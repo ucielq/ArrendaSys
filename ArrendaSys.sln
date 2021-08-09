@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrendaSys", "ArrendaSys\ArrendaSys.csproj", "{6993143C-562E-4EA6-9792-0CA49CD3BDC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6993143C-562E-4EA6-9792-0CA49CD3BDC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6993143C-562E-4EA6-9792-0CA49CD3BDC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6993143C-562E-4EA6-9792-0CA49CD3BDC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6993143C-562E-4EA6-9792-0CA49CD3BDC6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B36EEDD0-2C3F-40DA-9D3E-7B2DEF9C0636}
+	EndGlobalSection
+EndGlobal
