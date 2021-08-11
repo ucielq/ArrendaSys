@@ -42,3 +42,16 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+<script>
+    hola();
+    function hola() {
+        $.getJSON("/api/Cuenta/hola")
+            .done(function (data) {
+                alert(data.email);              
+
+            })
+            .fail(function (erro) {
+                alert('Error en el ajax');
+            });
+    }
+</script>
