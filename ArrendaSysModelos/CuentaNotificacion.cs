@@ -12,10 +12,12 @@ namespace ArrendaSysModelos
     using System;
     using System.Collections.Generic;
     
-    public partial class Departamento
+    public partial class CuentaNotificacion
     {
-        public int idDepartamento { get; set; }
-        public string nombreDepartamento { get; set; }
-        public Nullable<int> idProvincia { get; set; }
+        public int idCuentaNotificacion { get; set; }
+        public Nullable<System.DateTime> fechaAltaNotificacion { get; set; }
+        public Nullable<System.DateTime> fechaBajaNotificacion { get; set; }
+        public Nullable<int> idNotificacion { get; set; }
+        public Nullable<int> idCuenta { get; set; }
     }
 }

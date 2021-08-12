@@ -14,21 +14,11 @@ namespace ArrendaSysModelos
     
     public partial class Rol
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Rol()
-        {
-            this.Cuenta = new HashSet<Cuenta>();
-        }
-    
         public int idRol { get; set; }
         public string descripcionRol { get; set; }
         public Nullable<System.DateTime> fechaAltaRol { get; set; }
         public Nullable<System.DateTime> fechaBajaRol { get; set; }
         public string nombreRol { get; set; }
         public Nullable<int> idPermisoRol { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cuenta> Cuenta { get; set; }
-        public virtual PermisoRol PermisoRol { get; set; }
     }
 }

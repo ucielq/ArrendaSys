@@ -25,5 +25,7 @@ namespace ArrendaSysModelos
         public Nullable<int> mtsCuadradosInt { get; set; }
         public Nullable<bool> permiteMascota { get; set; }
         public Nullable<int> tipoArrendador { get; set; }
+        public Nullable<int> idArrendador { get; set; }
+        public Nullable<int> idDireccion { get; set; }
     }
 }

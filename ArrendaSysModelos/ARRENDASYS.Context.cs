@@ -13,10 +13,10 @@ namespace ArrendaSysModelos
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ARRENDASYSEntities : DbContext
+    public partial class ArrendasysEntities : DbContext
     {
-        public ARRENDASYSEntities()
-            : base("name=ARRENDASYSEntities")
+        public ArrendasysEntities()
+            : base("name=ArrendasysEntities")
         {
         }
     
@@ -26,20 +26,35 @@ namespace ArrendaSysModelos
         }
     
         public virtual DbSet<Alquiler> Alquiler { get; set; }
+        public virtual DbSet<AlquilerEstado> AlquilerEstado { get; set; }
         public virtual DbSet<Arrendatario> Arrendatario { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
+        public virtual DbSet<CuentaNotificacion> CuentaNotificacion { get; set; }
         public virtual DbSet<Departamento> Departamento { get; set; }
+        public virtual DbSet<Direccion> Direccion { get; set; }
         public virtual DbSet<EstadoAlquiler> EstadoAlquiler { get; set; }
         public virtual DbSet<EstadoInmueble> EstadoInmueble { get; set; }
         public virtual DbSet<EstadoPublicacion> EstadoPublicacion { get; set; }
         public virtual DbSet<Inmobiliaria> Inmobiliaria { get; set; }
         public virtual DbSet<Inmueble> Inmueble { get; set; }
+        public virtual DbSet<InmuebleEstado> InmuebleEstado { get; set; }
         public virtual DbSet<ItemReseña> ItemReseña { get; set; }
         public virtual DbSet<Localidad> Localidad { get; set; }
+        public virtual DbSet<MultimediaInmueble> MultimediaInmueble { get; set; }
         public virtual DbSet<Notificacion> Notificacion { get; set; }
         public virtual DbSet<PermisoRol> PermisoRol { get; set; }
+        public virtual DbSet<Premium> Premium { get; set; }
         public virtual DbSet<Propietario> Propietario { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
+        public virtual DbSet<Publicacion> Publicacion { get; set; }
+        public virtual DbSet<PublicacionEstado> PublicacionEstado { get; set; }
+        public virtual DbSet<ReseñaArchivo> ReseñaArchivo { get; set; }
+        public virtual DbSet<ReseñaArrendadorArrendatario> ReseñaArrendadorArrendatario { get; set; }
+        public virtual DbSet<ReseñaArrendatarioArrendador> ReseñaArrendatarioArrendador { get; set; }
+        public virtual DbSet<ReseñaArrendatarioInmueble> ReseñaArrendatarioInmueble { get; set; }
+        public virtual DbSet<ReseñaItemAI> ReseñaItemAI { get; set; }
+        public virtual DbSet<ReseñaItemAoAr> ReseñaItemAoAr { get; set; }
+        public virtual DbSet<ReseñaItemArAo> ReseñaItemArAo { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<URL> URL { get; set; }
     }

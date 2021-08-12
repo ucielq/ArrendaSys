@@ -12,10 +12,11 @@ namespace ArrendaSysModelos
     using System;
     using System.Collections.Generic;
     
-    public partial class Departamento
+    public partial class ReseñaItemAI
     {
-        public int idDepartamento { get; set; }
-        public string nombreDepartamento { get; set; }
-        public Nullable<int> idProvincia { get; set; }
+        public int idReseñaItemAI { get; set; }
+        public Nullable<int> puntuacionReseñaItemAI { get; set; }
+        public Nullable<int> idReseñaAI { get; set; }
+        public Nullable<int> idItemReseña { get; set; }
     }
 }

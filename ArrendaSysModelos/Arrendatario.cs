@@ -14,12 +14,6 @@ namespace ArrendaSysModelos
     
     public partial class Arrendatario
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Arrendatario()
-        {
-            this.Alquiler = new HashSet<Alquiler>();
-        }
-    
         public int idArrendatario { get; set; }
         public string apellidoArrendatario { get; set; }
         public string nombreArrendatario { get; set; }
@@ -27,9 +21,5 @@ namespace ArrendaSysModelos
         public Nullable<int> telefonoArrendatario { get; set; }
         public string tipoDocumentoArr { get; set; }
         public Nullable<int> idCuenta { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alquiler> Alquiler { get; set; }
-        public virtual Cuenta Cuenta { get; set; }
     }
 }

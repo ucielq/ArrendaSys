@@ -18,7 +18,5 @@ namespace ArrendaSysModelos
         public Nullable<int> codigoPostal { get; set; }
         public string nombreLocalidad { get; set; }
         public Nullable<int> idDepartamento { get; set; }
-    
-        public virtual Departamento Departamento { get; set; }
     }
 }

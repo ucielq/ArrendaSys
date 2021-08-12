@@ -150,6 +150,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Acceso\PermisoAttributeController.cs" />
+    <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\Api\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -211,6 +213,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ArrendaSysModelos\ArrendaSysModelos.csproj">
+      <Project>{23977B62-EA75-419D-AD4F-21BABF079F5A}</Project>
+      <Name>ArrendaSysModelos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ArrendaSysServicios\ArrendaSysServicios.csproj">
       <Project>{496CEAF0-6EEB-4E11-A81D-251323B5230A}</Project>
       <Name>ArrendaSysServicios</Name>

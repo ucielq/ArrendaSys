@@ -14,14 +14,13 @@ namespace ArrendaSysModelos
     
     public partial class Propietario
     {
-        public string apellidoPropietario { get; set; }
         public int idPropietario { get; set; }
+        public string apellidoPropietario { get; set; }
         public string nombrePropietario { get; set; }
         public Nullable<int> numeroDocumentoProp { get; set; }
         public string telefonoPropietario { get; set; }
         public string tipoDocumentoProp { get; set; }
         public Nullable<int> idCuenta { get; set; }
-    
-        public virtual Cuenta Cuenta { get; set; }
+        public Nullable<int> idDireccion { get; set; }
     }
 }

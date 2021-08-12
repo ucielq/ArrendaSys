@@ -18,7 +18,6 @@ namespace ArrendaSysModelos
         public Nullable<System.DateTime> fechaAltaAlquiler { get; set; }
         public Nullable<System.DateTime> fechaBajaAlquiler { get; set; }
         public Nullable<int> idArrendatario { get; set; }
-    
-        public virtual Arrendatario Arrendatario { get; set; }
+        public Nullable<int> idInmueble { get; set; }
     }
 }

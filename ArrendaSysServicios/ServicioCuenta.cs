@@ -13,12 +13,12 @@ namespace ArrendaSysServicios
 {
     public class ServicioCuenta : IDisposable
     {
-        private ARRENDASYSEntities db = new ARRENDASYSEntities();
+        private ArrendasysEntities db = new ArrendasysEntities();
 
         public CuentaViewModel hola()
         {
             CuentaViewModel cuenta = new CuentaViewModel();
-            var c = db.Cuenta.FirstOrDefault();
+            var c = db.Cuenta.FirstOrDefault();            
             cuenta.email = c.emailCuenta;
             return cuenta;
         }

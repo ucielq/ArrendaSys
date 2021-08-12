@@ -9,23 +9,27 @@
           <Key>
             <PropertyRef Name="idAlquiler" />
           </Key>
-          <Property Name="idAlquiler" Type="int" Nullable="false" />
+          <Property Name="idAlquiler" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaAltaAlquiler" Type="date" />
           <Property Name="fechaBajaAlquiler" Type="date" />
           <Property Name="idArrendatario" Type="int" />
+          <Property Name="idInmueble" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.AlquilerEstado' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="AlquilerEstado">
+          <Key>
+            <PropertyRef Name="idAlquilerEstado" />
+          </Key>
+          <Property Name="idAlquilerEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaAltaAlquilerEstado" Type="date" />
           <Property Name="fechaBajaAlquilerEstado" Type="date" />
           <Property Name="idEstadoAlquiler" Type="int" />
-        </EntityType>-->
+          <Property Name="idAlquiler" Type="int" />
+        </EntityType>
         <EntityType Name="Arrendatario">
           <Key>
             <PropertyRef Name="idArrendatario" />
           </Key>
-          <Property Name="idArrendatario" Type="int" Nullable="false" />
+          <Property Name="idArrendatario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="apellidoArrendatario" Type="varchar" MaxLength="100" />
           <Property Name="nombreArrendatario" Type="varchar" MaxLength="100" />
           <Property Name="numeroDocumentoArr" Type="int" />
@@ -37,35 +41,49 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.AlquilerEstado' no tiene defi
           <Key>
             <PropertyRef Name="idCuenta" />
           </Key>
-          <Property Name="idCuenta" Type="int" Nullable="false" />
+          <Property Name="idCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="contrasenaCuenta" Type="varchar" MaxLength="100" />
           <Property Name="emailCuenta" Type="varchar" MaxLength="100" />
           <Property Name="fechaAltaCuenta" Type="date" />
           <Property Name="fechaBajaCuenta" Type="date" />
           <Property Name="idRol" Type="int" />
+          <Property Name="idPremium" Type="int" />
+        </EntityType>
+        <EntityType Name="CuentaNotificacion">
+          <Key>
+            <PropertyRef Name="idCuentaNotificacion" />
+          </Key>
+          <Property Name="idCuentaNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fechaAltaNotificacion" Type="date" />
+          <Property Name="fechaBajaNotificacion" Type="date" />
+          <Property Name="idNotificacion" Type="int" />
+          <Property Name="idCuenta" Type="int" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="idDepartamento" />
           </Key>
-          <Property Name="idDepartamento" Type="int" Nullable="false" />
+          <Property Name="idDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombreDepartamento" Type="varchar" MaxLength="100" />
           <Property Name="idProvincia" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.Direccion' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="idDireccion" />
+          </Key>
+          <Property Name="idDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idLote" Type="int" />
           <Property Name="idManzana" Type="int" />
           <Property Name="nombreBarrio" Type="varchar" MaxLength="100" />
           <Property Name="nombreCalle" Type="varchar" MaxLength="100" />
           <Property Name="numeroCalle" Type="int" />
-        </EntityType>-->
+          <Property Name="idLocalidad" Type="int" />
+        </EntityType>
         <EntityType Name="EstadoAlquiler">
           <Key>
             <PropertyRef Name="idEstadoAlquiler" />
           </Key>
-          <Property Name="idEstadoAlquiler" Type="int" Nullable="false" />
+          <Property Name="idEstadoAlquiler" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionEstadoAlquiler" Type="varchar" MaxLength="100" />
           <Property Name="nombreEstadoAlquiler" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -73,7 +91,7 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.Direccion' no tiene definida 
           <Key>
             <PropertyRef Name="idEstadoInmueble" />
           </Key>
-          <Property Name="idEstadoInmueble" Type="int" Nullable="false" />
+          <Property Name="idEstadoInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionEstadoInmueble" Type="varchar" MaxLength="100" />
           <Property Name="nombreEstadoInmueble" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -81,7 +99,7 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.Direccion' no tiene definida 
           <Key>
             <PropertyRef Name="idEstadoPublicacion" />
           </Key>
-          <Property Name="idEstadoPublicacion" Type="int" Nullable="false" />
+          <Property Name="idEstadoPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionEstadoPublicacion" Type="varchar" MaxLength="100" />
           <Property Name="nombreEstadoPublicacion" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -89,18 +107,19 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.Direccion' no tiene definida 
           <Key>
             <PropertyRef Name="idInmobiliaria" />
           </Key>
+          <Property Name="idInmobiliaria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="altaInscripcion" Type="date" />
           <Property Name="cuitInmobiliaria" Type="int" />
-          <Property Name="idInmobiliaria" Type="int" Nullable="false" />
           <Property Name="nombreInmobiliaria" Type="varchar" MaxLength="100" />
           <Property Name="telefonoInmobiliaria" Type="varchar" MaxLength="100" />
           <Property Name="idCuenta" Type="int" />
+          <Property Name="idDireccion" Type="int" />
         </EntityType>
         <EntityType Name="Inmueble">
           <Key>
             <PropertyRef Name="idInmueble" />
           </Key>
-          <Property Name="idInmueble" Type="int" Nullable="false" />
+          <Property Name="idInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cantAmbientes" Type="int" />
           <Property Name="cantBanos" Type="int" />
           <Property Name="cantHabitaciones" Type="int" />
@@ -111,19 +130,24 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.Direccion' no tiene definida 
           <Property Name="mtsCuadradosInt" Type="int" />
           <Property Name="permiteMascota" Type="bit" />
           <Property Name="tipoArrendador" Type="int" />
+          <Property Name="idArrendador" Type="int" />
+          <Property Name="idDireccion" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.InmuebleEstado' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="InmuebleEstado">
+          <Key>
+            <PropertyRef Name="idInmuebleEstado" />
+          </Key>
+          <Property Name="idInmuebleEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaAltaInmuebleEstado" Type="date" />
           <Property Name="fechaBajaInmuebleEstado" Type="date" />
           <Property Name="idEstadoInmueble" Type="int" />
-        </EntityType>-->
+          <Property Name="idInmueble" Type="int" />
+        </EntityType>
         <EntityType Name="ItemReseña">
           <Key>
             <PropertyRef Name="idItemReseña" />
           </Key>
-          <Property Name="idItemReseña" Type="int" Nullable="false" />
+          <Property Name="idItemReseña" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IR_esAI" Type="bit" />
           <Property Name="IR_esAoAr" Type="bit" />
           <Property Name="IR_esArAo" Type="bit" />
@@ -133,21 +157,24 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.InmuebleEstado' no tiene defi
           <Key>
             <PropertyRef Name="idLocalidad" />
           </Key>
-          <Property Name="idLocalidad" Type="int" Nullable="false" />
+          <Property Name="idLocalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigoPostal" Type="int" />
           <Property Name="nombreLocalidad" Type="varchar" MaxLength="100" />
           <Property Name="idDepartamento" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.MultimediaInmueble' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="MultimediaInmueble">
+          <Key>
+            <PropertyRef Name="idMultimediaInmueble" />
+          </Key>
+          <Property Name="idMultimediaInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="urlMultimediaInmueble" Type="varchar" MaxLength="100" />
-        </EntityType>-->
+          <Property Name="idInmueble" Type="int" />
+        </EntityType>
         <EntityType Name="Notificacion">
           <Key>
             <PropertyRef Name="idNotificacion" />
           </Key>
-          <Property Name="idNotificacion" Type="int" Nullable="false" />
+          <Property Name="idNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionNotificacion" Type="varchar" MaxLength="100" />
           <Property Name="nombreNotificacion" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -155,73 +182,142 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.MultimediaInmueble' no tiene 
           <Key>
             <PropertyRef Name="idPermisoRol" />
           </Key>
-          <Property Name="idPermisoRol" Type="int" Nullable="false" />
+          <Property Name="idPermisoRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="edicionRol" Type="bit" />
           <Property Name="eliminacionRol" Type="bit" />
           <Property Name="lecturaRol" Type="bit" />
           <Property Name="idURL" Type="int" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.Premium' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
         <EntityType Name="Premium">
+          <Key>
+            <PropertyRef Name="idPremium" />
+          </Key>
+          <Property Name="idPremium" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaAltaPremium" Type="date" />
           <Property Name="fechaBajaPremium" Type="date" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="Propietario">
           <Key>
             <PropertyRef Name="idPropietario" />
           </Key>
+          <Property Name="idPropietario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="apellidoPropietario" Type="varchar" MaxLength="100" />
-          <Property Name="idPropietario" Type="int" Nullable="false" />
           <Property Name="nombrePropietario" Type="varchar" MaxLength="100" />
           <Property Name="numeroDocumentoProp" Type="int" />
           <Property Name="telefonoPropietario" Type="varchar" MaxLength="100" />
           <Property Name="tipoDocumentoProp" Type="varchar" MaxLength="100" />
           <Property Name="idCuenta" Type="int" />
+          <Property Name="idDireccion" Type="int" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="idProvincia" />
           </Key>
-          <Property Name="idProvincia" Type="int" Nullable="false" />
+          <Property Name="idProvincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombreProvincia" Type="varchar" MaxLength="100" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.PublicacionEstado' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="idPublicacion" />
+          </Key>
+          <Property Name="idPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionPublicacion" Type="varchar" MaxLength="100" />
+          <Property Name="fechaAltaPublicacion" Type="date" />
+          <Property Name="fechaBajaPublicacion" Type="date" />
+          <Property Name="precioAlquiler" Type="decimal" Precision="9" Scale="2" />
+          <Property Name="tituloPublicacion" Type="varchar" MaxLength="100" />
+          <Property Name="idInmueble" Type="int" />
+        </EntityType>
         <EntityType Name="PublicacionEstado">
+          <Key>
+            <PropertyRef Name="idPublicacionEstado" />
+          </Key>
+          <Property Name="idPublicacionEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="fechaAltaPublicacionEstado" Type="date" />
           <Property Name="fechaBajaPublicacionEstado" Type="date" />
           <Property Name="idEstadoPublicacion" Type="int" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.ReseñaArchivo' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+          <Property Name="idPublicacion" Type="int" />
+        </EntityType>
         <EntityType Name="ReseñaArchivo">
+          <Key>
+            <PropertyRef Name="idReseñaArchivo" />
+          </Key>
+          <Property Name="idReseñaArchivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RA_esAI" Type="bit" />
           <Property Name="RA_esAoAr" Type="bit" />
           <Property Name="RA_esArAo" Type="bit" />
           <Property Name="urlMultimediaReseñaArchivo" Type="varchar" MaxLength="100" />
           <Property Name="urlReseñaArchivo" Type="varchar" MaxLength="100" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.ReseñaItemAI' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+          <Property Name="idTipoReseña" Type="int" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendadorArrendatario">
+          <Key>
+            <PropertyRef Name="idReseñaArAo" />
+          </Key>
+          <Property Name="idReseñaArAo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionReseñaArAo" Type="varchar" MaxLength="100" />
+          <Property Name="fechaAltaReseñaArAo" Type="date" />
+          <Property Name="fechaBajaReseñaArAo" Type="date" />
+          <Property Name="puntuacionReseñaArAo" Type="int" />
+          <Property Name="respuestaReseñaArAo" Type="varchar" MaxLength="100" />
+          <Property Name="idAlquiler" Type="int" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendatarioArrendador">
+          <Key>
+            <PropertyRef Name="idReseñaAoAr" />
+          </Key>
+          <Property Name="idReseñaAoAr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionReseñaAoAr" Type="varchar" MaxLength="100" />
+          <Property Name="fechaAltaReseñaAoAr" Type="date" />
+          <Property Name="fechaBajaReseñaAoAr" Type="date" />
+          <Property Name="puntuacionReseñaAoAr" Type="int" />
+          <Property Name="respuestaReseñaAoAr" Type="varchar" MaxLength="100" />
+          <Property Name="idAlquiler" Type="int" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendatarioInmueble">
+          <Key>
+            <PropertyRef Name="idReseñaAI" />
+          </Key>
+          <Property Name="idReseñaAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcionReseñaAI" Type="varchar" MaxLength="100" />
+          <Property Name="fechaAltaReseñaAI" Type="date" />
+          <Property Name="fechaBajaReseñaAI" Type="date" />
+          <Property Name="puntuacionReseñaAI" Type="int" />
+          <Property Name="respuestaReseñaAI" Type="varchar" MaxLength="100" />
+          <Property Name="idAlquiler" Type="int" />
+        </EntityType>
         <EntityType Name="ReseñaItemAI">
+          <Key>
+            <PropertyRef Name="idReseñaItemAI" />
+          </Key>
+          <Property Name="idReseñaItemAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="puntuacionReseñaItemAI" Type="int" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.ReseñaItemAoAr' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+          <Property Name="idReseñaAI" Type="int" />
+          <Property Name="idItemReseña" Type="int" />
+        </EntityType>
         <EntityType Name="ReseñaItemAoAr">
+          <Key>
+            <PropertyRef Name="idReseñaItemArAo" />
+          </Key>
+          <Property Name="idReseñaItemArAo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="puntuacionReseñaItemAoAr" Type="int" />
-        </EntityType>-->
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.ReseñaItemArAo' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+          <Property Name="idReseñaArAo" Type="int" />
+          <Property Name="idItemReseña" Type="int" />
+        </EntityType>
         <EntityType Name="ReseñaItemArAo">
+          <Key>
+            <PropertyRef Name="idReseñaItemAoAr" />
+          </Key>
+          <Property Name="idReseñaItemAoAr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="puntuacionReseñaItemArAo" Type="int" />
-        </EntityType>-->
+          <Property Name="idReseñaAoAr" Type="int" />
+          <Property Name="idItemReseña" Type="int" />
+        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="idRol" />
           </Key>
-          <Property Name="idRol" Type="int" Nullable="false" />
+          <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionRol" Type="varchar" MaxLength="100" />
           <Property Name="fechaAltaRol" Type="date" />
           <Property Name="fechaBajaRol" Type="date" />
@@ -232,198 +328,42 @@ advertencia 6013: La tabla o vista 'ARRENDASYS.dbo.ReseñaItemArAo' no tiene def
           <Key>
             <PropertyRef Name="idURL" />
           </Key>
-          <Property Name="idURL" Type="int" Nullable="false" />
+          <Property Name="idURL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="linkURL" Type="varchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Alquiler__idArre__4D94879B">
-          <End Role="Arrendatario" Type="Self.Arrendatario" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Alquiler" Type="Self.Alquiler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Arrendatario">
-              <PropertyRef Name="idArrendatario" />
-            </Principal>
-            <Dependent Role="Alquiler">
-              <PropertyRef Name="idArrendatario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.AlquilerEstado', pero no se encuentra la tabla.
-        <Association Name="FK__AlquilerE__idEst__5165187F" />-->
-        <Association Name="FK__Arrendata__idCue__31EC6D26">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Arrendatario" Type="Self.Arrendatario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="idCuenta" />
-            </Principal>
-            <Dependent Role="Arrendatario">
-              <PropertyRef Name="idCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cuenta__idRol__2F10007B">
-          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="idRol" />
-            </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="idRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Departame__idPro__3C69FB99">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="idProvincia" />
-            </Principal>
-            <Dependent Role="Departamento">
-              <PropertyRef Name="idProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Inmobilia__idCue__34C8D9D1">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Inmobiliaria" Type="Self.Inmobiliaria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="idCuenta" />
-            </Principal>
-            <Dependent Role="Inmobiliaria">
-              <PropertyRef Name="idCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.InmuebleEstado', pero no se encuentra la tabla.
-        <Association Name="FK__InmuebleE__idEst__46E78A0C" />-->
-        <Association Name="FK__Localidad__idDep__3F466844">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Principal>
-            <Dependent Role="Localidad">
-              <PropertyRef Name="idDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PermisoRo__idURL__267ABA7A">
-          <End Role="URL" Type="Self.URL" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PermisoRol" Type="Self.PermisoRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="URL">
-              <PropertyRef Name="idURL" />
-            </Principal>
-            <Dependent Role="PermisoRol">
-              <PropertyRef Name="idURL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Propietar__idCue__37A5467C">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Propietario" Type="Self.Propietario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="idCuenta" />
-            </Principal>
-            <Dependent Role="Propietario">
-              <PropertyRef Name="idCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <!--Errores durante la generación:
-error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.PublicacionEstado', pero no se encuentra la tabla.
-        <Association Name="FK__Publicaci__idEst__4AB81AF0" />-->
-        <Association Name="FK__Rol__idPermisoRo__29572725">
-          <End Role="PermisoRol" Type="Self.PermisoRol" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PermisoRol">
-              <PropertyRef Name="idPermisoRol" />
-            </Principal>
-            <Dependent Role="Rol">
-              <PropertyRef Name="idPermisoRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ARRENDASYSModelStoreContainer">
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Arrendatario" EntityType="Self.Arrendatario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CuentaNotificacion" EntityType="Self.CuentaNotificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoAlquiler" EntityType="Self.EstadoAlquiler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoInmueble" EntityType="Self.EstadoInmueble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inmobiliaria" EntityType="Self.Inmobiliaria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inmueble" EntityType="Self.Inmueble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InmuebleEstado" EntityType="Self.InmuebleEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItemReseña" EntityType="Self.ItemReseña" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MultimediaInmueble" EntityType="Self.MultimediaInmueble" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermisoRol" EntityType="Self.PermisoRol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Premium" EntityType="Self.Premium" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PublicacionEstado" EntityType="Self.PublicacionEstado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaArchivo" EntityType="Self.ReseñaArchivo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaArrendadorArrendatario" EntityType="Self.ReseñaArrendadorArrendatario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="Self.ReseñaArrendatarioArrendador" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="Self.ReseñaArrendatarioInmueble" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaItemAoAr" EntityType="Self.ReseñaItemAoAr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReseñaItemArAo" EntityType="Self.ReseñaItemArAo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Alquiler__idArre__4D94879B" Association="Self.FK__Alquiler__idArre__4D94879B">
-            <End Role="Arrendatario" EntitySet="Arrendatario" />
-            <End Role="Alquiler" EntitySet="Alquiler" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Arrendata__idCue__31EC6D26" Association="Self.FK__Arrendata__idCue__31EC6D26">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Arrendatario" EntitySet="Arrendatario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cuenta__idRol__2F10007B" Association="Self.FK__Cuenta__idRol__2F10007B">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="Cuenta" EntitySet="Cuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Departame__idPro__3C69FB99" Association="Self.FK__Departame__idPro__3C69FB99">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Departamento" EntitySet="Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Inmobilia__idCue__34C8D9D1" Association="Self.FK__Inmobilia__idCue__34C8D9D1">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Inmobiliaria" EntitySet="Inmobiliaria" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Localidad__idDep__3F466844" Association="Self.FK__Localidad__idDep__3F466844">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Localidad" EntitySet="Localidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PermisoRo__idURL__267ABA7A" Association="Self.FK__PermisoRo__idURL__267ABA7A">
-            <End Role="URL" EntitySet="URL" />
-            <End Role="PermisoRol" EntitySet="PermisoRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Propietar__idCue__37A5467C" Association="Self.FK__Propietar__idCue__37A5467C">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Propietario" EntitySet="Propietario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Rol__idPermisoRo__29572725" Association="Self.FK__Rol__idPermisoRo__29572725">
-            <End Role="PermisoRol" EntitySet="PermisoRol" />
-            <End Role="Rol" EntitySet="Rol" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -434,56 +374,81 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Key>
             <PropertyRef Name="idAlquiler" />
           </Key>
-          <Property Name="idAlquiler" Type="Int32" Nullable="false" />
+          <Property Name="idAlquiler" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="fechaAltaAlquiler" Type="DateTime" Precision="0" />
           <Property Name="fechaBajaAlquiler" Type="DateTime" Precision="0" />
           <Property Name="idArrendatario" Type="Int32" />
-          <NavigationProperty Name="Arrendatario" Relationship="Self.FK__Alquiler__idArre__4D94879B" FromRole="Alquiler" ToRole="Arrendatario" />
+          <Property Name="idInmueble" Type="Int32" />
+        </EntityType>
+        <EntityType Name="AlquilerEstado">
+          <Key>
+            <PropertyRef Name="idAlquilerEstado" />
+          </Key>
+          <Property Name="idAlquilerEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaAltaAlquilerEstado" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaAlquilerEstado" Type="DateTime" Precision="0" />
+          <Property Name="idEstadoAlquiler" Type="Int32" />
+          <Property Name="idAlquiler" Type="Int32" />
         </EntityType>
         <EntityType Name="Arrendatario">
           <Key>
             <PropertyRef Name="idArrendatario" />
           </Key>
-          <Property Name="idArrendatario" Type="Int32" Nullable="false" />
+          <Property Name="idArrendatario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="apellidoArrendatario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreArrendatario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="numeroDocumentoArr" Type="Int32" />
           <Property Name="telefonoArrendatario" Type="Int32" />
           <Property Name="tipoDocumentoArr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
-          <NavigationProperty Name="Alquiler" Relationship="Self.FK__Alquiler__idArre__4D94879B" FromRole="Arrendatario" ToRole="Alquiler" />
-          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Arrendata__idCue__31EC6D26" FromRole="Arrendatario" ToRole="Cuenta" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
             <PropertyRef Name="idCuenta" />
           </Key>
-          <Property Name="idCuenta" Type="Int32" Nullable="false" />
+          <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="contrasenaCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="emailCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fechaAltaCuenta" Type="DateTime" Precision="0" />
           <Property Name="fechaBajaCuenta" Type="DateTime" Precision="0" />
           <Property Name="idRol" Type="Int32" />
-          <NavigationProperty Name="Arrendatario" Relationship="Self.FK__Arrendata__idCue__31EC6D26" FromRole="Cuenta" ToRole="Arrendatario" />
-          <NavigationProperty Name="Rol" Relationship="Self.FK__Cuenta__idRol__2F10007B" FromRole="Cuenta" ToRole="Rol" />
-          <NavigationProperty Name="Inmobiliaria" Relationship="Self.FK__Inmobilia__idCue__34C8D9D1" FromRole="Cuenta" ToRole="Inmobiliaria" />
-          <NavigationProperty Name="Propietario" Relationship="Self.FK__Propietar__idCue__37A5467C" FromRole="Cuenta" ToRole="Propietario" />
+          <Property Name="idPremium" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CuentaNotificacion">
+          <Key>
+            <PropertyRef Name="idCuentaNotificacion" />
+          </Key>
+          <Property Name="idCuentaNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaAltaNotificacion" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaNotificacion" Type="DateTime" Precision="0" />
+          <Property Name="idNotificacion" Type="Int32" />
+          <Property Name="idCuenta" Type="Int32" />
         </EntityType>
         <EntityType Name="Departamento">
           <Key>
             <PropertyRef Name="idDepartamento" />
           </Key>
-          <Property Name="idDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="idDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombreDepartamento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idProvincia" Type="Int32" />
-          <NavigationProperty Name="Provincia" Relationship="Self.FK__Departame__idPro__3C69FB99" FromRole="Departamento" ToRole="Provincia" />
-          <NavigationProperty Name="Localidad" Relationship="Self.FK__Localidad__idDep__3F466844" FromRole="Departamento" ToRole="Localidad" />
+        </EntityType>
+        <EntityType Name="Direccion">
+          <Key>
+            <PropertyRef Name="idDireccion" />
+          </Key>
+          <Property Name="idDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idLote" Type="Int32" />
+          <Property Name="idManzana" Type="Int32" />
+          <Property Name="nombreBarrio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombreCalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="numeroCalle" Type="Int32" />
+          <Property Name="idLocalidad" Type="Int32" />
         </EntityType>
         <EntityType Name="EstadoAlquiler">
           <Key>
             <PropertyRef Name="idEstadoAlquiler" />
           </Key>
-          <Property Name="idEstadoAlquiler" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoAlquiler" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionEstadoAlquiler" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreEstadoAlquiler" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -491,7 +456,7 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Key>
             <PropertyRef Name="idEstadoInmueble" />
           </Key>
-          <Property Name="idEstadoInmueble" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionEstadoInmueble" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreEstadoInmueble" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -499,7 +464,7 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Key>
             <PropertyRef Name="idEstadoPublicacion" />
           </Key>
-          <Property Name="idEstadoPublicacion" Type="Int32" Nullable="false" />
+          <Property Name="idEstadoPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionEstadoPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreEstadoPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -507,19 +472,19 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Key>
             <PropertyRef Name="idInmobiliaria" />
           </Key>
+          <Property Name="idInmobiliaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="altaInscripcion" Type="DateTime" Precision="0" />
           <Property Name="cuitInmobiliaria" Type="Int32" />
-          <Property Name="idInmobiliaria" Type="Int32" Nullable="false" />
           <Property Name="nombreInmobiliaria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="telefonoInmobiliaria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
-          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Inmobilia__idCue__34C8D9D1" FromRole="Inmobiliaria" ToRole="Cuenta" />
+          <Property Name="idDireccion" Type="Int32" />
         </EntityType>
         <EntityType Name="Inmueble">
           <Key>
             <PropertyRef Name="idInmueble" />
           </Key>
-          <Property Name="idInmueble" Type="Int32" Nullable="false" />
+          <Property Name="idInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="cantAmbientes" Type="Int32" />
           <Property Name="cantBanos" Type="Int32" />
           <Property Name="cantHabitaciones" Type="Int32" />
@@ -530,12 +495,24 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Property Name="mtsCuadradosInt" Type="Int32" />
           <Property Name="permiteMascota" Type="Boolean" />
           <Property Name="tipoArrendador" Type="Int32" />
+          <Property Name="idArrendador" Type="Int32" />
+          <Property Name="idDireccion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="InmuebleEstado">
+          <Key>
+            <PropertyRef Name="idInmuebleEstado" />
+          </Key>
+          <Property Name="idInmuebleEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaAltaInmuebleEstado" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaInmuebleEstado" Type="DateTime" Precision="0" />
+          <Property Name="idEstadoInmueble" Type="Int32" />
+          <Property Name="idInmueble" Type="Int32" />
         </EntityType>
         <EntityType Name="ItemReseña">
           <Key>
             <PropertyRef Name="idItemReseña" />
           </Key>
-          <Property Name="idItemReseña" Type="Int32" Nullable="false" />
+          <Property Name="idItemReseña" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IR_esAI" Type="Boolean" />
           <Property Name="IR_esAoAr" Type="Boolean" />
           <Property Name="IR_esArAo" Type="Boolean" />
@@ -545,17 +522,24 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Key>
             <PropertyRef Name="idLocalidad" />
           </Key>
-          <Property Name="idLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="idLocalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigoPostal" Type="Int32" />
           <Property Name="nombreLocalidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idDepartamento" Type="Int32" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Localidad__idDep__3F466844" FromRole="Localidad" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="MultimediaInmueble">
+          <Key>
+            <PropertyRef Name="idMultimediaInmueble" />
+          </Key>
+          <Property Name="idMultimediaInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urlMultimediaInmueble" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idInmueble" Type="Int32" />
         </EntityType>
         <EntityType Name="Notificacion">
           <Key>
             <PropertyRef Name="idNotificacion" />
           </Key>
-          <Property Name="idNotificacion" Type="Int32" Nullable="false" />
+          <Property Name="idNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -563,243 +547,195 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <Key>
             <PropertyRef Name="idPermisoRol" />
           </Key>
-          <Property Name="idPermisoRol" Type="Int32" Nullable="false" />
+          <Property Name="idPermisoRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="edicionRol" Type="Boolean" />
           <Property Name="eliminacionRol" Type="Boolean" />
           <Property Name="lecturaRol" Type="Boolean" />
           <Property Name="idURL" Type="Int32" />
-          <NavigationProperty Name="URL" Relationship="Self.FK__PermisoRo__idURL__267ABA7A" FromRole="PermisoRol" ToRole="URL" />
-          <NavigationProperty Name="Rol" Relationship="Self.FK__Rol__idPermisoRo__29572725" FromRole="PermisoRol" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Premium">
+          <Key>
+            <PropertyRef Name="idPremium" />
+          </Key>
+          <Property Name="idPremium" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaAltaPremium" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaPremium" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Propietario">
           <Key>
             <PropertyRef Name="idPropietario" />
           </Key>
+          <Property Name="idPropietario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="apellidoPropietario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idPropietario" Type="Int32" Nullable="false" />
           <Property Name="nombrePropietario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="numeroDocumentoProp" Type="Int32" />
           <Property Name="telefonoPropietario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="tipoDocumentoProp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
-          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Propietar__idCue__37A5467C" FromRole="Propietario" ToRole="Cuenta" />
+          <Property Name="idDireccion" Type="Int32" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="idProvincia" />
           </Key>
-          <Property Name="idProvincia" Type="Int32" Nullable="false" />
+          <Property Name="idProvincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombreProvincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Departamento" Relationship="Self.FK__Departame__idPro__3C69FB99" FromRole="Provincia" ToRole="Departamento" />
+        </EntityType>
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="idPublicacion" />
+          </Key>
+          <Property Name="idPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaPublicacion" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaPublicacion" Type="DateTime" Precision="0" />
+          <Property Name="precioAlquiler" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="tituloPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idInmueble" Type="Int32" />
+        </EntityType>
+        <EntityType Name="PublicacionEstado">
+          <Key>
+            <PropertyRef Name="idPublicacionEstado" />
+          </Key>
+          <Property Name="idPublicacionEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fechaAltaPublicacionEstado" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaPublicacionEstado" Type="DateTime" Precision="0" />
+          <Property Name="idEstadoPublicacion" Type="Int32" />
+          <Property Name="idPublicacion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaArchivo">
+          <Key>
+            <PropertyRef Name="idReseñaArchivo" />
+          </Key>
+          <Property Name="idReseñaArchivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RA_esAI" Type="Boolean" />
+          <Property Name="RA_esAoAr" Type="Boolean" />
+          <Property Name="RA_esArAo" Type="Boolean" />
+          <Property Name="urlMultimediaReseñaArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="urlReseñaArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idTipoReseña" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendadorArrendatario">
+          <Key>
+            <PropertyRef Name="idReseñaArAo" />
+          </Key>
+          <Property Name="idReseñaArAo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionReseñaArAo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaReseñaArAo" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaReseñaArAo" Type="DateTime" Precision="0" />
+          <Property Name="puntuacionReseñaArAo" Type="Int32" />
+          <Property Name="respuestaReseñaArAo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idAlquiler" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendatarioArrendador">
+          <Key>
+            <PropertyRef Name="idReseñaAoAr" />
+          </Key>
+          <Property Name="idReseñaAoAr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionReseñaAoAr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaReseñaAoAr" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaReseñaAoAr" Type="DateTime" Precision="0" />
+          <Property Name="puntuacionReseñaAoAr" Type="Int32" />
+          <Property Name="respuestaReseñaAoAr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idAlquiler" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendatarioInmueble">
+          <Key>
+            <PropertyRef Name="idReseñaAI" />
+          </Key>
+          <Property Name="idReseñaAI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionReseñaAI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaReseñaAI" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaReseñaAI" Type="DateTime" Precision="0" />
+          <Property Name="puntuacionReseñaAI" Type="Int32" />
+          <Property Name="respuestaReseñaAI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idAlquiler" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaItemAI">
+          <Key>
+            <PropertyRef Name="idReseñaItemAI" />
+          </Key>
+          <Property Name="idReseñaItemAI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="puntuacionReseñaItemAI" Type="Int32" />
+          <Property Name="idReseñaAI" Type="Int32" />
+          <Property Name="idItemReseña" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaItemAoAr">
+          <Key>
+            <PropertyRef Name="idReseñaItemArAo" />
+          </Key>
+          <Property Name="idReseñaItemArAo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="puntuacionReseñaItemAoAr" Type="Int32" />
+          <Property Name="idReseñaArAo" Type="Int32" />
+          <Property Name="idItemReseña" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaItemArAo">
+          <Key>
+            <PropertyRef Name="idReseñaItemAoAr" />
+          </Key>
+          <Property Name="idReseñaItemAoAr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="puntuacionReseñaItemArAo" Type="Int32" />
+          <Property Name="idReseñaAoAr" Type="Int32" />
+          <Property Name="idItemReseña" Type="Int32" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="idRol" />
           </Key>
-          <Property Name="idRol" Type="Int32" Nullable="false" />
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fechaAltaRol" Type="DateTime" Precision="0" />
           <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
           <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idPermisoRol" Type="Int32" />
-          <NavigationProperty Name="Cuenta" Relationship="Self.FK__Cuenta__idRol__2F10007B" FromRole="Rol" ToRole="Cuenta" />
-          <NavigationProperty Name="PermisoRol" Relationship="Self.FK__Rol__idPermisoRo__29572725" FromRole="Rol" ToRole="PermisoRol" />
         </EntityType>
         <EntityType Name="URL">
           <Key>
             <PropertyRef Name="idURL" />
           </Key>
-          <Property Name="idURL" Type="Int32" Nullable="false" />
+          <Property Name="idURL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="linkURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PermisoRol" Relationship="Self.FK__PermisoRo__idURL__267ABA7A" FromRole="URL" ToRole="PermisoRol" />
         </EntityType>
-        <Association Name="FK__Alquiler__idArre__4D94879B">
-          <End Role="Arrendatario" Type="Self.Arrendatario" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Alquiler" Type="Self.Alquiler" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Arrendatario">
-              <PropertyRef Name="idArrendatario" />
-            </Principal>
-            <Dependent Role="Alquiler">
-              <PropertyRef Name="idArrendatario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Arrendata__idCue__31EC6D26">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Arrendatario" Type="Self.Arrendatario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="idCuenta" />
-            </Principal>
-            <Dependent Role="Arrendatario">
-              <PropertyRef Name="idCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cuenta__idRol__2F10007B">
-          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="idRol" />
-            </Principal>
-            <Dependent Role="Cuenta">
-              <PropertyRef Name="idRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Inmobilia__idCue__34C8D9D1">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Inmobiliaria" Type="Self.Inmobiliaria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="idCuenta" />
-            </Principal>
-            <Dependent Role="Inmobiliaria">
-              <PropertyRef Name="idCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Propietar__idCue__37A5467C">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Propietario" Type="Self.Propietario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="idCuenta" />
-            </Principal>
-            <Dependent Role="Propietario">
-              <PropertyRef Name="idCuenta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Departame__idPro__3C69FB99">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="idProvincia" />
-            </Principal>
-            <Dependent Role="Departamento">
-              <PropertyRef Name="idProvincia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Localidad__idDep__3F466844">
-          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Departamento">
-              <PropertyRef Name="idDepartamento" />
-            </Principal>
-            <Dependent Role="Localidad">
-              <PropertyRef Name="idDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PermisoRo__idURL__267ABA7A">
-          <End Role="URL" Type="Self.URL" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="PermisoRol" Type="Self.PermisoRol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="URL">
-              <PropertyRef Name="idURL" />
-            </Principal>
-            <Dependent Role="PermisoRol">
-              <PropertyRef Name="idURL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Rol__idPermisoRo__29572725">
-          <End Role="PermisoRol" Type="Self.PermisoRol" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Rol" Type="Self.Rol" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PermisoRol">
-              <PropertyRef Name="idPermisoRol" />
-            </Principal>
-            <Dependent Role="Rol">
-              <PropertyRef Name="idPermisoRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="ARRENDASYSEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" />
+          <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" />
           <EntitySet Name="Arrendatario" EntityType="Self.Arrendatario" />
           <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
+          <EntitySet Name="CuentaNotificacion" EntityType="Self.CuentaNotificacion" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="Direccion" EntityType="Self.Direccion" />
           <EntitySet Name="EstadoAlquiler" EntityType="Self.EstadoAlquiler" />
           <EntitySet Name="EstadoInmueble" EntityType="Self.EstadoInmueble" />
           <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" />
           <EntitySet Name="Inmobiliaria" EntityType="Self.Inmobiliaria" />
           <EntitySet Name="Inmueble" EntityType="Self.Inmueble" />
+          <EntitySet Name="InmuebleEstado" EntityType="Self.InmuebleEstado" />
           <EntitySet Name="ItemReseña" EntityType="Self.ItemReseña" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="MultimediaInmueble" EntityType="Self.MultimediaInmueble" />
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" />
           <EntitySet Name="PermisoRol" EntityType="Self.PermisoRol" />
+          <EntitySet Name="Premium" EntityType="Self.Premium" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
+          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" />
+          <EntitySet Name="PublicacionEstado" EntityType="Self.PublicacionEstado" />
+          <EntitySet Name="ReseñaArchivo" EntityType="Self.ReseñaArchivo" />
+          <EntitySet Name="ReseñaArrendadorArrendatario" EntityType="Self.ReseñaArrendadorArrendatario" />
+          <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="Self.ReseñaArrendatarioArrendador" />
+          <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="Self.ReseñaArrendatarioInmueble" />
+          <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
+          <EntitySet Name="ReseñaItemAoAr" EntityType="Self.ReseñaItemAoAr" />
+          <EntitySet Name="ReseñaItemArAo" EntityType="Self.ReseñaItemArAo" />
           <EntitySet Name="Rol" EntityType="Self.Rol" />
           <EntitySet Name="URL" EntityType="Self.URL" />
-          <AssociationSet Name="FK__Alquiler__idArre__4D94879B" Association="Self.FK__Alquiler__idArre__4D94879B">
-            <End Role="Arrendatario" EntitySet="Arrendatario" />
-            <End Role="Alquiler" EntitySet="Alquiler" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Arrendata__idCue__31EC6D26" Association="Self.FK__Arrendata__idCue__31EC6D26">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Arrendatario" EntitySet="Arrendatario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cuenta__idRol__2F10007B" Association="Self.FK__Cuenta__idRol__2F10007B">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="Cuenta" EntitySet="Cuenta" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Inmobilia__idCue__34C8D9D1" Association="Self.FK__Inmobilia__idCue__34C8D9D1">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Inmobiliaria" EntitySet="Inmobiliaria" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Propietar__idCue__37A5467C" Association="Self.FK__Propietar__idCue__37A5467C">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Propietario" EntitySet="Propietario" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Departame__idPro__3C69FB99" Association="Self.FK__Departame__idPro__3C69FB99">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Departamento" EntitySet="Departamento" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Localidad__idDep__3F466844" Association="Self.FK__Localidad__idDep__3F466844">
-            <End Role="Departamento" EntitySet="Departamento" />
-            <End Role="Localidad" EntitySet="Localidad" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PermisoRo__idURL__267ABA7A" Association="Self.FK__PermisoRo__idURL__267ABA7A">
-            <End Role="URL" EntitySet="URL" />
-            <End Role="PermisoRol" EntitySet="PermisoRol" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Rol__idPermisoRo__29572725" Association="Self.FK__Rol__idPermisoRo__29572725">
-            <End Role="PermisoRol" EntitySet="PermisoRol" />
-            <End Role="Rol" EntitySet="Rol" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ARRENDASYSModelStoreContainer" CdmEntityContainer="ARRENDASYSEntities">
+        <EntityContainerMapping StorageEntityContainer="ARRENDASYSModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Alquiler">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Alquiler">
               <MappingFragment StoreEntitySet="Alquiler">
@@ -807,6 +743,18 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
                 <ScalarProperty Name="fechaAltaAlquiler" ColumnName="fechaAltaAlquiler" />
                 <ScalarProperty Name="fechaBajaAlquiler" ColumnName="fechaBajaAlquiler" />
                 <ScalarProperty Name="idArrendatario" ColumnName="idArrendatario" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlquilerEstado">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.AlquilerEstado">
+              <MappingFragment StoreEntitySet="AlquilerEstado">
+                <ScalarProperty Name="idAlquilerEstado" ColumnName="idAlquilerEstado" />
+                <ScalarProperty Name="fechaAltaAlquilerEstado" ColumnName="fechaAltaAlquilerEstado" />
+                <ScalarProperty Name="fechaBajaAlquilerEstado" ColumnName="fechaBajaAlquilerEstado" />
+                <ScalarProperty Name="idEstadoAlquiler" ColumnName="idEstadoAlquiler" />
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -832,6 +780,18 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
                 <ScalarProperty Name="fechaAltaCuenta" ColumnName="fechaAltaCuenta" />
                 <ScalarProperty Name="fechaBajaCuenta" ColumnName="fechaBajaCuenta" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idPremium" ColumnName="idPremium" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CuentaNotificacion">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.CuentaNotificacion">
+              <MappingFragment StoreEntitySet="CuentaNotificacion">
+                <ScalarProperty Name="idCuentaNotificacion" ColumnName="idCuentaNotificacion" />
+                <ScalarProperty Name="fechaAltaNotificacion" ColumnName="fechaAltaNotificacion" />
+                <ScalarProperty Name="fechaBajaNotificacion" ColumnName="fechaBajaNotificacion" />
+                <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -841,6 +801,19 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
                 <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
                 <ScalarProperty Name="nombreDepartamento" ColumnName="nombreDepartamento" />
                 <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Direccion">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.Direccion">
+              <MappingFragment StoreEntitySet="Direccion">
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="idLote" ColumnName="idLote" />
+                <ScalarProperty Name="idManzana" ColumnName="idManzana" />
+                <ScalarProperty Name="nombreBarrio" ColumnName="nombreBarrio" />
+                <ScalarProperty Name="nombreCalle" ColumnName="nombreCalle" />
+                <ScalarProperty Name="numeroCalle" ColumnName="numeroCalle" />
+                <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -874,12 +847,13 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
           <EntitySetMapping Name="Inmobiliaria">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Inmobiliaria">
               <MappingFragment StoreEntitySet="Inmobiliaria">
+                <ScalarProperty Name="idInmobiliaria" ColumnName="idInmobiliaria" />
                 <ScalarProperty Name="altaInscripcion" ColumnName="altaInscripcion" />
                 <ScalarProperty Name="cuitInmobiliaria" ColumnName="cuitInmobiliaria" />
-                <ScalarProperty Name="idInmobiliaria" ColumnName="idInmobiliaria" />
                 <ScalarProperty Name="nombreInmobiliaria" ColumnName="nombreInmobiliaria" />
                 <ScalarProperty Name="telefonoInmobiliaria" ColumnName="telefonoInmobiliaria" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -897,6 +871,19 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
                 <ScalarProperty Name="mtsCuadradosInt" ColumnName="mtsCuadradosInt" />
                 <ScalarProperty Name="permiteMascota" ColumnName="permiteMascota" />
                 <ScalarProperty Name="tipoArrendador" ColumnName="tipoArrendador" />
+                <ScalarProperty Name="idArrendador" ColumnName="idArrendador" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InmuebleEstado">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.InmuebleEstado">
+              <MappingFragment StoreEntitySet="InmuebleEstado">
+                <ScalarProperty Name="idInmuebleEstado" ColumnName="idInmuebleEstado" />
+                <ScalarProperty Name="fechaAltaInmuebleEstado" ColumnName="fechaAltaInmuebleEstado" />
+                <ScalarProperty Name="fechaBajaInmuebleEstado" ColumnName="fechaBajaInmuebleEstado" />
+                <ScalarProperty Name="idEstadoInmueble" ColumnName="idEstadoInmueble" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -921,6 +908,15 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MultimediaInmueble">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.MultimediaInmueble">
+              <MappingFragment StoreEntitySet="MultimediaInmueble">
+                <ScalarProperty Name="idMultimediaInmueble" ColumnName="idMultimediaInmueble" />
+                <ScalarProperty Name="urlMultimediaInmueble" ColumnName="urlMultimediaInmueble" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Notificacion">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Notificacion">
               <MappingFragment StoreEntitySet="Notificacion">
@@ -941,16 +937,26 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Premium">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.Premium">
+              <MappingFragment StoreEntitySet="Premium">
+                <ScalarProperty Name="idPremium" ColumnName="idPremium" />
+                <ScalarProperty Name="fechaAltaPremium" ColumnName="fechaAltaPremium" />
+                <ScalarProperty Name="fechaBajaPremium" ColumnName="fechaBajaPremium" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Propietario">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Propietario">
               <MappingFragment StoreEntitySet="Propietario">
-                <ScalarProperty Name="apellidoPropietario" ColumnName="apellidoPropietario" />
                 <ScalarProperty Name="idPropietario" ColumnName="idPropietario" />
+                <ScalarProperty Name="apellidoPropietario" ColumnName="apellidoPropietario" />
                 <ScalarProperty Name="nombrePropietario" ColumnName="nombrePropietario" />
                 <ScalarProperty Name="numeroDocumentoProp" ColumnName="numeroDocumentoProp" />
                 <ScalarProperty Name="telefonoPropietario" ColumnName="telefonoPropietario" />
                 <ScalarProperty Name="tipoDocumentoProp" ColumnName="tipoDocumentoProp" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -959,6 +965,112 @@ error 6004: Una relación hace referencia a la tabla 'ARRENDASYS.dbo.Publicacion
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
                 <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publicacion">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.Publicacion">
+              <MappingFragment StoreEntitySet="Publicacion">
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+                <ScalarProperty Name="descripcionPublicacion" ColumnName="descripcionPublicacion" />
+                <ScalarProperty Name="fechaAltaPublicacion" ColumnName="fechaAltaPublicacion" />
+                <ScalarProperty Name="fechaBajaPublicacion" ColumnName="fechaBajaPublicacion" />
+                <ScalarProperty Name="precioAlquiler" ColumnName="precioAlquiler" />
+                <ScalarProperty Name="tituloPublicacion" ColumnName="tituloPublicacion" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PublicacionEstado">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.PublicacionEstado">
+              <MappingFragment StoreEntitySet="PublicacionEstado">
+                <ScalarProperty Name="idPublicacionEstado" ColumnName="idPublicacionEstado" />
+                <ScalarProperty Name="fechaAltaPublicacionEstado" ColumnName="fechaAltaPublicacionEstado" />
+                <ScalarProperty Name="fechaBajaPublicacionEstado" ColumnName="fechaBajaPublicacionEstado" />
+                <ScalarProperty Name="idEstadoPublicacion" ColumnName="idEstadoPublicacion" />
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArchivo">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaArchivo">
+              <MappingFragment StoreEntitySet="ReseñaArchivo">
+                <ScalarProperty Name="idReseñaArchivo" ColumnName="idReseñaArchivo" />
+                <ScalarProperty Name="RA_esAI" ColumnName="RA_esAI" />
+                <ScalarProperty Name="RA_esAoAr" ColumnName="RA_esAoAr" />
+                <ScalarProperty Name="RA_esArAo" ColumnName="RA_esArAo" />
+                <ScalarProperty Name="urlMultimediaReseñaArchivo" ColumnName="urlMultimediaReseñaArchivo" />
+                <ScalarProperty Name="urlReseñaArchivo" ColumnName="urlReseñaArchivo" />
+                <ScalarProperty Name="idTipoReseña" ColumnName="idTipoReseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArrendadorArrendatario">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaArrendadorArrendatario">
+              <MappingFragment StoreEntitySet="ReseñaArrendadorArrendatario">
+                <ScalarProperty Name="idReseñaArAo" ColumnName="idReseñaArAo" />
+                <ScalarProperty Name="descripcionReseñaArAo" ColumnName="descripcionReseñaArAo" />
+                <ScalarProperty Name="fechaAltaReseñaArAo" ColumnName="fechaAltaReseñaArAo" />
+                <ScalarProperty Name="fechaBajaReseñaArAo" ColumnName="fechaBajaReseñaArAo" />
+                <ScalarProperty Name="puntuacionReseñaArAo" ColumnName="puntuacionReseñaArAo" />
+                <ScalarProperty Name="respuestaReseñaArAo" ColumnName="respuestaReseñaArAo" />
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArrendatarioArrendador">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaArrendatarioArrendador">
+              <MappingFragment StoreEntitySet="ReseñaArrendatarioArrendador">
+                <ScalarProperty Name="idReseñaAoAr" ColumnName="idReseñaAoAr" />
+                <ScalarProperty Name="descripcionReseñaAoAr" ColumnName="descripcionReseñaAoAr" />
+                <ScalarProperty Name="fechaAltaReseñaAoAr" ColumnName="fechaAltaReseñaAoAr" />
+                <ScalarProperty Name="fechaBajaReseñaAoAr" ColumnName="fechaBajaReseñaAoAr" />
+                <ScalarProperty Name="puntuacionReseñaAoAr" ColumnName="puntuacionReseñaAoAr" />
+                <ScalarProperty Name="respuestaReseñaAoAr" ColumnName="respuestaReseñaAoAr" />
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArrendatarioInmueble">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaArrendatarioInmueble">
+              <MappingFragment StoreEntitySet="ReseñaArrendatarioInmueble">
+                <ScalarProperty Name="idReseñaAI" ColumnName="idReseñaAI" />
+                <ScalarProperty Name="descripcionReseñaAI" ColumnName="descripcionReseñaAI" />
+                <ScalarProperty Name="fechaAltaReseñaAI" ColumnName="fechaAltaReseñaAI" />
+                <ScalarProperty Name="fechaBajaReseñaAI" ColumnName="fechaBajaReseñaAI" />
+                <ScalarProperty Name="puntuacionReseñaAI" ColumnName="puntuacionReseñaAI" />
+                <ScalarProperty Name="respuestaReseñaAI" ColumnName="respuestaReseñaAI" />
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaItemAI">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaItemAI">
+              <MappingFragment StoreEntitySet="ReseñaItemAI">
+                <ScalarProperty Name="idReseñaItemAI" ColumnName="idReseñaItemAI" />
+                <ScalarProperty Name="puntuacionReseñaItemAI" ColumnName="puntuacionReseñaItemAI" />
+                <ScalarProperty Name="idReseñaAI" ColumnName="idReseñaAI" />
+                <ScalarProperty Name="idItemReseña" ColumnName="idItemReseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaItemAoAr">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaItemAoAr">
+              <MappingFragment StoreEntitySet="ReseñaItemAoAr">
+                <ScalarProperty Name="idReseñaItemArAo" ColumnName="idReseñaItemArAo" />
+                <ScalarProperty Name="puntuacionReseñaItemAoAr" ColumnName="puntuacionReseñaItemAoAr" />
+                <ScalarProperty Name="idReseñaArAo" ColumnName="idReseñaArAo" />
+                <ScalarProperty Name="idItemReseña" ColumnName="idItemReseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaItemArAo">
+            <EntityTypeMapping TypeName="ARRENDASYSModel.ReseñaItemArAo">
+              <MappingFragment StoreEntitySet="ReseñaItemArAo">
+                <ScalarProperty Name="idReseñaItemAoAr" ColumnName="idReseñaItemAoAr" />
+                <ScalarProperty Name="puntuacionReseñaItemArAo" ColumnName="puntuacionReseñaItemArAo" />
+                <ScalarProperty Name="idReseñaAoAr" ColumnName="idReseñaAoAr" />
+                <ScalarProperty Name="idItemReseña" ColumnName="idItemReseña" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

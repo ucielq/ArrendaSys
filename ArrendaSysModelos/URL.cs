@@ -14,16 +14,7 @@ namespace ArrendaSysModelos
     
     public partial class URL
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public URL()
-        {
-            this.PermisoRol = new HashSet<PermisoRol>();
-        }
-    
         public int idURL { get; set; }
         public string linkURL { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PermisoRol> PermisoRol { get; set; }
     }
 }

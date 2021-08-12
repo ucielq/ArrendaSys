@@ -106,98 +106,143 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alquiler.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
-    <Compile Include="ARRENDASYS.Context.cs">
+    <Compile Include="AlquilerEstado.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Arrendasys.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ARRENDASYS.Context.tt</DependentUpon>
+      <DependentUpon>Arrendasys.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ARRENDASYS.cs">
+    <Compile Include="Arrendasys.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
-    <Compile Include="ARRENDASYS.Designer.cs">
+    <Compile Include="Arrendasys.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ARRENDASYS.edmx</DependentUpon>
+      <DependentUpon>Arrendasys.edmx</DependentUpon>
     </Compile>
     <Compile Include="Arrendatario.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Cuenta.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CuentaNotificacion.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Departamento.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Direccion.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="EstadoAlquiler.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="EstadoInmueble.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="EstadoPublicacion.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Inmobiliaria.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Inmueble.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InmuebleEstado.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="ItemReseña.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Localidad.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MultimediaInmueble.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Notificacion.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="PermisoRol.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Premium.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Propietario.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Provincia.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Publicacion.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PublicacionEstado.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaArchivo.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaArrendadorArrendatario.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaArrendatarioArrendador.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaArrendatarioInmueble.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaItemAI.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaItemAoAr.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReseñaItemArAo.cs">
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="Rol.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
     <Compile Include="URL.cs">
-      <DependentUpon>ARRENDASYS.tt</DependentUpon>
+      <DependentUpon>Arrendasys.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="ARRENDASYS.edmx">
+    <EntityDeploy Include="Arrendasys.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ARRENDASYS.Designer.cs</LastGenOutput>
+      <LastGenOutput>Arrendasys.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ARRENDASYS.edmx.diagram">
-      <DependentUpon>ARRENDASYS.edmx</DependentUpon>
+    <None Include="Arrendasys.edmx.diagram">
+      <DependentUpon>Arrendasys.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ARRENDASYS.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ARRENDASYS.edmx</DependentUpon>
-      <LastGenOutput>ARRENDASYS.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ARRENDASYS.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ARRENDASYS.edmx</DependentUpon>
-      <LastGenOutput>ARRENDASYS.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Arrendasys.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Arrendasys.edmx</DependentUpon>
+      <LastGenOutput>Arrendasys.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Arrendasys.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Arrendasys.edmx</DependentUpon>
+      <LastGenOutput>Arrendasys.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

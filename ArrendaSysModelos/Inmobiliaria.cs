@@ -14,13 +14,12 @@ namespace ArrendaSysModelos
     
     public partial class Inmobiliaria
     {
+        public int idInmobiliaria { get; set; }
         public Nullable<System.DateTime> altaInscripcion { get; set; }
         public Nullable<int> cuitInmobiliaria { get; set; }
-        public int idInmobiliaria { get; set; }
         public string nombreInmobiliaria { get; set; }
         public string telefonoInmobiliaria { get; set; }
         public Nullable<int> idCuenta { get; set; }
-    
-        public virtual Cuenta Cuenta { get; set; }
+        public Nullable<int> idDireccion { get; set; }
     }
 }
