@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ARRENDASYSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Alquiler">
+    <Key>
+      <PropertyRef Name="idAlquiler" />
+    </Key>
+    <Property Name="idAlquiler" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaAltaAlquiler" Type="date" />
+    <Property Name="fechaBajaAlquiler" Type="date" />
+    <Property Name="idArrendatario" Type="int" />
+    <Property Name="idInmueble" Type="int" />
+  </EntityType>
+  <EntityType Name="AlquilerEstado">
+    <Key>
+      <PropertyRef Name="idAlquilerEstado" />
+    </Key>
+    <Property Name="idAlquilerEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaAltaAlquilerEstado" Type="date" />
+    <Property Name="fechaBajaAlquilerEstado" Type="date" />
+    <Property Name="idEstadoAlquiler" Type="int" />
+    <Property Name="idAlquiler" Type="int" />
+  </EntityType>
+  <EntityType Name="Arrendatario">
+    <Key>
+      <PropertyRef Name="idArrendatario" />
+    </Key>
+    <Property Name="idArrendatario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="apellidoArrendatario" Type="varchar" MaxLength="100" />
+    <Property Name="nombreArrendatario" Type="varchar" MaxLength="100" />
+    <Property Name="numeroDocumentoArr" Type="int" />
+    <Property Name="telefonoArrendatario" Type="int" />
+    <Property Name="tipoDocumentoArr" Type="varchar" MaxLength="100" />
+    <Property Name="idCuenta" Type="int" />
+  </EntityType>
+  <EntityType Name="Cuenta">
+    <Key>
+      <PropertyRef Name="idCuenta" />
+    </Key>
+    <Property Name="idCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="contrasenaCuenta" Type="varchar" MaxLength="100" />
+    <Property Name="emailCuenta" Type="varchar" MaxLength="100" />
+    <Property Name="fechaAltaCuenta" Type="date" />
+    <Property Name="fechaBajaCuenta" Type="date" />
+    <Property Name="idRol" Type="int" />
+    <Property Name="idPremium" Type="int" />
+  </EntityType>
+  <EntityType Name="CuentaNotificacion">
+    <Key>
+      <PropertyRef Name="idCuentaNotificacion" />
+    </Key>
+    <Property Name="idCuentaNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaAltaNotificacion" Type="date" />
+    <Property Name="fechaBajaNotificacion" Type="date" />
+    <Property Name="idNotificacion" Type="int" />
+    <Property Name="idCuenta" Type="int" />
+  </EntityType>
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="idDepartamento" />
+    </Key>
+    <Property Name="idDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreDepartamento" Type="varchar" MaxLength="100" />
+    <Property Name="idProvincia" Type="int" />
+  </EntityType>
+  <EntityType Name="Direccion">
+    <Key>
+      <PropertyRef Name="idDireccion" />
+    </Key>
+    <Property Name="idDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idLote" Type="int" />
+    <Property Name="idManzana" Type="int" />
+    <Property Name="nombreBarrio" Type="varchar" MaxLength="100" />
+    <Property Name="nombreCalle" Type="varchar" MaxLength="100" />
+    <Property Name="numeroCalle" Type="int" />
+    <Property Name="idLocalidad" Type="int" />
+  </EntityType>
+  <EntityType Name="EstadoAlquiler">
+    <Key>
+      <PropertyRef Name="idEstadoAlquiler" />
+    </Key>
+    <Property Name="idEstadoAlquiler" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionEstadoAlquiler" Type="varchar" MaxLength="100" />
+    <Property Name="nombreEstadoAlquiler" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="EstadoInmueble">
+    <Key>
+      <PropertyRef Name="idEstadoInmueble" />
+    </Key>
+    <Property Name="idEstadoInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionEstadoInmueble" Type="varchar" MaxLength="100" />
+    <Property Name="nombreEstadoInmueble" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="EstadoPublicacion">
+    <Key>
+      <PropertyRef Name="idEstadoPublicacion" />
+    </Key>
+    <Property Name="idEstadoPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionEstadoPublicacion" Type="varchar" MaxLength="100" />
+    <Property Name="nombreEstadoPublicacion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Inmobiliaria">
+    <Key>
+      <PropertyRef Name="idInmobiliaria" />
+    </Key>
+    <Property Name="idInmobiliaria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="altaInscripcion" Type="date" />
+    <Property Name="cuitInmobiliaria" Type="int" />
+    <Property Name="nombreInmobiliaria" Type="varchar" MaxLength="100" />
+    <Property Name="telefonoInmobiliaria" Type="varchar" MaxLength="100" />
+    <Property Name="idCuenta" Type="int" />
+    <Property Name="idDireccion" Type="int" />
+  </EntityType>
+  <EntityType Name="Inmueble">
+    <Key>
+      <PropertyRef Name="idInmueble" />
+    </Key>
+    <Property Name="idInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cantAmbientes" Type="int" />
+    <Property Name="cantBanos" Type="int" />
+    <Property Name="cantHabitaciones" Type="int" />
+    <Property Name="cochera" Type="bit" />
+    <Property Name="descripcionInmueble" Type="varchar" MaxLength="100" />
+    <Property Name="incluyeExpensas" Type="bit" />
+    <Property Name="mtsCuadrados" Type="int" />
+    <Property Name="mtsCuadradosInt" Type="int" />
+    <Property Name="permiteMascota" Type="bit" />
+    <Property Name="tipoArrendador" Type="int" />
+    <Property Name="idArrendador" Type="int" />
+    <Property Name="idDireccion" Type="int" />
+  </EntityType>
+  <EntityType Name="InmuebleEstado">
+    <Key>
+      <PropertyRef Name="idInmuebleEstado" />
+    </Key>
+    <Property Name="idInmuebleEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaAltaInmuebleEstado" Type="date" />
+    <Property Name="fechaBajaInmuebleEstado" Type="date" />
+    <Property Name="idEstadoInmueble" Type="int" />
+    <Property Name="idInmueble" Type="int" />
+  </EntityType>
+  <EntityType Name="ItemReseña">
+    <Key>
+      <PropertyRef Name="idItemReseña" />
+    </Key>
+    <Property Name="idItemReseña" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IR_esAI" Type="bit" />
+    <Property Name="IR_esAoAr" Type="bit" />
+    <Property Name="IR_esArAo" Type="bit" />
+    <Property Name="nombreItemReseña" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Localidad">
+    <Key>
+      <PropertyRef Name="idLocalidad" />
+    </Key>
+    <Property Name="idLocalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="codigoPostal" Type="int" />
+    <Property Name="nombreLocalidad" Type="varchar" MaxLength="100" />
+    <Property Name="idDepartamento" Type="int" />
+  </EntityType>
+  <EntityType Name="MultimediaInmueble">
+    <Key>
+      <PropertyRef Name="idMultimediaInmueble" />
+    </Key>
+    <Property Name="idMultimediaInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urlMultimediaInmueble" Type="varchar" MaxLength="100" />
+    <Property Name="idInmueble" Type="int" />
+  </EntityType>
+  <EntityType Name="Notificacion">
+    <Key>
+      <PropertyRef Name="idNotificacion" />
+    </Key>
+    <Property Name="idNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionNotificacion" Type="varchar" MaxLength="100" />
+    <Property Name="nombreNotificacion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PermisoRol">
+    <Key>
+      <PropertyRef Name="idPermisoRol" />
+    </Key>
+    <Property Name="idPermisoRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="edicionRol" Type="bit" />
+    <Property Name="eliminacionRol" Type="bit" />
+    <Property Name="lecturaRol" Type="bit" />
+    <Property Name="idURL" Type="int" />
+  </EntityType>
+  <EntityType Name="Premium">
+    <Key>
+      <PropertyRef Name="idPremium" />
+    </Key>
+    <Property Name="idPremium" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaAltaPremium" Type="date" />
+    <Property Name="fechaBajaPremium" Type="date" />
+  </EntityType>
+  <EntityType Name="Propietario">
+    <Key>
+      <PropertyRef Name="idPropietario" />
+    </Key>
+    <Property Name="idPropietario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="apellidoPropietario" Type="varchar" MaxLength="100" />
+    <Property Name="nombrePropietario" Type="varchar" MaxLength="100" />
+    <Property Name="numeroDocumentoProp" Type="int" />
+    <Property Name="telefonoPropietario" Type="varchar" MaxLength="100" />
+    <Property Name="tipoDocumentoProp" Type="varchar" MaxLength="100" />
+    <Property Name="idCuenta" Type="int" />
+    <Property Name="idDireccion" Type="int" />
+  </EntityType>
+  <EntityType Name="Provincia">
+    <Key>
+      <PropertyRef Name="idProvincia" />
+    </Key>
+    <Property Name="idProvincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombreProvincia" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Publicacion">
+    <Key>
+      <PropertyRef Name="idPublicacion" />
+    </Key>
+    <Property Name="idPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionPublicacion" Type="varchar" MaxLength="100" />
+    <Property Name="fechaAltaPublicacion" Type="date" />
+    <Property Name="fechaBajaPublicacion" Type="date" />
+    <Property Name="precioAlquiler" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="tituloPublicacion" Type="varchar" MaxLength="100" />
+    <Property Name="idInmueble" Type="int" />
+  </EntityType>
+  <EntityType Name="PublicacionEstado">
+    <Key>
+      <PropertyRef Name="idPublicacionEstado" />
+    </Key>
+    <Property Name="idPublicacionEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fechaAltaPublicacionEstado" Type="date" />
+    <Property Name="fechaBajaPublicacionEstado" Type="date" />
+    <Property Name="idEstadoPublicacion" Type="int" />
+    <Property Name="idPublicacion" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaArchivo">
+    <Key>
+      <PropertyRef Name="idReseñaArchivo" />
+    </Key>
+    <Property Name="idReseñaArchivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RA_esAI" Type="bit" />
+    <Property Name="RA_esAoAr" Type="bit" />
+    <Property Name="RA_esArAo" Type="bit" />
+    <Property Name="urlMultimediaReseñaArchivo" Type="varchar" MaxLength="100" />
+    <Property Name="urlReseñaArchivo" Type="varchar" MaxLength="100" />
+    <Property Name="idTipoReseña" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaArrendadorArrendatario">
+    <Key>
+      <PropertyRef Name="idReseñaArAo" />
+    </Key>
+    <Property Name="idReseñaArAo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionReseñaArAo" Type="varchar" MaxLength="100" />
+    <Property Name="fechaAltaReseñaArAo" Type="date" />
+    <Property Name="fechaBajaReseñaArAo" Type="date" />
+    <Property Name="puntuacionReseñaArAo" Type="int" />
+    <Property Name="respuestaReseñaArAo" Type="varchar" MaxLength="100" />
+    <Property Name="idAlquiler" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaArrendatarioArrendador">
+    <Key>
+      <PropertyRef Name="idReseñaAoAr" />
+    </Key>
+    <Property Name="idReseñaAoAr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionReseñaAoAr" Type="varchar" MaxLength="100" />
+    <Property Name="fechaAltaReseñaAoAr" Type="date" />
+    <Property Name="fechaBajaReseñaAoAr" Type="date" />
+    <Property Name="puntuacionReseñaAoAr" Type="int" />
+    <Property Name="respuestaReseñaAoAr" Type="varchar" MaxLength="100" />
+    <Property Name="idAlquiler" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaArrendatarioInmueble">
+    <Key>
+      <PropertyRef Name="idReseñaAI" />
+    </Key>
+    <Property Name="idReseñaAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionReseñaAI" Type="varchar" MaxLength="100" />
+    <Property Name="fechaAltaReseñaAI" Type="date" />
+    <Property Name="fechaBajaReseñaAI" Type="date" />
+    <Property Name="puntuacionReseñaAI" Type="int" />
+    <Property Name="respuestaReseñaAI" Type="varchar" MaxLength="100" />
+    <Property Name="idAlquiler" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaItemAI">
+    <Key>
+      <PropertyRef Name="idReseñaItemAI" />
+    </Key>
+    <Property Name="idReseñaItemAI" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="puntuacionReseñaItemAI" Type="int" />
+    <Property Name="idReseñaAI" Type="int" />
+    <Property Name="idItemReseña" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaItemAoAr">
+    <Key>
+      <PropertyRef Name="idReseñaItemArAo" />
+    </Key>
+    <Property Name="idReseñaItemArAo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="puntuacionReseñaItemAoAr" Type="int" />
+    <Property Name="idReseñaArAo" Type="int" />
+    <Property Name="idItemReseña" Type="int" />
+  </EntityType>
+  <EntityType Name="ReseñaItemArAo">
+    <Key>
+      <PropertyRef Name="idReseñaItemAoAr" />
+    </Key>
+    <Property Name="idReseñaItemAoAr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="puntuacionReseñaItemArAo" Type="int" />
+    <Property Name="idReseñaAoAr" Type="int" />
+    <Property Name="idItemReseña" Type="int" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="idRol" />
+    </Key>
+    <Property Name="idRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="descripcionRol" Type="varchar" MaxLength="100" />
+    <Property Name="fechaAltaRol" Type="date" />
+    <Property Name="fechaBajaRol" Type="date" />
+    <Property Name="nombreRol" Type="varchar" MaxLength="100" />
+    <Property Name="idPermisoRol" Type="int" />
+  </EntityType>
+  <EntityType Name="URL">
+    <Key>
+      <PropertyRef Name="idURL" />
+    </Key>
+    <Property Name="idURL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="linkURL" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityContainer Name="ARRENDASYSModelStoreContainer">
+    <EntitySet Name="Alquiler" EntityType="Self.Alquiler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Arrendatario" EntityType="Self.Arrendatario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cuenta" EntityType="Self.Cuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CuentaNotificacion" EntityType="Self.CuentaNotificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Direccion" EntityType="Self.Direccion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoAlquiler" EntityType="Self.EstadoAlquiler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoInmueble" EntityType="Self.EstadoInmueble" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadoPublicacion" EntityType="Self.EstadoPublicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inmobiliaria" EntityType="Self.Inmobiliaria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Inmueble" EntityType="Self.Inmueble" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="InmuebleEstado" EntityType="Self.InmuebleEstado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemReseña" EntityType="Self.ItemReseña" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MultimediaInmueble" EntityType="Self.MultimediaInmueble" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notificacion" EntityType="Self.Notificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PermisoRol" EntityType="Self.PermisoRol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Premium" EntityType="Self.Premium" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Propietario" EntityType="Self.Propietario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Publicacion" EntityType="Self.Publicacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PublicacionEstado" EntityType="Self.PublicacionEstado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaArchivo" EntityType="Self.ReseñaArchivo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaArrendadorArrendatario" EntityType="Self.ReseñaArrendadorArrendatario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="Self.ReseñaArrendatarioArrendador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="Self.ReseñaArrendatarioInmueble" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaItemAoAr" EntityType="Self.ReseñaItemAoAr" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReseñaItemArAo" EntityType="Self.ReseñaItemArAo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
