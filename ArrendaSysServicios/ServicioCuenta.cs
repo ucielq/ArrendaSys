@@ -42,7 +42,7 @@ namespace ArrendaSysServicios
                 }
                 else
                 {
-                    return "About#Home";
+                    return "Index#Home";
                 }
 
 
