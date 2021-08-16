@@ -29,12 +29,12 @@ namespace ArrendaSys.Controllers.Acceso
                 }
                 catch
                 {
-                    filterContext.Result = new RedirectResult("~/Login/UsuarioLogin");
+                    filterContext.Result = new RedirectResult("~/Login/Login");
                 }
             }
             else
             {
-                filterContext.Result = new RedirectResult("~/Login/UsuarioLogin");
+                filterContext.Result = new RedirectResult("~/Login/Login");
             }
             base.OnActionExecuting(filterContext);
         }

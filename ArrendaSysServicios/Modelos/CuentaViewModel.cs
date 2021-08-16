@@ -9,5 +9,7 @@ namespace ArrendaSysServicios.Modelos
     public class CuentaViewModel
     {
         public string email { get; set; }
+        public int idCuenta { get; set; }
+       
     }
 }

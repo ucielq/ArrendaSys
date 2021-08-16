@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace ArrendaSys.Controllers.Api
 {
-    public class CuentaController : ApiController
+    public class CuentaApiController : ApiController
     {
         [System.Web.Http.ActionName("hola")]
         [System.Web.Http.HttpGet]
