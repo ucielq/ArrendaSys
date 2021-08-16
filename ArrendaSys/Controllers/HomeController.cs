@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers
 {
-    
+    [SessionUtility]
     public class HomeController : Controller
     {
         // GET: Home
