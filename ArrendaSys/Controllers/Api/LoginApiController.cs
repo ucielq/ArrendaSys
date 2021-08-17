@@ -1,4 +1,5 @@
 ﻿using ArrendaSysModelos;
+using ArrendaSysUtilidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,14 @@ namespace ArrendaSys.Controllers.Api
                 }
             }
         }
+        [System.Web.Http.Route("Api/Login/EnviarMail")]
+        [System.Web.Http.ActionName("EnviarMail")]
+        [System.Web.Http.HttpGet]
+        public string EnviarMail()
+        {
+            ArrendaSysUtilidades.EnvioMail envioMail = new EnvioMail();
+            return envioMail.EnviarMailGenerico();
+        }
+        
     }
 }

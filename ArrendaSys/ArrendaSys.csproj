@@ -224,6 +224,10 @@
       <Project>{496CEAF0-6EEB-4E11-A81D-251323B5230A}</Project>
       <Name>ArrendaSysServicios</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ArrendaSysUtilidades\ArrendaSysUtilidades.csproj">
+      <Project>{2e42cf7b-f0fe-44f6-8772-ae65bb02921a}</Project>
+      <Name>ArrendaSysUtilidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -430,7 +430,7 @@
             <div class="title">Iniciar Sesión</div>
 
             <div class="input">
-                <label for="mail">Usuario</label>
+                <label for="mail">Email</label>
                 <input type="text" name="name" id="mail">
                 <span class="spin"></span>
             </div>
@@ -445,7 +445,7 @@
                 <button id="Loguear"><span>Ingresar</span> <i class="fa fa-check"></i></button>
             </div>
             <div class="button login">
-                <button id="Registrar"><span>Registrarse</span> <i class="fa fa-check"></i></button>
+                <button id="Registrar" onclick="enviarMail()"><span>Registrarse</span> <i class="fa fa-check"></i></button>
             </div>
 
             @*<a href="" class="pass-forgot">¿Olvidaste tu contraseña?</a>*@
@@ -459,6 +459,15 @@
     <link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext" rel="stylesheet" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
+        //function enviarMail() {
+        //    $.ajax({
+        //        type: 'Get',
+        //        url: '/Api/Login/EnviarMail',
+        //        success: function (result) {
+        //            console.log(result);
+        //        }
+        //    });
+        //}
         $(document).on('keypress', function (e) {
             if (e.which == 13) {
                 var usuario = $("#name").val();
@@ -469,10 +478,11 @@
                     success: function (result) {
                         if (result == 0) {
                             alert("Usuario no encontrado, intente nuevamente.")
-
+                            window.location.href = '/Login/Login';
                         } else {
                             if (result == 1) {
                                 alert("Contraseña incorrecta, intente nuevamente.");
+                                window.location.href = '/Login/Login';
                             } else {
                                 if (result == 2) {
                                     window.location.href = '/Login/Validar?nombre=' + usuario + "&password=" + password;
@@ -540,10 +550,11 @@
                 success: function (result) {
                     if (result == 0) {
                         alert("Usuario no encontrado, intente nuevamente.")
-
+                        window.location.href = '/Login/Login';
                     } else {
                         if (result == 1) {
                             alert("Contraseña incorrecta, intente nuevamente.");
+                            window.location.href = '/Login/Login';
                         } else {
                             if (result == 2) {
                                 window.location.href = '/Login/Validar?mail=' + mail + "&password=" + password;
