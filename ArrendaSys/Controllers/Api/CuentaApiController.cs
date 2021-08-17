@@ -3,19 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
+using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers.Api
 {
-    public class CuentaApiController : ApiController
+    public class CuentaApiController : Controller
     {
-        [System.Web.Http.ActionName("hola")]
+        [System.Web.Http.Route("Api/CrearCuenta")]
+        [System.Web.Http.ActionName("CrearCuenta")]
         [System.Web.Http.HttpGet]
-        public CuentaViewModel hola()
+        public int ValidarDatos()
         {
-            ArrendaSysServicios.ServicioCuenta _servicio = new ArrendaSysServicios.ServicioCuenta();
-            var tmp = _servicio.hola();
-            return tmp;
+            return 0;
         }
+
+
     }
 }
