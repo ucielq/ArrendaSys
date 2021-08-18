@@ -20,11 +20,24 @@ namespace ArrendaSys
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      
+                      "~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
+                      "~/assets/vendor/glightbox/js/glightbox.min.js",
+                      "~/assets/vendor/isotope-layout/isotope.pkgd.min.js",
+                      "~/assets/vendor/php-email-form/validate.js",
+                      "~/assets/vendor/swiper/swiper-bundle.min.js",
+                      "~/assets/js/main.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/assets/img/favicon.png",
+                      "~/assets/img/apple-touch-icon.png",
+                      "~/assets/vendor/animate.css/animate.min.css",
+                      "~/assets/vendor/bootstrap/css/bootstrap.min.css",
+                      "~/assets/vendor/bootstrap-icons/bootstrap-icons.css",
+                      "~/assets/vendor/boxicons/css/boxicons.min.css",
+                      "~/assets/vendor/glightbox/css/glightbox.min.css",
+                      "~/assets/vendor/swiper/swiper-bundle.min.css",
+                      "~/assets/css/style.css"                      
+                      ));
         }
     }
 }
