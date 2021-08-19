@@ -38,8 +38,8 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">About</a></li>
+                    <li><a class="nav-link scrollto active" href="#" onclick="index()">Home</a></li>
+                    <li><a class="nav-link scrollto" href="#" onclick="about()">About</a></li>
                     <li><a class="nav-link scrollto" href="#services">Services</a></li>
                     <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
                     <li><a class="nav-link scrollto" href="#team">Team</a></li>
@@ -73,9 +73,26 @@
 
     <div class="body-content">
         @RenderBody()
-        <footer>
-            <p>&copy; @DateTime.Now.Year - ArrendaSys</p>
-        </footer>
+        <footer id="footer">
+            <div class="container">
+                <h3>Arrendasys</h3>
+                <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+                <div class="social-links">
+                    <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                    <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; Copyright <strong><span>ArrendaSys</span></strong>. Todos los derechos reservados.
+                </div>
+                <div class="credits">
+                    
+                    Diseñado por los pibes
+                </div>
+            </div>
+        </footer><!-- End Footer -->
     </div>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/vendor/glightbox/js/glightbox.min.js"></script>
@@ -90,5 +107,10 @@
 </html>
 
 <script>
-
+    function about() {
+        window.location.href ="/Home/About"
+    }
+    function index() {
+        window.location.href = "/Home/Index"
+    }
 </script>
