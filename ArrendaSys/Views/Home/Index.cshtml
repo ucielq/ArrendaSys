@@ -4,6 +4,7 @@
 }
 
 <script src="@RouteJs.RouteJsHandler.HandlerUrl"></script>
+
 <!DOCTYPE html>
 
 <html>
@@ -14,10 +15,10 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
 
-
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ArrendaSys</title>
-    
+
 </head>
 <body>
     <!-- ======= Top Bar ======= -->
@@ -31,30 +32,10 @@
                 <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
+                <a href="#" class="mercadopago">https://mpago.la/12ksw8Y</a>
             </div>
         </div>
     </section>
-    <header id="header" class="d-flex align-items-center">
-        <div class="container d-flex align-items-center">
-
-            <h1 class="logo me-auto"><a>ArrendaSys</a></h1>
-
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="#hero" >Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about">Sobre Nosotros</a></li>
-                    <li><a class="nav-link scrollto" href="#services">Servicios</a></li>
-                    <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                    <li><a class="nav-link scrollto" href="#team">Equipo</a></li>                    
-                    <li><a class="nav-link scrollto" href="#contact">Contacto</a></li>
-                    <li><a class="getstarted scrollto" href="#" onclick="Login()">Iniciar Sesión</a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
-
-        </div>
-    </header><!-- End Header -->
     <!-- ======= Hero Section ======= -->
     <section id="hero">
         <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -648,7 +629,24 @@
 </body>
 </html>
 <script>
+    
     function Login() {
         window.location.href = '/Login/Login';
     }
+
+    const mp = new MercadoPago('TEST-ab90c24d-2e85-4ba7-848b-7b7c1ed1ec39', {
+        locale: 'es-AR'
+    });
+
+    
+    mp.checkout({
+        preference: {
+            id: 'pagarMP'
+        },
+        render: {
+            container: '.mercadopago',
+            label: 'Pagar', 
+            type:'wallet'
+        }
+    });
 </script>

@@ -36,6 +36,7 @@
           <Property Name="telefonoArrendatario" Type="int" />
           <Property Name="tipoDocumentoArr" Type="varchar" MaxLength="100" />
           <Property Name="idCuenta" Type="int" />
+          <Property Name="fechaNacimArrendatario" Type="date" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -48,6 +49,7 @@
           <Property Name="fechaBajaCuenta" Type="date" />
           <Property Name="idRol" Type="int" />
           <Property Name="idPremium" Type="int" />
+          <Property Name="codigoConfimacion" Type="int" />
         </EntityType>
         <EntityType Name="CuentaNotificacion">
           <Key>
@@ -177,6 +179,7 @@
           <Property Name="idNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionNotificacion" Type="varchar" MaxLength="100" />
           <Property Name="nombreNotificacion" Type="varchar" MaxLength="100" />
+          <Property Name="fechaNotificación" Type="date" />
         </EntityType>
         <EntityType Name="PermisoRol">
           <Key>
@@ -208,6 +211,7 @@
           <Property Name="tipoDocumentoProp" Type="varchar" MaxLength="100" />
           <Property Name="idCuenta" Type="int" />
           <Property Name="idDireccion" Type="int" />
+          <Property Name="fechaNacimPropietario" Type="date" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -401,6 +405,7 @@
           <Property Name="telefonoArrendatario" Type="Int32" />
           <Property Name="tipoDocumentoArr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
+          <Property Name="fechaNacimArrendatario" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Cuenta">
           <Key>
@@ -413,6 +418,7 @@
           <Property Name="fechaBajaCuenta" Type="DateTime" Precision="0" />
           <Property Name="idRol" Type="Int32" />
           <Property Name="idPremium" Type="Int32" />
+          <Property Name="codigoConfimacion" Type="Int32" />
         </EntityType>
         <EntityType Name="CuentaNotificacion">
           <Key>
@@ -542,6 +548,7 @@
           <Property Name="idNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaNotificación" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="PermisoRol">
           <Key>
@@ -573,6 +580,7 @@
           <Property Name="tipoDocumentoProp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
           <Property Name="idDireccion" Type="Int32" />
+          <Property Name="fechaNacimPropietario" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -768,6 +776,7 @@
                 <ScalarProperty Name="telefonoArrendatario" ColumnName="telefonoArrendatario" />
                 <ScalarProperty Name="tipoDocumentoArr" ColumnName="tipoDocumentoArr" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="fechaNacimArrendatario" ColumnName="fechaNacimArrendatario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -781,6 +790,7 @@
                 <ScalarProperty Name="fechaBajaCuenta" ColumnName="fechaBajaCuenta" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="idPremium" ColumnName="idPremium" />
+                <ScalarProperty Name="codigoConfimacion" ColumnName="codigoConfimacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -923,6 +933,7 @@
                 <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
                 <ScalarProperty Name="descripcionNotificacion" ColumnName="descripcionNotificacion" />
                 <ScalarProperty Name="nombreNotificacion" ColumnName="nombreNotificacion" />
+                <ScalarProperty Name="fechaNotificación" ColumnName="fechaNotificación" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -957,6 +968,7 @@
                 <ScalarProperty Name="tipoDocumentoProp" ColumnName="tipoDocumentoProp" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
                 <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="fechaNacimPropietario" ColumnName="fechaNacimPropietario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

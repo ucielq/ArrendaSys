@@ -17,5 +17,6 @@ namespace ArrendaSysModelos
         public int idNotificacion { get; set; }
         public string descripcionNotificacion { get; set; }
         public string nombreNotificacion { get; set; }
+        public Nullable<System.DateTime> fechaNotificación { get; set; }
     }
 }
