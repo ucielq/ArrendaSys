@@ -14,6 +14,8 @@ namespace ArrendaSysModelos
     
     public partial class Arrendatario
     {
+        public DateTime fechaNacimArrendatario;
+
         public int idArrendatario { get; set; }
         public string apellidoArrendatario { get; set; }
         public string nombreArrendatario { get; set; }

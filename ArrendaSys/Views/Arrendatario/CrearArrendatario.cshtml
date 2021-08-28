@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "CrearArrendador";
+    ViewBag.Title = "CrearArrendatario";
 }
 
 <script src="@RouteJs.RouteJsHandler.HandlerUrl"></script>
@@ -22,12 +22,12 @@
         <section class="breadcrumbs">
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Crear Propietario</h2>
+                    <h2>Crear Arrendatario</h2>
                 </div>
             </div>
         </section><!-- End Breadcrumbs -->
         <section id="contact" class="contact">
-            <div class="container">             
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
@@ -55,10 +55,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="tipdoc">Fecha Nacimiento</label>
+                                    <label for="fechanac">Fecha Nacimiento</label>
                                     <input type="date" name="fechanac" class="form-control" id="fechanac" required>
                                 </div>
-
+                                
                             </div>
                             <div class="row">
                                 <div class=" col-md-3">
@@ -69,7 +69,7 @@
                             </div>
 
                         </form>
-</div>
+                    </div>
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                             <p>Dirección</p>
@@ -105,36 +105,45 @@
 
                             </div>
                             <p></p>
-                            <div class="text-center" onclick="CrearPerfil()"><button type="submit">Crear Perfil</button></div>
+                            <div class="text-center" onclick="CrearArre()"><button type="submit">Crear Perfil</button></div>
                         </form>
-</div>
+                    </div>
 
                 </div>
 
             </div>
+
+
+
+
+
+
         </section>
     </main>
-    
+
 </body>
 </html>
 <script>
-    function CrearPerfil() {
-        var prop = new Object();
-        prop.nombrePropietario = $("#name").val();
-        prop.apellidoPropietario = $("#lastname").val();
-        prop.numeroDocumentoPropietario = $("#doc").val();
-        prop.tipoDocumentoProp = $("#tipdoc").val();
-        prop.telefonoPropietario = $("#tel").val();
-        prop.fechaNacimPropietario = $("#fechanac").val();
+    function CrearArre() {
+        var arr = new Object();
+        arr.nombreArrendatario = $("#name").val();
+        arr.apellidoArrendatario = $("#lastname").val();
+        arr.numeroDocumentoArr = $("#doc").val();
+        arr.tipoDocumentoArr = $("#tipdoc").val();
+        arr.telefonoArrendatario = $("#tel").val();
+        arr.fechaNacimArrendatario = $("#fechanac").val();
+        
 
         $.ajax({
-            url: '/Arrendador/CrearProp',
-            data: prop,
+            url: '/Arrendatario/CrearArr',
+            data: arr,
             type: 'POST',
             success: function (data) {
-                alert("Propietario creado exitosamente");
+                alert("Arrendatario creado exitosamente");
             }
         });
     }
 </script>
+
+
 

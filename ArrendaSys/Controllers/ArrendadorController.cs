@@ -36,7 +36,8 @@ namespace ArrendaSys.Controllers
                         apellidoPropietario = propietario.apellidoPropietario,
                         numeroDocumentoProp = propietario.numeroDocumentoPropietario,
                         tipoDocumentoProp = propietario.tipoDocumentoProp,
-                        telefonoPropietario = propietario.telefonoPropietario
+                        telefonoPropietario = propietario.telefonoPropietario,
+                        fechaNacimPropietario= propietario.fechaNacimPropietario
                     };
                     db.Propietario.Add(p);
                     db.SaveChanges();

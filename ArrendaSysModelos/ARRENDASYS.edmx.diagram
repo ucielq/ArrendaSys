@@ -7,7 +7,7 @@
       <Diagram DiagramId="91c2cb9eb8fb406fb77a1892a1f1d31e" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="ARRENDASYSModel.Alquiler" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSModel.AlquilerEstado" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSModel.Arrendatario" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ARRENDASYSModel.Arrendatario" Width="2" PointX="0.5" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSModel.Cuenta" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSModel.CuentaNotificacion" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSModel.Departamento" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
