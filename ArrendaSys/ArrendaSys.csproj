@@ -166,6 +166,7 @@
     <Content Include="assets\css\style.css" />
     <Content Include="assets\img\about.jpg" />
     <Content Include="assets\img\apple-touch-icon.png" />
+    <Content Include="assets\img\arrendasys_logo.png" />
     <Content Include="assets\img\clients\client-1.png" />
     <Content Include="assets\img\clients\client-2.png" />
     <Content Include="assets\img\clients\client-3.png" />
@@ -187,10 +188,14 @@
     <Content Include="assets\img\portfolio\portfolio-details-1.jpg" />
     <Content Include="assets\img\portfolio\portfolio-details-2.jpg" />
     <Content Include="assets\img\portfolio\portfolio-details-3.jpg" />
-    <Content Include="assets\img\slide\mendoza-argentina.jpg" />
+    <Content Include="assets\img\slide\mendoza-ciudad.jpg" />
+    <Content Include="assets\img\slide\mendoza-portones.png" />
+    <Content Include="assets\img\slide\mendoza-town.jpg" />
     <Content Include="assets\img\slide\slide-1.jpg" />
     <Content Include="assets\img\slide\slide-2.jpg" />
     <Content Include="assets\img\slide\slide-3.jpg" />
+    <Content Include="assets\img\team\renzo_ubeira.jpeg" />
+    <Content Include="assets\img\team\sebastian_soto.png" />
     <Content Include="assets\img\team\team-1.jpg" />
     <Content Include="assets\img\team\team-2.jpg" />
     <Content Include="assets\img\team\team-3.jpg" />
