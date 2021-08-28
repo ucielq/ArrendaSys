@@ -159,6 +159,7 @@
     <Compile Include="Controllers\Api\LoginApiController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -169,6 +170,7 @@
     <Content Include="assets\css\style.css" />
     <Content Include="assets\img\about.jpg" />
     <Content Include="assets\img\apple-touch-icon.png" />
+    <Content Include="assets\img\arrendasys_logo.png" />
     <Content Include="assets\img\clients\client-1.png" />
     <Content Include="assets\img\clients\client-2.png" />
     <Content Include="assets\img\clients\client-3.png" />
@@ -178,6 +180,12 @@
     <Content Include="assets\img\clients\client-7.png" />
     <Content Include="assets\img\clients\client-8.png" />
     <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\portfolio\godoycruz.jpg" />
+    <Content Include="assets\img\portfolio\guaymallen.jpg" />
+    <Content Include="assets\img\portfolio\lasheras.jpg" />
+    <Content Include="assets\img\portfolio\lujan.jpg" />
+    <Content Include="assets\img\portfolio\maipu.jpg" />
+    <Content Include="assets\img\portfolio\mendoza.jpg" />
     <Content Include="assets\img\portfolio\portfolio-1.jpg" />
     <Content Include="assets\img\portfolio\portfolio-2.jpg" />
     <Content Include="assets\img\portfolio\portfolio-3.jpg" />
@@ -190,9 +198,17 @@
     <Content Include="assets\img\portfolio\portfolio-details-1.jpg" />
     <Content Include="assets\img\portfolio\portfolio-details-2.jpg" />
     <Content Include="assets\img\portfolio\portfolio-details-3.jpg" />
+    <Content Include="assets\img\portfolio\rivadavia.jpg" />
+    <Content Include="assets\img\portfolio\sanmartin.jpg" />
+    <Content Include="assets\img\portfolio\tunuyan.jpg" />
+    <Content Include="assets\img\slide\mendoza-ciudad.jpg" />
+    <Content Include="assets\img\slide\mendoza-portones.png" />
+    <Content Include="assets\img\slide\mendoza-town.jpg" />
     <Content Include="assets\img\slide\slide-1.jpg" />
     <Content Include="assets\img\slide\slide-2.jpg" />
     <Content Include="assets\img\slide\slide-3.jpg" />
+    <Content Include="assets\img\team\renzo_ubeira.jpeg" />
+    <Content Include="assets\img\team\sebastian_soto.png" />
     <Content Include="assets\img\team\team-1.jpg" />
     <Content Include="assets\img\team\team-2.jpg" />
     <Content Include="assets\img\team\team-3.jpg" />
@@ -439,10 +455,11 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Landing\Index.cshtml" />
     <Content Include="Views\Cuenta\CrearCuenta.cshtml" />
-    <Content Include="Views\Home\_ViewStart.cshtml" />
-    <Content Include="Views\Home\_Layout.cshtml" />
+    <Content Include="Views\Landing\_ViewStart.cshtml" />
+    <Content Include="Views\Landing\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
