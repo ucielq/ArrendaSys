@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ARRENDASYSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ARRENDASYSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alquiler">
           <Key>
             <PropertyRef Name="idAlquiler" />
@@ -369,8 +369,7 @@
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ARRENDASYSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -769,6 +768,7 @@
           <EntitySetMapping Name="Arrendatario">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Arrendatario">
               <MappingFragment StoreEntitySet="Arrendatario">
+                <ScalarProperty Name="fechaNacimArrendatario" ColumnName="fechaNacimArrendatario" />
                 <ScalarProperty Name="idArrendatario" ColumnName="idArrendatario" />
                 <ScalarProperty Name="apellidoArrendatario" ColumnName="apellidoArrendatario" />
                 <ScalarProperty Name="nombreArrendatario" ColumnName="nombreArrendatario" />
@@ -783,6 +783,7 @@
           <EntitySetMapping Name="Cuenta">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Cuenta">
               <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="codigoConfimacion" ColumnName="codigoConfimacion" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
                 <ScalarProperty Name="contrasenaCuenta" ColumnName="contrasenaCuenta" />
                 <ScalarProperty Name="emailCuenta" ColumnName="emailCuenta" />
@@ -930,6 +931,7 @@
           <EntitySetMapping Name="Notificacion">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Notificacion">
               <MappingFragment StoreEntitySet="Notificacion">
+                <ScalarProperty Name="fechaNotificación" ColumnName="fechaNotificación" />
                 <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
                 <ScalarProperty Name="descripcionNotificacion" ColumnName="descripcionNotificacion" />
                 <ScalarProperty Name="nombreNotificacion" ColumnName="nombreNotificacion" />
@@ -960,6 +962,7 @@
           <EntitySetMapping Name="Propietario">
             <EntityTypeMapping TypeName="ARRENDASYSModel.Propietario">
               <MappingFragment StoreEntitySet="Propietario">
+                <ScalarProperty Name="fechaNacimPropietario" ColumnName="fechaNacimPropietario" />
                 <ScalarProperty Name="idPropietario" ColumnName="idPropietario" />
                 <ScalarProperty Name="apellidoPropietario" ColumnName="apellidoPropietario" />
                 <ScalarProperty Name="nombrePropietario" ColumnName="nombrePropietario" />

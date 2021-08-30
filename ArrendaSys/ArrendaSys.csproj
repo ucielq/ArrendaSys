@@ -158,6 +158,9 @@
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
+    <Compile Include="Controllers\Api\ArrendadorApiController.cs" />
+    <Compile Include="Controllers\ArrendadorController.cs" />
+    <Compile Include="Controllers\ArrendatarioController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
