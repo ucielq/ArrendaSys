@@ -7,7 +7,7 @@
 }
 
 <!DOCTYPE html>
-
+<link href="~/Sidebar/styles.css" rel="stylesheet" />
 
 <style>
     .box {
@@ -24,34 +24,39 @@
         -ms-transform: scale(1);
         z-index: 5;
     }
-    .box.back {
-        transform: scale(.95);
-        -webkit-transform: scale(.95);
-        -ms-transform: scale(.95);
-        top: -20px;
-        opacity: .8;
-        z-index: -1;
-    }
-    .box:before {
-        content: "";
-        width: 100%;
-        height: 30px;
-        border-radius: 10px;
-        position: absolute;
-        top: -10px;
-        background: rgba(255, 255, 255, .6);
-        left: 0;
-        transform: scale(.95);
-        -webkit-transform: scale(.95);
-        -ms-transform: scale(.95);
-        z-index: -1;
-    }
+
+        .box.back {
+            transform: scale(.95);
+            -webkit-transform: scale(.95);
+            -ms-transform: scale(.95);
+            top: -20px;
+            opacity: .8;
+            z-index: -1;
+        }
+
+        .box:before {
+            content: "";
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            position: absolute;
+            top: -10px;
+            background: rgba(255, 255, 255, .6);
+            left: 0;
+            transform: scale(.95);
+            -webkit-transform: scale(.95);
+            -ms-transform: scale(.95);
+            z-index: -1;
+        }
+
     .overbox .title {
         color: #fff;
     }
-    .overbox .title:before {
-        background: #fff;
-    }
+
+        .overbox .title:before {
+            background: #fff;
+        }
+
     .title {
         width: 100%;
         float: left;
@@ -62,15 +67,17 @@
         color: #77CC66;
         position: relative;
     }
-    .title:before {
-        content: "";
-        width: 5px;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: -50px;
-        background: #77CC66;
-    }
+
+        .title:before {
+            content: "";
+            width: 5px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: -50px;
+            background: #77CC66;
+        }
+
     .input,
     .input label,
     .input input,
@@ -111,49 +118,49 @@
         height: 70px;
     }
 
-    .input,
-    .input input,
-    .button,
-    .button button {
-        position: relative;
-    }
+        .input,
+        .input input,
+        .button,
+        .button button {
+            position: relative;
+        }
 
-    .input input {
-        height: 60px;
-        top: 10px;
-        border: none;
-        background: transparent;
-    }
+            .input input {
+                height: 60px;
+                top: 10px;
+                border: none;
+                background: transparent;
+            }
 
-    .input input,
-    .input label,
-    .button button {
-        font-family: 'Roboto', sans-serif;
-        font-size: 24px;
-        color: rgba(0, 0, 0, 0.8);
-        font-weight: 300;
-    }
+            .input input,
+            .input label,
+            .button button {
+                font-family: 'Roboto', sans-serif;
+                font-size: 24px;
+                color: rgba(0, 0, 0, 0.8);
+                font-weight: 300;
+            }
 
-    .input:before,
-    .input .spin {
-        width: 100%;
-        height: 1px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
+            .input:before,
+            .input .spin {
+                width: 100%;
+                height: 1px;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
 
-    .input:before {
-        content: "";
-        background: rgba(0, 0, 0, 0.1);
-        z-index: 3;
-    }
+            .input:before {
+                content: "";
+                background: rgba(0, 0, 0, 0.1);
+                z-index: 3;
+            }
 
-    .input .spin {
-        background: #77CC66;
-        z-index: 4;
-        width: 0;
-    }
+            .input .spin {
+                background: #77CC66;
+                z-index: 4;
+                width: 0;
+            }
 
     .overbox .input .spin {
         background: rgba(255, 255, 255, 1);
@@ -177,17 +184,17 @@
         left: 20%;
     }
 
-    .button.login button,
-    .button button {
-        width: 100%;
-        line-height: 64px;
-        left: 0%;
-        background-color: transparent;
-        border: 3px solid rgba(0, 0, 0, 0.1);
-        font-weight: 900;
-        font-size: 18px;
-        color: rgba(0, 0, 0, 0.2);
-    }
+        .button.login button,
+        .button button {
+            width: 100%;
+            line-height: 64px;
+            left: 0%;
+            background-color: transparent;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            font-weight: 900;
+            font-size: 18px;
+            color: rgba(0, 0, 0, 0.2);
+        }
 
     .button.login {
         margin-top: 30px;
@@ -197,47 +204,47 @@
         margin-top: 20px;
     }
 
-    .button button {
-        background-color: #fff;
-        color: #77CC66;
-        border: none;
-    }
+        .button button {
+            background-color: #fff;
+            color: #77CC66;
+            border: none;
+        }
 
-    .button.login button.active {
-        border: 3px solid transparent;
-        color: #fff !important;
-    }
+        .button.login button.active {
+            border: 3px solid transparent;
+            color: #fff !important;
+        }
 
-    .button.login button.active span {
-        opacity: 0;
-        transform: scale(0);
-        -webkit-transform: scale(0);
-        -ms-transform: scale(0);
-    }
+            .button.login button.active span {
+                opacity: 0;
+                transform: scale(0);
+                -webkit-transform: scale(0);
+                -ms-transform: scale(0);
+            }
 
-    .button.login button.active i.fa {
-        opacity: 1;
-        transform: scale(1) rotate(-0deg);
-        -webkit-transform: scale(1) rotate(-0deg);
-        -ms-transform: scale(1) rotate(-0deg);
-    }
+            .button.login button.active i.fa {
+                opacity: 1;
+                transform: scale(1) rotate(-0deg);
+                -webkit-transform: scale(1) rotate(-0deg);
+                -ms-transform: scale(1) rotate(-0deg);
+            }
 
-    .button.login button i.fa {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        line-height: 60px;
-        transform: scale(0) rotate(-45deg);
-        -webkit-transform: scale(0) rotate(-45deg);
-        -ms-transform: scale(0) rotate(-45deg);
-    }
+        .button.login button i.fa {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            line-height: 60px;
+            transform: scale(0) rotate(-45deg);
+            -webkit-transform: scale(0) rotate(-45deg);
+            -ms-transform: scale(0) rotate(-45deg);
+        }
 
-    .button.login button:hover {
-        color: #77CC66;
-        border-color: #77CC66;
-    }
+        .button.login button:hover {
+            color: #77CC66;
+            border-color: #77CC66;
+        }
 
     .button {
         margin: 40px 0;
@@ -245,11 +252,11 @@
         z-index: 2;
     }
 
-    .button button {
-        cursor: pointer;
-        position: relative;
-        z-index: 2;
-    }
+        .button button {
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
 
     .pass-forgot {
         width: 100%;
@@ -278,34 +285,34 @@
         padding: 60px 50px 40px 50px;
     }
 
-    .overbox .title,
-    .overbox .button,
-    .overbox .input {
-        z-index: 111;
-        position: relative;
-        color: #77CC66 !important;
-        display: none;
-    }
+        .overbox .title,
+        .overbox .button,
+        .overbox .input {
+            z-index: 111;
+            position: relative;
+            color: #77CC66 !important;
+            display: none;
+        }
 
-    .overbox .title {
-        width: 80%;
-    }
+        .overbox .title {
+            width: 80%;
+        }
 
-    .overbox .input {
-        margin-top: 20px;
-    }
+        .overbox .input {
+            margin-top: 20px;
+        }
 
-    .overbox .input input,
-    .overbox .input label {
-        color: #fff;
-    }
+            .overbox .input input,
+            .overbox .input label {
+                color: #fff;
+            }
 
-    .overbox .material-button,
-    .overbox .material-button .shape,
-    .overbox .alt-2,
-    .overbox .alt-2 .shape {
-        display: block;
-    }
+        .overbox .material-button,
+        .overbox .material-button .shape,
+        .overbox .alt-2,
+        .overbox .alt-2 .shape {
+            display: block;
+        }
 
     .material-button,
     .alt-2 {
@@ -323,49 +330,49 @@
         -ms-transform: translate(0%, 0%);
     }
 
-    .material-button .shape,
-    .alt-2 .shape {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-    }
+        .material-button .shape,
+        .alt-2 .shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-    .material-button .shape:before,
-    .alt-2 .shape:before,
-    .material-button .shape:after,
-    .alt-2 .shape:after {
-        content: "";
-        background: #fff;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(360deg);
-        -webkit-transform: translate(-50%, -50%) rotate(360deg);
-        -ms-transform: translate(-50%, -50%) rotate(360deg);
-    }
+            .material-button .shape:before,
+            .alt-2 .shape:before,
+            .material-button .shape:after,
+            .alt-2 .shape:after {
+                content: "";
+                background: #fff;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotate(360deg);
+                -webkit-transform: translate(-50%, -50%) rotate(360deg);
+                -ms-transform: translate(-50%, -50%) rotate(360deg);
+            }
 
-    .material-button .shape:before,
-    .alt-2 .shape:before {
-        width: 25px;
-        height: 4px;
-    }
+            .material-button .shape:before,
+            .alt-2 .shape:before {
+                width: 25px;
+                height: 4px;
+            }
 
-    .material-button .shape:after,
-    .alt-2 .shape:after {
-        height: 25px;
-        width: 4px;
-    }
+            .material-button .shape:after,
+            .alt-2 .shape:after {
+                height: 25px;
+                width: 4px;
+            }
 
-    .material-button.active,
-    .alt-2.active {
-        top: 50%;
-        right: 50%;
-        transform: translate(50%, -50%) rotate(0deg);
-        -webkit-transform: translate(50%, -50%) rotate(0deg);
-        -ms-transform: translate(50%, -50%) rotate(0deg);
-    }
+        .material-button.active,
+        .alt-2.active {
+            top: 50%;
+            right: 50%;
+            transform: translate(50%, -50%) rotate(0deg);
+            -webkit-transform: translate(50%, -50%) rotate(0deg);
+            -ms-transform: translate(50%, -50%) rotate(0deg);
+        }
 
     body {
         background-color: #cdcdcd;
@@ -406,9 +413,12 @@
     }
 </style>
 <head>
+
     <meta name="viewport" content="width=device-width" />
     <meta charset="UTF-8">
     <title>CrearCuenta</title>
+    
+
 </head>
 <body>
     <div class="materialContainer">
@@ -418,9 +428,10 @@
             <div class="title">Crear Cuenta</div>
 
             <div class="input">
-                <label for="mail">E-mail</label>
-                <input type="text" name="name" id="mail">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email">
                 <span class="spin"></span>
+                <div id="xmail" hidden><h6>Ingresa un email valido</h6></div>
             </div>
 
             <div class="input">
@@ -433,15 +444,21 @@
                 <input type="password" name="pass1" id="pass1">
                 <span class="spin"></span>
             </div>
-            <span id="igualdad" hidden>"Las contraseñas no coinciden"</span>
-            <div class="input">
-                <label for="tipo">Tipo Cuenta</label>
-                <input type="text" name="pass" id="tipo">
-                <span class="spin"></span>
+            <span id="igualdad" hidden>Las contraseñas no coinciden</span>
+            <div class="form-group">
+                <label>Tipo cuenta</label>
+                <br />
+                <select class="form-select" id="tipoCuenta">
+                    <option selected value="0">Seleccione una opcion</option>.
+                    <option value="1">Inmobiliaria</option>
+                    <option value="2">Propietario</option>
+                    <option value="3">Arrendatario</option>
+                </select>
             </div>
 
+
             <div class="button login">
-                <button id="Loguear"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
+                <button id="crearCuenta"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
             </div>
             <div class="button login">
                 <button id="Cancelar" onclick="atras()"><span>Cancelar</span> <i class="fa fa-check"></i></button>
@@ -449,17 +466,39 @@
 
         </div>
 
-
     </div>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Sidebar/scripts.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext" rel="stylesheet" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 </body>
 <script>
+
+    $("#email").keyup(function () {
+        caracteresCorreoValido($(this).val())
+    });
+
+    function caracteresCorreoValido(email) {
+        var caract = new RegExp(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/);
+        debugger;
+        if (!caract.test(email)) {
+            $("#xmail").show();
+
+            return false;
+        } else {
+            $("#xmail").hide();
+            return true;
+        }
+    }
+
+
     function atras() {
         window.location.href = '/Login/Login'
     }
+
+
     $("#pass1").keyup(function () {
         var pass = $("#pass").val();
         var pass1 = $("#pass1").val();
@@ -567,4 +606,34 @@
         }
 
     });
+
+    $("crearCuenta").click(function () {
+        //Valido todos los datos
+        validarMail();
+        
+
+
+    });
+    function validarMail() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Cuenta/ValidarMail?email=' + $("#email"),
+            success: function (result) {
+                if (result == 1) {
+                    if (pass1 == pass2) {
+                        altaCuenta();
+                    }
+                }
+            }
+        });
+    }
+    function altaCuenta() {
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Cuenta/altaCuenta?email=' + $("#email")+'&password=' +$("#pass"),
+            success: function (result) {
+                
+            }
+        });
+    }
 </script>

@@ -15,6 +15,21 @@ namespace ArrendaSysServicios
     {
         private ArrendasysEntities db = new ArrendasysEntities();
 
+        public int altaCuenta(string email, string pass)
+        {
+            var codigo = email.GetHashCode();
+            Cuenta cuenta = new Cuenta
+            {
+                emailCuenta=email,
+                contrasenaCuenta=pass,
+                codigoConfimacion=codigo
+            };
+            db.Cuenta.Add(cuenta);
+            db.SaveChanges();
+            return codigo;
+        }
+
+
         public CuentaViewModel hola()
         {
             CuentaViewModel cuenta = new CuentaViewModel();
