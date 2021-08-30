@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="91c2cb9eb8fb406fb77a1892a1f1d31e" Name="Diagram1" ZoomLevel="83">
+      <Diagram DiagramId="1fc73e262904433682d9d0eaae1b8f82" Name="Diagram1">
         <EntityTypeShape EntityType="ARRENDASYSModel.Alquiler" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSModel.AlquilerEstado" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSModel.Arrendatario" Width="2" PointX="0.5" PointY="3.75" IsExpanded="true" />

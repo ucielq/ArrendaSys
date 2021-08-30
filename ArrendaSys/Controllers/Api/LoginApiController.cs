@@ -17,7 +17,7 @@ namespace ArrendaSys.Controllers.Api
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta==null).FirstOrDefault();
+                var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta == null).FirstOrDefault();
                 if (user == null)
                 {
                     return 0;

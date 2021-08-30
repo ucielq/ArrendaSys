@@ -24,5 +24,6 @@ namespace ArrendaSysModelos
         public string tipoDocumentoProp { get; set; }
         public Nullable<int> idCuenta { get; set; }
         public Nullable<int> idDireccion { get; set; }
+        public Nullable<System.DateTime> fechaNacimPropietario { get; set; }
     }
 }

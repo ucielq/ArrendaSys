@@ -21,5 +21,6 @@ namespace ArrendaSysModelos
         public Nullable<System.DateTime> fechaBajaCuenta { get; set; }
         public Nullable<int> idRol { get; set; }
         public Nullable<int> idPremium { get; set; }
+        public Nullable<int> codigoConfimacion { get; set; }
     }
 }

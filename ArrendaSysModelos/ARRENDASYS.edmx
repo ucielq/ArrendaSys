@@ -776,6 +776,7 @@
                 <ScalarProperty Name="telefonoArrendatario" ColumnName="telefonoArrendatario" />
                 <ScalarProperty Name="tipoDocumentoArr" ColumnName="tipoDocumentoArr" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="fechaNacimArrendatario" ColumnName="fechaNacimArrendatario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -790,6 +791,7 @@
                 <ScalarProperty Name="fechaBajaCuenta" ColumnName="fechaBajaCuenta" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
                 <ScalarProperty Name="idPremium" ColumnName="idPremium" />
+                <ScalarProperty Name="codigoConfimacion" ColumnName="codigoConfimacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -933,6 +935,7 @@
                 <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
                 <ScalarProperty Name="descripcionNotificacion" ColumnName="descripcionNotificacion" />
                 <ScalarProperty Name="nombreNotificacion" ColumnName="nombreNotificacion" />
+                <ScalarProperty Name="fechaNotificación" ColumnName="fechaNotificación" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -968,6 +971,7 @@
                 <ScalarProperty Name="tipoDocumentoProp" ColumnName="tipoDocumentoProp" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
                 <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
+                <ScalarProperty Name="fechaNacimPropietario" ColumnName="fechaNacimPropietario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
