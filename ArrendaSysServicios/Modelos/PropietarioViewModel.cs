@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArrendaSysServicios.Modelos
 {
-    public class ArrendadorViewModel
+    public class PropietarioViewModel
     {
         public int idPropietario { get; set; }
         public string nombrePropietario { get; set; }

@@ -18,6 +18,7 @@ namespace ArrendaSys.Controllers.Api
         {
             ServicioCuenta servicioCuenta = new ServicioCuenta();
             //return servicioCuenta.altaCuenta(email, password);
+            return 0;
         }
 
     }

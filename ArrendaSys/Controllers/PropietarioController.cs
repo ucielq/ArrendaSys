@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers
 {
-    public class ArrendadorController : Controller
+    public class PropietarioController : Controller
     {
 
         public ActionResult CrearArrendador()
@@ -24,7 +24,7 @@ namespace ArrendaSys.Controllers
             return View();
         }
 
-        public int CrearProp(ArrendadorViewModel propietario)
+        public int CrearPropietario(PropietarioViewModel propietario)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {

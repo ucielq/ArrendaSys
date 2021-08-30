@@ -40,7 +40,6 @@ namespace ArrendaSysUtilidades
             message.Subject = subject;
             message.SubjectEncoding = System.Text.Encoding.UTF8;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-            string userstate = "sending ...";
             client.Send(message);
             return respuesta;
         }

@@ -14,13 +14,8 @@ namespace ArrendaSysServicios.Modelos
         public string fechaNacimientoStr { get; set; }
         public string tipoDocumento { get; set; }
         public int nroTelefono { get; set; }
-        public string apellidoArrendatario { get; set; }
         public string nombreArrendatario { get; set; }
         public string apellidoArrendatario { get; set; }
-        public int numeroDocumentoArr { get; set; }
-        public string tipoDocumentoArr { get; set; }
-        public int telefonoArrendatario { get; set; }
-        public DateTime fechaNacimArrendatario { get; set; }
 
     }
 }

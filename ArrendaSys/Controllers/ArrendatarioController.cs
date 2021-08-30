@@ -26,9 +26,9 @@ namespace ArrendaSys.Controllers
 
                         nombreArrendatario = arrendatario.nombreArrendatario,
                         apellidoArrendatario = arrendatario.apellidoArrendatario,
-                        numeroDocumentoArr = arrendatario.numeroDocumentoArr,
-                        tipoDocumentoArr = arrendatario.tipoDocumentoArr,
-                        telefonoArrendatario = arrendatario.telefonoArrendatario
+                        numeroDocumentoArr = arrendatario.nroDocumento,
+                        tipoDocumentoArr = arrendatario.tipoDocumento,
+                        telefonoArrendatario = arrendatario.nroTelefono
                        // fechaNacimArrendatario = arrendatario.fechaNacimArrendatario
                     };
                     db.Arrendatario.Add(a);

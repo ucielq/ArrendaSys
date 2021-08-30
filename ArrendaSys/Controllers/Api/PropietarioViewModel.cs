@@ -4,16 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers.Api
 {
-    public class ArrendadorApiController : Controller
+    public class PropietarioViewModel : ApiController
     {
-        [System.Web.Http.Route("Api/Arrendador/CrearArrendador")]
-        [System.Web.Http.ActionName("CrearProp")]
+        [System.Web.Http.Route("Api/Propietario/CrearPropietario")]
+        [System.Web.Http.ActionName("CrearPropietario")]
         [System.Web.Http.HttpPost]
-        public int CrearProp(ArrendadorViewModel propietario)
+        public int CrearPropietario(PropietarioViewModel propietario)
         {
             //int codigo;
             //codigo = CrearProp(propietario);
@@ -21,7 +22,7 @@ namespace ArrendaSys.Controllers.Api
             return 0;
         }
 
-        [System.Web.Http.Route("Api/Arrendador/PerfilArrendador")]
+        [System.Web.Http.Route("Api/Propietario/PerfilPropietario")]
         [System.Web.Http.ActionName("PerfilArrendador")]
         [System.Web.Http.HttpGet]
         public int PerfilArrendador()
