@@ -1,6 +1,15 @@
 ﻿<script src="@RouteJs.RouteJsHandler.HandlerUrl"></script>
 <!DOCTYPE html>
-
+<style>
+    .redondeado {
+        border-radius: 4px;
+        border-color: lightgray;
+        border-width: 1px;
+        width: 100%;
+        font-size: 13px;
+        padding: 2px;
+    }
+</style>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -93,15 +102,6 @@
                     </a>
                 </li>
             </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-                </li>
-            </ul>
         </nav>
         <!-- Page Content  -->
         <div id="content" style="padding:0px">
@@ -111,9 +111,7 @@
                         <i class="fas fa-align-left"></i>
                         <span></span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
+                    <input type="text" class="redondeado" placeholder="Buscar" style="width:300px"/>
                 </div>
             </nav>
             <div class="body-content">
@@ -135,7 +133,7 @@
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
-        });
+        });        
     });
     function Login() {
         window.location.href = '/Login/Login';

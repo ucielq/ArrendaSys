@@ -37,7 +37,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                
+
                                 <div id="arrendatario" class="arrendatario">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
@@ -60,13 +60,13 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label>Fecha Nacimiento</label>
-                                            <br/>
-                                            <input type="date" id="fechaNacimiento" class="redondeado form-control"/>
+                                            <br />
+                                            <input type="date" id="fechaNacimiento" class="redondeado form-control" />
                                         </div>
 
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-info pull-center" onclick="GuardarPerfil()">Guardar</button>                                 
+                                <button type="button" class="btn btn-info pull-center" onclick="GuardarPerfil()">Guardar</button>
                             </form>
                         </div>
                     </div>
@@ -76,14 +76,13 @@
 
 
     </div>
-
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+
 </body>
 <script>
     $(document).ready(function () {
-        debugger;
         $('.select2').select2({
             allowClear: false,
             width: '100%',
@@ -93,7 +92,6 @@
     crearoEditar();
     console.log(id);
     function crearoEditar() {
-        debugger;
         if (id != undefined) {
             //Edicion
 
@@ -104,7 +102,6 @@
     }
 
     function cambioTipoCuenta() {
-        debugger;
         if ($("#tipoCuenta").val() == 3) {
             $(".arrendatario").show();
         }
