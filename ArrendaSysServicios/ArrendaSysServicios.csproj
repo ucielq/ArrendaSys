@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modelos\ArrendatarioViewModel.cs" />
     <Compile Include="Modelos\CuentaViewModel.cs" />
     <Compile Include="Modelos\URLViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

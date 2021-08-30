@@ -8,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.Configuration;
 using ArrendaSysModelos;
 using ArrendaSysServicios.Modelos;
+using ArrendaSysUtilidades;
 
 namespace ArrendaSysServicios
 {
@@ -17,7 +18,7 @@ namespace ArrendaSysServicios
 
         public int altaCuenta(string email, string pass)
         {
-            var codigo = email.GetHashCode();
+            var codigo = Math.Abs(email.GetHashCode());
             Cuenta cuenta = new Cuenta
             {
                 emailCuenta=email,
@@ -25,10 +26,28 @@ namespace ArrendaSysServicios
                 codigoConfimacion=codigo
             };
             db.Cuenta.Add(cuenta);
-            db.SaveChanges();
+            db.SaveChanges();            
+            enviarMailCodigo(email, codigo);
             return codigo;
         }
-
+        public int confirmaCuenta(string email)
+        {
+            var cuenta = db.Cuenta.Where(x => x.emailCuenta == email).FirstOrDefault();
+            if (cuenta != null)
+            {
+                cuenta.fechaAltaCuenta = DateTime.Now;
+            }
+            db.SaveChanges();
+            return cuenta.idCuenta;
+        }
+        public void enviarMailCodigo(string email, int codigo)
+        {
+            EnvioMail mail = new EnvioMail();
+            var destino = email;
+            var body = codigo.ToString();
+            var subject = "Código confirmación";
+            mail.EnviarMailGenerico(destino, body, subject);
+        }
 
         public CuentaViewModel hola()
         {

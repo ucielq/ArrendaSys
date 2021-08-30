@@ -11,7 +11,7 @@ namespace ArrendaSysUtilidades
     public class EnvioMail
     {
 
-        public string EnviarMailGenerico()
+        public string EnviarMailGenerico(string destino,string body,string subject)
         {
             string respuesta = "Enviar";
 
@@ -31,13 +31,13 @@ namespace ArrendaSysUtilidades
 
             MailAddress from2 = new MailAddress(emailRemitente, String.Empty, System.Text.Encoding.UTF8);
             MailMessage message = new MailMessage();
-            message.To.Add("ucielagustinquiroga@gmail.com");
+            message.To.Add(destino);
             message.From = from2;
-            message.Body = "Este es un mail enviado a traves del sistema.";
+            message.Body = body;
             message.IsBodyHtml = true;
 
             message.BodyEncoding = System.Text.Encoding.UTF8;
-            message.Subject = "Arrendasys";
+            message.Subject = subject;
             message.SubjectEncoding = System.Text.Encoding.UTF8;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
             string userstate = "sending ...";

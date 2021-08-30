@@ -431,7 +431,7 @@
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email">
                 <span class="spin"></span>
-                <div id="xmail" hidden><h6>Ingresa un email valido</h6></div>
+                <div id="xmail"><h6>Ingresa un email valido</h6></div>
             </div>
 
             <div class="input">
@@ -444,21 +444,19 @@
                 <input type="password" name="pass1" id="pass1">
                 <span class="spin"></span>
             </div>
-            <span id="igualdad" hidden>Las contraseñas no coinciden</span>
-            <div class="form-group">
-                <label>Tipo cuenta</label>
-                <br />
-                <select class="form-select" id="tipoCuenta">
-                    <option selected value="0">Seleccione una opcion</option>.
-                    <option value="1">Inmobiliaria</option>
-                    <option value="2">Propietario</option>
-                    <option value="3">Arrendatario</option>
-                </select>
+            <span id="igualdad">Las contraseñas no coinciden</span>
+            <div class="input" id="confirm">
+                <label for="codigo">Codigo confirmacion</label>
+                <input type="number" name="codigo" id="codigo">
+                <span class="spin"></span>
             </div>
 
 
             <div class="button login">
                 <button id="crearCuenta"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
+            </div>
+            <div class="button login" id="confirmar">
+                <button id="confirmar"><span>Confirmar</span> <i class="fa fa-check"></i></button>
             </div>
             <div class="button login">
                 <button id="Cancelar" onclick="atras()"><span>Cancelar</span> <i class="fa fa-check"></i></button>
@@ -475,7 +473,10 @@
 
 </body>
 <script>
-
+    $("#igualdad").hide();
+    $("#xmail").hide();
+    $("#confirm").hide();
+    $("#confirmar").hide();
     $("#email").keyup(function () {
         caracteresCorreoValido($(this).val())
     });
@@ -607,33 +608,52 @@
 
     });
 
-    $("crearCuenta").click(function () {
+    $("#crearCuenta").click(function () {
         //Valido todos los datos
         validarMail();
-        
-
-
     });
     function validarMail() {
         $.ajax({
             type: 'Get',
-            url: '/Api/Cuenta/ValidarMail?email=' + $("#email"),
+            url: '/Api/Cuenta/ValidarMail?email=' + $("#email").val(),
             success: function (result) {
                 if (result == 1) {
-                    if (pass1 == pass2) {
+                    if ($("#pass").val() == $("#pass1").val()) {
                         altaCuenta();
                     }
                 }
             }
         });
     }
+    var codigo;
     function altaCuenta() {
         $.ajax({
-            type: 'Post',
-            url: '/Api/Cuenta/altaCuenta?email=' + $("#email")+'&password=' +$("#pass"),
+            type: 'Get',
+            url: '/Api/Cuenta/altaCuenta?email=' + $("#email").val() + '&password=' + $("#pass").val(),
+            async: false,
             success: function (result) {
-                
+                codigo = result;
+                $("#crearCuenta").hide();
+                alert("Se le envio un codigo a su mail");
+                $("#confirm").show();
+                $("#confirmar").show();
             }
         });
     }
+    $("#confirmar").click(function () {
+        if ($("#codigo").val() == codigo) {
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Cuenta/confirmaCuenta?email=' + $("#email").val(),
+                success: function (result) {
+                    var id = result;
+                    window.location.href = '/Perfil/AdministrarPerfil?id=' + id;
+                }
+            });
+        }
+        else {
+            alert("El codigo no coincide");
+        }
+    });
+    
 </script>

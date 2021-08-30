@@ -1,0 +1,131 @@
+﻿<style>
+    .select2 {
+        width: 100%;
+    }
+    .arrendatario {
+        display:none;
+    }
+    .redondeado {
+        border-radius: 4px;
+        border-color: lightgray;
+        border-width: 1px;
+        width: 100%;
+        font-size: 13px;
+        padding: 2px;
+    }
+</style>
+<body>
+    <div class="content" style="padding-left:10px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title"><b>Administrar Perfil</b></h4>
+                            <p class="card-category">Complete los datos del perfil.</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="formulario">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="tipoCuenta">Tipo de cuenta</label>
+                                        <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" data-placeholder="Seleccione una opción" onchange="cambioTipoCuenta()">
+                                            <option></option>
+                                            <option value="1">Inmobiliaria</option>
+                                            <option value="2">Propietario</option>
+                                            <option value="3">Arrendatario</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div id="arrendatario" class="arrendatario">
+                                    <div class="row" style="padding-top:6px">
+                                        <div class="col-md-2">
+                                            <label>Nombre</label>
+                                            <br />
+                                            <input type="text" id="nombreArrendatario" name="nombreArrendatario" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Apellido</label>
+                                            <br />
+                                            <input type="text" id="apellidoArrendatario" name="apellidoArrendatario" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="documento">Nro Documento</label>
+                                            <input type="text" id="documento" name="documento" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="telefono">Nro Telefono</label>
+                                            <input type="text" id="telefono" name="telefono" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Fecha Nacimiento</label>
+                                            <br/>
+                                            <input type="date" id="fechaNacimiento" class="redondeado form-control"/>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-info pull-center" onclick="GuardarPerfil()">Guardar</button>                                 
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+</body>
+<script>
+    $(document).ready(function () {
+        debugger;
+        $('.select2').select2({
+            allowClear: false,
+            width: '100%',
+        });
+    });
+    var id = GetUrlVars()["id"];
+    crearoEditar();
+    console.log(id);
+    function crearoEditar() {
+        debugger;
+        if (id != undefined) {
+            //Edicion
+
+
+        } else {
+            //Creacion
+        }
+    }
+
+    function cambioTipoCuenta() {
+        debugger;
+        if ($("#tipoCuenta").val() == 3) {
+            $(".arrendatario").show();
+        }
+    }
+
+
+    function guardarPerfil() {
+        if ($("#tipoCuenta").val() == 3) {
+            var arrendatario = new Object();
+            arrendatario.nombreArrendatario = $("#nombreArrendatario").val();
+            arrendatario.apellidoArrendatario = $("#apellidoArrendatario").val();
+            arrendatario.fechaNacimiento = $("#fechaNacimiento").val();
+            arrendatario.nroDocumento = $("#documento").val();
+            arrendatario.nroTelefono = $("#telefono").val();
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Arrendatario/CrearArrendatario',
+                data: arrendatario,                
+                success: function (result) {
+                }
+            });
+        }
+    }
+</script>
