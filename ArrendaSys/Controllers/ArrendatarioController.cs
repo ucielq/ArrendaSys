@@ -23,13 +23,13 @@ namespace ArrendaSys.Controllers
                 {
                     Arrendatario a = new Arrendatario
                     {
-                        
-                        nombreArrendatario=arrendatario.nombreArrendatario,
-                        apellidoArrendatario=arrendatario.apellidoArrendatario,
-                        numeroDocumentoArr=arrendatario.numeroDocumentoArr,
-                        tipoDocumentoArr=arrendatario.tipoDocumentoArr,
-                        telefonoArrendatario=arrendatario.telefonoArrendatario,
-                        fechaNacimArrendatario=arrendatario.fechaNacimArrendatario
+
+                        nombreArrendatario = arrendatario.nombreArrendatario,
+                        apellidoArrendatario = arrendatario.apellidoArrendatario,
+                        numeroDocumentoArr = arrendatario.numeroDocumentoArr,
+                        tipoDocumentoArr = arrendatario.tipoDocumentoArr,
+                        telefonoArrendatario = arrendatario.telefonoArrendatario
+                       // fechaNacimArrendatario = arrendatario.fechaNacimArrendatario
                     };
                     db.Arrendatario.Add(a);
                     db.SaveChanges();

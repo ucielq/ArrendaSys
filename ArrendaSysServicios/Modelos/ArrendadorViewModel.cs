@@ -14,7 +14,6 @@ namespace ArrendaSysServicios.Modelos
         public int numeroDocumentoPropietario { get; set; }
         public string tipoDocumentoProp { get; set; }
         public string telefonoPropietario { get; set; }
-        public DateTime fechaNacimPropietario { get; set; }
 
     }
 }

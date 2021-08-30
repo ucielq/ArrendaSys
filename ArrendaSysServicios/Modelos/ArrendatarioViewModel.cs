@@ -8,7 +8,7 @@ namespace ArrendaSysServicios.Modelos
 {
     public class ArrendatarioViewModel
     {
-        
+
         public int idArrendatario { get; set; }
         public string nombreArrendatario { get; set; }
         public string apellidoArrendatario { get; set; }

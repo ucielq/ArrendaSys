@@ -105,7 +105,6 @@
   <ItemGroup>
     <Compile Include="Modelos\ArrendadorViewModel.cs" />
     <Compile Include="Modelos\ArrendatarioViewModel.cs" />
-    <Compile Include="ServicioArrendador.cs" />
     <Compile Include="Modelos\CuentaViewModel.cs" />
     <Compile Include="Modelos\URLViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,17 +10,17 @@ namespace ArrendaSys.Controllers
 {
     public class ArrendadorController : Controller
     {
-        
+
         public ActionResult CrearArrendador()
         {
             return View();
         }
         public ActionResult PerfilArrendador()
         {
-            
-            
-            
-            
+
+
+
+
             return View();
         }
 
@@ -36,8 +36,7 @@ namespace ArrendaSys.Controllers
                         apellidoPropietario = propietario.apellidoPropietario,
                         numeroDocumentoProp = propietario.numeroDocumentoPropietario,
                         tipoDocumentoProp = propietario.tipoDocumentoProp,
-                        telefonoPropietario = propietario.telefonoPropietario,
-                        fechaNacimPropietario= propietario.fechaNacimPropietario
+                        telefonoPropietario = propietario.telefonoPropietario
                     };
                     db.Propietario.Add(p);
                     db.SaveChanges();
@@ -48,9 +47,9 @@ namespace ArrendaSys.Controllers
                     return 404;
                 }
             }
-           
+
         }
 
-        
+
     }
 }
