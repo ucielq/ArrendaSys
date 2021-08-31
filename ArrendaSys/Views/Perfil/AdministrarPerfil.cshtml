@@ -101,27 +101,22 @@
                                 <div id="inmobiliaria" class="inmobiliaria">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label>Nombre</label>
+                                            <label>Razón Social</label>
                                             <br />
                                             <input type="text" id="nombreInmo" name="nombreInmo" />
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Apellido</label>
-                                            <br />
-                                            <input type="text" id="apellidoInmo" name="apellidoInmo" />
+                                            <label for="cuitInmo">CUIT</label>
+                                            <input type="text" id="cuitInmo" name="cuitInmo" />
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="documentoProp">Nro Documento</label>
-                                            <input type="text" id="documentoInmo" name="documentoInmo" />
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="telefonoProp">Nro Telefono</label>
+                                            <label for="telefonoInmo">Teléfono</label>
                                             <input type="text" id="telefonoInmo" name="telefonoInmo" />
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Fecha Nacimiento</label>
+                                            <label>Alta Inscripción</label>
                                             <br />
-                                            <input type="date" id="fechaNacimientoInmo" class="redondeado form-control" />
+                                            <input type="date" id="AltaInscripcionInmo" class="redondeado form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -196,11 +191,11 @@
         }
         if ($("#tipoCuenta").val() == 2) {
             var propietario = new Object();
-            propietario.nombreArrendatario = $("#nombrePropietario").val();
-            propietario.apellidoArrendatario = $("#apellidoPropietario").val();
-            propietario.fechaNacimiento = $("#fechaNacimientoProp").val();
-            propietario.nroDocumento = $("#documentoProp").val();
-            propietario.nroTelefono = $("#telefonoProp").val();
+            propietario.nombrePropietario = $("#nombrePropietario").val();
+            propietario.apellidoPropietario = $("#apellidoPropietario").val();
+            propietario.fechaNacimientoPropietario = $("#fechaNacimientoProp").val();
+            propietario.nroDocumentoPropietario = $("#documentoProp").val();
+            propietario.nroTelefonoPropietario = $("#telefonoProp").val();
             $.ajax({
                 type: 'Get',
                 url: '/Api/Propietario/CrearPropietario',
@@ -211,11 +206,10 @@
         }
         if ($("#tipoCuenta").val() == 1) {
             var inmobiliaria = new Object();
-            inmobiliaria.nombreArrendatario = $("#nombreInmo").val();
-            inmobiliaria.apellidoArrendatario = $("#apellidoInmo").val();
-            inmobiliaria.fechaNacimiento = $("#fechaNacimientoInmo").val();
-            inmobiliaria.nroDocumento = $("#documentoInmo").val();
-            inmobiliaria.nroTelefono = $("#telefonoInmo").val();
+            inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
+            inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
+            inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
+            inmobiliaria.Inmobiliaria = $("#AltaInscripcionInmo").val();          
             $.ajax({
                 type: 'Get',
                 url: '/Api/Inmobiliaria/CrearInmobiliaria',
