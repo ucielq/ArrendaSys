@@ -5,6 +5,12 @@
     .arrendatario {
         display:none;
     }
+    .propietario {
+        display: none;
+    }
+    .inmobiliaria{
+        display:none;
+    }
     .redondeado {
         border-radius: 4px;
         border-color: lightgray;
@@ -37,7 +43,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div id="arrendatario" class="arrendatario">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
@@ -63,7 +68,56 @@
                                             <br />
                                             <input type="date" id="fechaNacimiento" class="redondeado form-control" />
                                         </div>
+                                    </div>
+                                </div>
+                                <div id="propietario" class="propietario">
+                                    <div class="row" style="padding-top:6px">
+                                        <div class="col-md-2">
+                                            <label>Nombre</label>
+                                            <br />
+                                            <input type="text" id="nombrePropietario" name="nombrePropietario" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Apellido</label>
+                                            <br />
+                                            <input type="text" id="apellidoPropietario" name="apellidoPropietario" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="documentoProp">Nro Documento</label>
+                                            <input type="text" id="documentoProp" name="documentoProp" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="telefonoProp">Nro Telefono</label>
+                                            <input type="text" id="telefonoProp" name="telefonoProp" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Fecha Nacimiento</label>
+                                            <br />
+                                            <input type="date" id="fechaNacimientoProp" class="redondeado form-control" />
+                                        </div>
 
+                                    </div>
+                                </div>
+                                <div id="inmobiliaria" class="inmobiliaria">
+                                    <div class="row" style="padding-top:6px">
+                                        <div class="col-md-2">
+                                            <label>Razón Social</label>
+                                            <br />
+                                            <input type="text" id="nombreInmo" name="nombreInmo" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="cuitInmo">CUIT</label>
+                                            <input type="text" id="cuitInmo" name="cuitInmo" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="telefonoInmo">Teléfono</label>
+                                            <input type="text" id="telefonoInmo" name="telefonoInmo" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Alta Inscripción</label>
+                                            <br />
+                                            <input type="date" id="AltaInscripcionInmo" class="redondeado form-control" />
+                                        </div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn btn-info pull-center" onclick="GuardarPerfil()">Guardar</button>
@@ -108,6 +162,18 @@
     function cambioTipoCuenta() {
         if ($("#tipoCuenta").val() == 3) {
             $(".arrendatario").show();
+            $(".propietario").hide();
+            $(".inmobiliaria").hide();
+        }
+        if ($("#tipoCuenta").val() == 2) {
+            $(".propietario").show();
+            $(".arrendatario").hide();
+            $(".inmobiliaria").hide();
+        }
+        if ($("#tipoCuenta").val() == 1) {
+            $(".inmobiliaria").show();
+            $(".arrendatario").hide();
+            $(".propietario").hide();
         }
     }
 
@@ -130,5 +196,37 @@
                 }
             });
         }
+        if ($("#tipoCuenta").val() == 2) {
+            var propietario = new Object();
+            propietario.nombrePropietario = $("#nombrePropietario").val();
+            propietario.apellidoPropietario = $("#apellidoPropietario").val();
+            propietario.fechaNacimientoPropietario = $("#fechaNacimientoProp").val();
+            propietario.nroDocumentoPropietario = $("#documentoProp").val();
+            propietario.nroTelefonoPropietario = $("#telefonoProp").val();
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Propietario/CrearPropietario',
+                data: propietario,
+                success: function (result) {
+                }
+            });
+        }
+        if ($("#tipoCuenta").val() == 1) {
+            var inmobiliaria = new Object();
+            inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
+            inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
+            inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
+            inmobiliaria.Inmobiliaria = $("#AltaInscripcionInmo").val();          
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Inmobiliaria/CrearInmobiliaria',
+                data: inmobiliaria,
+                success: function (result) {
+                }
+            });
+        }
     }
+
+    
+    
 </script>
