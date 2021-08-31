@@ -19,5 +19,6 @@ namespace ArrendaSysModelos
         public Nullable<bool> eliminacionRol { get; set; }
         public Nullable<bool> lecturaRol { get; set; }
         public Nullable<int> idURL { get; set; }
+        public Nullable<int> idRol { get; set; }
     }
 }

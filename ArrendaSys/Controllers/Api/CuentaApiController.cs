@@ -38,14 +38,13 @@ namespace ArrendaSys.Controllers.Api
             return servicioCuenta.altaCuenta(email, password);
         }
 
-        [System.Web.Http.Route("Api/Cuenta/confirmaCuenta")]
-        [System.Web.Http.ActionName("confirmaCuenta")]
+        [System.Web.Http.Route("Api/Cuenta/ObtenerId")]
+        [System.Web.Http.ActionName("ObtenerId")]
         [System.Web.Http.HttpGet]
-        public int confirmaCuenta(string email)
-        {            
+        public int ObtenerId(string email)
+        {
             ArrendaSysServicios.ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
-            var id=servicioCuenta.confirmaCuenta(email);
-            return id;
+            return servicioCuenta.ObtenerUsuarioLogueado(email);
         }
     }
 }

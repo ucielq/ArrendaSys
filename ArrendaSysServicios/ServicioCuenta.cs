@@ -30,6 +30,37 @@ namespace ArrendaSysServicios
             enviarMailCodigo(email, codigo);
             return codigo;
         }
+
+        public CuentaViewModel ObtenerDatosUsuarioLogueado(string emailCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+
+                //var user = nombreUsuario.Remove(0, 10);
+                CuentaViewModel usuario = new CuentaViewModel();
+                if (emailCuenta != null)
+                {
+                    usuario = (from c in db.Cuenta
+                               where c.fechaAltaCuenta != null && c.fechaBajaCuenta==null && c.emailCuenta == emailCuenta
+                               select new CuentaViewModel
+                               {
+                                   idCuenta = c.idCuenta,
+                                   email = c.emailCuenta,
+                               }).FirstOrDefault();
+                    //aca debo controlar lo que se hace si no encuentro usuario en la base
+                    if (usuario == null)
+                    {
+                        usuario = new CuentaViewModel();
+                        usuario.email = "Sin nombre";
+                        usuario.idCuenta = 0;
+
+                    }
+
+                }
+                return usuario;
+            }
+        }
+
         public int confirmaCuenta(string email)
         {
             var cuenta = db.Cuenta.Where(x => x.emailCuenta == email).FirstOrDefault();
@@ -49,13 +80,114 @@ namespace ArrendaSysServicios
             mail.EnviarMailGenerico(destino, body, subject);
         }
 
-        public CuentaViewModel hola()
+        public static int Get(string emailCuenta)
         {
-            CuentaViewModel cuenta = new CuentaViewModel();
-            var c = db.Cuenta.FirstOrDefault();            
-            cuenta.email = c.emailCuenta;
-            return cuenta;
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var usuario = (from c in db.Cuenta
+
+                               where c.emailCuenta == emailCuenta
+                               select new CuentaViewModel
+                               {
+                                   idCuenta = c.idCuenta,
+                               }).FirstOrDefault() ?? new CuentaViewModel()
+                               {
+                                   idCuenta = 0,
+                               };
+                if (usuario.idCuenta==0)
+                {
+                    usuario.idCuenta = -1;
+                }
+
+                return usuario.idCuenta;
+            }
+
         }
+
+        public static bool TienePermisoPorLogin(int? access, string nombreUsuario)
+        {
+
+            var usuario = Get(nombreUsuario);
+
+            if (usuario > 0)
+            {
+                return HasAccess(usuario, access);
+            }
+
+            return false;
+        }
+
+        public static RolViewModel ObtenerTiposPermisos(int? access, string emailCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var idCuenta = Get(emailCuenta);
+                var rolPerm = (from t1 in db.Cuenta
+                               join t2 in db.PermisoRol
+                                   on t1.idRol equals t2.idRol
+                               join t3 in db.URL
+                                   on t2.idURL equals t3.idURL
+                               where t1.idCuenta == idCuenta && t2.idURL == access
+                               select new RolViewModel
+                               {
+                                   tienePermisoEdicion = t2.edicionRol,
+                                   tienePermisoEliminacion = t2.eliminacionRol,
+                                   tienePermisoLectura = t2.lecturaRol
+
+                               }).FirstOrDefault();
+
+
+                return rolPerm;
+
+            }
+        }
+
+        private static bool HasAccess(int idCuenta, int? acceso)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var list = (from t1 in db.Cuenta
+                            join t2 in db.PermisoRol
+                                on t1.idRol equals t2.idRol
+                            join t3 in db.URL
+                                on t2.idURL equals t3.idURL
+                            select new { t1, t3 }).Where(x => x.t1.idCuenta == idCuenta).ToList();
+
+
+                if (list.Any(item => item.t3.idURL == acceso))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public int ObtenerUsuarioLogueado(string emailCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var usuario = (from c in db.Cuenta
+
+                               where c.emailCuenta == emailCuenta
+                               select new CuentaViewModel
+                               {
+                                   idCuenta = c.idCuenta,
+                                   fechaAltaCuenta=c.fechaAltaCuenta,
+                                   fechaBajaCuenta=c.fechaBajaCuenta
+                               }).FirstOrDefault() ?? new CuentaViewModel()
+                               {
+                                   idCuenta = 0,
+                               };
+                if (usuario.fechaAltaCuenta==null || usuario.fechaBajaCuenta!=null)
+                {
+                    usuario.idCuenta = -1;
+                }
+                //devuelvo 0 si el usuario no existe en la bd ó -1 si existe pero no está activo
+
+                return usuario.idCuenta;
+            }
+        }
+
         public string ObtenerLoginUsuario(string mailUsuario, string pass)
         {
             {
@@ -65,7 +197,7 @@ namespace ArrendaSysServicios
                                 select new CuentaViewModel
                                 {
                                     idCuenta = c.idCuenta,
-                                    //esGuardia = c.esJefeGuardia
+                                    idRol=c.idRol
                                 }).FirstOrDefault() ?? new CuentaViewModel()
                                 {
                                     idCuenta = 0,
@@ -76,48 +208,23 @@ namespace ArrendaSysServicios
                 }
                 else
                 {
-                    return "Index#Home";
+                    //Aca se maneja el rol
+
+                    var rol = db.Rol.Where(x => x.idRol == usuario.idRol && x.fechaBajaRol == null).FirstOrDefault();
+                    if (rol == null)
+                    {
+                        return "Perfil#AdministrarPerfil*"+usuario.idCuenta;
+                    }
+                    else {
+                            
+                        var acceso = db.PermisoRol.Where(x => x.idRol == rol.idRol).FirstOrDefault();
+                        var menuInicio = db.URL.Where(x => x.idURL == acceso.idURL).FirstOrDefault().linkURL;
+                        var response = "Home#Index";
+                        return response;
+                    }
+                        
                 }
-
-
-                //Aca manejar el rol
-
-                //var rolUsuario = bc.GralUsuarioRol.Where(x => x.idUsuario == usuario.idUsuario && x.activo == true).FirstOrDefault();
-                //if (rolUsuario == null)
-                //{
-                //    return "PermisoDenegado#Login";
-                //}
-                //var rol = bc.GralRol.Where(x => x.idRol == rolUsuario.idRol).FirstOrDefault();
-
-                //if (rolUsuario != null)
-                //{
-                //    if (rol != null)
-                //    {
-                //        if (rol.esJefe == true)
-                //        {
-                //            return "Novedad#Novedad";
-                //        }
-                //        if (rol.esOperador == true)
-                //        {
-                //            return "Novedad#Novedad";
-                //        }
-                //        var acceso = bc.GralAccesoRol.Where(x => x.idRol == rol.idRol).FirstOrDefault();
-                //        var menuInicio = bc.GralMenu.Where(x => x.idMenu == acceso.idMenu).FirstOrDefault().url;
-                //        var response = menuInicio.Split('/')[1] + "#" + menuInicio.Split('/')[2];
-                //        return response;
-                //    }
-                //    else
-                //    {
-                //        return "PermisoDenegado#Login";
-                //    }
-
-                //}
-                //else
-                //{
-                //    return "PermisoDenegado#Login";
-                //}
             }
-            
         }
         public void Dispose()
         {

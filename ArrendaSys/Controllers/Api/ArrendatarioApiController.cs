@@ -13,12 +13,11 @@ namespace ArrendaSys.Controllers.Api
     {
         [System.Web.Http.Route("Api/Arrendatario/CrearArrendatario")]
         [System.Web.Http.ActionName("CrearArrendatario")]
-        [System.Web.Http.HttpGet]
+        [System.Web.Http.HttpPost]
         public int CrearArrendatario(ArrendatarioViewModel arrendatario)
         {
-            ServicioCuenta servicioCuenta = new ServicioCuenta();
-            //return servicioCuenta.altaCuenta(email, password);
-            return 0;
+            ServicioArrendatario ServicioArrendatario = new ServicioArrendatario();
+            return ServicioArrendatario.crearArrendatario(arrendatario);
         }
 
     }

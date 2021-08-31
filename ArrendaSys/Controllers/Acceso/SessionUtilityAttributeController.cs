@@ -20,12 +20,13 @@ namespace ArrendaSys.Controllers.Acceso
                 {
                     var emailUsuario = user.ToString();
                     ServicioCuenta usuario = new ServicioCuenta();
+                    var estadoLogin = usuario.ObtenerUsuarioLogueado(emailUsuario);
                     //Obtengo el estado del usuario a nivel existe y esta activo
-                    /*
-                    if(estado == no existe o inactivo){
-                        filterContext.Result = new RedirectResult("~/Login/SesionIncorrecta")
-                    } 
-                    */
+
+                    if (estadoLogin == 0 || estadoLogin==-1 ){
+                        filterContext.Result = new RedirectResult("~/Login/Login");
+                    }
+
                 }
                 catch
                 {

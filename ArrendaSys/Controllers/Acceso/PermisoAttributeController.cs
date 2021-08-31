@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArrendaSysServicios;
+using System.Web.Routing;
 
 namespace ArrendaSys.Controllers.Acceso
 {
@@ -23,7 +25,7 @@ namespace ArrendaSys.Controllers.Acceso
                 base.OnActionExecuting(filterContext);
 
                 var accesoPorCodigo = (from a in db.URL
-                                       where a.idURL.Equals(codigo)
+                                       where a.codigo.Equals(codigo)
                                        select new URLViewModel {
                                             idUrl=a.idURL
                                        }).FirstOrDefault();
@@ -32,7 +34,30 @@ namespace ArrendaSys.Controllers.Acceso
                 if(usuario!=null && accesoPorCodigo != null)
                 {
                     //Aca revisar el acceso por login y cargo las variables de session del tipo de permiso
-                    //HttpContext.Current.Session["tienePermisoLectura"]= lo que sea que tenga ...
+                    if (!ServicioCuenta.TienePermisoPorLogin(accesoPorCodigo.idUrl, usuario.ToString()))
+                    {
+                        filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
+                        {
+                            controller = "Login",
+                            action = "ModuloDenegado"
+                        }));
+                    }
+                    else
+                    {
+                        //Cargo los permisos en cada vista
+                        var rol = ServicioCuenta.ObtenerTiposPermisos(accesoPorCodigo.idUrl, usuario.ToString());
+                        HttpContext.Current.Session["tienePermisoEdicion"] = false;
+                        HttpContext.Current.Session["tienePermisoEliminacion"] = false;
+                        HttpContext.Current.Session["tienePermisoLectura"] = false;
+                        if (rol != null)
+                        {
+                            HttpContext.Current.Session["tienePermisoEdicion"] = rol.tienePermisoEdicion;
+                            HttpContext.Current.Session["tienePermisoEliminacion"] = rol.tienePermisoEliminacion;
+                            HttpContext.Current.Session["tienePermisoLectura"] = rol.tienePermisoLectura;
+                        }
+                    }
+                    
+                    
                 }
                 else  if (accesoPorCodigo == null)
                 { 

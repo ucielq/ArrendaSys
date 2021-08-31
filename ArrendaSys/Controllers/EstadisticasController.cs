@@ -8,10 +8,10 @@ using System.Web.Mvc;
 namespace ArrendaSys.Controllers
 {
     [SessionUtility]
-    public class HomeController : Controller
+    public class EstadisticasController : Controller
     {
-        // GET: Home
-        public ActionResult Index()
+     
+        public ActionResult Estadisticas()
         {
             return View();
         }

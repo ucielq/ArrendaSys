@@ -33,8 +33,12 @@ namespace ArrendaSys.Controllers
                 if (resp != "DatosIncorrectos#Login" && resp != "PermisoDenegado#Login")
                 {
                     System.Web.HttpContext.Current.Session["usuarioLogeado"] = mail;
+                    if (resp.Split('*')[0]== "Perfil#AdministrarPerfil")
+                    {
+                        return RedirectToAction("AdministrarPerfil", "Perfil", new { id = resp.Split('*')[1] });
+                    }
                 }
-                return RedirectToAction(resp.Split('#')[0], resp.Split('#')[1]);
+                return RedirectToAction(resp.Split('#')[1], resp.Split('#')[0]);
 
             }
             catch (UnauthorizedAccessException e)
@@ -42,6 +46,13 @@ namespace ArrendaSys.Controllers
                 ViewBag.User = e.Message;
             }
             return RedirectToAction("LoginManual", "Login");
+        }
+        public ActionResult Logout()
+        {
+            System.Web.Security.FormsAuthentication.SignOut();
+            System.Web.HttpContext.Current.Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index", "Landing");
         }
     }
 }

@@ -88,7 +88,11 @@
             width: '100%',
         });
     });
-    var id = GetUrlVars()["id"];
+    var id = GetUrlId();
+    function GetUrlId() {
+        var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
+        return hash;
+    }
     crearoEditar();
     console.log(id);
     function crearoEditar() {
@@ -108,7 +112,7 @@
     }
 
 
-    function guardarPerfil() {
+    function GuardarPerfil() {
         if ($("#tipoCuenta").val() == 3) {
             var arrendatario = new Object();
             arrendatario.nombreArrendatario = $("#nombreArrendatario").val();
@@ -116,11 +120,13 @@
             arrendatario.fechaNacimiento = $("#fechaNacimiento").val();
             arrendatario.nroDocumento = $("#documento").val();
             arrendatario.nroTelefono = $("#telefono").val();
+            arrendatario.idCuenta = id;
             $.ajax({
-                type: 'Get',
+                type: 'Post',
                 url: '/Api/Arrendatario/CrearArrendatario',
-                data: arrendatario,                
+                data:  arrendatario,
                 success: function (result) {
+                    window.location.href = "/Home/Index";
                 }
             });
         }

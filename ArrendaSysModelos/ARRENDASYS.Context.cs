@@ -42,7 +42,6 @@ namespace ArrendaSysModelos
         public virtual DbSet<Localidad> Localidad { get; set; }
         public virtual DbSet<MultimediaInmueble> MultimediaInmueble { get; set; }
         public virtual DbSet<Notificacion> Notificacion { get; set; }
-        public virtual DbSet<PermisoRol> PermisoRol { get; set; }
         public virtual DbSet<Premium> Premium { get; set; }
         public virtual DbSet<Propietario> Propietario { get; set; }
         public virtual DbSet<Provincia> Provincia { get; set; }
@@ -55,6 +54,7 @@ namespace ArrendaSysModelos
         public virtual DbSet<ReseñaItemAI> ReseñaItemAI { get; set; }
         public virtual DbSet<ReseñaItemAoAr> ReseñaItemAoAr { get; set; }
         public virtual DbSet<ReseñaItemArAo> ReseñaItemArAo { get; set; }
+        public virtual DbSet<PermisoRol> PermisoRol { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<URL> URL { get; set; }
     }

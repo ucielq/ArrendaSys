@@ -22,7 +22,6 @@
         <EntityTypeShape EntityType="ArrendasysModel.Localidad" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.MultimediaInmueble" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.Notificacion" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendasysModel.PermisoRol" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.Premium" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.Propietario" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.Provincia" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
@@ -35,8 +34,9 @@
         <EntityTypeShape EntityType="ArrendasysModel.ReseñaItemAI" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.ReseñaItemAoAr" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ArrendasysModel.ReseñaItemArAo" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendasysModel.Rol" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ArrendasysModel.URL" Width="1.5" PointX="14.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ArrendasysModel.PermisoRol" Width="1.5" PointX="11.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ArrendasysModel.Rol" Width="1.5" PointX="13.75" PointY="14.75" />
+        <EntityTypeShape EntityType="ArrendasysModel.URL" Width="1.5" PointX="0.75" PointY="15.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

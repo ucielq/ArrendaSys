@@ -8,10 +8,11 @@ using System.Web.Mvc;
 namespace ArrendaSys.Controllers
 {
     [SessionUtility]
-    public class HomeController : Controller
+    //[Permiso("ALQ")]
+    public class AlquileresController : Controller
     {
-        // GET: Home
-        public ActionResult Index()
+        
+        public ActionResult Alquileres()
         {
             return View();
         }

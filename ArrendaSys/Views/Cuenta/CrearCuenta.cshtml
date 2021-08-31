@@ -477,6 +477,8 @@
     $("#xmail").hide();
     $("#confirm").hide();
     $("#confirmar").hide();
+    $("#pass").show();
+    $("#pass1").show();
     $("#email").keyup(function () {
         caracteresCorreoValido($(this).val())
     });
@@ -634,6 +636,8 @@
             success: function (result) {
                 codigo = result;
                 $("#crearCuenta").hide();
+                $("#pass").hide();
+                $("#pass1").hide();
                 alert("Se le envio un codigo a su mail");
                 $("#confirm").show();
                 $("#confirmar").show();
@@ -642,14 +646,7 @@
     }
     $("#confirmar").click(function () {
         if ($("#codigo").val() == codigo) {
-            $.ajax({
-                type: 'Get',
-                url: '/Api/Cuenta/confirmaCuenta?email=' + $("#email").val(),
-                success: function (result) {
-                    var id = result;
-                    window.location.href = '/Perfil/AdministrarPerfil?id=' + id;
-                }
-            });
+            window.location.href = "/Cuenta/confirmaCuenta?email="+$("#email").val();           
         }
         else {
             alert("El codigo no coincide");

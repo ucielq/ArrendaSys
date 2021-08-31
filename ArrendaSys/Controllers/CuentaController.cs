@@ -13,7 +13,12 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
-
-        
+        public ActionResult confirmaCuenta(string email)
+        {
+            ArrendaSysServicios.ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
+            var id = servicioCuenta.confirmaCuenta(email);
+            System.Web.HttpContext.Current.Session["usuarioLogeado"] = email;
+            return RedirectToAction("AdministrarPerfil","Perfil",new {id =id });
+        }
     }
 }

@@ -19,6 +19,5 @@ namespace ArrendaSysModelos
         public Nullable<System.DateTime> fechaAltaRol { get; set; }
         public Nullable<System.DateTime> fechaBajaRol { get; set; }
         public string nombreRol { get; set; }
-        public Nullable<int> idPermisoRol { get; set; }
     }
 }

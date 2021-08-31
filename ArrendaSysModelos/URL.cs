@@ -16,5 +16,11 @@ namespace ArrendaSysModelos
     {
         public int idURL { get; set; }
         public string linkURL { get; set; }
+        public Nullable<bool> seMuestra { get; set; }
+        public string descripcion { get; set; }
+        public string codigo { get; set; }
+        public Nullable<int> posicion { get; set; }
+        public string nombre { get; set; }
+        public string iconClass { get; set; }
     }
 }

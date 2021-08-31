@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ArrendasysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ArrendasysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alquiler">
           <Key>
             <PropertyRef Name="idAlquiler" />
@@ -190,6 +190,7 @@
           <Property Name="eliminacionRol" Type="bit" />
           <Property Name="lecturaRol" Type="bit" />
           <Property Name="idURL" Type="int" />
+          <Property Name="idRol" Type="int" />
         </EntityType>
         <EntityType Name="Premium">
           <Key>
@@ -326,7 +327,6 @@
           <Property Name="fechaAltaRol" Type="date" />
           <Property Name="fechaBajaRol" Type="date" />
           <Property Name="nombreRol" Type="varchar" MaxLength="100" />
-          <Property Name="idPermisoRol" Type="int" />
         </EntityType>
         <EntityType Name="URL">
           <Key>
@@ -334,6 +334,12 @@
           </Key>
           <Property Name="idURL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="linkURL" Type="varchar" MaxLength="100" />
+          <Property Name="seMuestra" Type="bit" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="codigo" Type="varchar" MaxLength="10" />
+          <Property Name="posicion" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="iconClass" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="ArrendasysModelStoreContainer">
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" Schema="dbo" store:Type="Tables" />
@@ -369,8 +375,7 @@
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ArrendasysModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -550,16 +555,6 @@
           <Property Name="nombreNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="fechaNotificación" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="PermisoRol">
-          <Key>
-            <PropertyRef Name="idPermisoRol" />
-          </Key>
-          <Property Name="idPermisoRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="edicionRol" Type="Boolean" />
-          <Property Name="eliminacionRol" Type="Boolean" />
-          <Property Name="lecturaRol" Type="Boolean" />
-          <Property Name="idURL" Type="Int32" />
-        </EntityType>
         <EntityType Name="Premium">
           <Key>
             <PropertyRef Name="idPremium" />
@@ -686,24 +681,6 @@
           <Property Name="idReseñaAoAr" Type="Int32" />
           <Property Name="idItemReseña" Type="Int32" />
         </EntityType>
-        <EntityType Name="Rol">
-          <Key>
-            <PropertyRef Name="idRol" />
-          </Key>
-          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaAltaRol" Type="DateTime" Precision="0" />
-          <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
-          <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idPermisoRol" Type="Int32" />
-        </EntityType>
-        <EntityType Name="URL">
-          <Key>
-            <PropertyRef Name="idURL" />
-          </Key>
-          <Property Name="idURL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="linkURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" />
           <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" />
@@ -722,7 +699,6 @@
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
           <EntitySet Name="MultimediaInmueble" EntityType="Self.MultimediaInmueble" />
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" />
-          <EntitySet Name="PermisoRol" EntityType="Self.PermisoRol" />
           <EntitySet Name="Premium" EntityType="Self.Premium" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
@@ -735,9 +711,44 @@
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
           <EntitySet Name="ReseñaItemAoAr" EntityType="Self.ReseñaItemAoAr" />
           <EntitySet Name="ReseñaItemArAo" EntityType="Self.ReseñaItemArAo" />
-          <EntitySet Name="Rol" EntityType="Self.Rol" />
-          <EntitySet Name="URL" EntityType="Self.URL" />
+          <EntitySet Name="PermisoRol" EntityType="ArrendasysModel.PermisoRol" />
+          <EntitySet Name="Rol" EntityType="ArrendasysModel.Rol" />
+          <EntitySet Name="URL" EntityType="ArrendasysModel.URL" />
         </EntityContainer>
+        <EntityType Name="PermisoRol">
+          <Key>
+            <PropertyRef Name="idPermisoRol" />
+          </Key>
+          <Property Name="idPermisoRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edicionRol" Type="Boolean" />
+          <Property Name="eliminacionRol" Type="Boolean" />
+          <Property Name="lecturaRol" Type="Boolean" />
+          <Property Name="idURL" Type="Int32" />
+          <Property Name="idRol" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaRol" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
+          <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="URL">
+          <Key>
+            <PropertyRef Name="idURL" />
+          </Key>
+          <Property Name="idURL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="linkURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="seMuestra" Type="Boolean" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="posicion" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -937,17 +948,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PermisoRol">
-            <EntityTypeMapping TypeName="ArrendasysModel.PermisoRol">
-              <MappingFragment StoreEntitySet="PermisoRol">
-                <ScalarProperty Name="idPermisoRol" ColumnName="idPermisoRol" />
-                <ScalarProperty Name="edicionRol" ColumnName="edicionRol" />
-                <ScalarProperty Name="eliminacionRol" ColumnName="eliminacionRol" />
-                <ScalarProperty Name="lecturaRol" ColumnName="lecturaRol" />
-                <ScalarProperty Name="idURL" ColumnName="idURL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Premium">
             <EntityTypeMapping TypeName="ArrendasysModel.Premium">
               <MappingFragment StoreEntitySet="Premium">
@@ -1086,23 +1086,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PermisoRol">
+            <EntityTypeMapping TypeName="ArrendasysModel.PermisoRol">
+              <MappingFragment StoreEntitySet="PermisoRol">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="idURL" ColumnName="idURL" />
+                <ScalarProperty Name="lecturaRol" ColumnName="lecturaRol" />
+                <ScalarProperty Name="eliminacionRol" ColumnName="eliminacionRol" />
+                <ScalarProperty Name="edicionRol" ColumnName="edicionRol" />
+                <ScalarProperty Name="idPermisoRol" ColumnName="idPermisoRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Rol">
             <EntityTypeMapping TypeName="ArrendasysModel.Rol">
               <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="idRol" ColumnName="idRol" />
-                <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
-                <ScalarProperty Name="fechaAltaRol" ColumnName="fechaAltaRol" />
-                <ScalarProperty Name="fechaBajaRol" ColumnName="fechaBajaRol" />
                 <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
-                <ScalarProperty Name="idPermisoRol" ColumnName="idPermisoRol" />
+                <ScalarProperty Name="fechaBajaRol" ColumnName="fechaBajaRol" />
+                <ScalarProperty Name="fechaAltaRol" ColumnName="fechaAltaRol" />
+                <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="URL">
             <EntityTypeMapping TypeName="ArrendasysModel.URL">
               <MappingFragment StoreEntitySet="URL">
-                <ScalarProperty Name="idURL" ColumnName="idURL" />
+                <ScalarProperty Name="iconClass" ColumnName="iconClass" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="posicion" ColumnName="posicion" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="seMuestra" ColumnName="seMuestra" />
                 <ScalarProperty Name="linkURL" ColumnName="linkURL" />
+                <ScalarProperty Name="idURL" ColumnName="idURL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
