@@ -9,12 +9,12 @@ using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers.Api
 {
-    public class PropietarioViewModel : ApiController
+    public class PropietarioApiController : ApiController
     {
         [System.Web.Http.Route("Api/Propietario/CrearPropietario")]
         [System.Web.Http.ActionName("CrearPropietario")]
         [System.Web.Http.HttpPost]
-        public int CrearPropietario(PropietarioViewModel propietario)
+        public int CrearPropietario(PropietarioApiController propietario)
         {
             //int codigo;
             //codigo = CrearProp(propietario);

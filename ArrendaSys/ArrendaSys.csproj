@@ -157,8 +157,10 @@
     <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
+    <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
-    <Compile Include="Controllers\Api\PropietarioViewModel.cs" />
+    <Compile Include="Controllers\Api\PropietarioApiController.cs" />
+    <Compile Include="Controllers\InmobiliariaController.cs" />
     <Compile Include="Controllers\PropietarioController.cs" />
     <Compile Include="Controllers\ArrendatarioController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
@@ -747,6 +749,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ArrendatarioApi\" />
+    <Folder Include="Views\InmobiliariaApi\" />
+    <Folder Include="Views\Inmobiliaria\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
