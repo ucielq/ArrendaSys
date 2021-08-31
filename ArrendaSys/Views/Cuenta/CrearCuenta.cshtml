@@ -434,12 +434,12 @@
                 <div id="xmail"><h6>Ingresa un email valido</h6></div>
             </div>
 
-            <div class="input">
+            <div class="input" id="divpass">
                 <label for="pass">Contraseña</label>
                 <input type="password" name="pass" id="pass">
                 <span class="spin"></span>
             </div>
-            <div class="input">
+            <div class="input" id="divpass1">
                 <label for="pass1">Confirmar Contraseña</label>
                 <input type="password" name="pass1" id="pass1">
                 <span class="spin"></span>
@@ -477,8 +477,8 @@
     $("#xmail").hide();
     $("#confirm").hide();
     $("#confirmar").hide();
-    $("#pass").show();
-    $("#pass1").show();
+    $("#divpass").show();
+    $("#divpass1").show();
     $("#email").keyup(function () {
         caracteresCorreoValido($(this).val())
     });
@@ -636,8 +636,8 @@
             success: function (result) {
                 codigo = result;
                 $("#crearCuenta").hide();
-                $("#pass").hide();
-                $("#pass1").hide();
+                $("#divpass").hide();
+                $("#divpass1").hide();
                 alert("Se le envio un codigo a su mail");
                 $("#confirm").show();
                 $("#confirmar").show();

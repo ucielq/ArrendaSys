@@ -160,7 +160,6 @@
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
-    <Compile Include="Controllers\Api\PropietarioViewModel.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
