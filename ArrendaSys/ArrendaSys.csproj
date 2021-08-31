@@ -214,11 +214,15 @@
     <Content Include="assets\img\slide\slide-1.jpg" />
     <Content Include="assets\img\slide\slide-2.jpg" />
     <Content Include="assets\img\slide\slide-3.jpg" />
+    <Content Include="assets\img\team\andres_capone.jpeg" />
+    <Content Include="assets\img\team\mauricio_campos.jpeg" />
     <Content Include="assets\img\team\renzo_ubeira.jpeg" />
+    <Content Include="assets\img\team\renzo_ubeira.jpg" />
     <Content Include="assets\img\team\sebastian_soto.png" />
     <Content Include="assets\img\team\team-1.jpg" />
     <Content Include="assets\img\team\team-2.jpg" />
     <Content Include="assets\img\team\team-3.jpg" />
+    <Content Include="assets\img\team\uciel_quiroga.jpeg" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\vendor\animate.css\animate.compat.css" />
     <Content Include="assets\vendor\animate.css\animate.css" />
