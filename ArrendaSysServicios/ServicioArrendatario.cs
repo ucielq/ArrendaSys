@@ -16,16 +16,28 @@ namespace ArrendaSysServicios
             {
                 var cuenta = db.Cuenta.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
                 cuenta.idRol = 2;
-                Arrendatario arrendatario1 = new Arrendatario
+                var arrendatario2 = db.Arrendatario.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
+                if (arrendatario2!=null)
                 {
-                    nombreArrendatario = arrendatario.nombreArrendatario,
-                    apellidoArrendatario = arrendatario.apellidoArrendatario,
-                    fechaNacimArrendatario = arrendatario.fechaNacimiento,
-                    numeroDocumentoArr = arrendatario.nroDocumento,
-                    telefonoArrendatario = arrendatario.nroTelefono,
-                    idCuenta= arrendatario.idCuenta
-                };
-                db.Arrendatario.Add(arrendatario1);
+                    arrendatario2.nombreArrendatario = arrendatario.nombreArrendatario;
+                    arrendatario2.apellidoArrendatario = arrendatario.apellidoArrendatario;
+                    arrendatario2.fechaNacimArrendatario = arrendatario.fechaNacimiento;
+                    arrendatario2.numeroDocumentoArr = arrendatario.nroDocumento;
+                    arrendatario2.telefonoArrendatario = arrendatario.nroTelefono;
+                    arrendatario2.idCuenta = arrendatario.idCuenta;
+                }
+                else { 
+                    Arrendatario arrendatario1 = new Arrendatario
+                    {
+                        nombreArrendatario = arrendatario.nombreArrendatario,
+                        apellidoArrendatario = arrendatario.apellidoArrendatario,
+                        fechaNacimArrendatario = arrendatario.fechaNacimiento,
+                        numeroDocumentoArr = arrendatario.nroDocumento,
+                        telefonoArrendatario = arrendatario.nroTelefono,
+                        idCuenta= arrendatario.idCuenta
+                    };
+                    db.Arrendatario.Add(arrendatario1);
+                }
                 db.SaveChanges();
                 return 0;
             }

@@ -19,10 +19,11 @@ namespace ArrendaSysServicios
         public int altaCuenta(string email, string pass)
         {
             var codigo = Math.Abs(email.GetHashCode());
+            var ePass = Encrypt.GetSHA256(pass);
             Cuenta cuenta = new Cuenta
             {
                 emailCuenta=email,
-                contrasenaCuenta=pass,
+                contrasenaCuenta=ePass,
                 codigoConfimacion=codigo
             };
             db.Cuenta.Add(cuenta);
@@ -191,9 +192,10 @@ namespace ArrendaSysServicios
         public string ObtenerLoginUsuario(string mailUsuario, string pass)
         {
             {
+                var ePass = Encrypt.GetSHA256(pass);
                 var usuario = (from c in db.Cuenta
 
-                                where c.emailCuenta == mailUsuario && c.contrasenaCuenta == pass
+                                where c.emailCuenta == mailUsuario && c.contrasenaCuenta == ePass
                                 select new CuentaViewModel
                                 {
                                     idCuenta = c.idCuenta,
@@ -223,6 +225,67 @@ namespace ArrendaSysServicios
                         return response;
                     }
                         
+                }
+            }
+        }
+        public CuentaViewModel ObtenerDatosCuenta(int idCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var cuenta = new CuentaViewModel();
+                var cuent = db.Cuenta.Where(x => x.idCuenta == idCuenta && x.fechaBajaCuenta == null).FirstOrDefault();
+                if (cuent != null)
+                {
+                    cuenta.email = cuent.emailCuenta;
+                    var arrendatario = db.Arrendatario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
+                    var propietario = db.Propietario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
+                    var inmobiliaria = db.Inmobiliaria.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
+                    
+                    if (arrendatario != null)
+                    {
+                        //Es arrendatario
+                        var arrendatarioVM = new ArrendatarioViewModel();
+                        cuenta.tipoCuenta = 1;
+                        arrendatarioVM.nroDocumento = (int)arrendatario.numeroDocumentoArr;
+                        arrendatarioVM.nombreArrendatario = arrendatario.nombreArrendatario;
+                        arrendatarioVM.apellidoArrendatario = arrendatario.apellidoArrendatario;
+                        arrendatarioVM.nroTelefono = (int)arrendatario.telefonoArrendatario;
+                        arrendatarioVM.fechaNacimientoStr = String.Format("{0:yyyy-MM-dd}", arrendatario.fechaNacimArrendatario);
+                        arrendatarioVM.fechaNacimiento = (DateTime)arrendatario.fechaNacimArrendatario;
+                        cuenta.arrendatario = arrendatarioVM;
+                        return cuenta;
+                    }
+                    else
+                    {
+                        if (propietario != null)
+                        {
+                            //Es propietario
+                            cuenta.tipoCuenta = 2;
+                            return cuenta;
+                        }
+                        else
+                        {
+                            if (inmobiliaria != null)
+                            {
+                                //Es inmobiliaria
+                                cuenta.tipoCuenta = 3;
+                                return cuenta;
+                            }
+                            else
+                            {
+                                //Todavia no es nada
+                                cuenta.tipoCuenta = -1;
+                                return cuenta;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    //No existe la cuenta
+                    return new CuentaViewModel {
+                        idCuenta = 0
+                    };
                 }
             }
         }

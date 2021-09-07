@@ -1,4 +1,5 @@
 ﻿using ArrendaSysModelos;
+using ArrendaSysServicios;
 using ArrendaSysUtilidades;
 using System;
 using System.Collections.Generic;
@@ -18,13 +19,14 @@ namespace ArrendaSys.Controllers.Api
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta == null && x.fechaAltaCuenta!=null).FirstOrDefault();
+                var ePass = Encrypt.GetSHA256(password);
                 if (user == null)
                 {
                     return 0;
                 }
                 else
                 {
-                    if (user.contrasenaCuenta != password)
+                    if (user.contrasenaCuenta != ePass)
                     {
                         return 1;
                     }

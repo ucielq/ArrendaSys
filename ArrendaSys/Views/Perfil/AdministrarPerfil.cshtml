@@ -19,6 +19,8 @@
         font-size: 13px;
         padding: 2px;
     }
+
+
 </style>
 <body>
     <div class="content" style="padding-left:10px">
@@ -34,9 +36,18 @@
                             <form id="formulario">
                                 <div class="row">
                                     <div class="col-md-2">
+                                        <label for="email">Email</label>
+                                        <br />
+                                        <textarea class="form-control" id="email" name="email"></textarea>
+                                    </div>
+                                </div>
+                                <hr />
+                                <br/>
+                                <div class="row">
+                                    <div class="col-md-2">
                                         <label for="tipoCuenta">Tipo de cuenta</label>
-                                        <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" data-placeholder="Seleccione una opción" onchange="cambioTipoCuenta()">
-                                            <option></option>
+                                        <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" onchange="cambioTipoCuenta()">
+                                            <option value="-1">Seleccione una opción</option>
                                             <option value="1">Inmobiliaria</option>
                                             <option value="2">Propietario</option>
                                             <option value="3">Arrendatario</option>
@@ -46,22 +57,24 @@
                                 <div id="arrendatario" class="arrendatario">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label>Nombre</label>
-                                            <br />
-                                            <input type="text" id="nombreArrendatario" name="nombreArrendatario" />
+                                            <label for="nombreArrendatario">Nombre</label>
+                                            <br/>
+                                            <textarea class="form-control" id="nombreArrendatario" name="nombreArrendatario"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Apellido</label>
+                                            <label for="apellidoArrendatario">Apellido</label>
                                             <br />
-                                            <input type="text" id="apellidoArrendatario" name="apellidoArrendatario" />
+                                            <textarea class="form-control" id="apellidoArrendatario" name="apellidoArrendatario"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="documento">Nro Documento</label>
-                                            <input type="text" id="documento" name="documento" />
+                                            <br />
+                                            <textarea class="form-control" id="documento" name="documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefono">Nro Telefono</label>
-                                            <input type="text" id="telefono" name="telefono" />
+                                            <br />
+                                            <textarea class="form-control" id="telefono" name="telefono"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Fecha Nacimiento</label>
@@ -147,17 +160,40 @@
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
     }
-    crearoEditar();
+    completarDatos();
     console.log(id);
-    function crearoEditar() {
-        if (id != undefined) {
-            //Edicion
-
-
-        } else {
-            //Creacion
-        }
+    function completarDatos() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + id,
+            success: function (result) {
+                completarDatosCuenta(result);
+                if (result.tipoCuenta == 1) {
+                    completarDatosArrendatario(result);
+                }
+            }
+        });
     }
+
+    function completarDatosCuenta(cuentaVM) {
+        $("#email").text(cuentaVM.email);
+    }
+
+    function completarDatosArrendatario(cuentaVM) {
+        $("#tipoCuenta").empty();
+        var html = '<option value="-1">Seleccione una opción</option>';
+        html = html + '<option value="3" selected>Arrendatario</option>';
+        html = html + '<option value="2">Propietario</option>';
+        html = html + '<option value="1">Inmobiliaria</option>';
+        $("#tipoCuenta").append(html);
+        $("#tipoCuenta").change();
+        $("#nombreArrendatario").text(cuentaVM.arrendatario.nombreArrendatario);
+        $("#apellidoArrendatario").text(cuentaVM.arrendatario.apellidoArrendatario);
+        $("#documento").text(cuentaVM.arrendatario.nroDocumento);
+        $("#telefono").text(cuentaVM.arrendatario.nroTelefono);
+        $("#fechaNacimiento").val(cuentaVM.arrendatario.fechaNacimientoStr);
+    }
+
 
     function cambioTipoCuenta() {
         if ($("#tipoCuenta").val() == 3) {

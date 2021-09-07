@@ -13,5 +13,9 @@ namespace ArrendaSysServicios.Modelos
         public int idCuenta { get; set; }
         public DateTime? fechaBajaCuenta { get; set; }
         public DateTime? fechaAltaCuenta { get; set; }
+        public int tipoCuenta { get; set; }
+        public ArrendatarioViewModel arrendatario { get; set; }
+        public PropietarioViewModel propietario { get; set; }
+        public string contraseña { get; set; }
     }
 }

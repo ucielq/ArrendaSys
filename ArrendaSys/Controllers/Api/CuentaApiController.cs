@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-
+using ArrendaSysServicios;
 namespace ArrendaSys.Controllers.Api
 {
     public class CuentaApiController : ApiController
@@ -34,7 +34,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpGet]
         public int altaCuenta(string email, string password)
         {
-            ArrendaSysServicios.ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
+            ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
             return servicioCuenta.altaCuenta(email, password);
         }
 
@@ -43,8 +43,17 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpGet]
         public int ObtenerId(string email)
         {
-            ArrendaSysServicios.ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
+            ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
             return servicioCuenta.ObtenerUsuarioLogueado(email);
+        }
+        [System.Web.Http.Route("Api/Cuenta/ObtenerDatosCuenta")]
+        [System.Web.Http.ActionName("ObtenerDatosCuenta")]
+        [System.Web.Http.HttpGet]
+        public CuentaViewModel ObtenerDatosCuenta(int idCuenta)
+        {
+            ServicioCuenta servicio = new ServicioCuenta();
+            CuentaViewModel cuenta = servicio.ObtenerDatosCuenta(idCuenta);
+            return cuenta;
         }
     }
 }
