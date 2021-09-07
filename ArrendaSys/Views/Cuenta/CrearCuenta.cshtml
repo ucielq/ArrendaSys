@@ -612,11 +612,7 @@
 
     $("#crearCuenta").click(function () {
         //Valido todos los datos
-        if (caracteresCorreoValido($("#email"))) {
-            validarMail();
-        } else {
-            alert("Ingrese un correo valido");
-        }
+        validarMail();
         
     });
     function validarMail() {

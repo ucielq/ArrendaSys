@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -752,6 +753,7 @@
     <Content Include="Views\Alquileres\Alquileres.cshtml" />
     <Content Include="Views\Reseñas\Reseñas.cshtml" />
     <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
+    <Content Include="Views\Notificaciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
