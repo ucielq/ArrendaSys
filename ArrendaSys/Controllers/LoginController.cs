@@ -32,7 +32,11 @@ namespace ArrendaSys.Controllers
                 var resp = servicio.ObtenerLoginUsuario(mail, password);
                 if (resp != "DatosIncorrectos#Login" && resp != "PermisoDenegado#Login")
                 {
+                    var user = servicio.ObtenerDatosUsuarioLogueado(mail);
+                    var usuario = servicio.ObtenerDatosCuenta(user.idCuenta);
                     System.Web.HttpContext.Current.Session["usuarioLogeado"] = mail;
+                    System.Web.HttpContext.Current.Session["tipoCuenta"] = usuario.tipoCuenta;
+                    System.Web.HttpContext.Current.Session["idCuenta"] = user.idCuenta;
                     if (resp.Split('*')[0]== "Perfil#AdministrarPerfil")
                     {
                         return RedirectToAction("AdministrarPerfil", "Perfil", new { id = resp.Split('*')[1] });

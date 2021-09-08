@@ -239,8 +239,7 @@ namespace ArrendaSysServicios
                     cuenta.email = cuent.emailCuenta;
                     var arrendatario = db.Arrendatario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
                     var propietario = db.Propietario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
-                    var inmobiliaria = db.Inmobiliaria.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
-                    
+                    var inmobiliaria = db.Inmobiliaria.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();                    
                     if (arrendatario != null)
                     {
                         //Es arrendatario
