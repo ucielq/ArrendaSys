@@ -244,7 +244,7 @@ namespace ArrendaSysServicios
                     {
                         //Es arrendatario
                         var arrendatarioVM = new ArrendatarioViewModel();
-                        cuenta.tipoCuenta = 1;
+                        cuenta.tipoCuenta = 3;
                         arrendatarioVM.nroDocumento = (int)arrendatario.numeroDocumentoArr;
                         arrendatarioVM.nombreArrendatario = arrendatario.nombreArrendatario;
                         arrendatarioVM.apellidoArrendatario = arrendatario.apellidoArrendatario;
@@ -259,6 +259,16 @@ namespace ArrendaSysServicios
                         if (propietario != null)
                         {
                             //Es propietario
+                            var propVM = new PropietarioViewModel
+                            {
+                                apellidoPropietario = propietario.apellidoPropietario,
+                                nombrePropietario = propietario.nombrePropietario,
+                                numeroDocumentoPropietario = (int)propietario.numeroDocumentoProp,
+                                telefonoPropietario = propietario.telefonoPropietario,
+                                fechaNacimientoStr = String.Format("{0:yyyy-MM-dd}", propietario.fechaNacimPropietario)
+
+                            };
+                            cuenta.propietario = propVM;
                             cuenta.tipoCuenta = 2;
                             return cuenta;
                         }
@@ -267,7 +277,7 @@ namespace ArrendaSysServicios
                             if (inmobiliaria != null)
                             {
                                 //Es inmobiliaria
-                                cuenta.tipoCuenta = 3;
+                                cuenta.tipoCuenta = 1;
                                 return cuenta;
                             }
                             else

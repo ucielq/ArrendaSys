@@ -88,20 +88,20 @@
                                         <div class="col-md-2">
                                             <label>Nombre</label>
                                             <br />
-                                            <input type="text" id="nombrePropietario" name="nombrePropietario" />
+                                            <textarea class="form-control" id="nombrePropietario" name="nombrePropietario" ></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Apellido</label>
                                             <br />
-                                            <input type="text" id="apellidoPropietario" name="apellidoPropietario" />
+                                            <textarea class="form-control" id="apellidoPropietario" name="apellidoPropietario"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="documentoProp">Nro Documento</label>
-                                            <input type="text" id="documentoProp" name="documentoProp" />
+                                            <textarea class="form-control" id="documentoProp" name="documentoProp" ></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefonoProp">Nro Telefono</label>
-                                            <input type="text" id="telefonoProp" name="telefonoProp" />
+                                            <textarea class="form-control" id="telefonoProp" name="telefonoProp"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Fecha Nacimiento</label>
@@ -116,15 +116,17 @@
                                         <div class="col-md-2">
                                             <label>Razón Social</label>
                                             <br />
-                                            <input type="text" id="nombreInmo" name="nombreInmo" />
+                                            <textarea class="form-control" id="nombreInmo" name="nombreInmo"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="cuitInmo">CUIT</label>
-                                            <input type="text" id="cuitInmo" name="cuitInmo" />
+                                            <br />
+                                            <textarea class="form-control" id="cuitInmo" name="cuitInmo"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefonoInmo">Teléfono</label>
-                                            <input type="text" id="telefonoInmo" name="telefonoInmo" />
+                                            <br/>
+                                            <textarea class="form-control" id="telefonoInmo" name="telefonoInmo"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Alta Inscripción</label>
@@ -168,8 +170,14 @@
             url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + id,
             success: function (result) {
                 completarDatosCuenta(result);
-                if (result.tipoCuenta == 1) {
+                if (result.tipoCuenta == 3) {
                     completarDatosArrendatario(result);
+                }
+                if (result.tipoCuenta == 2) {
+                    completarDatosPropietario(result);
+                }
+                if (result.tipoCuenta == 1) {
+                    completarDatosInmobiliaria(result);
                 }
             }
         });
@@ -193,7 +201,21 @@
         $("#telefono").text(cuentaVM.arrendatario.nroTelefono);
         $("#fechaNacimiento").val(cuentaVM.arrendatario.fechaNacimientoStr);
     }
-
+    function completarDatosPropietario(cuentaVM) {
+        $("#tipoCuenta").empty();
+        var html = '<option value="-1">Seleccione una opción</option>';
+        html = html + '<option value="3">Arrendatario</option>';
+        html = html + '<option value="2" selected>Propietario</option>';
+        html = html + '<option value="1">Inmobiliaria</option>';
+        $("#tipoCuenta").append(html);
+        $("#tipoCuenta").change();
+        $("#nombrePropietario").text(cuentaVM.propietario.nombrePropietario);
+        $("#apellidoPropietario").text(cuentaVM.propietario.apellidoPropietario);
+        $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
+        debugger;
+        $("#telefonoProp").text(cuentaVM.propietario.telefonoPropietario);
+        $("#fechaNacimientoProp").val(cuentaVM.propietario.fechaNacimientoStr);
+    }
 
     function cambioTipoCuenta() {
         if ($("#tipoCuenta").val() == 3) {
@@ -236,14 +258,16 @@
             var propietario = new Object();
             propietario.nombrePropietario = $("#nombrePropietario").val();
             propietario.apellidoPropietario = $("#apellidoPropietario").val();
-            propietario.fechaNacimientoPropietario = $("#fechaNacimientoProp").val();
-            propietario.nroDocumentoPropietario = $("#documentoProp").val();
-            propietario.nroTelefonoPropietario = $("#telefonoProp").val();
+            propietario.fechaNacimiento = $("#fechaNacimientoProp").val();
+            propietario.numeroDocumentoPropietario = $("#documentoProp").val();
+            propietario.telefonoPropietario = $("#telefonoProp").val();
+            propietario.idCuenta = id;
             $.ajax({
-                type: 'Get',
+                type: 'Post',
                 url: '/Api/Propietario/CrearPropietario',
                 data: propietario,
                 success: function (result) {
+                    window.location.href = "/Home/Index";
                 }
             });
         }
@@ -254,7 +278,7 @@
             inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
             inmobiliaria.Inmobiliaria = $("#AltaInscripcionInmo").val();          
             $.ajax({
-                type: 'Get',
+                type: 'Post',
                 url: '/Api/Inmobiliaria/CrearInmobiliaria',
                 data: inmobiliaria,
                 success: function (result) {

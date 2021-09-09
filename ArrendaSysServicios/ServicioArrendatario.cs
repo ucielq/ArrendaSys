@@ -15,6 +15,16 @@ namespace ArrendaSysServicios
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 var cuenta = db.Cuenta.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
+                var inmo = db.Inmobiliaria.Where(x => x.idCuenta == cuenta.idCuenta).FirstOrDefault();
+                if (inmo != null)
+                {
+                    db.Inmobiliaria.Remove(inmo);
+                }
+                var prop = db.Propietario.Where(x => x.idCuenta == cuenta.idCuenta).FirstOrDefault();
+                if (prop != null)
+                {
+                    db.Propietario.Remove(prop);
+                }
                 cuenta.idRol = 2;
                 var arrendatario2 = db.Arrendatario.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
                 if (arrendatario2!=null)

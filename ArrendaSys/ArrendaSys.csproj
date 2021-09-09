@@ -160,6 +160,7 @@
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
+    <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
@@ -757,6 +758,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PropietarioApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
