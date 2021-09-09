@@ -442,10 +442,10 @@
             </div>
 
             <div class="button login">
-                <button id="Loguear"><span>Ingresar</span> <i class="fa fa-check"></i></button>
+                <button id="loguear"><span>Ingresar</span> <i class="fa fa-check"></i></button>
             </div>            
             <div class="button login">
-                <button id="Crear" onclick="CrearCuenta()"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
+                <button id="crear" onclick="CrearCuenta()"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
             </div>
 
             <a href="" id="recuperarContraseña" class="pass-forgot">¿Olvidaste tu contraseña?</a>
@@ -463,11 +463,12 @@
         
         $(document).on('keypress', function (e) {
             if (e.which == 13) {
-                var usuario = $("#name").val();
+                var mail = $("#mail").val();
                 var password = $("#pass").val();
                 $.ajax({
                     type: 'Get',
-                    url: '/Api/Login/ValidarDatos?nombreUsuario=' + usuario + "&password=" + password,
+                    url: '/Api/Login/ValidarDatos?mailUsuario=' + mail + "&password=" + password,
+
                     success: function (result) {
                         if (result == 0) {
                             alert("Usuario no encontrado, intente nuevamente.")
@@ -478,7 +479,7 @@
                                 window.location.href = '/Login/Login';
                             } else {
                                 if (result == 2) {
-                                    window.location.href = '/Login/Validar?nombre=' + usuario + "&password=" + password;
+                                    window.location.href = '/Login/Validar?mail=' + mail + "&password=" + password;
                                 }
                             }
 
@@ -520,7 +521,7 @@
         $("#recuperarContraseña").click(function (e) {
             debugger;
         });
-        $("Crear").click(function (e) {
+        $("#loguear").click(function (e) {
             var pX = e.pageX,
                 pY = e.pageY,
                 oX = parseInt($(this).offset().left),
