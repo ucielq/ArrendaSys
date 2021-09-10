@@ -277,6 +277,16 @@ namespace ArrendaSysServicios
                             if (inmobiliaria != null)
                             {
                                 //Es inmobiliaria
+                                var inmoVM = new InmobiliariaViewModel
+                                {
+                                    nombreInmobiliaria=inmobiliaria.nombreInmobiliaria,
+                                    altaInscripcion=(DateTime)inmobiliaria.altaInscripcion,
+                                    altaInscripcionStr= String.Format("{0:yyyy-MM-dd}",inmobiliaria.altaInscripcion),
+                                    cuitInmobiliaria=(int)inmobiliaria.cuitInmobiliaria,
+                                    telefonoInmobiliariaStr=inmobiliaria.telefonoInmobiliaria,
+
+                                };
+                                cuenta.inmobiliaria = inmoVM;
                                 cuenta.tipoCuenta = 1;
                                 return cuenta;
                             }

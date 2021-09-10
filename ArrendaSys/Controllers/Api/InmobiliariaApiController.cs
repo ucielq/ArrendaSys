@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ArrendaSysServicios;
+using ArrendaSysModelos;
+using ArrendaSysServicios.Modelos;
 
 namespace ArrendaSys.Controllers.Api
 {
@@ -11,9 +14,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Inmobiliaria/CrearInmobiliaria")]
         [System.Web.Http.ActionName("CrearInmobiliaria")]
         [System.Web.Http.HttpPost]
-        public int CrearInmobiliaria(InmobiliariaApiController inmobiliaria)
+        public int CrearInmobiliaria(InmobiliariaViewModel inmobiliaria)
         {
-            return 0;
+            ServicioInmobiliaria serv = new ServicioInmobiliaria();
+            return serv.crearInmobiliaria(inmobiliaria);
         }
 
     }

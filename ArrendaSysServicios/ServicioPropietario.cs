@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArrendaSysServicios
 {
-    public class ServicioPropietario
+    public class ServicioPropietario : IDisposable
     {
         public int CrearPropietario(PropietarioViewModel propietario)
         {
@@ -49,6 +49,11 @@ namespace ArrendaSysServicios
             }
             db.SaveChanges();
             return 1;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -212,9 +212,21 @@
         $("#nombrePropietario").text(cuentaVM.propietario.nombrePropietario);
         $("#apellidoPropietario").text(cuentaVM.propietario.apellidoPropietario);
         $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
-        debugger;
         $("#telefonoProp").text(cuentaVM.propietario.telefonoPropietario);
         $("#fechaNacimientoProp").val(cuentaVM.propietario.fechaNacimientoStr);
+    }
+    function completarDatosInmobiliaria(cuentaVM) {
+        $("#tipoCuenta").empty();
+        var html = '<option value="-1">Seleccione una opción</option>';
+        html = html + '<option value="3">Arrendatario</option>';
+        html = html + '<option value="2">Propietario</option>';
+        html = html + '<option value="1" selected>Inmobiliaria</option>';
+        $("#tipoCuenta").append(html);
+        $("#tipoCuenta").change();
+        $("#nombreInmo").text(cuentaVM.inmobiliaria.nombreInmobiliaria);
+        $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
+        $("#telefonoInmo").text(cuentaVM.inmobiliaria.telefonoInmobiliariaStr);
+        $("#AltaInscripcionInmo").val(cuentaVM.inmobiliaria.altaInscripcionStr);
     }
 
     function cambioTipoCuenta() {
@@ -276,12 +288,14 @@
             inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
             inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
             inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
-            inmobiliaria.Inmobiliaria = $("#AltaInscripcionInmo").val();          
+            inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
+            inmobiliaria.idCuenta = id;
             $.ajax({
                 type: 'Post',
                 url: '/Api/Inmobiliaria/CrearInmobiliaria',
                 data: inmobiliaria,
                 success: function (result) {
+                    window.location.href = "/Home/Index";
                 }
             });
         }
