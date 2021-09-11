@@ -161,6 +161,7 @@
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
+    <Compile Include="Controllers\Api\PublicacionApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PublicacionController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -755,6 +757,7 @@
     <Content Include="Views\Reseñas\Reseñas.cshtml" />
     <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
+    <Content Include="Views\Publicacion\Publicaciones.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
