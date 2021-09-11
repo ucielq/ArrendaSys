@@ -1,0 +1,152 @@
+﻿<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
+<script src="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+@{
+    var usuario = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    <div>
+        <span>Publicaciones</span>
+        <hr />
+    </div>
+
+    <div class="col-md12">
+        <div class="col-md12">
+            <button type="button" class="btn btn-info btn-sm" style="float:right;"> + Agregar</button>
+            <br />  
+        </div>
+
+    </div>
+
+
+
+
+    <div class="agregarpulicacion">
+        <div class="col-md-12">
+            <div class="col-md-2">
+
+                <span>Título: </span>
+                <br />
+                <input type="text" class="form-control" id="tituloPublicacion" placeholder="ingrese el título de la publicación" />
+            </div>
+
+            <div class="row" style="padding-top:6px">
+                <div class="col-md-2">
+                    <br />
+                    <span>Precio: </span>
+                    <br />
+                    <input type="text" class="form-control" id="precioAlquiler" placeholder="ingrese el precio de la publicación" />
+
+                </div>
+                <div class="col-md-2">
+                    <br />
+                    <span>Fecha Alta: </span>
+                    <br />
+                    <input type="date" class="form-control" id="fechaAltaPublicacion" />
+
+                </div>
+                <div class="col-md-2">
+                    <br />
+                    <span>Fecha Baja: </span>
+                    <br />
+                    <input type="date" class="form-control" id="fechaBajaPublicacion" />
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+                <br />
+                <span>Descripción: </span>
+                <br />
+                <input type="text" class="form-control" id="descripcionPublicacion" placeholder="ingrese la descripción de la publicación" />
+
+            </div>
+           
+                <div class="col-md-2">
+                    <br />
+                    <span>Inmueble: </span>
+                    <br />
+                    <select class="form-control" id="idInmule">
+                        <option value="value">Inmueble</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-12">
+                    <br />
+                    <div>
+                        <button type="button" class="btn btn-success" id="btnguardar"><i class="fas fa-save"></i> Guardar</button>
+                        <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                    </div>
+
+
+
+                </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped" id="notificaciones">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Detalle</th>
+                            <th>Fecha</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+<script>
+        var user = '@usuario';
+
+        $('#notificaciones').DataTable({
+            responsive: true, autoWidth: false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ notificaciones por página.",
+                "zeroRecords": "No se encontraron coincidencias.",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay notificaciones",
+                "infoFiltered": "(filtrado de _MAX_ notificaciones totales)",
+                'search': 'Buscar:',
+                'paginate': {
+                    'next': 'Siguiente',
+                    'previous': 'Anterior'
+
+                }
+            }
+
+        });
+</script>
