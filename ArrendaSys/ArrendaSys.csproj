@@ -153,6 +153,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ABMPublicacionController.cs" />
     <Compile Include="Controllers\Acceso\PermisoAttributeController.cs" />
     <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\AlquileresController.cs" />
@@ -758,6 +759,7 @@
     <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
     <Content Include="Views\Publicacion\Publicaciones.cshtml" />
+    <Content Include="Views\ABMPublicacion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
