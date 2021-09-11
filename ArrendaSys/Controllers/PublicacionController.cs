@@ -9,7 +9,7 @@ namespace ArrendaSys.Controllers
     public class PublicacionController : Controller
     {
         // GET: Publicacion
-        public ActionResult Index()
+        public ActionResult Publicaciones()
         {
             return View();
         }

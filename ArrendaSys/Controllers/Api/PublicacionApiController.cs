@@ -8,7 +8,7 @@ namespace ArrendaSys.Controllers.Api
 {
     public class PublicacionApiController : Controller
     {
-        
+
         public ActionResult Index()
         {
             return View();
