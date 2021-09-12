@@ -171,6 +171,9 @@
     <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PublicacionController.cs" />
+    <Compile Include="Controllers\ReseñaInmobiliariaController.cs" />
+    <Compile Include="Controllers\ReseñaInmuebleController.cs" />
+    <Compile Include="Controllers\ReseñaPropietarioController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -758,6 +761,9 @@
     <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
     <Content Include="Views\Publicacion\Publicaciones.cshtml" />
+    <Content Include="Views\Reseñas\ReseñaPropietarioView.cshtml" />
+    <Content Include="Views\ReseñaInmobiliaria\ReseñaInmobiliariaView.cshtml" />
+    <Content Include="Views\ReseñaInmueble\ReseñaInmuebleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
