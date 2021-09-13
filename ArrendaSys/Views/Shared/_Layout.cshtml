@@ -35,64 +35,64 @@
     <script src="~/Scripts/Generales.js"></script>
 
 </head>
-<body>    
-    
+<body>
+
     <div class="wrapper">
         <!-- Sidebar  -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>ArrendaSys</h3>
-                    <strong>AS</strong>
-                </div>
-                <ul class="list-unstyled components" id="MenuPrincipal">
-                    <li title="Home" id="home">
-                        <a href="/Home/Index">
-                            <i class="fas fa-home" style="width:25px"></i>
-                            Inicio
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-            <!-- Page Content  -->
-            <div id="content" style="padding:0px">
-                <nav class="navbar navbar-expand-lg sticky-top navbar-light" style="background-color: #5cb874">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-1">
-                                <div class="container-fluid">
-                                    <button type="button" id="sidebarCollapse" class="btn" style="background-color: #5cb874; border-color: #5cb874; ">
-                                        <i class="fas fa-align-left"></i>
-                                    </button>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>ArrendaSys</h3>
+                <strong>AS</strong>
+            </div>
+            <ul class="list-unstyled components" id="MenuPrincipal">
+                <li title="Home" id="home">
+                    <a href="/Home/Index">
+                        <i class="fas fa-home" style="width:25px"></i>
+                        Inicio
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Page Content  -->
+        <div id="content" style="padding:0px">
+            <nav class="navbar navbar-expand-lg sticky-top navbar-light" style="background-color: #5cb874">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="container-fluid">
+                                <button type="button" id="sidebarCollapse" class="btn" style="background-color: #5cb874; border-color: #5cb874; ">
+                                    <i class="fas fa-align-left"></i>
+                                </button>
 
-                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <input type="text" class="redondeado fa-align-left" placeholder="Buscar inmueble" style="width:300px" />
-                            </div>
-                            <div class="col-md-7">
-                                <div class="dropdown float-right">
-                                    <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
-                                        Perfil
-                                    </button>
-                                    <ul class="dropdown-menu float-left" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#" onclick="Perfil()">Mi perfil</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="text" class="redondeado fa-align-left" placeholder="Buscar inmueble" style="width:300px" />
+                        </div>
+                        <div class="col-md-7">
+                            <div class="dropdown float-right">
+                                <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
+                                    Perfil
+                                </button>
+                                <ul class="dropdown-menu float-left" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#" onclick="Perfil()">Mi perfil</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                </nav>
-                <div class="body-content">
-                    @RenderBody()
                 </div>
+            </nav>
+            <div class="body-content">
+                @RenderBody()
             </div>
+        </div>
     </div>
-    
 
-    
 
-    
+
+
+
     @RenderSection("scripts", required: false)
 </body>
 </html>
@@ -134,6 +134,6 @@
             success: function (result) {
                 window.location.href = "/Perfil/AdministrarPerfil/" + result;
             }
-        });        
+        });
     }
 </script>

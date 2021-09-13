@@ -1,1 +1,356 @@
-﻿<span>Reseñas</span>
+﻿
+@{
+    ViewBag.Title = "ReseñaView";
+}
+
+<!DOCTYPE html>
+<style>
+    /*seccion cabecera*/
+
+   /*.padding {
+        padding: 3rem !important;
+        margin-left: 200px
+    } */
+
+    .card-img-top {
+        height: 300px
+    }
+
+    .card-no-border .card {
+        border-color: #d7dfe3;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+    }
+
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
+    .pro-img {
+        margin-top: -80px;
+        margin-bottom: 20px
+    }
+
+    .little-profile .pro-img img {
+        width: 128px;
+        height: 128px;
+        -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 100%
+    }
+
+    html body .m-b-0 {
+        margin-bottom: 0px
+    }
+
+    h3 {
+        line-height: 30px;
+        font-size: 21px
+    }
+
+    .btn-rounded.btn-md {
+        padding: 12px 35px;
+        font-size: 16px
+    }
+
+    html body .m-t-10 {
+        margin-top: 10px
+    }
+
+    .btn-primary,
+    .btn-primary.disabled {
+        background: #7460ee;
+        border: 1px solid #7460ee;
+        -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+        box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+        transition: 0.2s ease-in
+    }
+
+    .btn-rounded {
+        border-radius: 60px;
+        padding: 7px 18px
+    }
+
+    .m-t-20 {
+        margin-top: 20px
+    }
+
+    .text-center {
+        text-align: center !important
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #455a64;
+        font-family: "Poppins", sans-serif;
+        font-weight: 400
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem
+    }
+
+    /*Seccion Estructura*/
+    #headerUsuario {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attached: fixed;
+        height: 250px;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        -webkit-box-shadow: inset 0px -5px 11px -6px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: inset 0px -5px 11px -6px rgba(0, 0, 0, 0.25);
+        box-shadow: inset 0px -5px 11px -6px rgba(0, 0, 0, 0.25);
+    }
+
+    .fh5co-section {
+        padding: 7em 0;
+    }
+    /*Seccion reseñas*/
+
+    body {
+        /*background-color: #D32F2F; */
+        font-family: 'Calibri', sans-serif !important
+    }
+
+    .card-no-border .card {
+        border: 0px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+    }
+
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
+    .comment-widgets .comment-row:hover {
+        background: rgba(0, 0, 0, 0.02);
+        cursor: pointer
+    }
+
+    .comment-widgets .comment-row {
+        border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+        padding: 15px
+    }
+
+    .comment-text:hover {
+        visibility: hidden
+    }
+
+    .comment-text:hover {
+        visibility: visible
+    }
+
+    .label {
+        padding: 3px 10px;
+        line-height: 13px;
+        color: #ffffff;
+        font-weight: 400;
+        border-radius: 4px;
+        font-size: 75%
+    }
+
+    .round img {
+        border-radius: 100%
+    }
+
+    .label-info {
+        background-color: #1976d2
+    }
+
+    .label-success {
+        background-color: green
+    }
+
+    .label-danger {
+        background-color: #ef5350
+    }
+
+    .action-icons a {
+        padding-left: 7px;
+        vertical-align: middle;
+        color: #99abb4
+    }
+
+        .action-icons a:hover {
+            color: #1976d2
+        }
+
+    .mt-100 {
+        margin-top: 100px
+    }
+
+    .mb-100 {
+        margin-bottom: 100px
+    }
+</style>
+<html class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Reseña View </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+    <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FreeHTML5.co" />
+</head>
+<body>
+
+    <!-- <div id="headerUsuario" style="background-image: src(https://imgur.com/6eAZxdz); " data-stellar-background-ratio="0.5"> -->
+    <!--<div class="overlay"></div> -->
+    <!--<div class="bio-photo text-center comment-text w-100"> -->
+    <!--<a href="index.html"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="Foto Perfil"></a>-->
+    <!--<h4>Nombre Arrendatario</h4> -->
+    <!--<h5>Email Arrendatario</h5> -->
+    <!--<h5>telefono arrendatario</h5> -->
+    <!--</div> -->
+    <!--</div> -->
+
+    <div class="padding">
+        <div class="col-md-8">
+            <!-- Column -->
+            <div class="card">
+                <img class="card-img-top" src="https://i.imgur.com/K7A78We.jpg" alt="Card image cap">
+                <div class="card-body little-profile text-center">
+                    <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
+                    <h3 class="m-b-0">Arrendatario: Brad Macullam</h3>
+                    <p>Direccion del arrendatario</p> <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Telefono</a>
+                    <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Email</a>
+                    <div class="row text-center m-t-20">
+                            <!-- <div class="col-lg-4 col-md-4 m-t-20">
+                                <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
+                            </div>
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                                <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
+                            </div>
+                            <div class="col-lg-4 col-md-4 m-t-20">
+                                <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container d-flex justify-content-center mt-50 mb-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cardR">
+                        <div class="card-body">
+                            <h4 class="card-title">Reseñas:</h4>
+                            <h6 class="card-subtitle">ultimas reseñas para el usuario</h6>
+                        </div>
+                        <div class="comment-widgets m-b-20">
+                            <div class="d-flex flex-row comment-row">
+                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div>-->
+                                <div class="comment-text w-100">
+                                    <h5>George Clooney</h5>
+                                    <div class="comment-footer"> <span class="date">April 14, 2019</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
+                                    <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row comment-row ">
+                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/tT8rjKC.jpg" alt="user" width="50"></span></div> -->
+                                <div class="comment-text active w-100">
+                                    <h5>Jonty Andrews</h5>
+                                <div class="comment-footer"> <span class="date">March 13, 2020</span> <span class="label label-success">Approved</span> <span class="action-icons active"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right text-success"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart text-danger"></i></a> </span> </div>
+                                    <p class="m-b-5 m-t-10">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row comment-row">
+                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/cAdLHeY.jpg" alt="user" width="50"></span></div> -->
+                                <div class="comment-text w-100">
+                                    <h5>Sarah Tim</h5>
+                                    <div class="comment-footer"> <span class="date">Jan 20, 2020</span> <span class="label label-danger">Rejected</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
+                                    <p class="m-b-5 m-t-10">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row comment-row">
+                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
+                                <div class="comment-text w-100">
+                                    <h5>Roberto Carlos</h5>
+                                    <div class="comment-footer"> <span class="date">March 20, 2020</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
+                                    <p class="m-b-5 m-t-10">It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row comment-row">
+                               <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
+                                <div class="comment-text w-100">
+                                    <h5>Jessica Alba</h5>
+                                    <div class="comment-footer"> <span class="date">March 20, 2020</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
+                                    <p class="m-b-5 m-t-10">It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row comment-row">
+                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
+                                <div class="comment-text w-100">
+                                    <h5>Samso Nagaro</h5>
+                                    <div class="comment-footer"> <span class="date">March 20, 2020</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
+                                    <p class="m-b-5 m-t-10">It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="fh5co-section">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 col-xs-12 section-heading">
+                            <h2>Haz tu Reseña</h2>
+                        </div>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="col-md-12">
+                                <form action="#">
+
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <textarea name="email" id="email" cols="30" class="form-control" rows="10" placeholder="Message"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="submit" class="btn btn-primary btn-outline btn-lg btn-block" value="Submit">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+
+
+    </body>
+        </html>
