@@ -165,6 +165,8 @@
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InmueblesInmobiliariaController.cs" />
+    <Compile Include="Controllers\InmueblesPropietarioController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NotificacionesController.cs" />
@@ -189,6 +191,16 @@
     <Content Include="assets\img\clients\client-7.png" />
     <Content Include="assets\img\clients\client-8.png" />
     <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\inmuebles\casa_1.jpg" />
+    <Content Include="assets\img\inmuebles\casa_2.jpg" />
+    <Content Include="assets\img\inmuebles\casa_3.jpg" />
+    <Content Include="assets\img\inmuebles\casa_4.jpg" />
+    <Content Include="assets\img\inmuebles\casa_5.jpg" />
+    <Content Include="assets\img\inmuebles\dpto_1.jpg" />
+    <Content Include="assets\img\inmuebles\dpto_2.jpg" />
+    <Content Include="assets\img\inmuebles\dpto_3.jpg" />
+    <Content Include="assets\img\inmuebles\dpto_4.jpg" />
+    <Content Include="assets\img\inmuebles\dpto_5.jpg" />
     <Content Include="assets\img\portfolio\godoycruz.jpg" />
     <Content Include="assets\img\portfolio\guaymallen.jpg" />
     <Content Include="assets\img\portfolio\lasheras.jpg" />
@@ -755,6 +767,8 @@
     <Content Include="Views\Reseñas\Reseñas.cshtml" />
     <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
+    <Content Include="Views\InmueblesPropietario\InmueblesPropietarioView.cshtml" />
+    <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
