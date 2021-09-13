@@ -5163,7 +5163,7 @@ tbody.collapse.show {
 .jumbotron {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
-    background-color: #31689e;
+    background-color: #dee2e6;
     border-radius: 0.3rem;
 }
 
@@ -17385,6 +17385,18 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
     border: 0;
     margin-bottom: 0px;
     height: 533.351px;
+    width: 350px;
+    margin-top: 30px;
+    border-radius: 6px;
+    color: #247025;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.cardV3 {
+    border: 0;
+    margin-bottom: 0px;
+    height: 650px;
     width: 350px;
     margin-top: 30px;
     border-radius: 6px;
