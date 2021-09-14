@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using ArrendaSysServicios;
 using ArrendaSysModelos;
 using ArrendaSysServicios.Modelos;
+using System.Web.Http;
 
 namespace ArrendaSys.Controllers.Api
 {
-    public class InmobiliariaApiController : Controller
+    public class InmobiliariaApiController : ApiController
     {
         [System.Web.Http.Route("Api/Inmobiliaria/CrearInmobiliaria")]
         [System.Web.Http.ActionName("CrearInmobiliaria")]
