@@ -814,8 +814,8 @@
     <Content Include="Views\Publicacion\Publicaciones.cshtml" />
     <Content Include="Views\ABMPublicacion\Index.cshtml" />
     <Content Include="Views\Reseñas\ReseñaPropietarioView.cshtml" />
-    <Content Include="Views\ReseñaInmobiliaria\ReseñaInmobiliariaView.cshtml" />
-    <Content Include="Views\ReseñaInmueble\ReseñaInmuebleView.cshtml" />
+    <Content Include="Views\Reseñas\ReseñaInmobiliariaView.cshtml" />
+    <Content Include="Views\Reseñas\ReseñaInmuebleView.cshtml" />
     <Content Include="Views\InmueblesPropietario\InmueblesPropietarioView.cshtml" />
     <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
   </ItemGroup>
