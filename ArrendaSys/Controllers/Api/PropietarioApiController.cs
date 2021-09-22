@@ -19,6 +19,8 @@ namespace ArrendaSys.Controllers.Api
             ServicioPropietario serv = new ServicioPropietario();
             return serv.CrearPropietario(propietario);
         }
+       
+        
 
     }
 }

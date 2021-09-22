@@ -15,7 +15,8 @@ namespace ArrendaSysServicios
             ArrendasysEntities db = new ArrendasysEntities();
             var cuenta = db.Cuenta.Where(x => x.idCuenta == propietario.idCuenta).FirstOrDefault();
             var arrenda = db.Arrendatario.Where(x => x.idCuenta == cuenta.idCuenta).FirstOrDefault();
-            if (arrenda != null) {
+            if (arrenda != null)
+            {
                 db.Arrendatario.Remove(arrenda);
             }
             var inmo = db.Inmobiliaria.Where(x => x.idCuenta == cuenta.idCuenta).FirstOrDefault();
@@ -31,7 +32,7 @@ namespace ArrendaSysServicios
                 propietario2.apellidoPropietario = propietario.apellidoPropietario;
                 propietario2.fechaNacimPropietario = propietario.fechaNacimiento;
                 propietario2.numeroDocumentoProp = propietario.numeroDocumentoPropietario;
-                propietario2.telefonoPropietario =propietario.telefonoPropietario;
+                propietario2.telefonoPropietario = propietario.telefonoPropietario;
                 propietario2.idCuenta = propietario.idCuenta;
             }
             else
@@ -50,10 +51,12 @@ namespace ArrendaSysServicios
             db.SaveChanges();
             return 1;
         }
+        
 
         public void Dispose()
         {
             throw new NotImplementedException();
         }
+
     }
 }

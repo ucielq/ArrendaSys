@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "AgregarInmueble";
+}
+
+<style>
+    .select2 {
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="content" style="padding-left:10px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title"><b>Agregar Inmueble</b></h4>
+                            <p class="card-category">Complete los datos del inmueble.</p>
+                        </div>
+                        <div class="card-body">
+                            <form id="formulario">
+                                <div id="inmueble">
+                                    <div class="row" style="padding-top:6px">
+                                        <div class="col-md-2">
+                                            <label for="Dirección">Dirección</label>
+                                            <br />
+                                            <textarea class="form-control" id="direccionInmueble" name="direccionInmueble"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="cantAmbInmueble">Cantidad Ambientes</label>
+                                            <br />
+                                            <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="cantHabInmueble">Cantidad Habiaciones</label>
+                                            <br />
+                                            <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="cantBanInmueble">Cantidad de Baños</label>
+                                            <br />
+                                            <textarea class="form-control" id="cantBanInmueble" name="cantBanInmueble"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="cantMtInmueble">Cantidad Metros Cuadrados</label>
+                                            <br />
+                                            <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <label> Agregar Archivo </label>
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <img type="image" onclick="agregarMultiplesArchivos()" src="~/assets/img/icono.png" />
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col" id="asd123">
+                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <label id="ArchivosYaCargados"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="descrInmueble">Descripción Inmueble</label>
+                                            <br />
+                                            <textarea class="form-control2" id="descrInmueble" name="descrInmueble"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="mascota">¿Acepta Mascotas?</label>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="mascota" id="mascota">
+                                                <option value="-1">Seleccione una opción</option>
+                                                <option value="1">Sí</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="expensa">¿Incluye Expensas?</label>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="expensa" id="expensa">
+                                                <option value="-1">Seleccione una opción</option>
+                                                <option value="1">Sí</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <label for="cochera">¿Contiene cochera?</label>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="cochera" id="cochera">
+                                                <option value="-1">Seleccione una opción</option>
+                                                <option value="1">Sí</option>
+                                                <option value="2">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>                                                             
+                                <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div hidden>
+        <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple/>
+    </div>
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/Generales.js"></script>
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+
+</body>
+<script>
+    $(document).ready(function () {
+        $('.select2').select2({
+            allowClear: false,
+            width: '100%',
+        });
+    });
+    function GuardarInmueble() {
+        var inmueble = new Object();
+        inmueble.cantAmbientes = $("#cantAmbInmueble").val();
+        inmueble.cantHabitaciones = $("#cantHabInmueble").val();
+        inmueble.cantBanos = $("#cantBanInmueble").val();
+        inmueble.mtsCuadrados = $("#cantMtInmueble").val();
+        inmueble.descripcionInmueble = $("#descrInmueble").val();
+        inmueble.permiteMascota = $("#mascota").val();
+        inmueble.incluyeExpensas = $("#expensa").val();
+        inmueble.cochera = $("#cochera").val();
+        //inmueble.idPropietario = id;
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Inmueble/AgregarInmueble',
+            data: inmueble,
+            success: function (result) {               
+                GuardarArchivo(result.idInmueble);
+                Mostrarimagen(result.idInmueble);
+            }
+        });
+    }
+    function Mostrarimagen() {
+
+    }
+
+
+</script>

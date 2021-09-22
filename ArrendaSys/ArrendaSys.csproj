@@ -157,9 +157,11 @@
     <Compile Include="Controllers\Acceso\PermisoAttributeController.cs" />
     <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\AlquileresController.cs" />
+    <Compile Include="Controllers\Api\ArchivoApiController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
+    <Compile Include="Controllers\Api\InmuebleApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\PublicacionApiController.cs" />
@@ -235,6 +237,7 @@
     <Content Include="assets\img\clients\client-7.png" />
     <Content Include="assets\img\clients\client-8.png" />
     <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\icono.png" />
     <Content Include="assets\img\inmuebles\casa_1.jpg" />
     <Content Include="assets\img\inmuebles\casa_2.jpg" />
     <Content Include="assets\img\inmuebles\casa_3.jpg" />
@@ -814,9 +817,12 @@
     <Content Include="Views\Reseñas\ReseñaInmuebleView.cshtml" />
     <Content Include="Views\InmueblesPropietario\InmueblesPropietarioView.cshtml" />
     <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
+    <Content Include="Views\InmueblesPropietario\AgregarInmuebleView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ArchivoApi\" />
+    <Folder Include="Views\InmuebleApi\" />
     <Folder Include="Views\PropietarioApi\" />
   </ItemGroup>
   <ItemGroup>
