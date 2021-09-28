@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Encrypt.cs" />
     <Compile Include="Modelos\ArchivoVM.cs" />
+    <Compile Include="Modelos\DepartamentoViewModel.cs" />
     <Compile Include="Modelos\InmuebleViewModel.cs" />
     <Compile Include="Modelos\InmobiliariaViewModel.cs" />
     <Compile Include="Modelos\PropietarioViewModel.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicioArrendatario.cs" />
     <Compile Include="ServicioCuenta.cs" />
+    <Compile Include="ServicioDepartamento.cs" />
     <Compile Include="ServicioInmobiliaria.cs" />
     <Compile Include="ServicioInmueble.cs" />
     <Compile Include="ServicioPropietario.cs" />

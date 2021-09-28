@@ -3,10 +3,12 @@
     ViewBag.Title = "AgregarInmueble";
 }
 
+
 <style>
     .select2 {
         width: 100%;
     }
+    
 </style>
 
 <body>
@@ -24,10 +26,57 @@
                                 <div id="inmueble">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label for="Dirección">Dirección</label>
-                                            <br />
-                                            <textarea class="form-control" id="direccionInmueble" name="direccionInmueble"></textarea>
+                                            <label for="provincia">Provincia</label>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="provincia" id="provincia">
+                                                <option value="-1">Seleccione Provincia</option>
+                                                <option value="1">Mendoza</option>
+                                            </select>
                                         </div>
+                                        <div class="col-md-2">
+                                            <label for="departamento">Departamento</label>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento">
+                                                <option value="-1">Seleccione Provincia</option>                                        
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="localidad">Localidad</label>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="localidad" id="localidad">
+                                                <option value="-1">Seleccione Localidad</option>
+                                                <option value="1">Mendoza</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row" style="padding-top:6px">
+                                        <div class="col-md-2">
+                                            <label for="calle">Calle</label>
+                                            <br />
+                                            <textarea class="form-control" id="calle" name="calle"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="numero">Número</label>
+                                            <br />
+                                            <textarea class="form-control" id="numero" name="numero"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="barrio">Barrio</label>
+                                            <br />
+                                            <textarea class="form-control" id="barrio" name="barrio"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="manzana">Manzana</label>
+                                            <br />
+                                            <textarea class="form-control" id="manzana" name="manzana"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="lote">Lote</label>
+                                            <br />
+                                            <textarea class="form-control" id="lote" name="lote"></textarea>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row" style="padding-top:6px">
+
                                         <div class="col-md-2">
                                             <label for="cantAmbInmueble">Cantidad Ambientes</label>
                                             <br />
@@ -71,7 +120,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <br />
                                     <div class="row">
                                         <div class="col-md-6">
@@ -115,9 +163,9 @@
                                         </div>
                                     </div>
                                     <br />
-                                </div>                                                             
-                                <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
-                            </form>
+                                </div>
+                                    <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
+</form>
                         </div>
                     </div>
                 </div>
@@ -127,7 +175,7 @@
 
     </div>
     <div hidden>
-        <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple/>
+        <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple />
     </div>
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
@@ -142,6 +190,7 @@
             width: '100%',
         });
     });
+    
 
     function GuardarInmueble() {
         var inmueble = new Object();
@@ -153,12 +202,12 @@
         inmueble.permiteMascota = $("#mascota").val();
         inmueble.incluyeExpensas = $("#expensa").val();
         inmueble.cochera = $("#cochera").val();
-        
+
         $.ajax({
             type: 'Post',
             url: '/Api/Inmueble/AgregarInmueble',
             data: inmueble,
-            success: function (result) {               
+            success: function (result) {
                 GuardarArchivo(result.idInmueble);
                 Mostrarimagen(result.idInmueble);
             }
@@ -167,6 +216,32 @@
     function Mostrarimagen() {
 
     }
+    function ObtenerDepto() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Novedad/ObtenerDepto',
+            dataType: "json",
+            data: {},
+            success: function (respuesta) {
+                listaDepto = respuesta;
+                if (departamento == -1) {
+                    $('#departamento').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                }
+                else {
+                    $('#departamento').append($('<option>').val(-1).text("Seleccione una opción"))
+                }
+                $.each(respuesta, function (index, result) {
+                    if (departamento == result.idDepartamento) {
+                        $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
+                    }
+                    else {
+                        $('#departamento').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
+                    }
 
+                });
+
+   
+       
 
 </script>
+

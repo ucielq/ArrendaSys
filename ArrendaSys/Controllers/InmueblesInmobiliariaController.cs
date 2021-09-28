@@ -13,5 +13,10 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+
+        public ActionResult AgregarInmueble()
+        {
+            return View();
+        }
     }
 }

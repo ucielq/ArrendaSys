@@ -7,7 +7,7 @@
 <section id="header" class="jumbotron text-center">
     <h1 class="display-3">Mis Inmuebles</h1>
     <p class="lead">Actualmente, estos son sus inmuebles en Arrendasys.</p>
-    <button type="button" class="btn btn-success">
+    <button type="button" class="btn btn-success" onclick="AgregarInmueble()">
         <i class="fas fa-plus"></i> Agregar nuevo inmueble
     </button>
 </section>
@@ -108,3 +108,6 @@
         </div>
     </div>
 </section>
+<script>
+    function AgregarInmueble() { window.location.href = '/InmueblesInmobiliaria/AgregarInmueble' }
+</script>

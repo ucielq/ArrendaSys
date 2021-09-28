@@ -160,6 +160,7 @@
     <Compile Include="Controllers\Api\ArchivoApiController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
+    <Compile Include="Controllers\Api\DepartamentoApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\InmuebleApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
@@ -815,13 +816,18 @@
     <Content Include="Views\Reseñas\ReseñaPropietarioView.cshtml" />
     <Content Include="Views\Reseñas\ReseñaInmobiliariaView.cshtml" />
     <Content Include="Views\Reseñas\ReseñaInmuebleView.cshtml" />
-    <Content Include="Views\InmueblesPropietario\InmueblesPropietarioView.cshtml" />
+    <Content Include="Views\InmueblesPropietario\InmueblesPropietarioView.cshtml">
+      <BrowseToURL>~/InmueblesPropietario/InmueblesPropietario</BrowseToURL>
+    </Content>
     <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
     <Content Include="Views\InmueblesPropietario\AgregarInmuebleView.cshtml" />
+    <Content Include="Views\InmueblesInmobiliaria\AgregarInmueble.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ArchivoApi\" />
+    <Folder Include="Views\DepartamentoApi\" />
+    <Folder Include="Views\Departamento\" />
     <Folder Include="Views\InmuebleApi\" />
     <Folder Include="Views\PropietarioApi\" />
   </ItemGroup>
