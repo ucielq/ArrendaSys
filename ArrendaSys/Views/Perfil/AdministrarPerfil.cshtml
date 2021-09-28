@@ -261,7 +261,7 @@
             arrendatario.fechaNacimiento = $("#fechaNacimiento").val();
             arrendatario.nroDocumento = $("#documento").val();
             arrendatario.nroTelefono = $("#telefono").val();
-            arrendatario.idCuenta = id;
+            arrendatario.idCuenta = idCuenta;
             $.ajax({
                 type: 'Post',
                 url: '/Api/Arrendatario/CrearArrendatario',
@@ -278,7 +278,7 @@
             propietario.fechaNacimiento = $("#fechaNacimientoProp").val();
             propietario.numeroDocumentoPropietario = $("#documentoProp").val();
             propietario.telefonoPropietario = $("#telefonoProp").val();
-            propietario.idCuenta = id;
+            propietario.idCuenta = idCuenta;
             $.ajax({
                 type: 'Post',
                 url: '/Api/Propietario/CrearPropietario',
@@ -294,7 +294,7 @@
             inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
             inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
             inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
-            inmobiliaria.idCuenta = id;
+            inmobiliaria.idCuenta = idCuenta;
             $.ajax({
                 type: 'Post',
                 url: '/Api/Inmobiliaria/CrearInmobiliaria',

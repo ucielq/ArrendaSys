@@ -10,7 +10,7 @@ namespace ArrendaSysServicios
 {
     public class ServicioDepartamento
     {
-        public object ObtenerDepto()
+        public List<DepartamentoViewModel> ObtenerDepto()
         {
             List<DepartamentoViewModel> listaDepto;
             using (ArrendasysEntities db = new ArrendasysEntities())
@@ -24,9 +24,9 @@ namespace ArrendaSysServicios
                               }).ToList();
             }
 
-            object json = new { data = listaDepto };
+            
 
-            return json;
+            return listaDepto;
         }
 
     }

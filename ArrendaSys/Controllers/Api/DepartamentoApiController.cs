@@ -1,4 +1,5 @@
 ﻿using ArrendaSysServicios;
+using ArrendaSysServicios.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Departamento/ObtenerDepto")]
         [System.Web.Http.ActionName("ObtenerDepto")]
         [System.Web.Http.HttpGet]
-        public object ObtenerDepto()
+        public List<DepartamentoViewModel> ObtenerDepto()
         {
             ServicioDepartamento servDepto = new ServicioDepartamento();
-            object listaDepto = servDepto.ObtenerDepto();
+            var listaDepto = servDepto.ObtenerDepto();
             return listaDepto;
         }
     }

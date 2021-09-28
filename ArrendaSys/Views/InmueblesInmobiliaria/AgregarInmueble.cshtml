@@ -34,8 +34,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label for="departamento">Departamento</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento">
-                                                <option value="-1">Seleccione Provincia</option>                                        
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento">                                
                                             </select>
                                         </div>
                                         <div class="col-md-2">
@@ -189,6 +188,7 @@
             allowClear: false,
             width: '100%',
         });
+        ObtenerDepto(-1);
     });
     
 
@@ -219,9 +219,7 @@
     function ObtenerDepto() {
         $.ajax({
             type: 'Get',
-            url: '/Api/Novedad/ObtenerDepto',
-            dataType: "json",
-            data: {},
+            url: '/Api/Departamento/ObtenerDepto',
             success: function (respuesta) {
                 listaDepto = respuesta;
                 if (departamento == -1) {
@@ -231,14 +229,17 @@
                     $('#departamento').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
                 $.each(respuesta, function (index, result) {
+                    debugger;
                     if (departamento == result.idDepartamento) {
                         $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
                     }
                     else {
                         $('#departamento').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
                     }
-
                 });
+            }
+        });
+    }
 
    
        
