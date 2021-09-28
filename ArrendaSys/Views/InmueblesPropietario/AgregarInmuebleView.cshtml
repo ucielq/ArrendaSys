@@ -20,7 +20,6 @@
                             <p class="card-category">Complete los datos del inmueble.</p>
                         </div>
                         <div class="card-body">
-                            <form id="formulario">
                                 <div id="inmueble">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
@@ -34,7 +33,7 @@
                                             <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="cantHabInmueble">Cantidad Habiaciones</label>
+                                            <label for="cantHabInmueble">Cantidad Habitaciones</label>
                                             <br />
                                             <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble"></textarea>
                                         </div>
@@ -49,26 +48,9 @@
                                             <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <div class=" row">
-                                                <div class="col">
-                                                    <label> Agregar Archivo </label>
-                                                </div>
-                                            </div>
-                                            <div class=" row">
-                                                <div class="col">
-                                                    <img type="image" onclick="agregarMultiplesArchivos()" src="~/assets/img/icono.png" />
-                                                </div>
-                                            </div>
-                                            <div class=" row">
-                                                <div class="col" id="asd123">
-                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
-                                                </div>
-                                            </div>
-                                            <div class=" row">
-                                                <div class="col">
-                                                    <label id="ArchivosYaCargados"></label>
-                                                </div>
-                                            </div>
+                                            <label for="cantMtInmuebleInt">Cantidad Metros Cuadrados Interior</label>
+                                            <br />
+                                            <textarea class="form-control" id="cantMtInmuebleInt" name="cantMtInmuebleInt"></textarea>
                                         </div>
                                     </div>
 
@@ -77,7 +59,7 @@
                                         <div class="col-md-6">
                                             <label for="descrInmueble">Descripción Inmueble</label>
                                             <br />
-                                            <textarea class="form-control2" id="descrInmueble" name="descrInmueble"></textarea>
+                                            <textarea class="form-control" id="descrInmueble" name="descrInmueble" style="width:fit-content;"></textarea>
                                         </div>
                                     </div>
 
@@ -113,11 +95,33 @@
                                                 <option value="2">No</option>
                                             </select>
                                         </div>
+                                        <div class="col-md-2">
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <label> Agregar Archivo </label>
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <img type="image" onclick="agregarMultiplesArchivos()" src="~/assets/img/icono.png" height="50" width="50" />
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col" id="asd123">
+                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <label id="ArchivosYaCargados"></label>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <br />
                                 </div>                                                             
                                 <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
-                            </form>
+                      
                         </div>
                     </div>
                 </div>
@@ -136,32 +140,107 @@
 
 </body>
 <script>
+    @{ 
+        var idPropietario = Session["id"];
+    }
+    var idPropietario = "@idPropietario";
     $(document).ready(function () {
         $('.select2').select2({
             allowClear: false,
             width: '100%',
         });
+        CrearOEditar();
     });
+    var crear = false;
+    var idInmueble;
+    function GetUrlId() {
+        var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
+        return hash;
+    }
+    function CrearOEditar() {
+        idInmueble = GetUrlVars()["id"];
+        if (idInmueble == undefined) {
+            console.log(idInmueble);
+            crear = true;
+        } else {
+            cargarDatosInmueble(idInmueble);
+        }
+        
+    }
+    function cargarDatosInmueble(idInmueble) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Inmueble/ObtenerInmueble?idInmueble=' + idInmueble,
+            success: function (inmueble) {
+                $("#cantAmbInmueble").text(inmueble.cantAmbientes);
+                $("#cantHabInmueble").text(inmueble.cantHabitaciones);
+                $("#cantBanInmueble").text(inmueble.cantBanos);
+                $("#cantMtInmueble").text(inmueble.mtsCuadrados);
+                $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
+                $("#descrInmueble").text(inmueble.descripcionInmueble);
+                if (inmueble.permiteMascota == true) {
+                    $("#mascota").val(1);
+                    $("#mascota option[value='1'").attr("selected", true).change();
+                } else {
+                    $("#mascota").val(2);
+                    $("#mascota option[value='2'").attr("selected", true).change();
+                }
+                if (inmueble.incluyeExpensas == true) {
+                    $("#expensa").val(1);
+                    $("#expensa option[value='1'").attr("selected", true).change();
+
+                } else {
+                    $("#expensa").val(2);
+                    $("#expensa option[value='2'").attr("selected", true).change();
+                }
+                if (inmueble.cochera == true) {
+                    $("#cochera").val(1);
+                    $("#cochera option[value='1'").attr("selected", true).change();
+                } else {
+                    $("#cochera").val(2);
+                    $("#cochera option[value='2'").attr("selected", true).change();
+                }
+            }
+        })
+    }
     function GuardarInmueble() {
         var inmueble = new Object();
         inmueble.cantAmbientes = $("#cantAmbInmueble").val();
         inmueble.cantHabitaciones = $("#cantHabInmueble").val();
         inmueble.cantBanos = $("#cantBanInmueble").val();
         inmueble.mtsCuadrados = $("#cantMtInmueble").val();
+        inmueble.mtsCuadradosInt = $("#cantMtInmuebleInt").val();
         inmueble.descripcionInmueble = $("#descrInmueble").val();
-        inmueble.permiteMascota = $("#mascota").val();
-        inmueble.incluyeExpensas = $("#expensa").val();
-        inmueble.cochera = $("#cochera").val();
-        //inmueble.idPropietario = id;
-        $.ajax({
-            type: 'Post',
-            url: '/Api/Inmueble/AgregarInmueble',
-            data: inmueble,
-            success: function (result) {               
-                GuardarArchivo(result.idInmueble);
-                Mostrarimagen(result.idInmueble);
-            }
-        });
+        inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
+        inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
+        inmueble.cochera = $("#cochera").val()==1 ? true:false;
+        inmueble.tipoArrendador = 2;
+        inmueble.idArrendador = idPropietario;
+        if (crear) {
+            //No le agrego el idInmueble
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Inmueble/AgregarInmueble',
+                data: inmueble,
+                success: function (result) {
+                    GuardarArchivo(result.idInmueble);
+                    location.href = '/InmueblesPropietario/InmueblesPropietarioView';
+                }
+            });
+        } else {
+            inmueble.idInmueble = idInmueble;
+            //Hago un llamado editando, ver el tema de los archivos, si se cargan todos de vuelta, o los que agrego se suman a los anteriores (seria lo ideal)
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Inmueble/AgregarInmueble',
+                data: inmueble,
+                success: function (result) {
+                    GuardarArchivo(result.idInmueble);
+                    location.href = '/InmueblesPropietario/InmueblesPropietarioView';
+                }
+            });
+        }
+        
     }
     function Mostrarimagen() {
 

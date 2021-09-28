@@ -15,5 +15,6 @@ namespace ArrendaSysServicios.Modelos
         public int telefonoInmobiliaria { get; set; }
         public int cuitInmobiliaria { get; set; }
         public int idCuenta { get; set; }
+        public int idInmobiliaria { get; set; }
     }
 }

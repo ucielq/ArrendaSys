@@ -101,6 +101,7 @@
     @{
         var emailCuenta = Session["usuarioLogeado"];
     }
+    
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
@@ -128,12 +129,6 @@
         window.location.href = "/Login/Logout";
     }
     function Perfil() {
-        $.ajax({
-            type: 'Get',
-            url: '/Api/Cuenta/ObtenerId?email=' + "@emailCuenta",
-            success: function (result) {
-                window.location.href = "/Perfil/AdministrarPerfil/" + result;
-            }
-        });
+         window.location.href = "/Perfil/AdministrarPerfil";
     }
 </script>
