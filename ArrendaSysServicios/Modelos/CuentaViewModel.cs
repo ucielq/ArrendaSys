@@ -18,5 +18,6 @@ namespace ArrendaSysServicios.Modelos
         public PropietarioViewModel propietario { get; set; }
         public string contraseña { get; set; }
         public InmobiliariaViewModel inmobiliaria{get;set;}
+        public int idPropio { get; set; }
     }
 }

@@ -251,7 +251,9 @@ namespace ArrendaSysServicios
                         arrendatarioVM.nroTelefono = (int)arrendatario.telefonoArrendatario;
                         arrendatarioVM.fechaNacimientoStr = String.Format("{0:yyyy-MM-dd}", arrendatario.fechaNacimArrendatario);
                         arrendatarioVM.fechaNacimiento = (DateTime)arrendatario.fechaNacimArrendatario;
+                        arrendatarioVM.idArrendatario = arrendatario.idArrendatario;
                         cuenta.arrendatario = arrendatarioVM;
+                        cuenta.idPropio = arrendatario.idArrendatario;
                         return cuenta;
                     }
                     else
@@ -265,11 +267,13 @@ namespace ArrendaSysServicios
                                 nombrePropietario = propietario.nombrePropietario,
                                 numeroDocumentoPropietario = (int)propietario.numeroDocumentoProp,
                                 telefonoPropietario = propietario.telefonoPropietario,
-                                fechaNacimientoStr = String.Format("{0:yyyy-MM-dd}", propietario.fechaNacimPropietario)
+                                fechaNacimientoStr = String.Format("{0:yyyy-MM-dd}", propietario.fechaNacimPropietario),
+                                idPropietario = propietario.idPropietario
 
                             };
                             cuenta.propietario = propVM;
                             cuenta.tipoCuenta = 2;
+                            cuenta.idPropio = propietario.idPropietario;
                             return cuenta;
                         }
                         else
@@ -284,10 +288,12 @@ namespace ArrendaSysServicios
                                     altaInscripcionStr= String.Format("{0:yyyy-MM-dd}",inmobiliaria.altaInscripcion),
                                     cuitInmobiliaria=(int)inmobiliaria.cuitInmobiliaria,
                                     telefonoInmobiliariaStr=inmobiliaria.telefonoInmobiliaria,
+                                    idInmobiliaria=inmobiliaria.idInmobiliaria
 
                                 };
                                 cuenta.inmobiliaria = inmoVM;
                                 cuenta.tipoCuenta = 1;
+                                cuenta.idPropio = inmobiliaria.idInmobiliaria;
                                 return cuenta;
                             }
                             else

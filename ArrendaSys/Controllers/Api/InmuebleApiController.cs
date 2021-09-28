@@ -1,9 +1,6 @@
 ﻿using ArrendaSysServicios;
 using ArrendaSysServicios.Modelos;
 using System;
-using ArrendaSysServicios;
-using ArrendaSysServicios.Modelos;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -48,6 +45,36 @@ namespace ArrendaSys.Controllers.Api
 
            
         }
+        [System.Web.Http.Route("Api/Inmueble/ObtenerInmueblesPropietario")]
+        [System.Web.Http.ActionName("ObtenerInmueblesPropietario")]
+        [System.Web.Http.HttpGet]
+        public List<InmuebleViewModel> ObtenerInmueblesPropietario(int idPropietario)
+        {
+            ServicioInmueble servicio = new ServicioInmueble();
+            var listaInmuebles = servicio.ObtenerInmueblesPropietario(idPropietario);
 
+            return listaInmuebles;
+        }
+
+        [System.Web.Http.Route("Api/Inmueble/ObtenerInmueble")]
+        [System.Web.Http.ActionName("ObtenerInmueble")]
+        [System.Web.Http.HttpGet]
+        public InmuebleViewModel ObtenerInmueble(int idInmueble)
+        {
+            ServicioInmueble servicio = new ServicioInmueble();
+            var listaInmuebles = servicio.ObtenerInmueble(idInmueble);
+
+            return listaInmuebles;
+        }
+        [System.Web.Http.Route("Api/Inmueble/EliminarInmueble")]
+        [System.Web.Http.ActionName("EliminarInmueble")]
+        [System.Web.Http.HttpPut]
+        public void EliminarInmueble(int idInmueble)
+        {
+            ServicioInmueble servicio = new ServicioInmueble();
+            servicio.EliminarInmueble(idInmueble);
+
+            
+        }
     }
 }

@@ -153,13 +153,16 @@
 
 </body>
 <script>
+    @{
+        var idCuenta = Session["idCuenta"];
+    }
     $(document).ready(function () {
         $('.select2').select2({
             allowClear: false,
             width: '100%',
         });
     });
-    var id = GetUrlId();
+    var idCuenta = "@idCuenta";
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
@@ -169,7 +172,7 @@
     function completarDatos() {
         $.ajax({
             type: 'Get',
-            url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + id,
+            url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + idCuenta,
             success: function (result) {
                 completarDatosCuenta(result);
                 if (result.tipoCuenta == 3) {
@@ -303,6 +306,6 @@
         }
     }
 
-    
-    
+
+
 </script>
