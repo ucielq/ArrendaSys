@@ -22,15 +22,13 @@
                             <p class="card-category">Complete los datos del inmueble.</p>
                         </div>
                         <div class="card-body">
-                            <form id="formulario">
+                            
                                 <div id="inmueble">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
                                             <label for="provincia">Provincia</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="provincia" id="provincia">
-                                                <option value="-1">Seleccione Provincia</option>
-                                                <option value="1">Mendoza</option>
-                                            </select>
+                                            <br />
+                                            <label for="provincia">Mendoza</label>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="departamento">Departamento</label>
@@ -39,9 +37,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label for="localidad">Localidad</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="localidad" id="localidad">
-                                                <option value="-1">Seleccione Localidad</option>
-                                                <option value="1">Mendoza</option>
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="localidad" id="localidad">                                
                                             </select>
                                         </div>
                                     </div>
@@ -55,12 +51,12 @@
                                         <div class="col-md-2">
                                             <label for="numero">Número</label>
                                             <br />
-                                            <textarea class="form-control" id="numero" name="numero"></textarea>
+                                            <textarea class="form-control" id="numero" name="numero" style=" width:150px"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="barrio">Barrio</label>
                                             <br />
-                                            <textarea class="form-control" id="barrio" name="barrio"></textarea>
+                                            <textarea class="form-control" id="barrio" name="barrio" ></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="manzana">Manzana</label>
@@ -79,22 +75,36 @@
                                         <div class="col-md-2">
                                             <label for="cantAmbInmueble">Cantidad Ambientes</label>
                                             <br />
-                                            <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble"></textarea>
+                                            <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble" style=" width:150px"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="cantHabInmueble">Cantidad Habiaciones</label>
                                             <br />
-                                            <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble"></textarea>
+                                            <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble" style=" width:150px"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="cantBanInmueble">Cantidad de Baños</label>
-                                            <br />
-                                            <textarea class="form-control" id="cantBanInmueble" name="cantBanInmueble"></textarea>
+
+                                            <textarea class="form-control" id="cantBanInmueble" name="cantBanInmueble" style=" width:150px"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="cantMtInmueble">Cantidad Metros Cuadrados</label>
+
+                                            <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble" style=" width:150px"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="cantMtInmuebleInt">Cantidad Metros Cuadrados Interior</label>
                                             <br />
-                                            <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble"></textarea>
+                                            <textarea class="form-control" id="cantMtInmuebleInt" name="cantMtInmuebleInt" style=" width:150px"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="descrInmueble">Descripción Inmueble</label>
+                                            <br />
+                                            <textarea class="form-control2" id="descrInmueble" name="descrInmueble" style="width: 803.988636px; height:53.988636px;"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <div class=" row">
@@ -119,14 +129,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="descrInmueble">Descripción Inmueble</label>
-                                            <br />
-                                            <textarea class="form-control2" id="descrInmueble" name="descrInmueble" style="width: 803.988636px; height:53.988636px;"></textarea>
-                                        </div>
-                                    </div>
+
 
                                     <br />
                                     <div class="row">
@@ -164,7 +167,7 @@
                                     <br />
                                 </div>
                                     <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
-</form>
+
                         </div>
                     </div>
                 </div>
@@ -173,6 +176,7 @@
 
 
     </div>
+
     <div hidden>
         <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple />
     </div>
@@ -183,40 +187,115 @@
 
 </body>
 <script>
+    @{
+        var idInmobiliaria = Session["id"];
+    }
+    var idInmobiliaria = "@idInmobiliaria";
+
     $(document).ready(function () {
         $('.select2').select2({
             allowClear: false,
             width: '100%',
         });
+        CrearOEditar();
         ObtenerDepto(-1);
+        ObtenerLocalidad(-1);
     });
-    
 
-    function GuardarInmueble() {
-        var inmueble = new Object();
-        inmueble.cantAmbientes = $("#cantAmbInmueble").val();
-        inmueble.cantHabitaciones = $("#cantHabInmueble").val();
-        inmueble.cantBanos = $("#cantBanInmueble").val();
-        inmueble.mtsCuadrados = $("#cantMtInmueble").val();
-        inmueble.descripcionInmueble = $("#descrInmueble").val();
-        inmueble.permiteMascota = $("#mascota").val();
-        inmueble.incluyeExpensas = $("#expensa").val();
-        inmueble.cochera = $("#cochera").val();
+    var crear = false;
+    var idInmueble;
+    function GetUrlId() {
+        var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
+        return hash;
+    }
 
-        $.ajax({
-            type: 'Post',
-            url: '/Api/Inmueble/AgregarInmueble',
-            data: inmueble,
-            success: function (result) {
-                GuardarArchivo(result.idInmueble);
-                Mostrarimagen(result.idInmueble);
+    function CrearOEditar() {
+        idInmueble = GetUrlVars()["id"];
+        if (idInmueble == undefined) {
+            console.log(idInmueble);
+            crear = true;
+        } else {
+            cargarDatosInmueble(idInmueble);
+        }
+    }
+        function cargarDatosInmueble(idInmueble) {
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Inmueble/ObtenerInmueble?idInmueble=' + idInmueble,
+                success: function (inmueble) {
+                    $("#cantAmbInmueble").text(inmueble.cantAmbientes);
+                    $("#cantHabInmueble").text(inmueble.cantHabitaciones);
+                    $("#cantBanInmueble").text(inmueble.cantBanos);
+                    $("#cantMtInmueble").text(inmueble.mtsCuadrados);
+                    $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
+                    $("#descrInmueble").text(inmueble.descripcionInmueble);
+                    if (inmueble.permiteMascota == true) {
+                        $("#mascota").val(1);
+                        $("#mascota option[value='1'").attr("selected", true).change();
+                    } else {
+                        $("#mascota").val(2);
+                        $("#mascota option[value='2'").attr("selected", true).change();
+                    }
+                    if (inmueble.incluyeExpensas == true) {
+                        $("#expensa").val(1);
+                        $("#expensa option[value='1'").attr("selected", true).change();
+
+                    } else {
+                        $("#expensa").val(2);
+                        $("#expensa option[value='2'").attr("selected", true).change();
+                    }
+                    if (inmueble.cochera == true) {
+                        $("#cochera").val(1);
+                        $("#cochera option[value='1'").attr("selected", true).change();
+                    } else {
+                        $("#cochera").val(2);
+                        $("#cochera option[value='2'").attr("selected", true).change();
+                    }
+                }
+            });
+        }
+        function GuardarInmueble() {
+            var inmueble = new Object();
+            inmueble.cantAmbientes = $("#cantAmbInmueble").val();
+            inmueble.cantHabitaciones = $("#cantHabInmueble").val();
+            inmueble.cantBanos = $("#cantBanInmueble").val();
+            inmueble.mtsCuadrados = $("#cantMtInmueble").val();
+            inmueble.descripcionInmueble = $("#descrInmueble").val();
+            inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
+            inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
+            inmueble.cochera = $("#cochera").val() == 1 ? true : false;
+            inmueble.tipoArrendador = 2;
+            inmueble.idArrendador = idInmobiliaria;
+            if (crear) {
+                //No le agrego el idInmueble
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/Inmueble/AgregarInmueble',
+                    data: inmueble,
+                    success: function (result) {
+                        GuardarArchivo(result.idInmueble);
+                        location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
+                    }
+                });
+            } else {
+                inmueble.idInmueble = idInmueble;
+                //Hago un llamado editando, ver el tema de los archivos, si se cargan todos de vuelta, o los que agrego se suman a los anteriores (seria lo ideal)
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/Inmueble/AgregarInmueble',
+                    data: inmueble,
+                    success: function (result) {
+                        GuardarArchivo(result.idInmueble);
+                        location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
+                    }
+
+                });
             }
-        });
-    }
-    function Mostrarimagen() {
 
-    }
-    function ObtenerDepto() {
+
+        }
+
+    function ObtenerDepto(departamento) {
         $.ajax({
             type: 'Get',
             url: '/Api/Departamento/ObtenerDepto',
@@ -228,21 +307,49 @@
                 else {
                     $('#departamento').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
+
                 $.each(respuesta, function (index, result) {
                     debugger;
                     if (departamento == result.idDepartamento) {
                         $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
+
                     }
                     else {
                         $('#departamento').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
+
+                    }
+                });
+            }
+        });
+    }
+    function ObtenerLocalidad(localidad) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Localidad/ObtenerLocalidad',
+            success: function (respuesta) {
+                listaLocalidad = respuesta;
+                if (localidad == -1) {
+                    $('#localidad').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                }
+                else {
+                    $('#localidad').append($('<option>').val(-1).text("Seleccione una opción"))
+                }
+                $.each(respuesta, function (index, result) {
+                    debugger;
+                    if (localidad == result.idLocalidad) {
+                        $('#localidad').append($('<option selected>').val(result.idLocalidad).text(result.nombreLocalidad))
+                    }
+                    else {
+                        $('#localidad').append($('<option>').val(result.idLocalidad).text(result.nombreLocalidad))
                     }
                 });
             }
         });
     }
 
-   
-       
+
+
+
 
 </script>
 

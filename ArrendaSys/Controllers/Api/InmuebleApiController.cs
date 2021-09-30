@@ -56,6 +56,17 @@ namespace ArrendaSys.Controllers.Api
             return listaInmuebles;
         }
 
+        [System.Web.Http.Route("Api/Inmueble/ObtenerInmueblesInmobiliaria")]
+        [System.Web.Http.ActionName("ObtenerInmueblesInmobiliaria")]
+        [System.Web.Http.HttpGet]
+        public List<InmuebleViewModel> ObtenerInmueblesInmobiliaria(int idInmobiliaria)
+        {
+            ServicioInmueble servicio = new ServicioInmueble();
+            var listaInmuebles = servicio.ObtenerInmueblesInmobiliaria(idInmobiliaria);
+
+            return listaInmuebles;
+        }
+
         [System.Web.Http.Route("Api/Inmueble/ObtenerInmueble")]
         [System.Web.Http.ActionName("ObtenerInmueble")]
         [System.Web.Http.HttpGet]
@@ -66,6 +77,11 @@ namespace ArrendaSys.Controllers.Api
 
             return listaInmuebles;
         }
+
+        
+
+
+
         [System.Web.Http.Route("Api/Inmueble/EliminarInmueble")]
         [System.Web.Http.ActionName("EliminarInmueble")]
         [System.Web.Http.HttpPut]

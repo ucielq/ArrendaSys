@@ -18,14 +18,11 @@ namespace ArrendaSysServicios
                 listaDepto = (from c in db.Departamento
                               select new DepartamentoViewModel
                               {
-                                  idDepartamento=c.idDepartamento,
+                                  idDepartamento = c.idDepartamento,
                                   nombreDepartamento = c.nombreDepartamento
-                                  
+
                               }).ToList();
-            }
-
-            
-
+            }           
             return listaDepto;
         }
 

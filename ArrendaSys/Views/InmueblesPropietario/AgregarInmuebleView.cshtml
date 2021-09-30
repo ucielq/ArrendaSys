@@ -150,6 +150,8 @@
             width: '100%',
         });
         CrearOEditar();
+        ObtenerDepto(-1);
+        ObtenerLocalidad(-1);
     });
     var crear = false;
     var idInmueble;
@@ -201,7 +203,7 @@
                     $("#cochera option[value='2'").attr("selected", true).change();
                 }
             }
-        })
+        });
     }
     function GuardarInmueble() {
         var inmueble = new Object();
@@ -244,6 +246,58 @@
     }
     function Mostrarimagen() {
 
+    }
+
+    function ObtenerDepto(departamento) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Departamento/ObtenerDepto',
+            success: function (respuesta) {
+                listaDepto = respuesta;
+                if (departamento == -1) {
+                    $('#departamento').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                }
+                else {
+                    $('#departamento').append($('<option>').val(-1).text("Seleccione una opción"))
+                }
+
+                $.each(respuesta, function (index, result) {
+                    debugger;
+                    if (departamento == result.idDepartamento) {
+                        $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
+
+                    }
+                    else {
+                        $('#departamento').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
+
+                    }
+                });
+            }
+        });
+    }
+    function ObtenerLocalidad(localidad) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Localidad/ObtenerLocalidad',
+            success: function (respuesta) {
+                listaLocalidad = respuesta;
+                if (localidad == -1) {
+                    $('#localidad').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                }
+                else {
+                    $('#localidad').append($('<option>').val(-1).text("Seleccione una opción"))
+                }
+                $.each(respuesta, function (index, result) {
+                    debugger;
+                    if (localidad == result.idLocalidad) {
+                        $('#localidad').append($('<option selected>').val(result.idLocalidad).text(result.nombreLocalidad))
+                    }
+                    else {
+                        $('#localidad').append($('<option>').val(result.idLocalidad).text(result.nombreLocalidad))
+                    }
+                });
+            }
+        });
     }
 
 

@@ -186,6 +186,47 @@ namespace ArrendaSysServicios
             }
         }
 
+        public List<InmuebleViewModel> ObtenerInmueblesInmobiliaria(int idInmobiliaria)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var inmuebles = (from i in db.Inmueble
+                                 where i.idArrendador == idInmobiliaria
+                                 select new InmuebleViewModel
+                                 {
+                                     cantAmbientes = i.cantAmbientes,
+                                     cantBanos = i.cantBanos,
+                                     cantHabitaciones = i.cantHabitaciones,
+                                     cochera = i.cochera,
+                                     descripcionInmueble = i.descripcionInmueble,
+                                     incluyeExpensas = i.incluyeExpensas,
+                                     mtsCuadrados = i.mtsCuadrados,
+                                     mtsCuadradosInt = i.mtsCuadradosInt,
+                                     permiteMascota = i.permiteMascota,
+                                     idArrendador = idInmobiliaria,
+                                     tipoArrendador = 2,
+                                     idDireccion = i.idDireccion,
+                                     idInmueble = i.idInmueble
+                                 }).ToList();
+                foreach (var inmu in inmuebles)
+                {
+                    var listaArchivoVM = new List<ArchivoVM>();
+                    var archivos = db.MultimediaInmueble.Where(x => x.idInmueble == inmu.idInmueble).ToList();
+                    foreach (var multi in archivos)
+                    {
+                        var archivoVM = new ArchivoVM
+                        {
+                            idInmueble = inmu.idInmueble,
+                            url = multi.urlMultimediaInmueble
+                        };
+                        listaArchivoVM.Add(archivoVM);
+                    }
+                    inmu.listaMultimedia = listaArchivoVM;
+                }
+                return inmuebles;
+            }
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();
