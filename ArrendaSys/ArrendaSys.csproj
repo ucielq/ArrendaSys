@@ -170,6 +170,7 @@
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
+    <Compile Include="Controllers\HacerReseñadePropietarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InmueblesInmobiliariaController.cs" />
     <Compile Include="Controllers\InmueblesPropietarioController.cs" />
@@ -800,6 +801,7 @@
     <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
     <Content Include="Views\InmueblesPropietario\AgregarInmuebleView.cshtml" />
     <Content Include="Views\InmueblesInmobiliaria\AgregarInmueble.cshtml" />
+    <Content Include="Views\HacerReseñadePropietario\HacerReseñadePropietario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
