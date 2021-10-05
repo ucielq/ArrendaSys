@@ -39,7 +39,6 @@ namespace ArrendaSysServicios
             else
             {
                 var esteInmu = db.Inmueble.Where(x => x.idInmueble == inmueble.idInmueble).FirstOrDefault();
-                InmuebleViewModel inmu = new InmuebleViewModel();
                 if (esteInmu != null)
                 {
                     esteInmu.cantAmbientes = inmueble.cantAmbientes;
@@ -55,22 +54,9 @@ namespace ArrendaSysServicios
                     esteInmu.tipoArrendador = inmueble.tipoArrendador;
                     esteInmu.idDireccion = inmueble.idDireccion;
                     db.SaveChanges();
-                    inmu.cantAmbientes = inmueble.cantAmbientes;
-                    inmu.cantBanos = inmueble.cantBanos;
-                    inmu.cantHabitaciones = inmueble.cantHabitaciones;
-                    inmu.cochera = inmueble.cochera;
-                    inmu.descripcionInmueble = inmueble.descripcionInmueble;
-                    inmu.incluyeExpensas = inmueble.incluyeExpensas;
-                    inmu.mtsCuadrados = inmueble.mtsCuadrados;
-                    inmu.mtsCuadradosInt = inmueble.mtsCuadradosInt;
-                    inmu.permiteMascota = inmueble.permiteMascota;
-                    inmu.idArrendador = inmueble.idArrendador;
-                    inmu.tipoArrendador = inmueble.tipoArrendador;
-                    inmu.idDireccion = inmueble.idDireccion;
-                    inmu.idInmueble = inmueble.idInmueble;
                 }
 
-                return inmu;
+                return inmueble;
             }
 
         }
