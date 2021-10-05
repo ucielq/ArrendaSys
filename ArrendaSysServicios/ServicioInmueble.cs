@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ArrendaSysServicios
 {
-    public class ServicioInmueble : IDisposable
+    public class ServicioInmueble 
     {
         public InmuebleViewModel AgregarInmueble(InmuebleViewModel inmueble)
         {
@@ -170,11 +170,6 @@ namespace ArrendaSysServicios
                 }
                 return inmuebles;
             }
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }
