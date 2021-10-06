@@ -1,0 +1,367 @@
+﻿
+<!DOCTYPE html>
+<style>
+    /*seccion cabecera*/
+
+    /*.padding {
+        padding: 3rem !important;
+        margin-left: 200px
+    } */
+
+    .card-img-top {
+        height: 300px
+    }
+
+    .card-no-border .card {
+        border-color: #d7dfe3;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+    }
+
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
+    .pro-img {
+        margin-top: -80px;
+        margin-bottom: 20px
+    }
+
+    .little-profile .pro-img img {
+        width: 128px;
+        height: 128px;
+        -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        border-radius: 100%
+    }
+
+    html body .m-b-0 {
+        margin-bottom: 0px
+    }
+
+    h3 {
+        line-height: 30px;
+        font-size: 21px
+    }
+
+    .btn-rounded.btn-md {
+        padding: 12px 35px;
+        font-size: 16px
+    }
+
+    html body .m-t-10 {
+        margin-top: 10px
+    }
+
+    .btn-primary,
+    .btn-primary.disabled {
+        background: #7460ee;
+        border: 1px solid #7460ee;
+        -webkit-box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+        box-shadow: 0 2px 2px 0 rgba(116, 96, 238, 0.14), 0 3px 1px -2px rgba(116, 96, 238, 0.2), 0 1px 5px 0 rgba(116, 96, 238, 0.12);
+        -webkit-transition: 0.2s ease-in;
+        -o-transition: 0.2s ease-in;
+        transition: 0.2s ease-in
+    }
+
+    .btn-rounded {
+        border-radius: 60px;
+        padding: 7px 18px
+    }
+
+    .m-t-20 {
+        margin-top: 20px
+    }
+
+    .text-center {
+        text-align: center !important
+    }
+
+    p {
+        margin-top: 0;
+        margin-bottom: 1rem
+    }
+
+    /*Seccion Estructura*/
+    #headerUsuario {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attached: fixed;
+        height: 250px;
+        width: 100%;
+        position: relative;
+        z-index: 2;
+        -webkit-box-shadow: inset 0px -5px 11px -6px rgba(0, 0, 0, 0.25);
+        -moz-box-shadow: inset 0px -5px 11px -6px rgba(0, 0, 0, 0.25);
+        box-shadow: inset 0px -5px 11px -6px rgba(0, 0, 0, 0.25);
+    }
+
+    .fh5co-section {
+        padding: 7em 0;
+    }
+    /*Seccion reseñas*/
+
+    body {
+        /*background-color: #D32F2F; */
+        /*font-family: 'Calibri', sans-serif !important*/
+    }
+
+    .card-no-border .card {
+        border: 0px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+    }
+
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem
+    }
+
+    .comment-widgets .comment-row:hover {
+        background: rgba(0, 0, 0, 0.02);
+        cursor: pointer
+    }
+
+    .comment-widgets .comment-row {
+        border-bottom: 1px solid rgba(120, 130, 140, 0.13);
+        padding: 15px
+    }
+
+    .comment-text:hover {
+        visibility: hidden
+    }
+
+    .comment-text:hover {
+        visibility: visible
+    }
+
+    .label {
+        padding: 3px 10px;
+        line-height: 13px;
+        color: #ffffff;
+        font-weight: 400;
+        border-radius: 4px;
+        font-size: 75%
+    }
+
+    .round img {
+        border-radius: 100%
+    }
+
+    .label-info {
+        background-color: #1976d2
+    }
+
+    .label-success {
+        background-color: green
+    }
+
+    .label-danger {
+        background-color: #ef5350
+    }
+
+    .action-icons a {
+        padding-left: 7px;
+        vertical-align: middle;
+        color: #99abb4
+    }
+
+        .action-icons a:hover {
+            color: #1976d2
+        }
+
+    .mt-100 {
+        margin-top: 100px
+    }
+
+    .mb-100 {
+        margin-bottom: 100px
+    }
+    /*Hacer Reseña*/
+    .col-md-Reseña {
+        flex: 0 0 100%;
+        position: relative;
+        width: 1130px;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .rowReseña {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        width: 1130px;
+    }
+    .form-controlReseña {
+        display: block;
+        padding: 0.4375rem 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        border: 1px solid #d2d2d2;
+        border-radius: 0;
+        box-shadow: none;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .form-control {
+        display: block;
+        width: 1000px;
+        padding: 0.4375rem 0;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .form-control,
+    .is-focused .form-control {
+        background-image: linear-gradient(to top, #5cb874 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+    }
+    .meter{
+        height:50px;
+        width:500px;
+    }
+    .Puntuacion{
+        height:50px !important;
+    }
+    .Puntuacion, is-focused .Puntuacion {
+        background-image: linear-gradient(to top, #5cb874 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
+    }
+    .insertArchivos {
+        color: #333333;
+        background-color: rgba(153, 153, 153, 0.2);
+        border-color: #333333;
+        box-shadow: 0 14px 26px -12px #4caf50, 0 4px 23px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(156 39 176 / 20%);
+        padding: 1.125rem 2.25rem;
+        font-size: 0.875rem;
+        line-height: 1.333333;
+        border-radius: 0.2rem;
+        margin-left:331px;
+        margin-top:20px;
+    }
+    .btn {
+        margin-left: 250px;
+        margin-top: 50px;
+        box-shadow: 0 2px 2px 0 #5cb874, 0 3px 1px -2px rgb(156 39 176 / 20%), 0 1px 5px 0 #5cb874 !important;
+    }
+    
+
+
+</style>
+<html class="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Reseña View </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+    <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+    <meta name="author" content="FreeHTML5.co" />
+</head>
+<body>
+
+
+    <div class="cardRes">
+        <img class="card-img-top" src="https://i.imgur.com/K7A78We.jpg" alt="Card image cap">
+        <div class="card-body little-profile text-center">
+            <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
+            <h3 class="m-b-0">Arrendatario: Rodrigo Acevedo</h3>
+            <p>Direccion del arrendatario</p> 
+            <div class="row text-center m-t-20">
+                <!-- <div class="col-lg-4 col-md-4 m-t-20">
+                    <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
+                </div>
+                <div class="col-lg-4 col-md-4 m-t-20">
+                    <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
+                </div>
+                <div class="col-lg-4 col-md-4 m-t-20">
+                    <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="reseña1 container d-flex justify-content-center mt-50 mb-100">
+        <div class="rowReseña justify-content-center">
+            <div class="col-md-Reseña">
+                <div class="cardR">
+                    <div class="card-body">
+                        <h4 class="card-title">Haz tu Reseñas:</h4>
+                        <h6 class="card-subtitle">Cual fue tu experiencia este mes?</h6>
+                    </div>
+                    <div class="comment-widgets m-b-20">
+                        
+                        
+                        <div class="fh5co-section">
+                            <div class="col-md-Reseña">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-4 col-xs-12 section-heading">
+                                            <!--<h2>Detalle</h2>-->
+                                        </div>
+                                            <div class="col-md-12">
+                                                <form action="#" name="formulario" method="post" enctype="multipart/form-data">
+
+
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <textarea name="email" id="email" cols="30" class="Puntuacion form-control" rows="10" placeholder="Puntuacion del 1 al 10"></textarea>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <textarea name="email" id="email" cols="30" class="form-control" rows="10" placeholder="Detalle Reseña"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                        <input class="insertArchivos" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
+                                                    
+
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <input type="submit" class="btn btn-primary btn-outline btn-lg btn-block" value="Submit">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
+
