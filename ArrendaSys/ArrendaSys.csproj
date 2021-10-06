@@ -161,6 +161,7 @@
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\DepartamentoApiController.cs" />
+    <Compile Include="Controllers\Api\DireccionApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\InmuebleApiController.cs" />
     <Compile Include="Controllers\Api\LocalidadApiController.cs" />
@@ -808,8 +809,8 @@
     <Folder Include="Views\ArchivoApi\" />
     <Folder Include="Views\DepartamentoApi\" />
     <Folder Include="Views\Departamento\" />
+    <Folder Include="Views\DireccionApi\" />
     <Folder Include="Views\InmuebleApi\" />
-    <Folder Include="Views\Localidad\" />
     <Folder Include="Views\PropietarioApi\" />
   </ItemGroup>
   <ItemGroup>

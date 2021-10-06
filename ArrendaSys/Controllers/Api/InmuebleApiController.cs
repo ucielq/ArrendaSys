@@ -17,6 +17,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpPost]
         public InmuebleViewModel AgregarInmueble(InmuebleViewModel inmueble)
         {
+            
             ServicioInmueble serv = new ServicioInmueble();
             return serv.AgregarInmueble(inmueble);
         }
@@ -42,7 +43,7 @@ namespace ArrendaSys.Controllers.Api
                 return 500;
             }
             
-
+        
            
         }
         [System.Web.Http.Route("Api/Inmueble/ObtenerInmueblesPropietario")]
@@ -79,8 +80,6 @@ namespace ArrendaSys.Controllers.Api
         }
 
         
-
-
 
         [System.Web.Http.Route("Api/Inmueble/EliminarInmueble")]
         [System.Web.Http.ActionName("EliminarInmueble")]

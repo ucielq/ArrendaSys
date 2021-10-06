@@ -14,10 +14,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Localidad/ObtenerLocalidad")]
         [System.Web.Http.ActionName("ObtenerLocalidad")]
         [System.Web.Http.HttpGet]
-        public List<LocalidadViewModel> ObtenerLocalidad()
+        public List<LocalidadViewModel> ObtenerLocalidad(int idDepto)
         {
             ServicioLocalidad servLoca = new ServicioLocalidad();
-            var listaLocalidad = servLoca.ObtenerLocalidad();
+            var listaLocalidad = servLoca.ObtenerLocalidad(idDepto);
             return listaLocalidad;
         }
     }
