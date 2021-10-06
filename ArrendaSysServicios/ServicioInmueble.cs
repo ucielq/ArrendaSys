@@ -58,7 +58,9 @@ namespace ArrendaSysServicios
             else
             {
                 var esteInmu = db.Inmueble.Where(x => x.idInmueble == inmueble.idInmueble).FirstOrDefault();
+                InmuebleViewModel inmu = new InmuebleViewModel();
                 if (esteInmu != null)
+                    
                 {
                     esteInmu.cantAmbientes = inmueble.cantAmbientes;
                     esteInmu.cantBanos = inmueble.cantBanos;
