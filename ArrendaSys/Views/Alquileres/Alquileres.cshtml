@@ -1,1 +1,149 @@
-﻿
+﻿<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
+<script src="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+@{
+    var usuario = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Alquileres</title>
+</head>
+
+<body>
+    <div>
+        <span>Alquileres</span>
+        <hr />
+    </div>
+
+    <div class="col-md12">
+        <div class="col-md12">
+            <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> + Agregar</button>
+            <br />
+        </div>
+
+    </div>
+
+
+    <div class="col-md-12" id="formulario" style="display:none">
+
+        <div class="col-md-2">
+            <br />
+            <span>Fecha Alta: </span>
+            
+            <input type="date" class="form-control" id="fechaAltaPublicacion" />
+
+        </div>
+        <div class="col-md-2">
+            <br />
+            <span>Fecha Baja: </span>
+            <input type="date" class="form-control" id="fechaBajaPublicacion" />
+
+        </div>
+
+
+
+
+
+         <div class="col-md-2">
+            <br />
+             <span>Inmueble: </span>
+               <select class="form-control" id="idInmule">
+              <option value="value">Inmueble</option>
+              </select>
+
+         </div>
+
+         <div class="col-md-2">
+               <br />
+               <span>Estado: </span>
+            <select class="form-control" id="idInmule">
+            <option value="value">Estados</option>
+              </select>
+
+          </div>
+
+         <div class="col-md-2">
+             <br />
+           <span>Arrendatario: </span>
+            <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el correo del arrendatario" />
+          </div>
+
+         <div class="col-md-12">
+          <br />
+              <div>
+                <button type="button" class="btn btn-success" id="btnguardar"><i class="fas fa-save"></i> Guardar</button>
+               <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+               </div>
+          </div>
+
+
+    </div>
+
+
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped" id="alquileres">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Detalle</th>
+                        <th>Fecha</th>
+                        <th style="text-align: center">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAlquileres">
+                                   
+
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+        var user = '@usuario';
+
+        $('#alquileres').DataTable({
+            responsive: true, autoWidth: false,
+            "language": {
+               "lengthMenu": "Mostrar _MENU_ notificaciones por página.",
+                "zeroRecords": "No se encontraron coincidencias.",
+                "info": "Mostrando la página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay notificaciones",
+                "infoFiltered": "(filtrado de _MAX_ notificaciones totales)",
+                'search': 'Buscar:',
+                'paginate': {
+                    'next': 'Siguiente',
+                    'previous': 'Anterior'
+
+                }
+            },
+            'ajax': { "url": "Api/Alquiler/listarAlquileres?idPropietario=" + idPropietario },
+            'columns': [
+                {
+                    'data':
+
+                }
+
+
+            ]
+
+        });
+    $("#btnvolver").click(function () {
+        $("#formulario").hide();
+    });
+    function mostrarformulario() {
+        $("#formulario").show();
+    }
+    
+
+
+
+</script>

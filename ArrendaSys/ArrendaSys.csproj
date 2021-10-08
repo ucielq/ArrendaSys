@@ -157,6 +157,7 @@
     <Compile Include="Controllers\Acceso\PermisoAttributeController.cs" />
     <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\AlquileresController.cs" />
+    <Compile Include="Controllers\Api\AlquilerApiController.cs" />
     <Compile Include="Controllers\Api\ArchivoApiController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />

@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace ArrendaSys.Controllers
 {
     [SessionUtility]
+    //Preguntar
     //[Permiso("ALQ")]
     public class AlquileresController : Controller
     {
