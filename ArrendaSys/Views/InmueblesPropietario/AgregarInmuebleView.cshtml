@@ -20,108 +20,152 @@
                             <p class="card-category">Complete los datos del inmueble.</p>
                         </div>
                         <div class="card-body">
-                                <div id="inmueble">
-                                    <div class="row" style="padding-top:6px">
-                                        <div class="col-md-2">
-                                            <label for="Dirección">Dirección</label>
-                                            <br />
-                                            <textarea class="form-control" id="direccionInmueble" name="direccionInmueble"></textarea>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="cantAmbInmueble">Cantidad Ambientes</label>
-                                            <br />
-                                            <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble"></textarea>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="cantHabInmueble">Cantidad Habitaciones</label>
-                                            <br />
-                                            <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble"></textarea>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="cantBanInmueble">Cantidad de Baños</label>
-                                            <br />
-                                            <textarea class="form-control" id="cantBanInmueble" name="cantBanInmueble"></textarea>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="cantMtInmueble">Cantidad Metros Cuadrados</label>
-                                            <br />
-                                            <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble"></textarea>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label for="cantMtInmuebleInt">Cantidad Metros Cuadrados Interior</label>
-                                            <br />
-                                            <textarea class="form-control" id="cantMtInmuebleInt" name="cantMtInmuebleInt"></textarea>
-                                        </div>
+
+                            <div id="inmueble">
+                                <div class="row" style="padding-top:6px">
+                                    <div class="col-md-2">
+                                        <label for="provincia">Provincia</label>
+                                        <br />
+                                        <label for="provincia">Mendoza</label>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="departamento">Departamento</label>
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento" onchange="ObtenerLocalidad(-1)">
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="localidad">Localidad</label>
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="localidad" id="localidad">
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" style="padding-top:6px">
+                                    <div class="col-md-2">
+                                        <label for="calle">Calle</label>
+                                        <br />
+                                        <textarea class="form-control" id="calle" name="calle"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="numero">Número</label>
+                                        <br />
+                                        <textarea class="form-control" id="numero" name="numero" style=" width:150px"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="barrio">Barrio</label>
+                                        <br />
+                                        <textarea class="form-control" id="barrio" name="barrio"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="manzana">Manzana</label>
+                                        <br />
+                                        <textarea class="form-control" id="manzana" name="manzana"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="lote">Lote</label>
+                                        <br />
+                                        <textarea class="form-control" id="lote" name="lote"></textarea>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row" style="padding-top:6px">
+
+                                    <div class="col-md-2">
+                                        <label for="cantAmbInmueble">Cantidad Ambientes</label>
+                                        <br />
+                                        <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble" style=" width:150px"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="cantHabInmueble">Cantidad Habiaciones</label>
+                                        <br />
+                                        <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble" style=" width:150px"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="cantBanInmueble">Cantidad de Baños</label>
+
+                                        <textarea class="form-control" id="cantBanInmueble" name="cantBanInmueble" style=" width:150px"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="cantMtInmueble">Cantidad Metros Cuadrados</label>
+
+                                        <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble" style=" width:150px"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label for="cantMtInmuebleInt">Cantidad Metros Cuadrados Interior</label>
+                                        <br />
+                                        <textarea class="form-control" id="cantMtInmuebleInt" name="cantMtInmuebleInt" style=" width:150px"></textarea>
                                     </div>
 
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label for="descrInmueble">Descripción Inmueble</label>
-                                            <br />
-                                            <textarea class="form-control" id="descrInmueble" name="descrInmueble" style="width:fit-content;"></textarea>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="descrInmueble">Descripción Inmueble</label>
+                                        <br />
+                                        <textarea class="form-control2" id="descrInmueble" name="descrInmueble" style="width: 803.988636px; height:53.988636px;"></textarea>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class=" row">
+                                            <div class="col">
+                                                <label> Agregar Imágenes </label>
+                                            </div>
+                                        </div>
+                                        <div class=" row">
+                                            <div class="col">
+                                                <img type="image" onclick="agregarMultiplesArchivos()" src="~/assets/img/icono.png" style="width:50px;height:37px" />
+                                            </div>
+                                        </div>
+                                        <div class=" row">
+                                            <div class="col" id="asd123">
+                                                <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                            </div>
+                                        </div>
+                                        <div class=" row">
+                                            <div class="col">
+                                                <label id="ArchivosYaCargados"></label>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <label for="mascota">¿Acepta Mascotas?</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="mascota" id="mascota">
-                                                <option value="-1">Seleccione una opción</option>
-                                                <option value="1">Sí</option>
-                                                <option value="2">No</option>
-                                            </select>
-                                        </div>
+
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="mascota">¿Acepta Mascotas?</label>
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="mascota" id="mascota">
+                                            <option value="-1">Seleccione una opción</option>
+                                            <option value="1">Sí</option>
+                                            <option value="2">No</option>
+                                        </select>
                                     </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <label for="expensa">¿Incluye Expensas?</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="expensa" id="expensa">
-                                                <option value="-1">Seleccione una opción</option>
-                                                <option value="1">Sí</option>
-                                                <option value="2">No</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="expensa">¿Incluye Expensas?</label>
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="expensa" id="expensa">
+                                            <option value="-1">Seleccione una opción</option>
+                                            <option value="1">Sí</option>
+                                            <option value="2">No</option>
+                                        </select>
                                     </div>
-                                    <br />
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <label for="cochera">¿Contiene cochera?</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="cochera" id="cochera">
-                                                <option value="-1">Seleccione una opción</option>
-                                                <option value="1">Sí</option>
-                                                <option value="2">No</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class=" row">
-                                                <div class="col">
-                                                    <label> Agregar Archivo </label>
-                                                </div>
-                                            </div>
-                                            <div class=" row">
-                                                <div class="col">
-                                                    <img type="image" onclick="agregarMultiplesArchivos()" src="~/assets/img/icono.png" height="50" width="50" />
-                                                </div>
-                                            </div>
-                                            <div class=" row">
-                                                <div class="col" id="asd123">
-                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
-                                                </div>
-                                            </div>
-                                            <div class=" row">
-                                                <div class="col">
-                                                    <label id="ArchivosYaCargados"></label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <label for="cochera">¿Contiene cochera?</label>
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="cochera" id="cochera">
+                                            <option value="-1">Seleccione una opción</option>
+                                            <option value="1">Sí</option>
+                                            <option value="2">No</option>
+                                        </select>
                                     </div>
-                                    <br />
-                                </div>                                                             
-                                <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
-                      
+                                </div>
+                                <br />
+                            </div>
+                            <button type="button" class="btn btn-info pull-center" onclick="GuardarInmueble()">Guardar</button>
+
                         </div>
                     </div>
                 </div>
@@ -131,7 +175,7 @@
 
     </div>
     <div hidden>
-        <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple/>
+        <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple />
     </div>
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
@@ -151,7 +195,7 @@
         });
         CrearOEditar();
         ObtenerDepto(-1);
-        ObtenerLocalidad(-1);
+        
     });
     var crear = false;
     var idInmueble;
@@ -180,6 +224,13 @@
                 $("#cantMtInmueble").text(inmueble.mtsCuadrados);
                 $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
                 $("#descrInmueble").text(inmueble.descripcionInmueble);
+                $("#lote").text(inmueble.direccion.idLote);
+                $("#manzana").text(inmueble.direccion.idManzana);
+                $("#barrio").text(inmueble.direccion.nombreBarrio);
+                $("#calle").text(inmueble.direccion.nombreCalle);
+                $("#numero").text(inmueble.direccion.numeroCalle);
+                //$("#departamento").text(ObtenerDepto(inmueble.direccion.localidad.idDepartamento));
+                //$("#localidad").text(ObtenerLocalidad());
                 if (inmueble.permiteMascota == true) {
                     $("#mascota").val(1);
                     $("#mascota option[value='1'").attr("selected", true).change();
@@ -205,6 +256,7 @@
             }
         });
     }
+
     function GuardarInmueble() {
         var inmueble = new Object();
         inmueble.cantAmbientes = $("#cantAmbInmueble").val();
@@ -215,9 +267,29 @@
         inmueble.descripcionInmueble = $("#descrInmueble").val();
         inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
         inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
-        inmueble.cochera = $("#cochera").val()==1 ? true:false;
+        inmueble.cochera = $("#cochera").val() == 1 ? true : false;
+
         inmueble.tipoArrendador = 2;
         inmueble.idArrendador = idPropietario;
+
+        var direccion = new Object();
+        var localidad = new Object();
+        var departamento = new Object();
+
+        localidad.departamento = departamento;
+        direccion.localidad = localidad;
+        inmueble.direccion = direccion;
+
+        departamento.idDepartamento = $("#departamento").val();
+        //departamento.nombreDepartamento= 
+        localidad.idLocalidad = $("#localidad").val();
+        direccion.nombreCalle = $("#calle").val();
+        direccion.numeroCalle = $("#numero").val();
+        direccion.nombreBarrio = $("#barrio").val();
+        direccion.idlote = $("#lote").val();
+        direccion.idManzana = $("#manzana").val();
+       
+
         if (crear) {
             //No le agrego el idInmueble
             $.ajax({
@@ -262,7 +334,7 @@
                 }
 
                 $.each(respuesta, function (index, result) {
-                    debugger;
+                    
                     if (departamento == result.idDepartamento) {
                         $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
 
@@ -276,9 +348,11 @@
         });
     }
     function ObtenerLocalidad(localidad) {
+        var idDepto = $("#departamento").val();
+        $("#localidad").empty();
         $.ajax({
             type: 'Get',
-            url: '/Api/Localidad/ObtenerLocalidad',
+            url: '/Api/Localidad/ObtenerLocalidad?idDepto=' + idDepto,
             success: function (respuesta) {
                 listaLocalidad = respuesta;
                 if (localidad == -1) {
@@ -288,7 +362,7 @@
                     $('#localidad').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
                 $.each(respuesta, function (index, result) {
-                    debugger;
+                    
                     if (localidad == result.idLocalidad) {
                         $('#localidad').append($('<option selected>').val(result.idLocalidad).text(result.nombreLocalidad))
                     }
@@ -299,6 +373,44 @@
             }
         });
     }
+    (function ($){
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function (){
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setselectionRange(this.oldSelectionstart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    } (jQuery));
+
+    $("#cantMtInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantAmbInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantBanInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantMtInmuebleInt").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#numero").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantHabInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    
+
+    
 
 
 </script>

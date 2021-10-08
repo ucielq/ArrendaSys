@@ -8,8 +8,10 @@ namespace ArrendaSysServicios.Modelos
 {
     public class DepartamentoViewModel
     {
-        public int idDepartamento { get; set; }
+        public int? idDepartamento { get; set; }
         public string nombreDepartamento { get; set; }
+        //public LocalidadViewModel localidad { get; set; }
+
         
         
     }
