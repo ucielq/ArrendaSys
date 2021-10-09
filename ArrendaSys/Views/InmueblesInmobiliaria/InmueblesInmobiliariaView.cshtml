@@ -44,7 +44,6 @@
     var idInmobiliaria = Session["id"];
 }
 <script>
-
     var idCuenta = "@idCuenta";
     var idInmobiliaria = parseInt("@idInmobiliaria");
     (function () {
@@ -58,7 +57,6 @@
                 item = item + "<div class='row'>";
                 $.each(result,function (index,inmueble){
                     cont++;
-
                     item = item + "<div class='col-md-4'>";
                     item = item + "<div class='cardV3'>";
                     item = item + "<div id='carouselexamplecontrols"+cont.toString()+"' class='carousel slide' data-ride='carousel'>";

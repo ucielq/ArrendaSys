@@ -157,11 +157,13 @@
     <Compile Include="Controllers\Acceso\PermisoAttributeController.cs" />
     <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\AlquileresController.cs" />
+    <Compile Include="Controllers\Api\AlquilerApiController.cs" />
     <Compile Include="Controllers\Api\ArchivoApiController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
     <Compile Include="Controllers\Api\ConfiguracionesApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\DepartamentoApiController.cs" />
+    <Compile Include="Controllers\Api\DireccionApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\InmuebleApiController.cs" />
     <Compile Include="Controllers\Api\LocalidadApiController.cs" />
@@ -172,6 +174,7 @@
     <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
+    <Compile Include="Controllers\HacerReseñadePropietarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InmueblesInmobiliariaController.cs" />
     <Compile Include="Controllers\InmueblesPropietarioController.cs" />
@@ -804,6 +807,7 @@
     <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
     <Content Include="Views\InmueblesPropietario\AgregarInmuebleView.cshtml" />
     <Content Include="Views\InmueblesInmobiliaria\AgregarInmueble.cshtml" />
+    <Content Include="Views\HacerReseñadePropietario\HacerReseñadePropietario.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -813,8 +817,8 @@
     <Folder Include="Views\ArchivoApi\" />
     <Folder Include="Views\DepartamentoApi\" />
     <Folder Include="Views\Departamento\" />
+    <Folder Include="Views\DireccionApi\" />
     <Folder Include="Views\InmuebleApi\" />
-    <Folder Include="Views\Localidad\" />
     <Folder Include="Views\PropietarioApi\" />
   </ItemGroup>
   <ItemGroup>

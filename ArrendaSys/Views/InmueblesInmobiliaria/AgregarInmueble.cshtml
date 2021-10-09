@@ -32,7 +32,7 @@
                                         </div>
                                         <div class="col-md-2">
                                             <label for="departamento">Departamento</label>
-                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento">                                
+                                            <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento" onchange="ObtenerLocalidad(-1)">                                
                                             </select>
                                         </div>
                                         <div class="col-md-2">
@@ -199,7 +199,7 @@
         });
         CrearOEditar();
         ObtenerDepto(-1);
-        ObtenerLocalidad(-1);
+        
     });
 
     var crear = false;
@@ -229,6 +229,11 @@
                     $("#cantMtInmueble").text(inmueble.mtsCuadrados);
                     $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
                     $("#descrInmueble").text(inmueble.descripcionInmueble);
+                    $("#lote").text(inmueble.direccion.idLote);
+                    $("#manzana").text(inmueble.direccion.idManzana);
+                    $("#barrio").text(inmueble.direccion.nombreBarrio);
+                    $("#calle").text(inmueble.direccion.nombreCalle);
+                    $("#numero").text(inmueble.direccion.numeroCalle);
                     if (inmueble.permiteMascota == true) {
                         $("#mascota").val(1);
                         $("#mascota option[value='1'").attr("selected", true).change();
@@ -264,8 +269,26 @@
             inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
             inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
             inmueble.cochera = $("#cochera").val() == 1 ? true : false;
-            inmueble.tipoArrendador = 2;
+            inmueble.tipoArrendador = 4;
             inmueble.idArrendador = idInmobiliaria;
+
+            var direccion = new Object();
+            var localidad = new Object();
+            var departamento = new Object();
+
+            localidad.departamento = departamento;
+            direccion.localidad = localidad;
+            inmueble.direccion = direccion;
+
+            departamento.idDepartamento = $("#departamento").val();
+            //departamento.nombreDepartamento= 
+            localidad.idLocalidad = $("#localidad").val();
+            direccion.nombreCalle = $("#calle").val();
+            direccion.numeroCalle = $("#numero").val();
+            direccion.nombreBarrio = $("#barrio").val();
+            direccion.idlote = $("#lote").val();
+            direccion.idManzana = $("#manzana").val();
+
             if (crear) {
                 //No le agrego el idInmueble
                 $.ajax({
@@ -323,6 +346,8 @@
         });
     }
     function ObtenerLocalidad(localidad) {
+        var idDepto = $("#departamento").val();
+        $("#localidad").empty();
         $.ajax({
             type: 'Get',
             url: '/Api/Localidad/ObtenerLocalidad',
@@ -346,6 +371,42 @@
             }
         });
     }
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setselectionRange(this.oldSelectionstart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+
+    $("#cantMtInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantAmbInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantBanInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantMtInmuebleInt").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#numero").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+    $("#cantHabInmueble").inputFilter(function (value) {
+        return /^-?\d*[.,]?\d*$/.test(value);
+    });
+
 
 
 
