@@ -31,13 +31,13 @@ namespace ArrendaSysServicios
                                        select new URLViewModel
                                        {
                                            idUrl = m.idURL,
-                                           codigo= m.codigo,
+                                           codigo = m.codigo,
                                            codigoRetorno = 200,
                                            descripcion = m.descripcion,
                                            nombreUrl = m.nombre,
                                            linkUrl = m.linkURL,
                                            posicion = m.posicion,
-                                           iconClass=m.iconClass
+                                           iconClass = m.iconClass
                                        }).Where((x) => x.idUrl > 0).Distinct().ToList();
 
                         foreach (var item2 in menuRol)
@@ -70,31 +70,66 @@ namespace ArrendaSysServicios
             List<RolViewModel> listaRoles = new List<RolViewModel>();
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                
+
                 var consultarUsuario = db.Cuenta.Find(idCuenta);
                 if (consultarUsuario != null)
                 {
                     var rol = (from r in db.Rol
-                                join nr in db.Cuenta on r.idRol equals nr.idRol
-                                where nr.idCuenta == idCuenta 
-                                select new RolViewModel
-                                {
-                                    codigoRetorno = 200,
-                                    idRol = r.idRol,
-                                    nombreRol = r.nombreRol,
+                               join nr in db.Cuenta on r.idRol equals nr.idRol
+                               where nr.idCuenta == idCuenta
+                               select new RolViewModel
+                               {
+                                   codigoRetorno = 200,
+                                   idRol = r.idRol,
+                                   nombreRol = r.nombreRol,
 
-                                }).ToList();
+                               }).ToList();
                     foreach (var item in rol)
                     {
                         listaRoles.Add(item);
                     }
                 }
-                
+
 
             }
             return listaRoles;
             //var user = nombreUsuario.Remove(0, 10);
 
+        }
+        public object ObtenerRoles(bool activo)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                
+                if (activo)
+                {
+                    var lista = (from r in db.Rol
+                                 where r.fechaBajaRol == null
+                                 select new RolViewModel
+                                 {
+                                     nombreRol = r.nombreRol,
+                                     idRol = r.idRol,
+                                     activo=true
+                                 }).ToList();
+                    object json = new { data = lista };
+                    return json;
+                }
+                else
+                {
+                    var lista = (from r in db.Rol
+                                 where r.fechaBajaRol != null
+                                 select new RolViewModel
+                                 {
+                                     nombreRol = r.nombreRol,
+                                     idRol = r.idRol,
+                                     activo = false
+
+                                 }).ToList();
+                    object json = new { data = lista };
+                    return json;
+                }
+                
+            }
         }
     }
 }

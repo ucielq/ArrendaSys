@@ -159,6 +159,7 @@
     <Compile Include="Controllers\AlquileresController.cs" />
     <Compile Include="Controllers\Api\ArchivoApiController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
+    <Compile Include="Controllers\Api\ConfiguracionesApiController.cs" />
     <Compile Include="Controllers\Api\CuentaApiController.cs" />
     <Compile Include="Controllers\Api\DepartamentoApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\PublicacionApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
+    <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -756,6 +758,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.dataTables.colResize.css" />
+    <Content Include="Scripts\jquery.dataTables.colResize.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -800,6 +804,7 @@
     <Content Include="Views\InmueblesInmobiliaria\InmueblesInmobiliariaView.cshtml" />
     <Content Include="Views\InmueblesPropietario\AgregarInmuebleView.cshtml" />
     <Content Include="Views\InmueblesInmobiliaria\AgregarInmueble.cshtml" />
+    <Content Include="Views\Configuraciones\AdministrarRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

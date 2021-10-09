@@ -5114,10 +5114,10 @@ tbody.collapse.show {
 }
 
 .page-item.active .page-link {
-  z-index: 1;
-  color: #ffffff;
-  background-color: #2196f3;
-  border-color: #2196f3;
+    z-index: 1;
+    color: #ffffff;
+    background-color: #5cb874;
+    border-color: #5cb874;
 }
 
 .page-item.disabled .page-link {

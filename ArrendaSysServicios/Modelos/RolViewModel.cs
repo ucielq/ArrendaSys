@@ -15,5 +15,6 @@ namespace ArrendaSysServicios.Modelos
         public bool? tienePermisoEliminacion { get; set; }
         public bool? tienePermisoEdicion { get; set; }
         public int codigoRetorno { get; set; }
+        public bool activo { get; set; }
     }
 }
