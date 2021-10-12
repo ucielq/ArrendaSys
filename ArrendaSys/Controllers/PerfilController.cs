@@ -10,7 +10,6 @@ namespace ArrendaSys.Controllers
     [SessionUtility]
     public class PerfilController : Controller
     {      
-        [Permiso("ADMPER")]
        
         public ActionResult AdministrarPerfil()
         {
