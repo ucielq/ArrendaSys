@@ -15,15 +15,40 @@ namespace ArrendaSys.Controllers.Api
     public class AlquilerApiController : ApiController
     {
 
-        [System.Web.Http.Route("Api/Alquiler/listarAlquileres")]
-        [System.Web.Http.ActionName("listarAlquileres")]
-        [System.Web.Http.HttpGet]
-        public List<AlquileresViewModel> listarAlquileres(int idPropietario)
+        [System.Web.Http.Route("Api/Alquiler/CrearAlquiler")]
+        [System.Web.Http.ActionName("CrearAlquiler")]
+        [System.Web.Http.HttpPost]
+       
+
+        public int Alquiler(AlquileresViewModel alquiler)
         {
-            var servicio = new ServicioAlquiler();
-            return servicio.ListarAlquileresPropietario(idPropietario);
+            ServicioAlquiler serv = new ServicioAlquiler();
+            return serv.AgregarAlquiler(alquiler);
+        }
+
+
+        [System.Web.Http.Route("Api/Alquiler/ListarAlquileres")]
+        [System.Web.Http.ActionName("ListarAlquileres")]
+        [System.Web.Http.HttpGet]
+        public object ListarAlquileres()
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            var lista = servicio.ListarAlquileres();
+            return lista;
+        }
+
+        [System.Web.Http.Route("Api/Alquiler/EliminarAlquiler")]
+        [System.Web.Http.ActionName("EliminarAlquiler")]
+        [System.Web.Http.HttpPut]
+        public void EliminarAlquiler(int idAlquiler)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            servicio.EliminarAlquiler(idAlquiler);
+
 
         }
+
+
 
     }
 }

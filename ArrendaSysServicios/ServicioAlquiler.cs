@@ -16,65 +16,44 @@ namespace ArrendaSysServicios
     {
         public ArrendasysEntities db = new ArrendasysEntities();
         // ----------------------METODOS PROPIETARIO ------------
-        public List<AlquileresViewModel> ListarAlquileresPropietario(int idPropietario)
+        public object ListarAlquileres()
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 var alquileres = (from i in db.Alquiler
-                                  where i.idAlquiler == idPropietario
                                   select new AlquileresViewModel
                                   {
                                       idAlquiler = i.idAlquiler,
                                       fechaAltaAlquiler = i.fechaAltaAlquiler,
                                       fechaBajaAlquiler = i.fechaBajaAlquiler,
                                       idArrendatario = i.idArrendatario,
-                                      idInmueble = i.idInmueble,
+                                      idInmueble = i.idInmueble
                                   }).ToList();
-
-                return alquileres;
+                object json = new { data = alquileres };
+                return json;
             }
 
         }
 
-        public AlquileresViewModel AgregarAlquiler(AlquileresViewModel alquiler)
+        public int AgregarAlquiler(AlquileresViewModel alquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                if (alquiler.idInmueble == null)
-                {
-                    Alquiler alquiler1 = new Alquiler
-                    {
-                        fechaAltaAlquiler = alquiler.fechaAltaAlquiler,
-                        fechaBajaAlquiler = alquiler.fechaBajaAlquiler,
-                        idArrendatario = alquiler.idArrendatario,
-                        idInmueble = alquiler.idInmueble,
-                    };
+
+                Alquiler alquiler1 = new Alquiler();
+
+
+                        alquiler1.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
+                        alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
+                        alquiler1.idArrendatario = alquiler.idArrendatario;
+                        alquiler1.idInmueble = alquiler.idInmueble;
+                    
                     db.Alquiler.Add(alquiler1);
 
                     db.SaveChanges();
-                    var ultimo = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
-                    alquiler.idAlquiler = ultimo.idAlquiler;
-                    return alquiler;
-                }
-                else
-                {
-                    var esteAlquiler = db.Alquiler.Where(x => x.idAlquiler == alquiler.idAlquiler).FirstOrDefault();
-                    AlquileresViewModel alquiler2 = new AlquileresViewModel();
-                    if (esteAlquiler != null)
-                    {
-                        esteAlquiler.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
-                        esteAlquiler.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
-                        esteAlquiler.idArrendatario = alquiler.idArrendatario;
-                        esteAlquiler.idInmueble = alquiler.idInmueble;
-                        db.SaveChanges();
-                        alquiler2.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
-                        alquiler2.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
-                        alquiler2.idArrendatario = alquiler.idArrendatario;
-                        alquiler2.idInmueble = alquiler.idInmueble;
-                    }
-
-                    return alquiler2;
-                }
+                   
+                    return 1;
+             
             }
         }
 

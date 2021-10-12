@@ -12,7 +12,7 @@ namespace ArrendaSysModelos
     using System;
     using System.Collections.Generic;
     
-    public partial class Alquiler
+    public class Alquiler
     {
         public int idAlquiler { get; set; }
         public Nullable<System.DateTime> fechaAltaAlquiler { get; set; }

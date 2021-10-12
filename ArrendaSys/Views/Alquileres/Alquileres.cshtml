@@ -3,13 +3,11 @@
 <script src="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
-
 @{
     var usuario = Session["usuarioLogeado"];
     var tipoCuenta = Session["tipoCuenta"];
     var idCuenta = Session["idCuenta"];
 }
-
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Alquileres</title>
@@ -30,120 +28,229 @@
     </div>
 
 
+
+
     <div class="col-md-12" id="formulario" style="display:none">
+        
 
-        <div class="col-md-2">
-            <br />
-            <span>Fecha Alta: </span>
-            
-            <input type="date" class="form-control" id="fechaAltaPublicacion" />
+        <div class="row" style="padding-top:6px">
+
+
+
+            <div class="col-md-2">
+                <br />
+                <span>Fecha Alta: </span>
+                <br />
+                <input type="date" class="form-control" id="fechaAltaAlquiler" />
+
+            </div>
+
+            <div class="col-md-2">
+                <br />
+                <span>Fecha Baja: </span>
+                <br />
+                <input type="date" class="form-control" id="fechaBajaAlquiler" />
+
+            </div>
+
+            <div class="col-md-2">
+                <br />
+                <span>Arrendatario: </span>
+                <br />
+                <input type="number" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
+
+            </div>
+
+
+            <div class="col-md-2">
+                <br />
+                <span>Inmueble: </span>
+                <br />
+                <input type="number" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
+
+            </div>
+
 
         </div>
-        <div class="col-md-2">
+
+
+        <div class="col-md-12">
             <br />
-            <span>Fecha Baja: </span>
-            <input type="date" class="form-control" id="fechaBajaPublicacion" />
+            <div>
+                <button type="button" class="btn btn-success"  onclick="GuardarAlquiler()"><i class="fas fa-save"></i> Guardar</button>
+                <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                
+            </div>
+
+
 
         </div>
-
-
-
-
-
-         <div class="col-md-2">
-            <br />
-             <span>Inmueble: </span>
-               <select class="form-control" id="idInmule">
-              <option value="value">Inmueble</option>
-              </select>
-
-         </div>
-
-         <div class="col-md-2">
-               <br />
-               <span>Estado: </span>
-            <select class="form-control" id="idInmule">
-            <option value="value">Estados</option>
-              </select>
-
-          </div>
-
-         <div class="col-md-2">
-             <br />
-           <span>Arrendatario: </span>
-            <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el correo del arrendatario" />
-          </div>
-
-         <div class="col-md-12">
-          <br />
-              <div>
-                <button type="button" class="btn btn-success" id="btnguardar"><i class="fas fa-save"></i> Guardar</button>
-               <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
-               </div>
-          </div>
 
 
     </div>
+
+
+
+
 
 
 
     <div class="card">
         <div class="card-body">
-            <table class="table table-striped" id="alquileres">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Detalle</th>
-                        <th>Fecha</th>
-                        <th style="text-align: center">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody id="tablaAlquileres">
-                                   
-
-                   
-                </tbody>
-            </table>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <table id="alquilereslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Fecha Alta</th>
+                                    <th>Fecha Baja</th>
+                                    <th>Arrendatario</th>
+                                    <th>Inmueble</th>
+                                    <th>Editar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 <script>
         var user = '@usuario';
-
-        $('#alquileres').DataTable({
-            responsive: true, autoWidth: false,
-            "language": {
-               "lengthMenu": "Mostrar _MENU_ notificaciones por página.",
-                "zeroRecords": "No se encontraron coincidencias.",
-                "info": "Mostrando la página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay notificaciones",
-                "infoFiltered": "(filtrado de _MAX_ notificaciones totales)",
-                'search': 'Buscar:',
-                'paginate': {
-                    'next': 'Siguiente',
-                    'previous': 'Anterior'
-
-                }
+    var table;
+    (function () {
+        CrearTabla();
+    })();
+    function CrearTabla() {
+       
+        var idiomaEspanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla.",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
             },
-            'ajax': { "url": "Api/Alquiler/listarAlquileres?idPropietario=" + idPropietario },
-            'columns': [
-                {
-                    'data':
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
+            }
+        }
 
+        table = $('#alquilereslista').DataTable({
+            "colResize": {
+                isEnabled: true,
+                hoverClass: 'dt-colresizable-hover',
+                hasBoundCheck: true,
+                minBoundClass: 'dt-colresizable-bound-min',
+                maxBoundClass: 'dt-colresizable-bound-max',
+                isResizable: function (column) { return true; },
+                onResize: function (column) { },
+                onResizeEnd: function (column, columns) { },
+                getMinWidthOf: function ($thNode) { }
+            },
+            "responsive": true,
+            "order": [[1, "asc"]],
+            "ajax": "/Api/Alquiler/ListarAlquileres",
+            "lengthMenu": [5, 10, 25, 50],
+            "columns": [
+                { data: "idAlquiler", "className": "text-left", "visible": false },
+                { data: "fechaAltaAlquiler", "className": "text-left" },
+                { data: "fechaBajaAlquiler", "className": "text-left" },
+                { data: "idArrendatario", "className": "text-left" },
+                { data: "idInmueble", "className": "text-left" },
+               {
+                    orderable: false,
+                    "render": function () {
+                       
+                            var botones = "<button class='fa fa-edit' onclick='EditarAlquiler(this)'></button>";
+
+                            return botones
+                        
+                    },
+                    "width": 35,
+                },
+                {
+                    orderable: false,
+                    "render": function () {
+
+                        var botones = "<button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>";
+
+                        return botones
+
+                    },
+                    "width": 35,
                 }
 
-
-            ]
-
+            ],
+            "language": idiomaEspanol
         });
+
+
+
+    }
+
+    /*
+    function EliminarAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Alquiler/EliminarAlquiler?idAlquiler=' + id.idAlquiler,
+            success: function (result) {
+                location.href = '/Alquileres/Alquileres';
+            }
+        });
+
+
+
+    }
+    */
+
     $("#btnvolver").click(function () {
         $("#formulario").hide();
     });
     function mostrarformulario() {
         $("#formulario").show();
     }
-    
 
 
+
+    function GuardarAlquiler() {
+        var alquiler = new Object();
+        alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
+        alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
+        alquiler.idArrendatario = $("#idArrendatario").val();
+        alquiler.idInmueble = $("#idInmueble").val();
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Alquiler/CrearAlquiler',
+            data: alquiler,
+            success: function (result) {
+                window.location.href = "/Alquileres/Alquileres";
+            }
+        });
+
+    }
 
 </script>
