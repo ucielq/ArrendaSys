@@ -26,7 +26,6 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/perfect-scrollbar.jquery.min.js"></script>
     <link href="~/material/css/material-dashboard.css" rel="stylesheet" />
-
     <script src="~/material/js/core/bootstrap-material-design.min.js"></script>
     <script src="~/material/js/material-dashboard.js"></script>
 
@@ -48,35 +47,44 @@
                 
             </ul>
         </nav>
-        <!-- Page Content  -->
+        <!-- Topbar  -->
         <div id="content" style="padding:0px">
             <nav class="navbar navbar-expand-lg sticky-top navbar-light" style="background-color: #5cb874">
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-1">
+                        <div class="col-md-4">
                             <div class="container-fluid">
-                                <button type="button" id="sidebarCollapse" class="btn" style="background-color: #5cb874; border-color: #5cb874; ">
+                                <button type="button" id="sidebarCollapse" class="btn" style="background-color: #5cb874; border-color: #ffffff; ">
                                     <i class="fas fa-align-left"></i>
                                 </button>
 
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <input type="text" class="redondeado fa-align-left" placeholder="Buscar inmueble" style="width:300px" />
+
+
+                        <div class="col-md-2">
+                            <input class="form-control" type="search" placeholder="Buscar Inmueble">
                         </div>
-                        <div class="col-md-7">
-                            <div class="dropdown float-right">
-                                <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
-                                    Perfil
-                                </button>
-                                <ul class="dropdown-menu float-left" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="#" onclick="Perfil()">Mi perfil</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
-                                </ul>
+                        <div class="col-md-1">
+                            <button type="button" class="btn btn-success" style="background-color:#5cb874">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+
+
+                            <div class="col-md-4">
+                                <div class="dropdown float-right">
+                                    <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
+                                        Mi perfil
+                                    </button>
+                                    <ul class="dropdown-menu float-left" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </nav>
             <div class="body-content">
                 @RenderBody()
