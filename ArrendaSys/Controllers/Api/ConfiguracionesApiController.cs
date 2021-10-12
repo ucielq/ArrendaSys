@@ -22,5 +22,26 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.ObtenerRoles(activo);
             return lista;
         }
+        [System.Web.Http.Route("Api/Configuraciones/ObtenerListaMenu")]
+        [System.Web.Http.ActionName("ObtenerListaMenu")]
+        [System.Web.Http.HttpGet]
+        public object ObtenerListaMenu()
+        {
+            ServicioRol servicio = new ServicioRol();
+            var lista = servicio.ObtenerListaMenu();
+            return lista;
+        }
+
+        [System.Web.Http.Route("Api/Configuraciones/ConsultarRol")]
+        [System.Web.Http.ActionName("ConsultarRol")]
+        [System.Web.Http.HttpGet]
+        public RolViewModel ConsultarRol(int idRol)
+        {
+            ServicioRol servicio = new ServicioRol();
+
+            RolViewModel rol = servicio.ConsultarRol(idRol);
+
+            return rol;
+        }
     }
 }

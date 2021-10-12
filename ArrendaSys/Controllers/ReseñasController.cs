@@ -8,6 +8,7 @@ using System.Web.Mvc;
 namespace ArrendaSys.Controllers
 {
     [SessionUtility]
+    [Permiso("RES")]
     public class ReseñasController : Controller
     {
         public ActionResult Reseñas()

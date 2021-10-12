@@ -23,6 +23,7 @@
                                     <table id="tablaRol" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
                                         <thead>
                                             <tr>
+                                                <th>id</th>
                                                 <th>Nombre Rol</th>
                                                 <th></th>
                                             </tr>
@@ -86,21 +87,22 @@
                 getMinWidthOf: function ($thNode) { }
             },
             "responsive":true,
-            "order": [[0, "asc"]],
+            "order": [[1, "asc"]],
             "ajax": "/Api/Configuraciones/ObtenerRoles?activo=" + true,
             "lengthMenu": [5, 10, 25, 50],
             "columns": [
+                { data: "idRol", "className": "text-left", "visible": false },
                 { data: "nombreRol", "className": "text-left" },
                 {
                     orderable: false,
                     data: "nombreRol",
                     "render": function (data) {
-                        if (data!="") {
-                            var botones = "<button class='fa fa-edit' onclick='AgregarPermiso()'></button>";
+                        if (data != "") {
+                            var botones = "<button class='fa fa-edit' onclick='EditarPermiso(this)'></button>";
 
                             return botones
                         } else {
-                            var recuperar = "<button class='fa fa-edit' onclick='AgregarPermiso()'></button>";
+                            var recuperar = "<button class='fa fa-edit' onclick='EditarPermiso(this)'></button>";
                             return recuperar
                         }
                     },
@@ -110,5 +112,10 @@
             ],
             "language": idiomaEspanol
         });
+    }
+    function EditarPermiso(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idRol);
+        window.location.href = '/Configuraciones/AdministrarPermisosRol?idRol=' + id.idRol;
     }
 </script>

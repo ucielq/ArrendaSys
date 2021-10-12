@@ -10,6 +10,43 @@ namespace ArrendaSysServicios
 {
     public class ServicioRol
     {
+        public int ModificarRol(RolViewModel rol)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var consultaunRol = db.Rol.Where(x => x.idRol == rol.idRol).FirstOrDefault();
+                var list = db.PermisoRol.Where(x => x.idRol == rol.idRol).ToList();
+
+                if (consultaunRol != null)
+                {
+                    //Rol
+                    consultaunRol.nombreRol = rol.nombreRol;
+
+                    foreach (var consultaAccesoRol in list)
+                    {
+                        //Acceso Rol
+                        db.PermisoRol.Remove(consultaAccesoRol);
+                    }
+                    foreach (var lisMenu in rol.menu)
+                    {
+                        PermisoRol gar = new PermisoRol
+                        {
+                            idRol = rol.idRol,
+                            lecturaRol = lisMenu.lectura,
+                            edicionRol = lisMenu.edicion,
+                            eliminacionRol = lisMenu.eliminacion,
+                            idURL = lisMenu.idUrl,
+                        };
+                        db.PermisoRol.Add(gar);
+                    }
+
+                }
+
+                db.SaveChanges();
+            }
+            return 200;
+
+        }
         public List<URLViewModel> ObtenerMenu(string emailCuenta)
         {
             ServicioCuenta serUsuario = new ServicioCuenta();
@@ -95,6 +132,52 @@ namespace ArrendaSysServicios
             return listaRoles;
             //var user = nombreUsuario.Remove(0, 10);
 
+        }
+        public List<URLViewModel> ObtenerListaMenu()
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<URLViewModel> listaMenu = new List<URLViewModel>();
+                listaMenu = (from m in db.URL
+                             select new URLViewModel
+                             {
+                                 idUrl = m.idURL,
+                                 nombreUrl = m.nombre,
+                             }).ToList();
+                return listaMenu;
+            }
+        }
+        public RolViewModel ConsultarRol(int idRol)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                RolViewModel rol;
+                List<URLViewModel> listAcceso = new List<URLViewModel>();
+                rol = (from r in db.Rol where r.idRol == idRol
+                       select new RolViewModel
+                       {
+                           idRol = r.idRol,
+                           nombreRol = r.nombreRol,
+                       }).FirstOrDefault();
+
+
+                rol.menu = new List<URLViewModel>();
+                var list = db.PermisoRol.Where(x => x.idRol == rol.idRol).ToList();
+                foreach (var i in list)
+                {
+                    URLViewModel menu = new URLViewModel
+                    {
+                         idPermisoRol= i.idPermisoRol,
+                        idUrl = i.idURL,
+                        lectura = i.lecturaRol,
+                        edicion = i.edicionRol,
+                        eliminacion = i.eliminacionRol,
+                    };
+                    rol.menu.Add(menu);
+                }
+
+                return rol;
+            }
         }
         public object ObtenerRoles(bool activo)
         {

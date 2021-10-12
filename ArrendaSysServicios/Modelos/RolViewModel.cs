@@ -16,5 +16,6 @@ namespace ArrendaSysServicios.Modelos
         public bool? tienePermisoEdicion { get; set; }
         public int codigoRetorno { get; set; }
         public bool activo { get; set; }
+        public List<URLViewModel> menu { get; set; }
     }
 }

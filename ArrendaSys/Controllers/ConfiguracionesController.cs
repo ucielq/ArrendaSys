@@ -16,5 +16,10 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+
+        public ActionResult AdministrarPermisosRol()
+        {
+            return View();
+        }
     }
 }

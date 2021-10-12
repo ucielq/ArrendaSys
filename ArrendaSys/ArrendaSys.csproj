@@ -809,6 +809,8 @@
     <Content Include="Views\InmueblesInmobiliaria\AgregarInmueble.cshtml" />
     <Content Include="Views\HacerReseñadePropietario\HacerReseñadePropietario.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarRoles.cshtml" />
+    <Content Include="Views\Configuraciones\AdministrarPermisosRol.cshtml" />
+    <Content Include="Views\Login\ModuloDenegado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,455 @@
+﻿<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b>Administrar Rol</b></h4>
+                        <p class="card-category">Complete los datos.</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div id="alertaRol"></div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="bmd-label-floating">Nombre Rol</label>
+                                    <input type="text" class="form-control ObtenerRol" id="nombreRol" maxlength="50">
+                                </div>
+
+                            </div>
+                            <div id="permisoMenu"></div>
+                            <div class="row">
+                                <div class="centrar">
+                                    <button type="button" class="btn botonGuardar" style="background-color:#0080FF" onclick="AgregarMenu()">Agregar Menu </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="centrar">
+                                    <br />
+                                    <br />
+                                    <input type="button" class="btn btn-info pull-center" onclick="volver()" value="Volver">
+                                    <button type="button" class="btn botonGuardar" style="background-color:#5cb85c; margin-right:10px;" onclick="GuardarRol()">Guardar </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/select2.min.js"></script>
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<style>
+
+
+    .centrar {
+        margin: 0 auto;
+    }
+</style>
+<script>
+    var idRol = parseInt(GetUrlVars()["idRol"]);
+    var cantidad = 0;
+    var listaMenu = [];
+    var listaDeMenu = [];
+    var idAccesoRol;
+    (function () {
+
+        
+        CrearOEditar();
+        ObtenerMenus();
+        convertirSelect2();
+    })();
+    function convertirSelect2() {
+
+        $('.selector').select2({
+            allowClear: false,
+            width: '90%',
+        });
+    }
+    function AgregarNuevoMenu(menu, Tlectura, Tedicion, Teliminacion) {
+        //Armo la estructura de la fila
+        var AccesoMenu = "";
+        AccesoMenu += '<div class="row">' +
+            '<div class="col-md-2">' +
+            '<div class="form-group">' +
+            '<label for="descripcionMenu">Menu</label>' +
+            '<select class="form-control selector" id="nuevoMenu' + cantidad + '"></select>' +
+            '</div>' +
+            '</div>';
+
+
+        if (Tlectura == true) {
+
+            AccesoMenu += '<div class="col-md-2">' +
+                '</br>' +
+                '<div class="form-group">' +
+                '<label class="form-check-label" for="Tlectura' + cantidad + '">¿Tiene permiso de Lectura?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>' +
+                '<input class="form-check-input" type="checkbox" id="Tlectura' + cantidad + '" checked/>' +
+                '</div>' +
+                '</div>';
+
+        }
+        else {
+            AccesoMenu += '<div class="col-md-2">' +
+                '</br>' +
+                '<div class="form-group">' +
+                '<label class="form-check-label">¿Tiene permiso de Lectura?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>' +
+                '<input class="form-check-input" type="checkbox" id="Tlectura' + cantidad + '"/>' +
+                '</div>' +
+                '</div>';
+        }
+
+        if (Tedicion == true) {
+            AccesoMenu += '<div class="col-md-2">' +
+                '</br>' +
+                '<div class="form-group">' +
+                '<label class="form-check-label">¿Tiene permiso de Edición?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </label>' +
+                '<input class="form-check-input" type="checkbox" id="Tedicion' + cantidad + '" checked />' +
+                '</div>' +
+                '</div>';
+        } else {
+            AccesoMenu += '<div class="col-md-2">' +
+                '</br>' +
+                '<div class="form-group">' +
+                '<label class="form-check-label">¿Tiene permiso de Edición?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </label>' +
+                '<input class="form-check-input" type="checkbox" id="Tedicion' + cantidad + '" />' +
+                '</div>' +
+                '</div>';
+        }
+        if (Teliminacion == true) {
+            AccesoMenu += '<div class="col-md-2">' +
+                '</br>' +
+                '<div class="form-group">' +
+                '<label class="form-check-label">¿Tiene permiso de Eliminación?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </label>' +
+                '<input class="form-check-input" type="checkbox" id="Teliminacion' + cantidad + '" checked>' +
+                '</div>' +
+                '</div>';
+        } else {
+            AccesoMenu += '<div class="col-md-2">' +
+                '</br>' +
+                '<div class="form-group">' +
+                '<label class="form-check-label">¿Tiene permiso de Eliminación? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </label>' +
+                '<input class="form-check-input" type="checkbox" id="Teliminacion' + cantidad + '" />' +
+                '</div>' +
+                '</div>';
+        }
+
+        AccesoMenu += '<div class="col-md-1">' +
+            '<div class="form-group align-items-center" style="top:-7px">' +
+            '</br>' +
+            '<button class="btn btn-danger" onclick="Eliminar(' + cantidad + ')" style="padding:5px;text-transform:;">Eliminar</button>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+
+        $('#permisoMenu').append(AccesoMenu);
+
+        id = "nuevoMenu" + cantidad;
+        //cargo el selector
+        selector(id, menu);
+        //aumento en 1 la cantidad de filas que tengo
+        cantidad += 1;
+        convertirSelect2();
+    }
+    function Eliminar(index) {
+        //guardo en una lista todas las filas antes de eliminarla
+
+        var lista = [];
+        for (var i = 0; i < cantidad; i++) {
+            var idMenu = '#nuevoMenu' + i;
+            var Tlectura = document.getElementById('Tlectura' + i).checked;
+            var Tedicion = document.getElementById('Tedicion' + i).checked;
+            var Teliminacion = document.getElementById('Teliminacion' + i).checked;
+            var menu = new Object();
+            menu.Tlectura = Tlectura;
+            menu.Tedicion = Tedicion;
+            menu.Teliminacion = Teliminacion;
+            menu.idMenu = $(idMenu).val();
+            lista.push(menu);
+
+        }
+
+        for (var i = 0; i < cantidad; i++) {
+            //recorro la lista de menus abiertos , si es asi guardo los valores
+            if (listaDeMenu[i] != undefined) {
+                listaDeMenu[i].Tlectura = lista[i].Tlectura;
+                listaDeMenu[i].Tedicion = lista[i].Tedicion;
+                listaDeMenu[i].Teliminacion = lista[i].Teliminacion;
+                listaDeMenu[i].idMenu = lista[i].idMenu;
+            }
+            else {
+                //sino le agrego la entidad
+                var men = new Object();
+                men.Tlectura = lista[i].Tlectura;
+                men.Tedicion = lista[i].Tedicion;
+                men.Teliminacion = lista[i].Teliminacion;
+                men.idMenu = lista[i].idMenu;
+                listaDeMenu.push(men);
+            }
+        }
+
+        //luego elimino la entidad que quiero sacar
+        listaDeMenu.splice(index, 1);
+
+        //vacio la lista
+        $('#permisoMenu').empty();
+        //reinicio la cantidad
+        cantidad = 0;
+        //y vuelvo a cargar todas los menus abiertas
+        $.each(listaDeMenu, function (index, result) {
+            var idmenu = result.idMenu;
+
+            var Tlectura = result.Tlectura;
+
+            var Tedicion = result.Tedicion;
+
+            var Teliminacion = result.Teliminacion;
+
+            AgregarNuevoMenu(idmenu, Tlectura, Tedicion, Teliminacion);
+        });
+
+    }
+
+    function ObtenerMenus() {
+        //función que obtiene lista menu esta separado para llamarla una sola vez
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Configuraciones/ObtenerListaMenu',
+            dataType: "json",
+            data: {},
+            async: false,
+            success: function (respuesta) {
+                listaMenu = respuesta
+
+            }
+        })
+    }
+    function selector(id, menu) {
+        //función que carga los datos de los empleados en el selector
+        var idSelect = '#' + id;
+
+        if (menu == -1) {
+            $(idSelect).append($('<option selected>').val(-1).text("Seleccione una opción"))
+        }
+        else {
+            $(idSelect).append($('<option>').val(-1).text("Seleccione una opción"))
+        }
+        $.each(listaMenu, function (index, result) {
+            if (menu == result.idUrl) {
+                $(idSelect).append($('<option selected>').val(result.idUrl).text(result.nombreUrl))
+            }
+            else {
+                $(idSelect).append($('<option>').val(result.idUrl).text(result.nombreUrl))
+            }
+
+        });
+
+    }
+    function volver() {
+        window.location.href = '/Configuraciones/AdministrarRoles';
+    }
+    function CrearOEditar() {
+        if (idRol != undefined) {
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Configuraciones/ConsultarRol?idRol=' + idRol,
+                dataType: "json",
+                data: idRol,
+                success: function (rol) {
+
+                    lista = rol;
+                    $('#nombreRol').val(rol.nombreRol);
+                    if (rol.esJefe) {
+                        $('#esJefe').prop('checked', true);
+                    }
+                    if (rol.esOperador) {
+                        $('#esOperador').prop('checked', true);
+                    }
+
+                    $.each(rol.menu, function (index, menu) {
+                        //controlo que esten todos los datos completos
+                        var idMenu = menu.idUrl;
+                        var Tlectura = menu.lectura;
+                        var Tedicion = menu.edicion;
+                        var Teliminacion = menu.eliminacion;
+                        idPermisoRol = menu.idPermisoRol;
+                        ObtenerMenus();
+                        AgregarNuevoMenu(idMenu, Tlectura, Tedicion, Teliminacion);
+                    })
+                    convertirSelect2();
+                }
+            })
+        }
+        else {
+            var id = -1
+            ObtenerRol(id);
+        }
+
+    }
+    function GuardarRol() {
+        if (ValidarRol()) {
+            var idRol = GetUrlVars()["idRol"];
+            var rol = new Object();
+            rol.idRol = $("#idRol").val();
+            rol.nombreRol = $("#nombreRol").val();
+            rol.menu = [];
+
+            for (var i = 0; i < cantidad; i++) {
+                //controlo que esten todos los datos completos
+                var idMenu = '#nuevoMenu' + i;
+                var Tlectura = document.getElementById('Tlectura' + i).checked;
+                var Tedicion = document.getElementById('Tedicion' + i).checked;
+                var Teliminacion = document.getElementById('Teliminacion' + i).checked;
+                var menu = new Object();
+                menu.lectura = Tlectura;
+                menu.edicion = Tedicion;
+                menu.eliminacion = Teliminacion;
+                menu.idUrl = $(idMenu).val();
+                menu.idPermisoRol = idPermisoRol;
+                rol.menu.push(menu);
+            }
+
+            if (idRol != undefined) {
+
+                rol.idRol = idRol;
+                $.ajax({
+                    type: 'POST',
+                    url: '/Api/Rol/ModificarRol?idRol=',
+                    dataType: "json",
+                    data: rol,
+                    success: function (codigo) {
+                        console.log("CODIGO " + codigo);
+                        if (codigo == 200) {
+                            volver();
+                        }
+                        else {
+                            var alert = "";
+                            alert += "<div class='alert alert-danger'>" +
+                                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                                "<i class='material-icons'>close</i>" +
+                                "</button>" +
+                                "<span>Formulario incompleto.</span>" +
+                                "</div>";
+
+                            $('#alertaRol').clearQueue();
+                            $('#alertaRol').append(alert);
+                        }
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/Rol/AltaRol',
+                    dataType: "json",
+                    data: rol,
+                    success: function (codigo) {
+                        console.log("CODIGO " + codigo);
+                        console.log(codigo)
+                        if (codigo == 200) {
+                            volver();
+                        }
+                        else {
+                            var alert = "";
+                            alert += "<div class='alert alert-danger'>" +
+                                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                                "<i class='material-icons'>close</i>" +
+                                "</button>" +
+                                "<span>Formulario incompleto.</span>" +
+                                "</div>";
+
+                            $('#alertaRol').clearQueue();
+                            $('#alertaRol').append(alert);
+                        }
+                    }
+                })
+            }
+
+
+        }
+    }
+    function ValidarRol() {
+
+        if ($("#nombreRol").val() == "") {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>close</i>" +
+                "</button>" +
+                "<span>Debe escribir un <b>Nombre de ROL</b>.</span>" +
+                "</div>";
+
+            $('#alertaRol').clearQueue();
+            $('#alertaRol').append(alert);
+            $(".alert").delay(4000).slideUp(200, function () {
+                $(this).alert('close');
+            });
+            $("#nombreRol").focus();
+            return false;
+        }
+
+        if ($("#nuevoMenu").val() == -1 || cantidad == 0) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>close</i>" +
+                "</button>" +
+                "<span>Debe tener por lo menos un <b>Menu</b>.</span>" +
+                "</div>";
+
+            $('#alertaRol').clearQueue();
+            $('#alertaRol').append(alert);
+            $(".alert").delay(4000).slideUp(200, function () {
+                $(this).alert('close');
+            });
+            $("#nombreRol").focus();
+            return false;
+        }
+
+
+        return true;
+    }
+    function ObtenerRol(idRol) {
+        var activo = true;
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Rol/ObtenerRoles?activo=' + activo,
+            success: function (respuesta) {
+
+                if (idRol == -1) {
+                    $('#nombreRol').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                }
+                else {
+                    $('#nombreRol').append($('<option>').val(-1).text("Seleccione una opción"))
+                }
+                $.each(respuesta.data, function (index, result) {
+                    if (idRol == result.idRol) {
+                        $('#nombreRol').append($('<option selected>').val(result.idRol).text(result.nombreRol))
+                    }
+                    else {
+                        $('#nombreRol').append($('<option>').val(result.idRol).text(result.nombreRol))
+                    }
+                });
+                convertirSelect2();
+            }
+        })
+
+    }
+    function AgregarMenu() {
+        //Metodo que agrega filas vacias
+        var menu = -1;
+
+        var Tlectura = false;
+
+        var Tedicion = false;
+
+        var Teliminacion = false;
+
+
+        AgregarNuevoMenu(menu, Tlectura, Tedicion, Teliminacion);
+
+    }
+</script>

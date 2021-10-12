@@ -16,6 +16,10 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+        public ActionResult ModuloDenegado()
+        {
+            return View();
+        }
         public ActionResult Validar(string mail, string password)
         {
             try

@@ -8,6 +8,7 @@ using System.Web.Mvc;
 namespace ArrendaSys.Controllers
 {
     [SessionUtility]
+    [Permiso("HOM")]
     public class HomeController : Controller
     {
         // GET: Home

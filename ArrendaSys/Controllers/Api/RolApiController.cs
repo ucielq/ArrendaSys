@@ -30,5 +30,15 @@ namespace ArrendaSys.Controllers.Api
 
             return listMenu;
         }
+        [System.Web.Http.Route("Api/Rol/ModificarRol")]
+        [System.Web.Http.ActionName("ModificarRol")]
+        [System.Web.Http.HttpPost]
+        public int ModificarRol(RolViewModel rol)
+        {
+            ServicioRol servicio = new ServicioRol();
+            int codigo;
+            codigo = servicio.ModificarRol(rol);
+            return codigo;
+        }
     }
 }
