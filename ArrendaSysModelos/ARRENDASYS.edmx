@@ -169,7 +169,7 @@
             <PropertyRef Name="idMultimediaInmueble" />
           </Key>
           <Property Name="idMultimediaInmueble" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="urlMultimediaInmueble" Type="varchar" MaxLength="100" />
+          <Property Name="urlMultimediaInmueble" Type="nvarchar" MaxLength="500" />
           <Property Name="idInmueble" Type="int" />
         </EntityType>
         <EntityType Name="Notificacion">
@@ -538,14 +538,6 @@
           <Property Name="nombreLocalidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idDepartamento" Type="Int32" />
         </EntityType>
-        <EntityType Name="MultimediaInmueble">
-          <Key>
-            <PropertyRef Name="idMultimediaInmueble" />
-          </Key>
-          <Property Name="idMultimediaInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="urlMultimediaInmueble" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idInmueble" Type="Int32" />
-        </EntityType>
         <EntityType Name="Notificacion">
           <Key>
             <PropertyRef Name="idNotificacion" />
@@ -697,7 +689,6 @@
           <EntitySet Name="InmuebleEstado" EntityType="Self.InmuebleEstado" />
           <EntitySet Name="ItemReseña" EntityType="Self.ItemReseña" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
-          <EntitySet Name="MultimediaInmueble" EntityType="Self.MultimediaInmueble" />
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" />
           <EntitySet Name="Premium" EntityType="Self.Premium" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
@@ -714,6 +705,7 @@
           <EntitySet Name="PermisoRol" EntityType="ArrendasysModel.PermisoRol" />
           <EntitySet Name="Rol" EntityType="ArrendasysModel.Rol" />
           <EntitySet Name="URL" EntityType="ArrendasysModel.URL" />
+          <EntitySet Name="MultimediaInmueble" EntityType="ArrendasysModel.MultimediaInmueble" />
         </EntityContainer>
         <EntityType Name="PermisoRol">
           <Key>
@@ -748,6 +740,14 @@
           <Property Name="posicion" Type="Int32" />
           <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="iconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MultimediaInmueble">
+          <Key>
+            <PropertyRef Name="idMultimediaInmueble" />
+          </Key>
+          <Property Name="idMultimediaInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urlMultimediaInmueble" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="idInmueble" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -926,15 +926,6 @@
                 <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
                 <ScalarProperty Name="nombreLocalidad" ColumnName="nombreLocalidad" />
                 <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MultimediaInmueble">
-            <EntityTypeMapping TypeName="ArrendasysModel.MultimediaInmueble">
-              <MappingFragment StoreEntitySet="MultimediaInmueble">
-                <ScalarProperty Name="idMultimediaInmueble" ColumnName="idMultimediaInmueble" />
-                <ScalarProperty Name="urlMultimediaInmueble" ColumnName="urlMultimediaInmueble" />
-                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1120,6 +1111,15 @@
                 <ScalarProperty Name="seMuestra" ColumnName="seMuestra" />
                 <ScalarProperty Name="linkURL" ColumnName="linkURL" />
                 <ScalarProperty Name="idURL" ColumnName="idURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MultimediaInmueble">
+            <EntityTypeMapping TypeName="ArrendasysModel.MultimediaInmueble">
+              <MappingFragment StoreEntitySet="MultimediaInmueble">
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+                <ScalarProperty Name="urlMultimediaInmueble" ColumnName="urlMultimediaInmueble" />
+                <ScalarProperty Name="idMultimediaInmueble" ColumnName="idMultimediaInmueble" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
