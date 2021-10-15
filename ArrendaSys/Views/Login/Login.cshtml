@@ -448,7 +448,7 @@
                 <button id="crear" onclick="CrearCuenta()"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
             </div>
 
-            <a href="" id="recuperarContraseña" class="pass-forgot">¿Olvidaste tu contraseña?</a>
+            <button id="recuperarContraseña" class="pass-forgot" onclick="recuperarContrasenia()">¿Olvidaste tu contraseña?</button>
 
         </div>
 
@@ -460,7 +460,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
         function CrearCuenta() { window.location.href = '/Cuenta/CrearCuenta'}
-        
+        function recuperarContrasenia() {
+            window.location.href = '/Login/RecuperarContrasenia';
+        }
         $(document).on('keypress', function (e) {
             if (e.which == 13) {
                 var mail = $("#mail").val();

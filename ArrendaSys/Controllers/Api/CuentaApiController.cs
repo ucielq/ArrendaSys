@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using ArrendaSysServicios;
+using ArrendaSysModelos;
+
 namespace ArrendaSys.Controllers.Api
 {
     public class CuentaApiController : ApiController
@@ -27,6 +29,40 @@ namespace ArrendaSys.Controllers.Api
                     return 1;
                 }
             }
+        }
+
+        [System.Web.Http.Route("Api/Cuenta/generarCodigoValidacion")]
+        [System.Web.Http.ActionName("generarCodigoValidacion")]
+        [System.Web.Http.HttpGet]
+        public int generarCodigoValidacion(string email)
+        {
+            DateTime now = DateTime.Now;
+
+            var hashCode = Math.Abs((email+now.ToString()).GetHashCode());
+            ArrendaSysUtilidades.EnvioMail envioMail = new ArrendaSysUtilidades.EnvioMail();
+            envioMail.EnviarMailGenerico(email,"Código de recuperación de contraseña: "+ hashCode, "Recuperación Contraseña");
+            return hashCode;
+        }
+        [System.Web.Http.Route("Api/Cuenta/ActualizarContrasenia")]
+        [System.Web.Http.ActionName("ActualizarContrasenia")]
+        [System.Web.Http.HttpGet]
+        public int ActualizarContrasenia(string email,string pass)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                try
+                {
+                    var cuenta = db.Cuenta.Where(x => x.emailCuenta == email).FirstOrDefault();
+                    var nuevaContrasenia = Encrypt.GetSHA256(pass);
+                    cuenta.contrasenaCuenta = nuevaContrasenia;
+                    db.SaveChanges();
+                    return 1;
+                }
+                catch
+                {
+                    return 0;
+                }
+            }           
         }
 
         [System.Web.Http.Route("Api/Cuenta/altaCuenta")]

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "CrearCuenta";
+    ViewBag.Title = "RecuperarContrasenia";
 }
 @{
     Layout = null;
@@ -416,8 +416,8 @@
 
     <meta name="viewport" content="width=device-width" />
     <meta charset="UTF-8">
-    <title>CrearCuenta</title>
-    
+    <title>Recuperar Contraseña</title>
+
 
 </head>
 <body>
@@ -425,7 +425,7 @@
 
         <div class="box">
 
-            <div class="title">Crear Cuenta</div>
+            <div class="title">Recuperar Contraseña</div>
 
             <div class="input">
                 <label for="email">E-mail</label>
@@ -433,6 +433,13 @@
                 <span class="spin"></span>
             </div>
             <div id="xmail"><h6>Ingresa un email valido</h6></div>
+
+
+            <div class="input" id="divcod">
+                <label for="codigo">Código</label>
+                <input type="text" name="codigo" id="codigo" />
+                <span class="spin"></span>
+            </div>
             <div class="input" id="divpass">
                 <label for="pass">Contraseña</label>
                 <input type="password" name="pass" id="pass">
@@ -446,25 +453,13 @@
                 <span class="spin"></span>
             </div>
             <span id="igualdad">Las contraseñas no coinciden</span>
-            <div class="input" id="confirm">
-                <label for="codigo">Codigo confirmacion</label>
-                <input type="number" name="codigo" id="codigo">
-                <span class="spin"></span>
-            </div>
-
-
-            <div class="button login">
-                <button id="crearCuenta"><span>Crear Cuenta</span> <i class="fa fa-check"></i></button>
-            </div>
-            <div class="button login" id="confirmar">
-                <button id="confirmar"><span>Confirmar</span> <i class="fa fa-check"></i></button>
+            <div class="button login" id="divrec">
+                <button id="recuperar" onclick="actualizarContrasenia()"><span>Actualizar Contraseña</span> <i class="fa fa-check"></i></button>
             </div>
             <div class="button login">
-                <button id="Cancelar" onclick="atras()"><span>Cancelar</span> <i class="fa fa-check"></i></button>
+                <button id="solicitar" onclick="solicitarRecuperacion()"><span>Recuperar Contraseña</span> <i class="fa fa-check"></i></button>
             </div>
-
         </div>
-
     </div>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Sidebar/scripts.js"></script>
@@ -474,35 +469,18 @@
 
 </body>
 <script>
-    $("#igualdad").hide();
-    $("#xmail").hide();
-    $("#xpass").hide();
-    $("#confirm").hide();
-    $("#confirmar").hide();
-    $("#divpass").show();
-    $("#divpass1").show();
+    (function () {
+        $("#xpass").hide();
+        $("#igualdad").hide();
+        $("#xmail").hide();
+        $("#divcod").hide();
+        $("#divpass").hide();
+        $("#divpass1").hide();
+        $("#divrec").hide();
+    })();
     $("#email").keyup(function () {
         caracteresCorreoValido($(this).val())
     });
-
-    function caracteresCorreoValido(email) {
-        var caract = new RegExp(/^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        debugger;
-        if (!caract.test(email)) {
-            $("#xmail").show();
-
-            return false;
-        } else {
-            $("#xmail").hide();
-            return true;
-        }
-    }
-
-
-    function atras() {
-        window.location.href = '/Login/Login'
-    }
-
     $("#pass").keyup(function () {
         var pass = $("#pass").val();
         var pass1 = $("#pass1").val();
@@ -513,6 +491,9 @@
         }
         validarContraseña(pass);
     });
+    function actualizarContrasenia() {
+        validarDatos();
+    }
 
     function validarContraseña(pass) {
         var caract = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/);
@@ -526,6 +507,7 @@
             return false;
         }
     }
+    var existe;
     $("#pass1").keyup(function () {
         var pass = $("#pass").val();
         var pass1 = $("#pass1").val();
@@ -535,7 +517,91 @@
             $("#igualdad").hide();
         }
     });
+    function solicitarRecuperacion() {
+        var email = $("#email").val();
+        validarExisteCuenta(email);
+        if (existe==true) {
+            generarCodigoValidacion(email);
+        };
+    }
+    var cod;
+    function generarCodigoValidacion(email) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Cuenta/generarCodigoValidacion?email=' + email,
+            async: false,
+            success: function (result) {
+                cod = result;
+                $("#divcod").show();
+                $("#divpass").show();
+                $("#divpass1").show();
+                $("#solicitar").hide();
+                $("#divrec").show();
+            }
+        });
+    }
+    function validarDatos() {
+        if ($("#pass").val() == $("#pass1").val()) {
+            if (caracteresCorreoValido($("#email").val())) {
+                if (validarContraseña($("#pass").val())) {
+                    if ($("#codigo").val() == cod) {
+                        $.ajax({
+                            type: 'Get',
+                            url: '/Api/Cuenta/ActualizarContrasenia?email=' + $("#email").val() + "&pass=" + $("#pass").val(),
+                            success: function (result) {
+                                if (result == 1) {
+                                    alert("Contraseña actualizada correctamente");
+                                    window.location.href = '/Login/Login'
+                                } else {
+                                    alert("Hubo un error al actualizar la contraseña, intente nuevamente");
+                                    window.location.href = '/Login/Login'
+                                }
+                            }
+                        });
+                    } else {
+                        alert("El código introducido es incorrecto")
+                    }
+                } else alert("Debe ingresar una contraseña válida")
+            }
+            else {
+                alert("Ingrese un mail válido")
+            }
+        } else {
+            alert("Las contraseñas deben coincidir")
+        }
 
+    }
+    function validarExisteCuenta(email) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Cuenta/ValidarMail?email=' + email,
+            async:false,
+            success: function (result) {
+                if (result == 1) {
+                    alert("El mail ingresado no se encuentra registrado en el sistema");
+                    existe=false;
+                }
+                if (result == 0) {
+                    existe = true;
+                } else {
+                    existe = false;
+                }
+                
+            }
+        });
+    }
+    function caracteresCorreoValido(email) {
+        var caract = new RegExp(/^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+        debugger;
+        if (!caract.test(email)) {
+            $("#xmail").show();
+
+            return false;
+        } else {
+            $("#xmail").hide();
+            return true;
+        }
+    }
     $(".input input").focus(function () {
 
         $(this).parent(".input").each(function () {
@@ -633,61 +699,4 @@
         }
 
     });
-
-    $("#crearCuenta").click(function () {
-        //Valido todos los datos
-        validarMail();
-
-    });
-    function validarMail() {
-        if ($("#pass").val() == $("#pass1").val()) {
-            if (caracteresCorreoValido($("#email").val())) {
-                if (validarContraseña($("#pass").val())) {
-                $.ajax({
-                    type: 'Get',
-                    url: '/Api/Cuenta/ValidarMail?email=' + $("#email").val(),
-                    success: function (result) {
-                        if (result == 1) {
-                            altaCuenta();
-                        } else {
-                            alert("El mail ingresado ya esta registrado en el sistema")
-                        }
-                    }
-                });
-                }else alert ("Debe ingresar una contraseña válida")
-            }
-            else {
-                alert("Ingrese un mail válido")
-            }
-        } else {
-            alert("Las contraseñas deben coincidir")
-        }
-
-    }
-    var codigo;
-    function altaCuenta() {
-        $.ajax({
-            type: 'Get',
-            url: '/Api/Cuenta/altaCuenta?email=' + $("#email").val() + '&password=' + $("#pass").val(),
-            async: false,
-            success: function (result) {
-                codigo = result;
-                $("#crearCuenta").hide();
-                $("#divpass").hide();
-                $("#divpass1").hide();
-                alert("Se le envio un codigo a su mail");
-                $("#confirm").show();
-                $("#confirmar").show();
-            }
-        });
-    }
-    $("#confirmar").click(function () {
-        if ($("#codigo").val() == codigo) {
-            window.location.href = "/Cuenta/confirmaCuenta?email="+$("#email").val();
-        }
-        else {
-            alert("El codigo no coincide");
-        }
-    });
-
 </script>

@@ -40,11 +40,12 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>ArrendaSys</h3>
-                <strong>AS</strong>
+                <img src="~/assets/img/arrendasys-sinfondo.png" class="img-fluid" alt="">
+                <strong>
+                    <!--Vacio-->
+                </strong>
             </div>
             <ul class="list-unstyled components" id="MenuPrincipal">
-                
             </ul>
         </nav>
         <!-- Topbar  -->
@@ -72,19 +73,19 @@
                         </div>
 
 
-                            <div class="col-md-4">
-                                <div class="dropdown float-right">
-                                    <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
-                                        Mi perfil
-                                    </button>
-                                    <ul class="dropdown-menu float-left" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="dropdown float-right">
+                                <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
+                                    Mi perfil
+                                </button>
+                                <ul class="dropdown-menu float-left" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
             </nav>
             <div class="body-content">
                 @RenderBody()

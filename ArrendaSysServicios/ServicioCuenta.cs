@@ -18,7 +18,8 @@ namespace ArrendaSysServicios
 
         public int altaCuenta(string email, string pass)
         {
-            var codigo = Math.Abs(email.GetHashCode());
+            DateTime now = DateTime.Now;
+            var codigo = Math.Abs((email+now.ToString()).GetHashCode());
             var ePass = Encrypt.GetSHA256(pass);
             Cuenta cuenta = new Cuenta
             {
@@ -31,7 +32,6 @@ namespace ArrendaSysServicios
             enviarMailCodigo(email, codigo);
             return codigo;
         }
-
         public CuentaViewModel ObtenerDatosUsuarioLogueado(string emailCuenta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
