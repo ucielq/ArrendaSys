@@ -244,7 +244,7 @@ namespace ArrendaSysServicios
                     {
                         //Es arrendatario
                         var arrendatarioVM = new ArrendatarioViewModel();
-                        cuenta.tipoCuenta = 3;
+                        cuenta.tipoCuenta = 2;
                         arrendatarioVM.nroDocumento = (int)arrendatario.numeroDocumentoArr;
                         arrendatarioVM.nombreArrendatario = arrendatario.nombreArrendatario;
                         arrendatarioVM.apellidoArrendatario = arrendatario.apellidoArrendatario;
@@ -272,7 +272,7 @@ namespace ArrendaSysServicios
 
                             };
                             cuenta.propietario = propVM;
-                            cuenta.tipoCuenta = 2;
+                            cuenta.tipoCuenta =3;
                             cuenta.idPropio = propietario.idPropietario;
                             return cuenta;
                         }
@@ -292,7 +292,7 @@ namespace ArrendaSysServicios
 
                                 };
                                 cuenta.inmobiliaria = inmoVM;
-                                cuenta.tipoCuenta = 1;
+                                cuenta.tipoCuenta = 4;
                                 cuenta.idPropio = inmobiliaria.idInmobiliaria;
                                 return cuenta;
                             }

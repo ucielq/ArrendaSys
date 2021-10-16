@@ -1,8 +1,7 @@
-﻿<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
-<script src="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+﻿<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/b-2.0.1/cr-1.5.4/fc-4.0.0/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/b-2.0.1/cr-1.5.4/fc-4.0.0/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/jquery.dataTables.colResize.css" />
+<script type="text/javascript" src="~/Scripts/jquery.dataTables.colResize.js"></script>
 @{
     var usuario = Session["usuarioLogeado"];
     var tipoCuenta = Session["tipoCuenta"];
@@ -13,120 +12,114 @@
     <title>Alquileres</title>
 </head>
 
-<body>
-    <div>
-        <span>Alquileres</span>
-        <hr />
-    </div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <div class="float-left">
+                            <div class="titulo">Alquileres</div>
+                        </div>
 
-    <div class="col-md12">
-        <div class="col-md12">
-            <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> + Agregar</button>
-            <br />
-        </div>
-
-    </div>
-
-
-
-
-    <div class="col-md-12" id="formulario" style="display:none">
-        
-
-        <div class="row" style="padding-top:6px">
-
-
-
-            <div class="col-md-2">
-                <br />
-                <span>Fecha Alta: </span>
-                <br />
-                <input type="date" class="form-control" id="fechaAltaAlquiler" />
-
-            </div>
-
-            <div class="col-md-2">
-                <br />
-                <span>Fecha Baja: </span>
-                <br />
-                <input type="date" class="form-control" id="fechaBajaAlquiler" />
-
-            </div>
-
-            <div class="col-md-2">
-                <br />
-                <span>Arrendatario: </span>
-                <br />
-                <input type="number" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
-
-            </div>
-
-
-            <div class="col-md-2">
-                <br />
-                <span>Inmueble: </span>
-                <br />
-                <input type="number" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
-
-            </div>
-
-
-        </div>
-
-
-        <div class="col-md-12">
-            <br />
-            <div>
-                <button type="button" class="btn btn-success"  onclick="GuardarAlquiler()"><i class="fas fa-save"></i> Guardar</button>
-                <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
-                
-            </div>
-
-
-
-        </div>
-
-
-    </div>
-
-
-
-
-
-
-
-    <div class="card">
-        <div class="card-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <table id="alquilereslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Fecha Alta</th>
-                                    <th>Fecha Baja</th>
-                                    <th>Arrendatario</th>
-                                    <th>Inmueble</th>
-                                    <th>Editar</th>
-                                    <th>Eliminar</th>
-                                </tr>
-                            </thead>
-                        </table>
                     </div>
+
+
+                    <body>
+
+                        <div class="col-md12">
+                            <div class="col-md12">
+                                <br />
+                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> + Agregar</button>
+                                <br />
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" id="formulario" style="display:none">
+
+                            <div class="row" style="padding-top:6px">
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Fecha Alta: </span>
+                                    <br />
+                                    <input type="date" class="form-control" id="fechaAltaAlquiler" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Fecha Baja: </span>
+                                    <br />
+                                    <input type="date" class="form-control" id="fechaBajaAlquiler" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Arrendatario: </span>
+                                    <br />
+                                    <input type="number" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Inmueble: </span>
+                                    <br />
+                                    <input type="number" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <br />
+                                <div>
+                                    <button type="button" class="btn btn-success" onclick="GuardarAlquiler()"><i class="fas fa-save"></i> Guardar</button>
+                                    <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <table id="alquilereslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>idAlquiler</th>
+                                                        <th>Fecha Alta</th>
+                                                        <th>Fecha Baja</th>
+                                                        <th>Arrendatario</th>
+                                                        <th>Inmueble</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </body>
+
                 </div>
             </div>
         </div>
     </div>
-</body>
+</div>
+
+
+
 <script>
-        var user = '@usuario';
+    var user = '@usuario';
+    var idCuenta = parseInt(@idCuenta);
+    var tipoCuenta = parseInt(@tipoCuenta);
     var table;
     (function () {
         CrearTabla();
     })();
     function CrearTabla() {
-       
+
         var idiomaEspanol = {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -170,7 +163,7 @@
             },
             "responsive": true,
             "order": [[1, "asc"]],
-            "ajax": "/Api/Alquiler/ListarAlquileres",
+            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta="+tipoCuenta,
             "lengthMenu": [5, 10, 25, 50],
             "columns": [
                 { data: "idAlquiler", "className": "text-left", "visible": false },
@@ -178,39 +171,23 @@
                 { data: "fechaBajaAlquiler", "className": "text-left" },
                 { data: "idArrendatario", "className": "text-left" },
                 { data: "idInmueble", "className": "text-left" },
-               {
+               {data:"idAlquiler",
                     orderable: false,
                     "render": function () {
-                       
-                            var botones = "<button class='fa fa-edit' onclick='EditarAlquiler(this)'></button>";
-
+                        var botones = "<button class='fa fa-edit' onclick='EditarAlquiler(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>";
                             return botones
-                        
-                    },
-                    "width": 35,
-                },
-                {
-                    orderable: false,
-                    "render": function () {
-
-                        var botones = "<button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>";
-
-                        return botones
-
                     },
                     "width": 35,
                 }
-
             ],
             "language": idiomaEspanol
         });
 
-
-
     }
 
-    /*
+
     function EliminarAlquiler(btn) {
+        debugger;
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
 
@@ -222,10 +199,8 @@
             }
         });
 
-
-
     }
-    */
+
 
     $("#btnvolver").click(function () {
         $("#formulario").hide();
@@ -240,7 +215,11 @@
         var alquiler = new Object();
         alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
-        alquiler.idArrendatario = $("#idArrendatario").val();
+
+
+            alquiler.idArrendatario = $("#idArrendatario").val();
+
+
         alquiler.idInmueble = $("#idInmueble").val();
         $.ajax({
             type: 'Post',
