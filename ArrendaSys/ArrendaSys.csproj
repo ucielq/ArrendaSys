@@ -814,6 +814,7 @@
     <Content Include="Views\Login\ModuloDenegado.cshtml" />
     <Content Include="Views\Login\RecuperarContrasenia.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItemsResenias.cshtml" />
+    <Content Include="Views\Configuraciones\AdministrarItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

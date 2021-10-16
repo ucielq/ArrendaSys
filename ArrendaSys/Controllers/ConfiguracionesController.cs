@@ -25,5 +25,9 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+        public ActionResult AdministrarItem()
+        {
+            return View();
+        }
     }
 }

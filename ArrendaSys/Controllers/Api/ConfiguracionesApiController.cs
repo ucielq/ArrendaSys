@@ -22,6 +22,40 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.ObtenerRoles(activo);
             return lista;
         }
+        [System.Web.Http.Route("Api/Configuraciones/ConsultarItem")]
+        [System.Web.Http.ActionName("ConsultarItem")]
+        [System.Web.Http.HttpGet]
+        public ItemViewModel ConsultarItem(int idItem)
+        {
+            ServicioItem servicio = new ServicioItem();
+            var lista = servicio.ConsultarItem(idItem);
+            return lista;
+        }
+        [System.Web.Http.Route("Api/Configuraciones/GuardarItem")]
+        [System.Web.Http.ActionName("GuardarItem")]
+        [System.Web.Http.HttpPost]
+        public int GuardarItem(ItemViewModel item)
+        {
+            ServicioItem servicio = new ServicioItem();
+            var lista = servicio.GuardarItem(item);
+            return lista;
+        }
+        [System.Web.Http.Route("Api/Configuraciones/EliminarItem")]
+        [System.Web.Http.ActionName("EliminarItem")]
+        [System.Web.Http.HttpPost]
+        public int EliminarItem(int idItem)
+        {
+            using(ArrendaSysModelos.ArrendasysEntities db = new ArrendaSysModelos.ArrendasysEntities())
+            {
+                var item = db.ItemReseña.Where(x => x.idItemReseña == idItem).FirstOrDefault();
+                if (item != null)
+                {
+                    db.ItemReseña.Remove(item);
+                    db.SaveChanges();
+                }
+                return 1;
+            }
+        }
         [System.Web.Http.Route("Api/Configuraciones/ObtenerItems")]
         [System.Web.Http.ActionName("ObtenerItems")]
         [System.Web.Http.HttpGet]
