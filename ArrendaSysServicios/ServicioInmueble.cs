@@ -2,6 +2,7 @@
 using ArrendaSysServicios.Modelos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 
 namespace ArrendaSysServicios
@@ -124,7 +125,7 @@ namespace ArrendaSysServicios
                     }
 
                 }
-                catch (Exception e)
+                catch (DbEntityValidationException e)
                 {
                     return 400;
                 }

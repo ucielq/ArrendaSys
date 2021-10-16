@@ -22,6 +22,15 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.ObtenerRoles(activo);
             return lista;
         }
+        [System.Web.Http.Route("Api/Configuraciones/ObtenerItems")]
+        [System.Web.Http.ActionName("ObtenerItems")]
+        [System.Web.Http.HttpGet]
+        public object ObtenerItems()
+        {
+            ServicioItem servicio = new ServicioItem();
+            var lista = servicio.ObtenerItems();
+            return lista;
+        }
         [System.Web.Http.Route("Api/Configuraciones/ObtenerListaMenu")]
         [System.Web.Http.ActionName("ObtenerListaMenu")]
         [System.Web.Http.HttpGet]

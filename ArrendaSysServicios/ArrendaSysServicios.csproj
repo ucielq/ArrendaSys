@@ -114,6 +114,7 @@
     <Compile Include="Modelos\DireccionViewModel.cs" />
     <Compile Include="Modelos\InmuebleViewModel.cs" />
     <Compile Include="Modelos\InmobiliariaViewModel.cs" />
+    <Compile Include="Modelos\ItemViewModel.cs" />
     <Compile Include="Modelos\LocalidadViewModel.cs" />
     <Compile Include="Modelos\PropietarioViewModel.cs" />
     <Compile Include="Modelos\ArrendatarioViewModel.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="ServicioDireccion.cs" />
     <Compile Include="ServicioInmobiliaria.cs" />
     <Compile Include="ServicioInmueble.cs" />
+    <Compile Include="ServicioItem.cs" />
     <Compile Include="ServicioLocalidad.cs" />
     <Compile Include="ServicioPropietario.cs" />
     <Compile Include="ServicioRol.cs" />
