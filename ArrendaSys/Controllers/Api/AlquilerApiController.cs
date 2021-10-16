@@ -30,10 +30,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Alquiler/ListarAlquileres")]
         [System.Web.Http.ActionName("ListarAlquileres")]
         [System.Web.Http.HttpGet]
-        public object ListarAlquileres()
+        public object ListarAlquileres(int idCuenta,int tipoCuenta)
         {
             ServicioAlquiler servicio = new ServicioAlquiler();
-            var lista = servicio.ListarAlquileres();
+            var lista = servicio.ListarAlquileres(idCuenta,tipoCuenta);
             return lista;
         }
 
