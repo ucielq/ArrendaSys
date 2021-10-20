@@ -23,6 +23,9 @@
 
                             <div id="inmueble">
                                 <div class="row" style="padding-top:6px">
+                                    <div id="alertcalle"></div>
+                                    <div id="alertnumero"></div>
+                                    <div id="alertcantAmbInmueble"></div>
                                     <div class="col-md-2">
                                         <label for="provincia">Provincia</label>
                                         <br />
@@ -42,14 +45,16 @@
                                 <br />
                                 <div class="row" style="padding-top:6px">
                                     <div class="col-md-2">
+                                        
                                         <label for="calle">Calle</label>
                                         <br />
-                                        <textarea class="form-control" id="calle" name="calle"></textarea>
+                                        <textarea class="form-control obligatoria" id="calle" name="calle"></textarea>
                                     </div>
                                     <div class="col-md-2">
+
                                         <label for="numero">Número</label>
                                         <br />
-                                        <textarea class="form-control" id="numero" name="numero" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="numero" name="numero" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="barrio">Barrio</label>
@@ -73,12 +78,12 @@
                                     <div class="col-md-2">
                                         <label for="cantAmbInmueble">Cantidad Ambientes</label>
                                         <br />
-                                        <textarea class="form-control" id="cantAmbInmueble" name="cantAmbInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantAmbInmueble" name="cantAmbInmueble" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantHabInmueble">Cantidad Habiaciones</label>
                                         <br />
-                                        <textarea class="form-control" id="cantHabInmueble" name="cantHabInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantHabInmueble" name="cantHabInmueble" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantBanInmueble">Cantidad de Baños</label>
@@ -184,7 +189,7 @@
 
 </body>
 <script>
-    @{ 
+    @{
         var idPropietario = Session["id"];
     }
     var idPropietario = "@idPropietario";
@@ -195,7 +200,7 @@
         });
         CrearOEditar();
         ObtenerDepto(-1);
-        
+
     });
     var crear = false;
     var idInmueble;
@@ -211,7 +216,7 @@
         } else {
             cargarDatosInmueble(idInmueble);
         }
-        
+
     }
     function cargarDatosInmueble(idInmueble) {
         $.ajax({
@@ -258,63 +263,64 @@
     }
 
     function GuardarInmueble() {
-        var inmueble = new Object();
-        inmueble.cantAmbientes = $("#cantAmbInmueble").val();
-        inmueble.cantHabitaciones = $("#cantHabInmueble").val();
-        inmueble.cantBanos = $("#cantBanInmueble").val();
-        inmueble.mtsCuadrados = $("#cantMtInmueble").val();
-        inmueble.mtsCuadradosInt = $("#cantMtInmuebleInt").val();
-        inmueble.descripcionInmueble = $("#descrInmueble").val();
-        inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
-        inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
-        inmueble.cochera = $("#cochera").val() == 1 ? true : false;
+        if (ValidarInmueble()) {
+            var inmueble = new Object();
+            inmueble.cantAmbientes = $("#cantAmbInmueble").val();
+            inmueble.cantHabitaciones = $("#cantHabInmueble").val();
+            inmueble.cantBanos = $("#cantBanInmueble").val();
+            inmueble.mtsCuadrados = $("#cantMtInmueble").val();
+            inmueble.mtsCuadradosInt = $("#cantMtInmuebleInt").val();
+            inmueble.descripcionInmueble = $("#descrInmueble").val();
+            inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
+            inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
+            inmueble.cochera = $("#cochera").val() == 1 ? true : false;
 
-        inmueble.tipoArrendador = 2;
-        inmueble.idArrendador = idPropietario;
+            inmueble.tipoArrendador = 2;
+            inmueble.idArrendador = idPropietario;
 
-        var direccion = new Object();
-        var localidad = new Object();
-        var departamento = new Object();
+            var direccion = new Object();
+            var localidad = new Object();
+            var departamento = new Object();
 
-        localidad.departamento = departamento;
-        direccion.localidad = localidad;
-        inmueble.direccion = direccion;
+            localidad.departamento = departamento;
+            direccion.localidad = localidad;
+            inmueble.direccion = direccion;
 
-        departamento.idDepartamento = $("#departamento").val();
-        //departamento.nombreDepartamento= 
-        localidad.idLocalidad = $("#localidad").val();
-        direccion.nombreCalle = $("#calle").val();
-        direccion.numeroCalle = $("#numero").val();
-        direccion.nombreBarrio = $("#barrio").val();
-        direccion.idlote = $("#lote").val();
-        direccion.idManzana = $("#manzana").val();
-       
+            departamento.idDepartamento = $("#departamento").val();
+            //departamento.nombreDepartamento=
+            localidad.idLocalidad = $("#localidad").val();
+            direccion.nombreCalle = $("#calle").val();
+            direccion.numeroCalle = $("#numero").val();
+            direccion.nombreBarrio = $("#barrio").val();
+            direccion.idlote = $("#lote").val();
+            direccion.idManzana = $("#manzana").val();
 
-        if (crear) {
-            //No le agrego el idInmueble
-            $.ajax({
-                type: 'Post',
-                url: '/Api/Inmueble/AgregarInmueble',
-                data: inmueble,
-                success: function (result) {
-                    GuardarArchivo(result.idInmueble);
-                    location.href = '/InmueblesPropietario/InmueblesPropietarioView';
-                }
-            });
-        } else {
-            inmueble.idInmueble = idInmueble;
-            //Hago un llamado editando, ver el tema de los archivos, si se cargan todos de vuelta, o los que agrego se suman a los anteriores (seria lo ideal)
-            $.ajax({
-                type: 'Post',
-                url: '/Api/Inmueble/AgregarInmueble',
-                data: inmueble,
-                success: function (result) {
-                    GuardarArchivo(result.idInmueble);
-                    location.href = '/InmueblesPropietario/InmueblesPropietarioView';
-                }
-            });
+
+            if (crear) {
+                //No le agrego el idInmueble
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/Inmueble/AgregarInmueble',
+                    data: inmueble,
+                    success: function (result) {
+                        GuardarArchivo(result.idInmueble);
+                        location.href = '/InmueblesPropietario/InmueblesPropietarioView';
+                    }
+                });
+            } else {
+                inmueble.idInmueble = idInmueble;
+                //Hago un llamado editando, ver el tema de los archivos, si se cargan todos de vuelta, o los que agrego se suman a los anteriores (seria lo ideal)
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/Inmueble/AgregarInmueble',
+                    data: inmueble,
+                    success: function (result) {
+                        GuardarArchivo(result.idInmueble);
+                        location.href = '/InmueblesPropietario/InmueblesPropietarioView';
+                    }
+                });
+            }
         }
-        
     }
     function Mostrarimagen() {
 
@@ -334,7 +340,7 @@
                 }
 
                 $.each(respuesta, function (index, result) {
-                    
+
                     if (departamento == result.idDepartamento) {
                         $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
 
@@ -362,7 +368,7 @@
                     $('#localidad').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
                 $.each(respuesta, function (index, result) {
-                    
+
                     if (localidad == result.idLocalidad) {
                         $('#localidad').append($('<option selected>').val(result.idLocalidad).text(result.nombreLocalidad))
                     }
@@ -408,9 +414,34 @@
     $("#cantHabInmueble").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
-    
 
     
+    $(".obligatoria").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    function ValidarInmueble() {        
+        var respuesta = true;
+        $(".obligatoria").each(function (index, result) {
+            var alert = "";
+            var objeto = $("#" + $(this).attr("id").toString());
+            var objetoAlert = $("#alert" + $(this).attr("id").toString());
+            if (objeto.val() == "") {
+                alert += "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<i class='material-icons'>Cerrar</i>" +
+                    "</button>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("id").toString()+"</b>.</span>" +
+                    "</div>";
+                objetoAlert.clearQueue();
+                objetoAlert.empty();
+                objetoAlert.append(alert)
+                respuesta = false;
+            }            
+        });
+        return respuesta;
+    }
 
 
 </script>
