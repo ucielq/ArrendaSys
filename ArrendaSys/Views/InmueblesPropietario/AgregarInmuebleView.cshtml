@@ -3,6 +3,8 @@
     ViewBag.Title = "AgregarInmueble";
 }
 
+@Html.ValidationSummary();
+
 <style>
     .select2 {
         width: 100%;
@@ -180,6 +182,9 @@
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
     <script src="~/Scripts/Generales.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 
 </body>
@@ -193,8 +198,9 @@
             allowClear: false,
             width: '100%',
         });
-        CrearOEditar();
         ObtenerDepto(-1);
+        CrearOEditar();
+        
         
     });
     var crear = false;
@@ -229,8 +235,9 @@
                 $("#barrio").text(inmueble.direccion.nombreBarrio);
                 $("#calle").text(inmueble.direccion.nombreCalle);
                 $("#numero").text(inmueble.direccion.numeroCalle);
-                //$("#departamento").text(ObtenerDepto(inmueble.direccion.localidad.idDepartamento));
-                //$("#localidad").text(ObtenerLocalidad());
+                $("#departamento").val(inmueble.direccion.localidad.idDepartamento);
+                $("#departamento").change();
+                ObtenerLocalidad(inmueble.direccion.localidad.idLocalidad);
                 if (inmueble.permiteMascota == true) {
                     $("#mascota").val(1);
                     $("#mascota option[value='1'").attr("selected", true).change();
@@ -253,6 +260,7 @@
                     $("#cochera").val(2);
                     $("#cochera option[value='2'").attr("selected", true).change();
                 }
+
             }
         });
     }
@@ -324,6 +332,7 @@
         $.ajax({
             type: 'Get',
             url: '/Api/Departamento/ObtenerDepto',
+            async: false,
             success: function (respuesta) {
                 listaDepto = respuesta;
                 if (departamento == -1) {
@@ -353,6 +362,7 @@
         $.ajax({
             type: 'Get',
             url: '/Api/Localidad/ObtenerLocalidad?idDepto=' + idDepto,
+            async: false,
             success: function (respuesta) {
                 listaLocalidad = respuesta;
                 if (localidad == -1) {

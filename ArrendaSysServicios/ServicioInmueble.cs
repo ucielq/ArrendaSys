@@ -59,10 +59,20 @@ namespace ArrendaSysServicios
             else
             {
                 var esteInmu = db.Inmueble.Where(x => x.idInmueble == inmueble.idInmueble).FirstOrDefault();
-                InmuebleViewModel inmu = new InmuebleViewModel();
-                if (esteInmu != null)
-                    
+                
+                if (esteInmu != null)                    
+
                 {
+                    var direc = db.Direccion.Where(x => x.idDireccion == esteInmu.idDireccion).FirstOrDefault();
+                    if (direc != null) {
+                        direc.idLocalidad = inmueble.direccion.localidad.idLocalidad;
+                        direc.idLote = inmueble.direccion.idLote;
+                        direc.idManzana = inmueble.direccion.idManzana;
+                        direc.nombreBarrio = inmueble.direccion.nombreBarrio;
+                        direc.nombreCalle = inmueble.direccion.nombreCalle;
+                        direc.numeroCalle = inmueble.direccion.numeroCalle;                      
+                    } 
+
                     esteInmu.cantAmbientes = inmueble.cantAmbientes;
                     esteInmu.cantBanos = inmueble.cantBanos;
                     esteInmu.cantHabitaciones = inmueble.cantHabitaciones;
@@ -74,22 +84,10 @@ namespace ArrendaSysServicios
                     esteInmu.permiteMascota = inmueble.permiteMascota;
                     esteInmu.idArrendador = inmueble.idArrendador;
                     esteInmu.tipoArrendador = inmueble.tipoArrendador;
-                    esteInmu.idDireccion = inmueble.idDireccion;
+                    
                     
                     db.SaveChanges();
-                    inmu.cantAmbientes = inmueble.cantAmbientes;
-                    inmu.cantBanos = inmueble.cantBanos;
-                    inmu.cantHabitaciones = inmueble.cantHabitaciones;
-                    inmu.cochera = inmueble.cochera;
-                    inmu.descripcionInmueble = inmueble.descripcionInmueble;
-                    inmu.incluyeExpensas = inmueble.incluyeExpensas;
-                    inmu.mtsCuadrados = inmueble.mtsCuadrados;
-                    inmu.mtsCuadradosInt = inmueble.mtsCuadradosInt;
-                    inmu.permiteMascota = inmueble.permiteMascota;
-                    inmu.idArrendador = inmueble.idArrendador;
-                    inmu.tipoArrendador = inmueble.tipoArrendador;
-                    inmu.idDireccion = inmueble.idDireccion;
-                    inmu.idInmueble = inmueble.idInmueble;
+                   
                     //inmu.direccion.idDireccion = inmueble.direccion.idDireccion;
 
                     //inmu.direccion.nombreCalle = inmueble.direccion.nombreCalle;
@@ -102,7 +100,7 @@ namespace ArrendaSysServicios
 
                 };
 
-                return inmu;
+                return inmueble;
             }
 
         }
