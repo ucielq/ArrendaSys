@@ -3,6 +3,8 @@
     ViewBag.Title = "AgregarInmueble";
 }
 
+
+
 <style>
     .select2 {
         width: 100%;
@@ -25,7 +27,15 @@
                                 <div class="row" style="padding-top:6px">
                                     <div id="alertcalle"></div>
                                     <div id="alertnumero"></div>
-                                    <div id="alertcantAmbInmueble"></div>
+                                    <div id="alertcantidadambientes"></div>
+                                    <div id="alertbarrio"></div>
+                                    <div id="alertpiso"></div>
+                                    <div id="alertdepartamento"></div>
+                                    <div id="alertcantidadhabitaciones"></div>
+                                    <div id="alertcantidadbaños"></div>
+                                    <div id="alertcantidadmetros"></div>
+                                    <div id="alertcantidadmetrosinternos"></div>
+
                                     <div class="col-md-2">
                                         <label for="provincia">Provincia</label>
                                         <br />
@@ -33,7 +43,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="departamento">Departamento</label>
-                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento" onchange="ObtenerLocalidad(-1)">
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamentoid" onchange="ObtenerLocalidad(-1)">
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -45,7 +55,7 @@
                                 <br />
                                 <div class="row" style="padding-top:6px">
                                     <div class="col-md-2">
-                                        
+
                                         <label for="calle">Calle</label>
                                         <br />
                                         <textarea class="form-control obligatoria" id="calle" name="calle"></textarea>
@@ -59,17 +69,17 @@
                                     <div class="col-md-2">
                                         <label for="barrio">Barrio</label>
                                         <br />
-                                        <textarea class="form-control" id="barrio" name="barrio"></textarea>
+                                        <textarea class="form-control obligatoria" id="barrio" name="barrio"></textarea>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="manzana">Manzana</label>
+                                        <label for="piso">Piso</label>
                                         <br />
-                                        <textarea class="form-control" id="manzana" name="manzana"></textarea>
+                                        <textarea class="form-control obligatoria" id="piso" name="piso"></textarea>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="lote">Lote</label>
+                                        <label for="departamento">Departamento</label>
                                         <br />
-                                        <textarea class="form-control" id="lote" name="lote"></textarea>
+                                        <textarea class="form-control obligatoria" id="departamento" name="departamento"></textarea>
                                     </div>
                                 </div>
                                 <br />
@@ -78,27 +88,27 @@
                                     <div class="col-md-2">
                                         <label for="cantAmbInmueble">Cantidad Ambientes</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="cantAmbInmueble" name="cantAmbInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadambientes" name="cantAmbInmueble" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="cantHabInmueble">Cantidad Habiaciones</label>
+                                        <label for="cantHabInmueble">Cantidad Habitaciones</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="cantHabInmueble" name="cantHabInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadhabitaciones" name="cantHabInmueble" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantBanInmueble">Cantidad de Baños</label>
 
-                                        <textarea class="form-control" id="cantBanInmueble" name="cantBanInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadbaños" name="cantBanInmueble" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantMtInmueble">Cantidad Metros Cuadrados</label>
 
-                                        <textarea class="form-control" id="cantMtInmueble" name="cantMtInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadmetros" name="cantMtInmueble" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantMtInmuebleInt">Cantidad Metros Cuadrados Interior</label>
                                         <br />
-                                        <textarea class="form-control" id="cantMtInmuebleInt" name="cantMtInmuebleInt" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadmetrosinternos" name="cantMtInmuebleInt" style=" width:150px"></textarea>
                                     </div>
 
                                 </div>
@@ -185,6 +195,7 @@
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
     <script src="~/Scripts/Generales.js"></script>
+    
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 
 </body>
@@ -198,9 +209,9 @@
             allowClear: false,
             width: '100%',
         });
-        CrearOEditar();
         ObtenerDepto(-1);
-
+        CrearOEditar();
+               
     });
     var crear = false;
     var idInmueble;
@@ -229,13 +240,14 @@
                 $("#cantMtInmueble").text(inmueble.mtsCuadrados);
                 $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
                 $("#descrInmueble").text(inmueble.descripcionInmueble);
-                $("#lote").text(inmueble.direccion.idLote);
-                $("#manzana").text(inmueble.direccion.idManzana);
+                $("#departamento").text(inmueble.direccion.idLote);
+                $("#piso").text(inmueble.direccion.idManzana);
                 $("#barrio").text(inmueble.direccion.nombreBarrio);
                 $("#calle").text(inmueble.direccion.nombreCalle);
                 $("#numero").text(inmueble.direccion.numeroCalle);
-                //$("#departamento").text(ObtenerDepto(inmueble.direccion.localidad.idDepartamento));
-                //$("#localidad").text(ObtenerLocalidad());
+                $("#departamentoid").val(inmueble.direccion.localidad.idDepartamento);
+                $("#departamentoid").change();
+                ObtenerLocalidad(inmueble.direccion.localidad.idLocalidad);
                 if (inmueble.permiteMascota == true) {
                     $("#mascota").val(1);
                     $("#mascota option[value='1'").attr("selected", true).change();
@@ -258,6 +270,7 @@
                     $("#cochera").val(2);
                     $("#cochera option[value='2'").attr("selected", true).change();
                 }
+
             }
         });
     }
@@ -286,15 +299,13 @@
             direccion.localidad = localidad;
             inmueble.direccion = direccion;
 
-            departamento.idDepartamento = $("#departamento").val();
-            //departamento.nombreDepartamento=
+            departamento.idDepartamento = $("#departamentoid").val();
             localidad.idLocalidad = $("#localidad").val();
             direccion.nombreCalle = $("#calle").val();
             direccion.numeroCalle = $("#numero").val();
             direccion.nombreBarrio = $("#barrio").val();
-            direccion.idlote = $("#lote").val();
-            direccion.idManzana = $("#manzana").val();
-
+            direccion.idlote = $("#departamento").val();
+            direccion.idManzana = $("#piso").val();
 
             if (crear) {
                 //No le agrego el idInmueble
@@ -330,23 +341,24 @@
         $.ajax({
             type: 'Get',
             url: '/Api/Departamento/ObtenerDepto',
+            async: false,
             success: function (respuesta) {
                 listaDepto = respuesta;
                 if (departamento == -1) {
-                    $('#departamento').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                    $('#departamentoid').append($('<option selected>').val(-1).text("Seleccione una opción"))
                 }
                 else {
-                    $('#departamento').append($('<option>').val(-1).text("Seleccione una opción"))
+                    $('#departamentoid').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
 
                 $.each(respuesta, function (index, result) {
 
                     if (departamento == result.idDepartamento) {
-                        $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
+                        $('#departamentoid').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
 
                     }
                     else {
-                        $('#departamento').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
+                        $('#departamentoid').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
 
                     }
                 });
@@ -354,11 +366,12 @@
         });
     }
     function ObtenerLocalidad(localidad) {
-        var idDepto = $("#departamento").val();
+        var idDepto = $("#departamentoid").val();
         $("#localidad").empty();
         $.ajax({
             type: 'Get',
             url: '/Api/Localidad/ObtenerLocalidad?idDepto=' + idDepto,
+            async: false,
             success: function (respuesta) {
                 listaLocalidad = respuesta;
                 if (localidad == -1) {
@@ -442,6 +455,7 @@
         });
         return respuesta;
     }
-
+   
 
 </script>
+
