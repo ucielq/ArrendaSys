@@ -45,7 +45,8 @@ namespace ArrendaSysServicios
                     permiteMascota = inmueble.permiteMascota,
                     idArrendador = inmueble.idArrendador,
                     tipoArrendador = inmueble.tipoArrendador,
-                    idDireccion = ultimadireccion.idDireccion
+                    idDireccion = ultimadireccion.idDireccion,
+                    //estadoInmueble= 'Activo'
                 };
 
                 db.Inmueble.Add(inmueble1);
