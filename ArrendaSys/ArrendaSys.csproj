@@ -170,6 +170,7 @@
     <Compile Include="Controllers\Api\LoginApiController.cs" />
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\PublicacionApiController.cs" />
+    <Compile Include="Controllers\Api\ReseñaApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
@@ -826,6 +827,7 @@
     <Folder Include="Views\InmuebleApi\" />
     <Folder Include="Views\PropietarioApi\" />
     <Folder Include="Views\RecuperarContrasenia\" />
+    <Folder Include="Views\ReseñaApi\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
