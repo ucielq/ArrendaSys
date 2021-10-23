@@ -289,6 +289,7 @@
     <Content Include="assets\img\team\renzoubeira.jpg" />
     <Content Include="assets\img\team\sebastiansoto.jpg" />
     <Content Include="assets\img\team\ucielquiroga.jpg" />
+    <Content Include="assets\img\turismo-mendoza.jpg" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\vendor\animate.css\animate.compat.css" />
     <Content Include="assets\vendor\animate.css\animate.css" />
@@ -815,6 +816,7 @@
     <Content Include="Views\Login\ModuloDenegado.cshtml" />
     <Content Include="Views\Login\RecuperarContrasenia.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItemsResenias.cshtml" />
+    <Content Include="Views\Configuraciones\AdministrarItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

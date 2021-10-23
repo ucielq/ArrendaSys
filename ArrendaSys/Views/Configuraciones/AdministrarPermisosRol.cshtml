@@ -280,7 +280,6 @@
                         var Tlectura = menu.lectura;
                         var Tedicion = menu.edicion;
                         var Teliminacion = menu.eliminacion;
-                        idPermisoRol = menu.idPermisoRol;
                         ObtenerMenus();
                         AgregarNuevoMenu(idMenu, Tlectura, Tedicion, Teliminacion);
                     })
@@ -313,7 +312,6 @@
                 menu.edicion = Tedicion;
                 menu.eliminacion = Teliminacion;
                 menu.idUrl = $(idMenu).val();
-                menu.idPermisoRol = idPermisoRol;
                 rol.menu.push(menu);
             }
 

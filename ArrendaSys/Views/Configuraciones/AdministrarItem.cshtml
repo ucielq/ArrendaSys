@@ -1,0 +1,206 @@
+﻿<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title"><b>Administrar Item</b></h4>
+                        <p class="card-category">Complete los datos.</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div id="alertaItem"></div>
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="bmd-label-floating">Nombre Item</label>
+                                    <input type="text" class="form-control" id="nombreItem" maxlength="50">
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="bmd-label-floating">Asignación:</label>
+                                    <select class="select2 form-control" id="selector" maxlength="50" multiple data-placeholder="Seleccione una opción">
+                                        <option value="1">
+                                            Arrendatario-Inmueble
+                                        </option>
+                                        <option value="2">
+                                            Arrendatario-Arrendador
+                                        </option>
+                                        <option value="3">
+                                            Arrendador-Arrendatario
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="permisoMenu"></div>
+                            <div class="row">
+                                <div class="centrar">
+                                    <br />
+                                    <br />
+                                    <input type="button" class="btn btn-info pull-center" onclick="volver()" value="Volver">
+                                    <button type="button" class="btn botonGuardar" style="background-color:#5cb85c; margin-right:10px;" onclick="GuardarItem()">Guardar </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/select2.min.js"></script>
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+<style>
+
+
+    .centrar {
+        margin: 0 auto;
+    }
+
+    .form-check-input:checked {
+        background-color: #216232;
+        border-color: #216232;
+    }
+</style>
+<script>
+    var idItemResenia = GetUrlVars()["idItemResenia"];
+    var cantidad = 0;
+    var listaMenu = [];
+    var listaDeMenu = [];
+    var idAccesoRol;
+    (function () {
+
+
+        CrearOEditar();
+    })();
+    function convertirSelect2() {
+
+        $('.select2').select2({
+            allowClear: false,
+            width: '90%',
+        });
+    }    
+
+    function selector(id, menu) {
+        //función que carga los datos de los empleados en el selector
+        var idSelect = '#' + id;
+
+        if (menu == -1) {
+            $(idSelect).append($('<option selected>').val(-1).text("Seleccione una opción"))
+        }
+        else {
+            $(idSelect).append($('<option>').val(-1).text("Seleccione una opción"))
+        }
+        $.each(listaMenu, function (index, result) {
+            if (menu == result.idUrl) {
+                $(idSelect).append($('<option selected>').val(result.idUrl).text(result.nombreUrl))
+            }
+            else {
+                $(idSelect).append($('<option>').val(result.idUrl).text(result.nombreUrl))
+            }
+
+        });
+
+    }
+    function volver() {
+        window.location.href = '/Configuraciones/AdministrarItemsResenias';
+    }
+    function CrearOEditar() {
+        debugger;
+        if (idItemResenia != undefined) {
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Configuraciones/ConsultarItem?idItem=' + idItemResenia,
+                success: function (item) {
+                    $("#nombreItem").val(item.nombreItemReseña);
+                    convertirSelect2();
+                    $("#selector").empty();
+                    var a = "";
+                    if (item.IR_esAI == true) {
+                        a = a + "<option value='1' selected>Arrendatario-Inmueble</option>";
+                    } else {
+                        a = a + "<option value='1'>Arrendatario-Inmueble</option>";
+                    }
+                    if (item.IR_esAoAr == true) {
+                        a = a + "<option value='2' selected>Arrendatario-Arrendador</option>";
+                    } else {
+                        a = a + "<option value='2'>Arrendatario-Arrendador</option>";
+                    }
+                    if (item.IR_esArAo == true) {
+                        a = a + "<option value='3' selected>Arrendador-Arrendatario</option>";
+                    } else {
+                        a = a + "<option value='3'>Arrendador-Arrendatario</option>";
+                    }
+                    $("#selector").append(a);
+                }
+            })
+        }
+        else {
+            convertirSelect2();
+        }
+
+    }
+    function GuardarItem() {
+        if (ValidarItem()) {
+            var idItemResenia = GetUrlVars()["idItemResenia"];
+            var item = new Object();
+            if (idItemResenia == undefined) {
+                item.idItemReseña = null;
+            } else {
+                item.idItemReseña = parseInt(idItemResenia);
+            }
+            
+            item.nombreItemReseña = $("#nombreItem").val();
+            item.IR_esAI = false;
+            item.IR_esAoAr = false;
+            item.IR_esArAo = false;
+            var selected = $("#selector").val();
+            $.each(selected, function (index, result) {
+                if (result == 1) {
+                    item.IR_esAI = true;
+                }
+                if (result == 2) {
+                    item.IR_esArAo = true;
+                    
+                }
+                if (result == 3) {
+                    item.IR_esAoAr = true;
+                }
+            });
+            debugger;
+            $.ajax({
+                type: 'POST',
+                url: '/Api/Configuraciones/GuardarItem',
+                dataType: "json",
+                data:item,
+                success: function (codigo) {
+                    window.location.href = '/Configuraciones/AdministrarItemsResenias';
+                }
+            })
+        }
+    }
+    $("#nombreItem").keydown(function () {
+        $("#alertaItem").clearQueue();
+        $("#alertaItem").empty();
+    });
+    function ValidarItem() {
+
+        if ($("#nombreItem").val() == "") {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe escribir un <b>Nombre de Item</b>.</span>" +
+                "</div>";
+
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+            
+            $("#nombreItem").focus();
+            return false;
+        }
+        return true;
+    }
+</script>

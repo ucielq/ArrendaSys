@@ -99,14 +99,9 @@
                     orderable: false,
                     data: "nombreItemReseña",
                     "render": function (data) {
-                        if (data != "") {
-                            var botones = "<button class='fa fa-edit' onclick='EditarPermiso(this)'></button>";
+                        var botones = "<button class='fa fa-edit' onclick='EditarItem(this)'></button>  <button class='fa fa-trash' onclick='EliminarItem(this)'></button>";
 
-                            return botones
-                        } else {
-                            var recuperar = "<button class='fa fa-edit' onclick='EditarPermiso(this)'></button>";
-                            return recuperar
-                        }
+                        return botones
                     },
                     "width": 36,
                 }
@@ -115,8 +110,21 @@
             "language": idiomaEspanol
         });
     }
-    function EditarPermiso(btn) {
+    function EditarItem(btn) {
         var id = table.row($(btn).parents('tr')).data();
-        window.location.href = '/Configuraciones/AdministrarItem?idItemReseña=' + id.idItemReseña;
+        window.location.href = '/Configuraciones/AdministrarItem?idItemResenia=' + id.idItemReseña;
+    }
+    function EliminarItem(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Configuraciones/EliminarItem?idItem=' + id.idItemReseña,
+            success: function (item) {
+                location.reload();
+            }
+        })
+    }
+    function AgregarItem() {
+        window.location.href = '/Configuraciones/AdministrarItem';
     }
 </script>
