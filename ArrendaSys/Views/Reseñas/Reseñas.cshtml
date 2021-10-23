@@ -7,7 +7,7 @@
 <style>
     /*seccion cabecera*/
 
-   /*.padding {
+    /*.padding {
         padding: 3rem !important;
         margin-left: 200px
     } */
@@ -187,6 +187,74 @@
     .mb-100 {
         margin-bottom: 100px
     }
+
+    /*SECCION PUNTUACION ESTRELLA*/
+    body {
+        font-family: sans-serif;
+        background: #f1f1f1;
+    }
+
+    table {
+        margin: 0 auto;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid #d4d4d4;
+        font-size: 20px;
+        background: #fff;
+    }
+
+        table th,
+        table tr:nth-child(2n+2) {
+            background: #e7e7e7;
+        }
+
+        table th,
+        table td {
+            padding: 20px 50px;
+        }
+
+        table th {
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+    .stars-outer {
+        display: inline-block;
+        position: relative;
+        font-family: FontAwesome;
+    }
+
+        .stars-outer::before {
+            content: "\f006 \f006 \f006 \f006 \f006";
+        }
+
+    .stars-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+
+        .stars-inner::before {
+            content: "\f005 \f005 \f005 \f005 \f005";
+            color: #f8ce0b;
+        }
+
+    .attribution {
+        font-size: 12px;
+        color: #444;
+        text-decoration: none;
+        text-align: center;
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        z-index: -1;
+    }
+
+        .attribution:hover {
+            color: #1fa67a;
+        }
 </style>
 <html class="no-js">
 
@@ -198,8 +266,13 @@
     <meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
     <meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
     <meta name="author" content="FreeHTML5.co" />
+
+    <!-- Relacionado a Puntuacion Estrella-->
+    <script src="https://kit.fontawesome.com/3ac005a31a.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+
 
     <!-- <div id="headerUsuario" style="background-image: src(https://imgur.com/6eAZxdz); " data-stellar-background-ratio="0.5"> -->
     <!--<div class="overlay"></div> -->
@@ -210,132 +283,109 @@
     <!--<h5>telefono arrendatario</h5> -->
     <!--</div> -->
     <!--</div> -->
-
-            <!-- Column -->
-            <div class="cardRes">
-                <img class="card-img-top" src="https://i.imgur.com/K7A78We.jpg" alt="Card image cap">
-                <div class="card-body little-profile text-center">
-                    <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
-                    <h3 class="m-b-0">Arrendatario: Rodrigo Acevedo</h3>
-                    <p>Direccion del arrendatario</p> <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Telefono</a>
-                    <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Email</a>
-                    <div class="row text-center m-t-20">
-                            <!-- <div class="col-lg-4 col-md-4 m-t-20">
-                                <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
-                            </div>
-                            <div class="col-lg-4 col-md-4 m-t-20">
-                                <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
-                            </div>
-                            <div class="col-lg-4 col-md-4 m-t-20">
-                                <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
-                            </div> -->
-                        </div>
-                    </div>
+    <!-- Column -->
+    <div class="cardRes">
+        <img class="card-img-top" src="https://i.imgur.com/K7A78We.jpg" alt="Card image cap">
+        <div class="card-body little-profile text-center">
+            <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
+            <h3 class="m-b-0">Arrendatario: Rodrigo Acevedo</h3>
+            <p>Direccion del arrendatario</p> <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Telefono</a>
+            <a href="javascript:void(0)" class="m-t-10 waves-effect waves-dark btn btn-primary btn-md btn-rounded" data-abc="true">Email</a>
+            <div class="row text-center m-t-20">
+                <!-- <div class="col-lg-4 col-md-4 m-t-20">
+                    <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
                 </div>
-
-        <div class="container d-flex justify-content-center mt-50 mb-100">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="cardR">
-                        <div class="card-body">
-                            <h4 class="card-title">Reseñas:</h4>
-                            <h6 class="card-subtitle">ultimas reseñas para el usuario</h6>
-                        </div>
-                        <div class="comment-widgets m-b-20">
-                            <div class="d-flex flex-row comment-row">
-                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div>-->
-                                <div class="comment-text w-100">
-                                    <h5>Carlos Ventura</h5>
-                                    <div class="comment-footer"> <span class="date">April 30, 2021</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
-                                    <p class="m-b-5 m-t-10">Rodrigo ha cumplido con el pago de este mes e incluso adelanto el de los proximos dos meses, el trato ha sido excelente y ha cuidado la propiedad perfectamente</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row comment-row ">
-                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/tT8rjKC.jpg" alt="user" width="50"></span></div> -->
-                                <div class="comment-text active w-100">
-                                    <h5>Carlos Ventura</h5>
-                                <div class="comment-footer"> <span class="date">March 30, 2021</span> <span class="label label-success">Approved</span> <span class="action-icons active"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right text-success"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart text-danger"></i></a> </span> </div>
-                                    <p class="m-b-5 m-t-10">Hubo problemas respecto a las cañerias del baño, Hubo un atasco debido a mugre que tiraba Rodrigo en el lavador de manos, pero el solo se hizo cargo del pago y arreglo de los mismos</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row comment-row">
-                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/cAdLHeY.jpg" alt="user" width="50"></span></div> -->
-                                <div class="comment-text w-100">
-                                    <h5>Julieta Rodriguez</h5>
-                                    <div class="comment-footer"> <span class="date">Feb 28, 2021</span> <span class="label label-danger">Rejected</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
-                                    <p class="m-b-5 m-t-10">Se termina el contrato con Rodrigo, si hay algo que debo decir es que ha sido muy respetuoso tanto conmigo como con el departamento, siempre todo limpio y nunca tuvo problemas con los vecinos. Una gran persona fue un placer compartir con el estos meses de contrato.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row comment-row">
-                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
-                                <div class="comment-text w-100">
-                                    <h5>Julieta Rodriguez</h5>
-                                    <div class="comment-footer"> <span class="date">Jan 30, 2021</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
-                                    <p class="m-b-5 m-t-10">Mes completamente Normal, no ha habido problemas y rodrigo ha cumplido con el pago en tiempo y forma</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row comment-row">
-                               <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
-                                <div class="comment-text w-100">
-                                    <h5>Julieta Rodriguez</h5>
-                                    <div class="comment-footer"> <span class="date">Dec 30, 2020</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
-                                    <p class="m-b-5 m-t-10">Comienza el contrato por 3 meses con rodrigo, este primer mes ha sido un lujo, Rodrigo encontro algunos defectos en el departamento, y llegamos a un acuerdo para el arreglo de los mismos.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row comment-row">
-                                <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
-                                <div class="comment-text w-100">
-                                    <h5>Andres Nagaro</h5>
-                                    <div class="comment-footer"> <span class="date">Nov 30, 2020</span> <span class="label label-info">Pending</span> <span class="action-icons"> <a href="#" data-abc="true"><i class="fa fa-pencil"></i></a> <a href="#" data-abc="true"><i class="fa fa-rotate-right"></i></a> <a href="#" data-abc="true"><i class="fa fa-heart"></i></a> </span> </div>
-                                    <p class="m-b-5 m-t-10">Finaliza el contrato de alquiler con Rodrigo, Un joven muy entusiasta y respetuoso, hubo un poco de problemas con los vecinos por ruidos, pero mas alla de eso no ha habido ningun problema</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-4 col-md-4 m-t-20">
+                    <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
                 </div>
+                <div class="col-lg-4 col-md-4 m-t-20">
+                    <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
+                </div> -->
             </div>
+            <table><tr class="hotel_a"><td>Puntuacion: </td> <td><div class="stars-outer"> <div class="stars-inner"> </div></div></td></tr></table>
         </div>
-
-
-        <div class="fh5co-section">
+    </div>
+    <div class="container d-flex justify-content-center mt-50 mb-100">
+        <div class="row">
             <div class="col-md-12">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-12 section-heading">
-                            <h2>Haz tu Reseña</h2>
+                <div class="cardR">
+                    <div class="card-body">
+                        <h4 class="card-title">Reseñas:</h4>
+                        <h6 class="card-subtitle">ultimas reseñas para el usuario</h6>
+                    </div>
+                    <div class="comment-widgets m-b-20">
+                        <div class="d-flex flex-row comment-row">
+                            <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div>-->
+                            <div class="comment-text w-100">
+                                <h5>Carlos Ventura</h5>
+                                <div class="comment-footer"> <span class="date">April 30, 2021</span> <span class="label label-info">Pending</span> <span class="hotel_a"> <td>Puntuacion: </td><div class="stars-outer"> <div class="stars-inner"> </div></div></span> </div>
+                                <p class="m-b-5 m-t-10">Rodrigo ha cumplido con el pago de este mes e incluso adelanto el de los proximos dos meses, el trato ha sido excelente y ha cuidado la propiedad perfectamente</p>
+                            </div>
                         </div>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                            <div class="col-md-12">
-                                <form action="#">
-
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <textarea name="email" id="email" cols="30" class="form-control" rows="10" placeholder="Message"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <input type="submit" class="btn btn-primary btn-outline btn-lg btn-block" value="Submit">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
+                        <div class="d-flex flex-row comment-row ">
+                            <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/tT8rjKC.jpg" alt="user" width="50"></span></div> -->
+                            <div class="comment-text active w-100">
+                                <h5>Carlos Ventura</h5>
+                                <div class="comment-footer"> <span class="date">March 30, 2021</span> <span class="label label-success">Approved</span> <span class="puntuacionEstrella"> <div class="stars-outer"> <div class="stars-inner"> </div></div> </span> </div>
+                                <p class="m-b-5 m-t-10">Hubo problemas respecto a las cañerias del baño, Hubo un atasco debido a mugre que tiraba Rodrigo en el lavador de manos, pero el solo se hizo cargo del pago y arreglo de los mismos</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row comment-row">
+                            <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/cAdLHeY.jpg" alt="user" width="50"></span></div> -->
+                            <div class="comment-text w-100">
+                                <h5>Julieta Rodriguez</h5>
+                                <div class="comment-footer"> <span class="date">Feb 28, 2021</span> <span class="label label-danger">Rejected</span> <span class="puntuacionEstrella"> <div class="stars-outer"> <div class="stars-inner"> </div></div> </span> </div>
+                                <p class="m-b-5 m-t-10">Se termina el contrato con Rodrigo, si hay algo que debo decir es que ha sido muy respetuoso tanto conmigo como con el departamento, siempre todo limpio y nunca tuvo problemas con los vecinos. Una gran persona fue un placer compartir con el estos meses de contrato.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row comment-row">
+                            <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
+                            <div class="comment-text w-100">
+                                <h5>Julieta Rodriguez</h5>
+                                <div class="comment-footer"> <span class="date">Jan 30, 2021</span> <span class="label label-info">Pending</span> <span class="puntuacionEstrella"> <div class="stars-outer"> <div class="stars-inner"> </div></div> </span> </div>
+                                <p class="m-b-5 m-t-10">Mes completamente Normal, no ha habido problemas y rodrigo ha cumplido con el pago en tiempo y forma</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row comment-row">
+                            <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
+                            <div class="comment-text w-100">
+                                <h5>Julieta Rodriguez</h5>
+                                <div class="comment-footer"> <span class="date">Dec 30, 2020</span> <span class="label label-info">Pending</span> <span class="puntuacionEstrella"> <div class="stars-outer"> <div class="stars-inner"> </div></div> </span> </div>
+                                <p class="m-b-5 m-t-10">Comienza el contrato por 3 meses con rodrigo, este primer mes ha sido un lujo, Rodrigo encontro algunos defectos en el departamento, y llegamos a un acuerdo para el arreglo de los mismos.</p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row comment-row">
+                            <!-- <div class="p-2"><span class="round"><img src="https://i.imgur.com/uIgDDDd.jpg" alt="user" width="50"></span></div> -->
+                            <div class="comment-text w-100">
+                                <h5>Andres Nagaro</h5>
+                                <div class="comment-footer"> <span class="date">Nov 30, 2020</span> <span class="label label-info">Pending</span> <span class="puntuacionEstrella"> <div class="stars-outer"> <div class="stars-inner"> </div></div> </span> </div>
+                                <p class="m-b-5 m-t-10">Finaliza el contrato de alquiler con Rodrigo, Un joven muy entusiasta y respetuoso, hubo un poco de problemas con los vecinos por ruidos, pero mas alla de eso no ha habido ningun problema</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        </div>
+</body>
+</html>
+<script>
+    const ratings = {
+        hotel_a: 5.8,
+        hotel_b: 3.3,
+        hotel_c: 1.9,
+        hotel_d: 4.3,
+        hotel_e: 4.74
+    };
 
+    // total number of stars
+    const starTotal = 10;
 
-    </body>
-        </html>
+    for (const rating in ratings) {
+        const starPercentage = (ratings[rating] / starTotal) * 100;
+        const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+        document.querySelector(`.${rating} .stars-inner`).style.width = starPercentageRounded;
+    }
+</script>
