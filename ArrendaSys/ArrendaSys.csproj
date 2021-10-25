@@ -158,6 +158,7 @@
     <Compile Include="Controllers\Acceso\PermisoAttributeController.cs" />
     <Compile Include="Controllers\Acceso\SessionUtilityAttributeController.cs" />
     <Compile Include="Controllers\AlquileresController.cs" />
+    <Compile Include="Controllers\Api\ABMPublicacionApiController.cs" />
     <Compile Include="Controllers\Api\AlquilerApiController.cs" />
     <Compile Include="Controllers\Api\ArchivoApiController.cs" />
     <Compile Include="Controllers\Api\ArrendatarioApiController.cs" />
@@ -823,6 +824,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\es\" />
     <Folder Include="TempFolder\" />
+    <Folder Include="Views\ABMPublicacionApi\" />
     <Folder Include="Views\ArchivoApi\" />
     <Folder Include="Views\DepartamentoApi\" />
     <Folder Include="Views\Departamento\" />

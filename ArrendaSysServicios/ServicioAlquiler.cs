@@ -9,6 +9,7 @@ using System.Configuration;
 using ArrendaSysModelos;
 using ArrendaSysServicios.Modelos;
 using ArrendaSysUtilidades;
+using System.Globalization;
 
 namespace ArrendaSysServicios
 {
@@ -27,14 +28,17 @@ namespace ArrendaSysServicios
                     var alquileres = (from a in db.Alquiler
                                       join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                       join p in db.Propietario on i.idArrendador equals p.idPropietario
-                                      where p.idPropietario == id
+                                      join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                      join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                      where p.idPropietario == id && ae.fechaBajaAlquilerEstado==null
                                       select new AlquileresViewModel
                                       {
                                           idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                          fechaAltaAlquiler =a.fechaAltaAlquiler,
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble
+                                          idInmueble = a.idInmueble,
+                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -45,14 +49,17 @@ namespace ArrendaSysServicios
                     var alquileres = (from a in db.Alquiler
                                       join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                       join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
-                                      where p.idInmobiliaria == idCuenta
+                                      join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                      join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                      where p.idInmobiliaria == idCuenta && ae.fechaBajaAlquilerEstado == null
                                       select new AlquileresViewModel
                                       {
                                           idAlquiler = a.idAlquiler,
                                           fechaAltaAlquiler = a.fechaAltaAlquiler,
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble
+                                          idInmueble = a.idInmueble,
+                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -63,14 +70,17 @@ namespace ArrendaSysServicios
                     //
                     var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
                     var alquileres = (from a in db.Alquiler
-                                      where a.idArrendatario == idCuenta
+                                      join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                      join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                      where a.idArrendatario == idCuenta && ae.fechaBajaAlquilerEstado == null
                                       select new AlquileresViewModel
                                       {
                                           idAlquiler = a.idAlquiler,
                                           fechaAltaAlquiler = a.fechaAltaAlquiler,
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble
+                                          idInmueble = a.idInmueble,
+                                          descripcionEstadoAlquiler=ea.nombreEstadoAlquiler
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -87,7 +97,7 @@ namespace ArrendaSysServicios
             {
 
                 Alquiler alquiler1 = new Alquiler();
-
+                
 
                 alquiler1.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
                 alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
@@ -97,10 +107,31 @@ namespace ArrendaSysServicios
                 db.Alquiler.Add(alquiler1);
 
                 db.SaveChanges();
-
+                //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
+                CrearAlquilerEstado(alquiler1.idAlquiler);
                 return 1;
 
             }
+        }
+        public void CrearAlquilerEstado(int? id)
+        {
+            AlquilerEstado alqEstado = new AlquilerEstado();
+            alqEstado.fechaAltaAlquilerEstado = DateTime.Now;
+            alqEstado.fechaBajaAlquilerEstado = null;
+            alqEstado.idEstadoAlquiler = 3;
+            alqEstado.idAlquiler = id;
+            db.AlquilerEstado.Add(alqEstado);
+            db.SaveChanges();
+        }
+        public void CrearInmuebleEstado(int? id)
+        {
+            AlquilerEstado alqEstado = new AlquilerEstado();
+            alqEstado.fechaAltaAlquilerEstado = DateTime.Now;
+            alqEstado.fechaBajaAlquilerEstado = null;
+            alqEstado.idEstadoAlquiler = 3;
+            alqEstado.idAlquiler = id;
+            db.AlquilerEstado.Add(alqEstado);
+            db.SaveChanges();
         }
 
 
@@ -111,7 +142,14 @@ namespace ArrendaSysServicios
                 var alquiler1 = db.Alquiler.Where(x => x.idAlquiler == idAlquiler).FirstOrDefault();
                 if (alquiler1 != null)
                 {
-                    db.Alquiler.Remove(alquiler1);
+
+                    var alquilerEstado = db.AlquilerEstado.Where(x => x.idAlquiler == idAlquiler && x.fechaBajaAlquilerEstado == null).FirstOrDefault();
+                    alquilerEstado.fechaBajaAlquilerEstado = DateTime.Now;
+                    AlquilerEstado nuevoEstado = new AlquilerEstado();
+                    nuevoEstado.fechaAltaAlquilerEstado = DateTime.Now;
+                    nuevoEstado.idEstadoAlquiler = 2;
+                    nuevoEstado.idAlquiler = idAlquiler;
+                    db.AlquilerEstado.Add(nuevoEstado);              
                     db.SaveChanges();
                 }
             }

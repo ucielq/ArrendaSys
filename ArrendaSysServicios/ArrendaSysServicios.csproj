@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encrypt.cs" />
+    <Compile Include="Modelos\ABMPublicacionViewModel.cs" />
     <Compile Include="Modelos\AlquileresViewModel.cs" />
     <Compile Include="Modelos\ArchivoVM.cs" />
     <Compile Include="Modelos\DepartamentoViewModel.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Modelos\RolViewModel.cs" />
     <Compile Include="Modelos\URLViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServicioABMPublicacion.cs" />
     <Compile Include="ServicioAlquiler.cs" />
     <Compile Include="ServicioArrendatario.cs" />
     <Compile Include="ServicioCuenta.cs" />
