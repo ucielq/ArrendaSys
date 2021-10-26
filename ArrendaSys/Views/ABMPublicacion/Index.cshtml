@@ -30,7 +30,7 @@
                         <div class="col-md12">
                             <div class="col-md12">
                                 <br />
-                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> + Agregar</button>
+                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
                                 <br />
                             </div>
 
@@ -218,7 +218,7 @@
                {data:"idPublicacion",
                     orderable: false,
                     "render": function () {
-                        var botones = "<button class='fa fa-edit' onclick='EditarPublicacion(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarPublicacion(this)'></button>  <button class='far fa-eye' onclick='VerPublicacion(this)'></button>";
+                        var botones = "<button class='fa fa-edit' onclick='EditarPublicacion(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarPublicacion(this)'></button>  <button class='fas fa-eye' onclick='VerPublicacion(this)'></button>";
                             return botones
                     },
                     "width": 35,
@@ -265,7 +265,7 @@
         $.ajax({
             type: 'Post',
             url: '/Api/ABMPublicacion/CrearPublicacion',
-            data: alquiler,
+            data: publicacion,
             success: function (result) {
                 window.location.href = "/ABMPublicacion";
             }
