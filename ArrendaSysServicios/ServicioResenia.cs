@@ -12,15 +12,14 @@ using ArrendaSysUtilidades;
 
 namespace ArrendaSysServicios
 {
-    public class ServicioReseña
+    public class ServicioResenia
     {
         public ArrendasysEntities db = new ArrendasysEntities();
         // ----------------------METODOS  ------------
-        public object ListarAlquileres(int idCuenta, int tipoCuenta)
+        public object ListarItemsReseñaPropietario(int idCuenta, int tipoCuenta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                
                 if (tipoCuenta == 3)
                 {
                     var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
@@ -78,23 +77,22 @@ namespace ArrendaSysServicios
 
             }
         }
-
-
-
-        public int AgregarAlquiler(AlquileresViewModel alquiler)
+        public int AgregarReseña(ReseniaViewModel resenia)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
 
-                Reseña alquiler1 = new Reseña();
+                ReseñaArrendadorArrendatario reseña1 = new ReseñaArrendadorArrendatario();
 
 
-                alquiler1.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
-                alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
-                alquiler1.idArrendatario = alquiler.idArrendatario;
-                alquiler1.idInmueble = alquiler.idInmueble;
+                reseña1.fechaAltaReseñaArAo= resenia.fechaAltaReseñaArAo;
+                reseña1.fechaBajaReseñaArAo = resenia.fechaBajaReseñaArAo;
+                reseña1.idAlquiler = resenia.idAlquiler;
+                reseña1.idReseñaArAo = resenia.idReseñaAoAr;
+                reseña1.puntuacionReseñaArAo = resenia.puntuacionReseñaAoAr;
+                reseña1.descripcionReseñaArAo = resenia.descripcionReseñaArAo;
 
-                db.Reseña.Add(alquiler1);
+                db.ReseñaArrendadorArrendatario.Add(reseña1);
 
                 db.SaveChanges();
 
@@ -102,41 +100,5 @@ namespace ArrendaSysServicios
 
             }
         }
-
-
-        public void EliminarAlquiler(int idAlquiler)
-        {
-            using (ArrendasysEntities db = new ArrendasysEntities())
-            {
-                var alquiler1 = db.Reseña.Where(x => x.idAlquiler == idAlquiler).FirstOrDefault();
-                if (alquiler1 != null)
-                {
-                    db.Reseña.Remove(alquiler1);
-                    db.SaveChanges();
-                }
-            }
-        }
-
-        public AlquileresViewModel ObtenerAlquiler(int idAlquiler)
-        {
-            using (ArrendasysEntities db = new ArrendasysEntities())
-            {
-                AlquileresViewModel alquiler = (from i in db.Reseña
-                                                where i.idAlquiler == idAlquiler
-                                                select new AlquileresViewModel
-                                                {
-                                                    idAlquiler = i.idAlquiler,
-                                                    fechaAltaAlquiler = i.fechaAltaAlquiler,
-                                                    fechaBajaAlquiler = i.fechaBajaAlquiler,
-                                                    idArrendatario = i.idArrendatario,
-                                                    idInmueble = i.idInmueble
-                                                }).FirstOrDefault();
-                return alquiler;
-            }
-        }
-
     }
 }
-
-
-

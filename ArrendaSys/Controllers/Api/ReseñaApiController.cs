@@ -1,14 +1,29 @@
-﻿using System;
+﻿using ArrendaSys.Controllers.Acceso;
+using ArrendaSysServicios;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
-
+using ArrendaSysServicios.Modelos;
 namespace ArrendaSys.Controllers.Api
 {
-    public class ReseñaApiController : Controller
+    [SessionUtility]
+
+    public class ReseñaApiController : ApiController
     {
-        // GET: ReseñaApi
+
+        [System.Web.Http.Route("Api/Reseña/CrearReseña")]
+        [System.Web.Http.ActionName("CrearReseña")]
+        [System.Web.Http.HttpPost]
+        public int Reseña(ReseniaViewModel reseña)
+        {
+            ServicioResenia serv = new ServicioResenia();
+            return serv.AgregarReseña(reseña);
+        }
+
+        /*// GET: ReseñaApi
         public ActionResult Index()
         {
             return View();
@@ -84,6 +99,8 @@ namespace ArrendaSys.Controllers.Api
             {
                 return View();
             }
+       
         }
+        */
     }
 }
