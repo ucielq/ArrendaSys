@@ -23,9 +23,7 @@ namespace ArrendaSysServicios.Modelos
         public int? idInmueble { get; set; }
         public List<ArchivoVM> listaMultimedia { get; set; }
         public DireccionViewModel direccion { get; set; }
-        public string estadoInmueble { get; set; } 
-       
-
+        public InmuebleEstadoViewModel inmuebleestado { get;set;}       
 
     }
 }

@@ -113,6 +113,7 @@
     <Compile Include="Modelos\ArchivoVM.cs" />
     <Compile Include="Modelos\DepartamentoViewModel.cs" />
     <Compile Include="Modelos\DireccionViewModel.cs" />
+    <Compile Include="Modelos\InmuebleEstadoViewModel.cs" />
     <Compile Include="Modelos\InmuebleViewModel.cs" />
     <Compile Include="Modelos\InmobiliariaViewModel.cs" />
     <Compile Include="Modelos\ItemViewModel.cs" />

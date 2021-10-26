@@ -115,7 +115,10 @@
     function AgregarNuevoInmueble() {
         location.href = '/InmueblesPropietario/AgregarInmuebleView';
     }
+
     function EliminarInmueble(idInmueble) {
+
+        $("#exampleModal").modal('show');
         $.ajax({
             type: 'Put',
             url: '/Api/Inmueble/EliminarInmueble?idInmueble=' + idInmueble,

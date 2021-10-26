@@ -17,21 +17,19 @@ namespace ArrendaSysServicios
 
                 Direccion dire = new Direccion
                 {
-
                     nombreCalle = inmueble.direccion.nombreCalle,
                     numeroCalle = inmueble.direccion.numeroCalle,
                     nombreBarrio = inmueble.direccion.nombreBarrio,
                     idManzana = inmueble.direccion.idManzana,
                     idLote = inmueble.direccion.idLote,
                     idLocalidad = inmueble.direccion.localidad.idLocalidad
-
                 };
                 db.Direccion.Add(dire);
                 db.SaveChanges();
 
                 var ultimadireccion = db.Direccion.OrderByDescending(x => x.idDireccion).FirstOrDefault();
                 //dire.idDireccion = ultimadireccion.idDireccion;
-
+                                             
                 Inmueble inmueble1 = new Inmueble
                 {
                     cantAmbientes = inmueble.cantAmbientes,
@@ -45,8 +43,7 @@ namespace ArrendaSysServicios
                     permiteMascota = inmueble.permiteMascota,
                     idArrendador = inmueble.idArrendador,
                     tipoArrendador = inmueble.tipoArrendador,
-                    idDireccion = ultimadireccion.idDireccion,
-                    //estadoInmueble= 'Activo'
+                    idDireccion = ultimadireccion.idDireccion                   
                 };
 
                 db.Inmueble.Add(inmueble1);
@@ -54,6 +51,16 @@ namespace ArrendaSysServicios
                 db.SaveChanges();
                 var ultimo = db.Inmueble.OrderByDescending(x => x.idInmueble).FirstOrDefault();
                 inmueble.idInmueble = ultimo.idInmueble;
+
+                InmuebleEstado inmuest = new InmuebleEstado
+                {
+                    fechaAltaInmuebleEstado = DateTime.Today,
+                    fechaBajaInmuebleEstado = null,
+                    idEstadoInmueble = 1,
+                    idInmueble = inmueble.idInmueble
+                };
+                db.InmuebleEstado.Add(inmuest);
+                db.SaveChanges();
 
                 return inmueble;
             }
@@ -84,23 +91,9 @@ namespace ArrendaSysServicios
                     esteInmu.mtsCuadradosInt = inmueble.mtsCuadradosInt;
                     esteInmu.permiteMascota = inmueble.permiteMascota;
                     esteInmu.idArrendador = inmueble.idArrendador;
-                    esteInmu.tipoArrendador = inmueble.tipoArrendador;
-                    
-                    
-                    db.SaveChanges();
-                   
-                    //inmu.direccion.idDireccion = inmueble.direccion.idDireccion;
-
-                    //inmu.direccion.nombreCalle = inmueble.direccion.nombreCalle;
-                    //inmu.direccion.numeroCalle = inmueble.direccion.numeroCalle;
-                    //inmu.direccion.nombreBarrio = inmueble.direccion.nombreBarrio;
-                    //inmu.direccion.idManzana = inmueble.direccion.idManzana;
-                    //inmu.direccion.idLote = inmueble.direccion.idLote;
-                    //inmu.direccion.idLocalidad = inmueble.direccion.localidad.idLocalidad;
-
-
+                    esteInmu.tipoArrendador = inmueble.tipoArrendador;                                       
+                    db.SaveChanges();                                     
                 };
-
                 return inmueble;
             }
 
@@ -147,7 +140,6 @@ namespace ArrendaSysServicios
                         //Aca borrar las imagenes de la tempFolder
                     }
                     db.SaveChanges();
-
 
                 }
             }
@@ -210,7 +202,9 @@ namespace ArrendaSysServicios
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 var inmuebles = (from i in db.Inmueble
+                                 join ei in db.InmuebleEstado on i.idInmueble equals ei.idInmueble
                                  where i.idArrendador == idPropietario
+                                 where ei.idEstadoInmueble ==1
                                  select new InmuebleViewModel
                                  {
                                      cantAmbientes = i.cantAmbientes,
@@ -225,7 +219,8 @@ namespace ArrendaSysServicios
                                      idArrendador = idPropietario,
                                      tipoArrendador = 2,
                                      idDireccion = i.idDireccion,
-                                     idInmueble = i.idInmueble
+                                     idInmueble = i.idInmueble,
+                                     
                                  }).ToList();
                 foreach (var inmu in inmuebles)
                 {
