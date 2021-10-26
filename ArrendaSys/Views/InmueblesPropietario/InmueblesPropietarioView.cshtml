@@ -32,8 +32,8 @@
                 ¿Seguro que desea eliminar este inmueble?
             </div>
             <div class="modal-footer">
-                <a href="" class="btn btn-outline-secondary btn-sm">Cancelar</a>
-                <a href="" class="btn btn-outline-danger btn-sm">Eliminar</a>
+                <a href="" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">Cancelar</a>
+                <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar">Eliminar</a>
             </div>
         </div>
     </div>
@@ -97,7 +97,7 @@
                         item = item + "<p><i class='fas fa-warehouse'></i>" + "No tiene Cochera" + "</p>";
                     }
                     item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble("+inmueble.idInmueble+")'>Editar</button>";
-                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble +")'>Eliminar</button>";
+                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble +")'>Eliminar</button>";                    
                     item = item + "</div>";
                     item = item + "</div>";
                     item = item + "</div>";
@@ -109,6 +109,9 @@
             }
         });
     })()
+
+
+
     function EditarInmueble(idInmueble) {
         location.href = '/InmueblesPropietario/AgregarInmuebleView?id=' + idInmueble;
     }
@@ -116,15 +119,23 @@
         location.href = '/InmueblesPropietario/AgregarInmuebleView';
     }
 
-    function EliminarInmueble(idInmueble) {
+    
 
+    function EliminarInmueble(idInmueble) {
+        
         $("#exampleModal").modal('show');
-        $.ajax({
-            type: 'Put',
-            url: '/Api/Inmueble/EliminarInmueble?idInmueble=' + idInmueble,
-            success: function (result) {
-                location.href = '/InmueblesPropietario/InmueblesPropietarioView';
-            }
+        $("#btnEliminar").click(function () {          
+            $.ajax({
+                type: 'Put',
+                url: '/Api/Inmueble/EliminarInmueble?idInmueble=' + idInmueble,
+                success: function (result) {
+                    console.log("Exito");
+                    //$("#" + idEliminar).remove();
+                    //$("#exampleModal").modal('hide');
+                    location.href = '/InmueblesPropietario/InmueblesPropietarioView';
+                }
+            });
         });
     }
+
 </script>
