@@ -72,7 +72,7 @@ namespace ArrendaSysServicios
                     var alquileres = (from a in db.Alquiler
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
-                                      where a.idArrendatario == idCuenta && ae.fechaBajaAlquilerEstado == null
+                                      where a.idArrendatario == id && ae.fechaBajaAlquilerEstado == null
                                       select new AlquileresViewModel
                                       {
                                           idAlquiler = a.idAlquiler,

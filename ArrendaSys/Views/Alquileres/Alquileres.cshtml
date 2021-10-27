@@ -23,85 +23,81 @@
                         </div>
 
                     </div>
-
-
-                    <body>
-
+                    <div class="col-md12" id="botonAgregar">
                         <div class="col-md12">
-                            <div class="col-md12">
-                                <br />
-                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
-                                <br />
-                            </div>
-
+                            <br />
+                            <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
+                            <br />
                         </div>
 
-                        <div class="col-md-12" id="formulario" style="display:none">
+                    </div>
 
-                            <div class="row" style="padding-top:6px">
+                    <div class="col-md-12" id="formulario" style="display:none">
 
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Fecha Alta: </span>
-                                    <br />
-                                    <input type="date" class="form-control" id="fechaAltaAlquiler" />
-                                </div>
+                        <div class="row" style="padding-top:6px">
 
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Fecha Baja: </span>
-                                    <br />
-                                    <input type="date" class="form-control" id="fechaBajaAlquiler" />
-                                </div>
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Arrendatario: </span>
-                                    <br />
-                                    <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
-                                </div>
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Inmueble: </span>
-                                    <br />
-                                    <input type="text" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
-                                </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Alta: </span>
+                                <br />
+                                <input type="date" class="form-control" id="fechaAltaAlquiler" />
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-2">
                                 <br />
-                                <div>
-                                    <button type="button" class="btn btn-success" onclick="GuardarAlquiler()"><i class="fas fa-save"></i> Guardar</button>
-                                    <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
-                                </div>
+                                <span>Fecha Baja: </span>
+                                <br />
+                                <input type="date" class="form-control" id="fechaBajaAlquiler" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Arrendatario: </span>
+                                <br />
+                                <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Inmueble: </span>
+                                <br />
+                                <input type="text" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <table id="alquilereslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>idAlquiler</th>
-                                                        <th>Fecha Alta</th>
-                                                        <th>Fecha Baja</th>
-                                                        <th>Arrendatario</th>
-                                                        <th>Inmueble</th>
-                                                        <th>Estado</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-success" onclick="GuardarAlquiler()"><i class="fas fa-save"></i> Guardar</button>
+                                <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <table id="alquilereslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>idAlquiler</th>
+                                                    <th>Fecha Alta</th>
+                                                    <th>Fecha Baja</th>
+                                                    <th>Arrendatario</th>
+                                                    <th>Inmueble</th>
+                                                    <th>Estado</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </body>
+                    </div>
+
 
                 </div>
             </div>
@@ -117,6 +113,9 @@
     var tipoCuenta = parseInt(@tipoCuenta);
     var table;
     (function () {
+        if (tipoCuenta == 2) {
+            $("#botonAgregar").hide();
+        }
         CrearTabla();
     })();
     function CrearTabla() {
@@ -187,9 +186,15 @@
                 { data: "descripcionEstadoAlquiler", "className": "text-left" },
                {data:"idAlquiler",
                     orderable: false,
-                    "render": function () {
-                        var botones = "<button class='fa fa-edit' onclick='EditarAlquiler(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>  <button class='far fa-eye' onclick='VerAlquiler(this)'></button>";
-                            return botones
+                   "render": function () {
+                       if (tipoCuenta == 2) {
+                           var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                           return botones
+                       } else {
+                           var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                           return botones
+                       }
+
                     },
                     "width": 35,
                 }
@@ -200,7 +205,7 @@
     }
 
 
-    function EliminarAlquiler(btn) {     
+    function EliminarAlquiler(btn) {
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
 
@@ -221,7 +226,7 @@
     function mostrarformulario() {
         $("#formulario").show();
     }
-   
+
 
 
     function GuardarAlquiler() {

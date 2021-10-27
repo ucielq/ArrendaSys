@@ -21,5 +21,11 @@ namespace ArrendaSys.Controllers
             System.Web.HttpContext.Current.Session["idCuenta"] = id;
             return RedirectToAction("AdministrarPerfil","Perfil",new {id =id });
         }
+        public ActionResult CambiarTipoCuenta(int tipoCuenta)
+        {
+            System.Web.HttpContext.Current.Session["tipoCuenta"] =tipoCuenta.ToString();
+            return RedirectToAction("Index", "Home");
+
+        }
     }
 }

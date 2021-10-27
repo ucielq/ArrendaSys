@@ -48,9 +48,9 @@
                                         <label for="tipoCuenta">Tipo de cuenta</label>
                                         <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" onchange="cambioTipoCuenta()">
                                             <option value="-1">Seleccione una opción</option>
-                                            <option value="1">Inmobiliaria</option>
-                                            <option value="2">Propietario</option>
-                                            <option value="3">Arrendatario</option>
+                                            <option value="4">Inmobiliaria</option>
+                                            <option value="3">Propietario</option>
+                                            <option value="2">Arrendatario</option>
                                         </select>
                                     </div>
                                 </div>
@@ -168,20 +168,19 @@
         return hash;
     }
     completarDatos();
-    console.log(id);
     function completarDatos() {
         $.ajax({
             type: 'Get',
             url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + idCuenta,
             success: function (result) {
                 completarDatosCuenta(result);
-                if (result.tipoCuenta == 3) {
+                if (result.tipoCuenta == 2) {
                     completarDatosArrendatario(result);
                 }
-                if (result.tipoCuenta == 2) {
+                if (result.tipoCuenta == 3) {
                     completarDatosPropietario(result);
                 }
-                if (result.tipoCuenta == 1) {
+                if (result.tipoCuenta == 4) {
                     completarDatosInmobiliaria(result);
                 }
             }
@@ -195,9 +194,9 @@
     function completarDatosArrendatario(cuentaVM) {
         $("#tipoCuenta").empty();
         var html = '<option value="-1">Seleccione una opción</option>';
-        html = html + '<option value="3" selected>Arrendatario</option>';
-        html = html + '<option value="2">Propietario</option>';
-        html = html + '<option value="1">Inmobiliaria</option>';
+        html = html + '<option value="2" selected>Arrendatario</option>';
+        html = html + '<option value="3">Propietario</option>';
+        html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
         $("#nombreArrendatario").text(cuentaVM.arrendatario.nombreArrendatario);
@@ -209,9 +208,9 @@
     function completarDatosPropietario(cuentaVM) {
         $("#tipoCuenta").empty();
         var html = '<option value="-1">Seleccione una opción</option>';
-        html = html + '<option value="3">Arrendatario</option>';
-        html = html + '<option value="2" selected>Propietario</option>';
-        html = html + '<option value="1">Inmobiliaria</option>';
+        html = html + '<option value="2">Arrendatario</option>';
+        html = html + '<option value="3" selected>Propietario</option>';
+        html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
         $("#nombrePropietario").text(cuentaVM.propietario.nombrePropietario);
@@ -223,9 +222,9 @@
     function completarDatosInmobiliaria(cuentaVM) {
         $("#tipoCuenta").empty();
         var html = '<option value="-1">Seleccione una opción</option>';
-        html = html + '<option value="3">Arrendatario</option>';
-        html = html + '<option value="2">Propietario</option>';
-        html = html + '<option value="1" selected>Inmobiliaria</option>';
+        html = html + '<option value="2">Arrendatario</option>';
+        html = html + '<option value="3">Propietario</option>';
+        html = html + '<option value="4" selected>Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
         $("#nombreInmo").text(cuentaVM.inmobiliaria.nombreInmobiliaria);
@@ -235,17 +234,17 @@
     }
 
     function cambioTipoCuenta() {
-        if ($("#tipoCuenta").val() == 3) {
+        if ($("#tipoCuenta").val() == 2) {
             $(".arrendatario").show();
             $(".propietario").hide();
             $(".inmobiliaria").hide();
         }
-        if ($("#tipoCuenta").val() == 2) {
+        if ($("#tipoCuenta").val() == 3) {
             $(".propietario").show();
             $(".arrendatario").hide();
             $(".inmobiliaria").hide();
         }
-        if ($("#tipoCuenta").val() == 1) {
+        if ($("#tipoCuenta").val() == 4) {
             $(".inmobiliaria").show();
             $(".arrendatario").hide();
             $(".propietario").hide();
@@ -254,7 +253,7 @@
 
 
     function GuardarPerfil() {
-        if ($("#tipoCuenta").val() == 3) {
+        if ($("#tipoCuenta").val() == 2) {
             var arrendatario = new Object();
             arrendatario.nombreArrendatario = $("#nombreArrendatario").val();
             arrendatario.apellidoArrendatario = $("#apellidoArrendatario").val();
@@ -267,11 +266,12 @@
                 url: '/Api/Arrendatario/CrearArrendatario',
                 data:  arrendatario,
                 success: function (result) {
-                    window.location.href = "/Home/Index";
+                    window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=2";
+                    
                 }
             });
         }
-        if ($("#tipoCuenta").val() == 2) {
+        if ($("#tipoCuenta").val() == 3) {
             var propietario = new Object();
             propietario.nombrePropietario = $("#nombrePropietario").val();
             propietario.apellidoPropietario = $("#apellidoPropietario").val();
@@ -284,11 +284,11 @@
                 url: '/Api/Propietario/CrearPropietario',
                 data: propietario,
                 success: function (result) {
-                    window.location.href = "/Home/Index";
+                    window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=3";
                 }
             });
         }
-        if ($("#tipoCuenta").val() == 1) {
+        if ($("#tipoCuenta").val() ==4) {
             var inmobiliaria = new Object();
             inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
             inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
@@ -300,7 +300,7 @@
                 url: '/Api/Inmobiliaria/CrearInmobiliaria',
                 data: inmobiliaria,
                 success: function (result) {
-                    window.location.href = "/Home/Index";
+                    window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=4";
                 }
             });
         }
