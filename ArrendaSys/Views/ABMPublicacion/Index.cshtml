@@ -1,8 +1,7 @@
-﻿<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
-<script src="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+﻿<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/b-2.0.1/cr-1.5.4/fc-4.0.0/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/b-2.0.1/cr-1.5.4/fc-4.0.0/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/jquery.dataTables.colResize.css" />
+<script type="text/javascript" src="~/Scripts/jquery.dataTables.colResize.js"></script>
 @{
     var usuario = Session["usuarioLogeado"];
     var tipoCuenta = Session["tipoCuenta"];
@@ -10,140 +9,267 @@
 }
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Publicaciones</title>
 </head>
 
-<body>
-    <div>
-        <span>Publicaciones</span>
-        <hr />
-    </div>
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <div class="float-left">
+                            <div class="titulo">Administrar Publicaciones</div>
+                        </div>
 
-    <div class="col-md12">
-        <div class="col-md12">
-            <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> + Agregar</button>
-            <br />  
-        </div>
-
-    </div>
-
-
-
-    
-        <div class="col-md-12" id="formulario" style="display:none">
-            <div class="col-md-2">
-
-                <span>Título: </span>
-                <br />
-                <input type="text" class="form-control" id="tituloPublicacion" placeholder="ingrese el título de la publicación" />
-            </div>
-
-            <div class="row" style="padding-top:6px">
-                <div class="col-md-2">
-                    <br />
-                    <span>Precio: </span>
-                    <br />
-                    <input type="text" class="form-control" id="precioAlquiler" placeholder="ingrese el precio de la publicación" />
-
-                </div>
-                <div class="col-md-2">
-                    <br />
-                    <span>Fecha Alta: </span>
-                    <br />
-                    <input type="date" class="form-control" id="fechaAltaPublicacion" />
-
-                </div>
-                <div class="col-md-2">
-                    <br />
-                    <span>Fecha Baja: </span>
-                    <br />
-                    <input type="date" class="form-control" id="fechaBajaPublicacion" />
-
-                </div>
-
-            </div>
-
-            <div class="col-md-2">
-                <br />
-                <span>Descripción: </span>
-                <br />
-                <input type="text" class="form-control" id="descripcionPublicacion" placeholder="ingrese la descripción de la publicación" />
-
-            </div>
-           
-                <div class="col-md-2">
-                    <br />
-                    <span>Inmueble: </span>
-                    <br />
-                    <select class="form-control" id="idInmule">
-                        <option value="value">Inmueble</option>
-                    </select>
-
-                </div>
-
-                <div class="col-md-12">
-                    <br />
-                    <div>
-                        <button type="button" class="btn btn-success" id="btnguardar"><i class="fas fa-save"></i> Guardar</button>
-                        <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
                     </div>
 
 
+                    <body>
+
+                        <div class="col-md12">
+                            <div class="col-md12">
+                                <br />
+                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
+                                <br />
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12" id="formulario" style="display:none">
+
+                            <div class="row" style="padding-top:6px">
+
+                                <div class="col-md-5">
+
+                                    <span>Título: </span>
+                                    <input type="text" class="form-control" id="tituloPublicacion" placeholder="Ingrese el título de la publicación" />
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="padding-top:6px">
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Fecha Alta: </span>
+                                    <br />
+                                    <input type="date" class="form-control" id="fechaAltaPublicacion" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Fecha Baja: </span>
+                                    <br />
+                                    <input type="date" class="form-control" id="fechaBajaPublicacion" />
+                                </div>
+
+
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Precio: </span>
+                                    <br />
+                                    <input type="text" class="form-control" id="precioAlquiler" placeholder="Ingrese el precio del Alquiler" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Inmueble: </span>
+                                    <br />
+                                    <input type="text" class="form-control" id="idInmueble" placeholder="Ingrese el Inmueble" />
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="padding-top:6px">
+                                <div class="col-md-12">
+                                    <br />
+                                    <span>Descipción: </span>
+                                    <input type="text" class="form-control" id="descripcionPublicacion" placeholder="Ingrese descripción de la publicación" />
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <br />
+                                <div>
+                                    <button type="button" class="btn btn-success" onclick="GuardarPublicacion()"><i class="fas fa-save"></i> Guardar</button>
+                                    <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                                </div>
+                            </div>
+                        </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <table id="publicacionlista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>idPublicacion</th>
+                                                            <th>Título</th>
+                                                            <th>Fecha Alta</th>
+                                                            <th>Fecha Baja</th>
+                                                            <th>Precio</th>
+                                                            <th>Inmueble</th>
+                                                            <th>Estado</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                     </body>
 
                 </div>
-
-
-        </div>
-
-
-
-        <div class="card">
-            <div class="card-body">
-                <table class="table table-striped" id="notificaciones">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Detalle</th>
-                            <th>Fecha</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
-</body>
+    </div>
+</div>
+
+
+
+
+
+
+
 <script>
-        var user = '@usuario';
 
-        $('#notificaciones').DataTable({
-            responsive: true, autoWidth: false,
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ notificaciones por página.",
-                "zeroRecords": "No se encontraron coincidencias.",
-                "info": "Mostrando la página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay notificaciones",
-                "infoFiltered": "(filtrado de _MAX_ notificaciones totales)",
-                'search': 'Buscar:',
-                'paginate': {
-                    'next': 'Siguiente',
-                    'previous': 'Anterior'
+    var user = '@usuario';
+    var idCuenta = parseInt(@idCuenta);
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var table;
+    (function () {
+        CrearTabla();
+    })();
+    function CrearTabla() {
 
-                }
+        var idiomaEspanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla.",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
             }
+        }
 
+        table = $('#publicacionlista').DataTable({
+            "colResize": {
+                isEnabled: true,
+                hoverClass: 'dt-colresizable-hover',
+                hasBoundCheck: true,
+                minBoundClass: 'dt-colresizable-bound-min',
+                maxBoundClass: 'dt-colresizable-bound-max',
+                isResizable: function (column) { return true; },
+                onResize: function (column) { },
+                onResizeEnd: function (column, columns) { },
+                getMinWidthOf: function ($thNode) { }
+            },
+            "responsive": true,
+            "order": [[1, "asc"]],
+            "ajax": "/Api/ABMPublicacion/ListarPublicaciones?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
+            "lengthMenu": [5, 10, 25, 50],
+            "columns": [
+                { data: "idPublicacion", "className": "text-left", "visible": false },
+                { data: "tituloPublicacion", "className": "text-left"},
+                { data: "fechaAltaPublicacion",
+                    "render": function(data){
+                        let fechaAA = new Date(Date.parse(data));
+                        return fechaAA.getDate() + '/' + (fechaAA.getMonth()+1) + '/' + fechaAA.getFullYear()
+                     }
+                    ,"className": "text-left"},
+                {
+                    data: "fechaBajaPublicacion",
+                    "render": function (data) {
+                        let fechaBA = new Date(Date.parse(data));
+                        return fechaBA.getDate() + '/' + (fechaBA.getMonth() + 1) + '/' + fechaBA.getFullYear()
+                    }
+
+                    ,"className": "text-left"},
+                { data: "precioAlquiler", "className": "text-left" },
+                { data: "idInmueble", "className": "text-left" },
+                { data: "descripcionEstadoPublicacion", "className": "text-left" },
+               {data:"idPublicacion",
+                    orderable: false,
+                    "render": function () {
+                        var botones = "<button class='fa fa-edit' onclick='EditarPublicacion(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarPublicacion(this)'></button>  <button class='fas fa-eye' onclick='VerPublicacion(this)'></button>";
+                            return botones
+                    },
+                    "width": 35,
+                }
+            ],
+            "language": idiomaEspanol
         });
+
+    }
+
+
+    function EliminarPublicacion(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/ABMPublicacion/EliminarPublicacion?idPublicacion=' + id.idPublicacion,
+            success: function (result) {
+                location.href = '/ABMPublicacion';
+            }
+        });
+
+    }
+
+
     $("#btnvolver").click(function () {
         $("#formulario").hide();
     });
     function mostrarformulario() {
         $("#formulario").show();
+    }
+
+
+
+    function GuardarPublicacion() {
+        var publicacion = new Object();
+        publicacion.descripcionPublicacion = $("#descripcionPublicacion").val();
+        publicacion.fechaAltaPublicacion = $("#fechaAltaPublicacion").val();
+        publicacion.fechaBajaPublicacion = $("#fechaBajaPublicacion").val();
+        publicacion.precioAlquiler = $("#precioAlquiler").val();
+        publicacion.tituloPublicacion = $("#tituloPublicacion").val();
+        publicacion.idInmueble = $("#idInmueble").val();
+        $.ajax({
+            type: 'Post',
+            url: '/Api/ABMPublicacion/CrearPublicacion',
+            data: publicacion,
+            success: function (result) {
+                window.location.href = "/ABMPublicacion";
+            }
+        });
+
     }
 </script>

@@ -11,12 +11,15 @@ namespace ArrendaSysModelos
 {
     using System;
     using System.Collections.Generic;
-    
-    public class alquiler
+   
+
+    public class Alquiler
     {
 
 
         public int idAlquiler { get; set; }
+      
+     
         public Nullable<System.DateTime> fechaAltaAlquiler { get; set; }
         public Nullable<System.DateTime> fechaBajaAlquiler { get; set; }
         public Nullable<int> idArrendatario { get; set; }

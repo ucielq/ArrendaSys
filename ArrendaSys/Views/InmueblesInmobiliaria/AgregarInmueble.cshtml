@@ -42,8 +42,8 @@
                                         <label for="provincia">Mendoza</label>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="departamento">Departamento</label>
-                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamento" onchange="ObtenerLocalidad(-1)">
+                                        <label for="departamentoid">Departamento</label>
+                                        <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamentoid" id="departamentoid" onchange="ObtenerLocalidad(-1)">
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -72,14 +72,14 @@
                                         <textarea class="form-control obligatoria" id="barrio" name="barrio"></textarea>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="manzana">Piso</label>
+                                        <label for="piso">Piso</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="piso" name="manzana"></textarea>
+                                        <textarea class="form-control obligatoria" id="piso" name="piso"></textarea>
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="lote">Departamento</label>
+                                        <label for="departamento">Departamento</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="departamento" name="lote"></textarea>
+                                        <textarea class="form-control obligatoria" id="departamento" name="departamento"></textarea>
                                     </div>
                                 </div>
                                 <br />
@@ -246,13 +246,13 @@
                     $("#cantMtInmueble").text(inmueble.mtsCuadrados);
                     $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
                     $("#descrInmueble").text(inmueble.descripcionInmueble);
-                    $("#lote").text(inmueble.direccion.idLote);
-                    $("#manzana").text(inmueble.direccion.idManzana);
+                    $("#departamento").text(inmueble.direccion.idLote);
+                    $("#piso").text(inmueble.direccion.idManzana);
                     $("#barrio").text(inmueble.direccion.nombreBarrio);
                     $("#calle").text(inmueble.direccion.nombreCalle);
                     $("#numero").text(inmueble.direccion.numeroCalle);
-                    $("#departamento").val(inmueble.direccion.localidad.idDepartamento);
-                    $("#departamento").change();
+                    $("#departamentoid").val(inmueble.direccion.localidad.idDepartamento);
+                    $("#departamentoid").change();
                     ObtenerLocalidad(inmueble.direccion.localidad.idLocalidad);
                     if (inmueble.permiteMascota == true) {
                         $("#mascota").val(1);
@@ -301,14 +301,14 @@
             direccion.localidad = localidad;
             inmueble.direccion = direccion;
 
-            departamento.idDepartamento = $("#departamento").val();
+            departamento.idDepartamento = $("#departamentoid").val();
 
             localidad.idLocalidad = $("#localidad").val();
             direccion.nombreCalle = $("#calle").val();
             direccion.numeroCalle = $("#numero").val();
             direccion.nombreBarrio = $("#barrio").val();
-            direccion.idlote = $("#lote").val();
-            direccion.idManzana = $("#manzana").val();
+            direccion.idlote = $("#departamento").val();
+            direccion.idManzana = $("#piso").val();
 
             if (crear) {
                 //No le agrego el idInmueble
@@ -347,20 +347,20 @@
             success: function (respuesta) {
                 listaDepto = respuesta;
                 if (departamento == -1) {
-                    $('#departamento').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                    $('#departamentoid').append($('<option selected>').val(-1).text("Seleccione una opción"))
                 }
                 else {
-                    $('#departamento').append($('<option>').val(-1).text("Seleccione una opción"))
+                    $('#departamentoid').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
 
                 $.each(respuesta, function (index, result) {
                     debugger;
                     if (departamento == result.idDepartamento) {
-                        $('#departamento').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
+                        $('#departamentoid').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
 
                     }
                     else {
-                        $('#departamento').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
+                        $('#departamentoid').append($('<option>').val(result.idDepartamento).text(result.nombreDepartamento))
 
                     }
                 });
@@ -368,7 +368,7 @@
         });
     }
     function ObtenerLocalidad(localidad) {
-        var idDepto = $("#departamento").val();
+        var idDepto = $("#departamentoid").val();
         $("#localidad").empty();
         $.ajax({
             type: 'Get',

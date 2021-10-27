@@ -30,7 +30,7 @@
                         <div class="col-md12">
                             <div class="col-md12">
                                 <br />
-                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> + Agregar</button>
+                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
                                 <br />
                             </div>
 
@@ -58,14 +58,14 @@
                                     <br />
                                     <span>Arrendatario: </span>
                                     <br />
-                                    <input type="number" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
+                                    <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
                                 </div>
 
                                 <div class="col-md-2">
                                     <br />
                                     <span>Inmueble: </span>
                                     <br />
-                                    <input type="number" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
+                                    <input type="text" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
                                 </div>
                             </div>
 
@@ -91,6 +91,7 @@
                                                         <th>Fecha Baja</th>
                                                         <th>Arrendatario</th>
                                                         <th>Inmueble</th>
+                                                        <th>Estado</th>
                                                         <th></th>
                                                     </tr>
                                                 </thead>
@@ -163,18 +164,31 @@
             },
             "responsive": true,
             "order": [[1, "asc"]],
-            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta="+tipoCuenta,
+            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
             "lengthMenu": [5, 10, 25, 50],
             "columns": [
                 { data: "idAlquiler", "className": "text-left", "visible": false },
-                { data: "fechaAltaAlquiler", "className": "text-left" },
-                { data: "fechaBajaAlquiler", "className": "text-left" },
+                { data: "fechaAltaAlquiler",
+                    "render": function(data){
+                        let fechaAA = new Date(Date.parse(data));
+                        return fechaAA.getDate() + '/' + (fechaAA.getMonth()+1) + '/' + fechaAA.getFullYear()
+                     }
+                    ,"className": "text-left"},
+                {
+                    data: "fechaBajaAlquiler",
+                    "render": function (data) {
+                        let fechaBA = new Date(Date.parse(data));
+                        return fechaBA.getDate() + '/' + (fechaBA.getMonth() + 1) + '/' + fechaBA.getFullYear()
+                    }
+
+                    ,"className": "text-left"},
                 { data: "idArrendatario", "className": "text-left" },
                 { data: "idInmueble", "className": "text-left" },
+                { data: "descripcionEstadoAlquiler", "className": "text-left" },
                {data:"idAlquiler",
                     orderable: false,
                     "render": function () {
-                        var botones = "<button class='fa fa-edit' onclick='EditarAlquiler(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>";
+                        var botones = "<button class='fa fa-edit' onclick='EditarAlquiler(this)'></button>  <button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>  <button class='far fa-eye' onclick='VerAlquiler(this)'></button>";
                             return botones
                     },
                     "width": 35,
@@ -186,8 +200,7 @@
     }
 
 
-    function EliminarAlquiler(btn) {
-        debugger;
+    function EliminarAlquiler(btn) {     
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
 
@@ -208,7 +221,7 @@
     function mostrarformulario() {
         $("#formulario").show();
     }
-
+   
 
 
     function GuardarAlquiler() {
