@@ -1,8 +1,7 @@
-﻿<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/colreorder/1.5.4/js/dataTables.colReorder.min.js"></script>
-<script src="https://cdn.datatables.net/colreorder/1.5.4/css/colReorder.dataTables.min.css"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+﻿<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.3/b-2.0.1/cr-1.5.4/fc-4.0.0/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/datatables.min.css" />
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/b-2.0.1/cr-1.5.4/fc-4.0.0/r-2.2.9/rg-1.1.3/rr-1.2.8/sc-2.0.5/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Scripts/jquery.dataTables.colResize.css" />
+<script type="text/javascript" src="~/Scripts/jquery.dataTables.colResize.js"></script>
 @{
     var usuario = Session["usuarioLogeado"];
     var tipoCuenta = Session["tipoCuenta"];
@@ -10,53 +9,152 @@
 }
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Notificaciones</title>
 </head>
 
-<body>
-    <div>
-        <span>  Notificaciones</span>
-        <hr />
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-striped" id="notificaciones">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Detalle</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Traer notificaciones de la BD del Arrendatario logueado</td>
-                        <td>Customer Support</td>
-                        <td>New York</td>
-                    </tr>
-                </tbody>
-            </table>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <div class="float-left">
+                            <div class="titulo">Notificaciones</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <table id="notificacioneslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>idNotificacion</th>
+                                                    <th>Fecha</th>
+                                                    <th>Nombre</th>
+                                                    <th>Descripcion</th>
+                                                    <th>Estado</th>
+                                                    <th>idCuenta</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</body>
+</div>
+
+
+
 <script>
-        var user = '@usuario';
+    var user = '@usuario';
+    var idCuenta = parseInt(@idCuenta);
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var table;
+    (function () {
+        CrearTabla();
+    })();
+    function CrearTabla() {
 
-        $('#notificaciones').DataTable({
-            responsive: true, autoWidth: false,
-            "language": {
-                "lengthMenu": "Mostrar _MENU_ notificaciones por página.",
-                "zeroRecords": "No se encontraron coincidencias.",
-                "info": "Mostrando la página _PAGE_ de _PAGES_",
-                "infoEmpty": "No hay notificaciones",
-                "infoFiltered": "(filtrado de _MAX_ notificaciones totales)",
-                'search': 'Buscar:',
-                'paginate': {
-                    'next': 'Siguiente',
-                    'previous': 'Anterior'
-
-                }
+        var idiomaEspanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla.",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
             }
+        }
 
+        table = $('#alquilereslista').DataTable({
+            "colResize": {
+                isEnabled: true,
+                hoverClass: 'dt-colresizable-hover',
+                hasBoundCheck: true,
+                minBoundClass: 'dt-colresizable-bound-min',
+                maxBoundClass: 'dt-colresizable-bound-max',
+                isResizable: function (column) { return true; },
+                onResize: function (column) { },
+                onResizeEnd: function (column, columns) { },
+                getMinWidthOf: function ($thNode) { }
+            },
+            "responsive": true,
+            "order": [[1, "asc"]],
+            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
+            "lengthMenu": [5, 10, 25, 50],
+            "columns": [
+                { data: "idAlquiler", "className": "text-left", "visible": false },
+                { data: "fechaAltaAlquiler",
+                    "render": function(data){
+                        let fechaAA = new Date(Date.parse(data));
+                        return fechaAA.getDate() + '/' + (fechaAA.getMonth()+1) + '/' + fechaAA.getFullYear()
+                     }
+                    ,"className": "text-left"},
+                {
+                    data: "fechaBajaAlquiler",
+                    "render": function (data) {
+                        let fechaBA = new Date(Date.parse(data));
+                        return fechaBA.getDate() + '/' + (fechaBA.getMonth() + 1) + '/' + fechaBA.getFullYear()
+                    }
+
+                    ,"className": "text-left"},
+                { data: "idArrendatario", "className": "text-left" },
+                { data: "idInmueble", "className": "text-left" },
+                { data: "descripcionEstadoAlquiler", "className": "text-left" },
+               {data:"idAlquiler",
+                    orderable: false,
+                    "render": function () {
+                        var botones = "<button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>  <button class='far fa-eye' onclick='VerAlquiler(this)'></button>";
+                            return botones
+                    },
+                    "width": 35,
+                }
+            ],
+            "language": idiomaEspanol
         });
+
+    }
+
+
+    function EliminarAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Alquiler/EliminarAlquiler?idAlquiler=' + id.idAlquiler,
+            success: function (result) {
+                location.href = '/Alquileres/Alquileres';
+            }
+        });
+
+    }
+
 </script>

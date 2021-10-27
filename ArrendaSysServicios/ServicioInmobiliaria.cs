@@ -33,7 +33,7 @@ namespace ArrendaSysServicios
                     inmobiliaria2.nombreInmobiliaria = inmobiliaria.nombreInmobiliaria;
                     inmobiliaria2.altaInscripcion = inmobiliaria.altaInscripcion;
                     inmobiliaria2.cuitInmobiliaria = inmobiliaria.cuitInmobiliaria;
-                    inmobiliaria2.telefonoInmobiliaria = inmobiliaria.telefonoInmobiliaria.ToString();
+                    inmobiliaria2.telefonoInmobiliaria = inmobiliaria.telefonoInmobiliaria;
                     inmobiliaria2.idCuenta = inmobiliaria.idCuenta;
 
                 }
@@ -44,7 +44,7 @@ namespace ArrendaSysServicios
                         nombreInmobiliaria = inmobiliaria.nombreInmobiliaria,
                         altaInscripcion = inmobiliaria.altaInscripcion,
                         cuitInmobiliaria = inmobiliaria.cuitInmobiliaria,
-                        telefonoInmobiliaria = inmobiliaria.telefonoInmobiliaria.ToString(),
+                        telefonoInmobiliaria = inmobiliaria.telefonoInmobiliaria,
                         idCuenta = inmobiliaria.idCuenta
                     };
                     db.Inmobiliaria.Add(inmo);

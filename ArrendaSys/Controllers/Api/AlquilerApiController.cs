@@ -18,8 +18,6 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Alquiler/CrearAlquiler")]
         [System.Web.Http.ActionName("CrearAlquiler")]
         [System.Web.Http.HttpPost]
-       
-
         public int Alquiler(AlquileresViewModel alquiler)
         {
             ServicioReseña serv = new ServicioReseña();
@@ -44,11 +42,15 @@ namespace ArrendaSys.Controllers.Api
         {
             ServicioReseña servicio = new ServicioReseña();
             servicio.EliminarAlquiler(idAlquiler);
-
-
         }
-
-
-
+        [System.Web.Http.Route("Api/Alquiler/ObtenerAlquiler")]
+        [System.Web.Http.ActionName("ObtenerAlquiler")]
+        [System.Web.Http.HttpGet]
+        public object ObtenerAlquiler(int idAlquiler, int tipoCuenta)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            var lista = servicio.ObtenerAlquiler(idAlquiler,tipoCuenta);
+            return lista;
+        }
     }
 }

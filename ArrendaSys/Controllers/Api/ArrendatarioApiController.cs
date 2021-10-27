@@ -16,7 +16,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpPost]
         public int CrearArrendatario(ArrendatarioViewModel arrendatario)
         {
-            ServicioArrendatario ServicioArrendatario = new ServicioArrendatario();
+            ServicioArrendatario ServicioArrendatario = new ServicioArrendatario();             
             return ServicioArrendatario.crearArrendatario(arrendatario);
         }
 

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ArrendasysModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ARRENDASYSEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alquiler">
           <Key>
             <PropertyRef Name="idAlquiler" />
@@ -33,7 +33,7 @@
           <Property Name="apellidoArrendatario" Type="varchar" MaxLength="100" />
           <Property Name="nombreArrendatario" Type="varchar" MaxLength="100" />
           <Property Name="numeroDocumentoArr" Type="int" />
-          <Property Name="telefonoArrendatario" Type="int" />
+          <Property Name="telefonoArrendatario" Type="nvarchar" MaxLength="30" />
           <Property Name="tipoDocumentoArr" Type="varchar" MaxLength="100" />
           <Property Name="idCuenta" Type="int" />
           <Property Name="fechaNacimArrendatario" Type="date" />
@@ -113,7 +113,7 @@
           <Property Name="altaInscripcion" Type="date" />
           <Property Name="cuitInmobiliaria" Type="int" />
           <Property Name="nombreInmobiliaria" Type="varchar" MaxLength="100" />
-          <Property Name="telefonoInmobiliaria" Type="varchar" MaxLength="100" />
+          <Property Name="telefonoInmobiliaria" Type="nvarchar" MaxLength="30" />
           <Property Name="idCuenta" Type="int" />
           <Property Name="idDireccion" Type="int" />
         </EntityType>
@@ -179,7 +179,9 @@
           <Property Name="idNotificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcionNotificacion" Type="varchar" MaxLength="100" />
           <Property Name="nombreNotificacion" Type="varchar" MaxLength="100" />
-          <Property Name="fechaNotificación" Type="date" />
+          <Property Name="fechaNotificacion" Type="date" />
+          <Property Name="idCuenta" Type="int" />
+          <Property Name="leido" Type="bit" />
         </EntityType>
         <EntityType Name="PermisoRol">
           <Key>
@@ -208,7 +210,7 @@
           <Property Name="apellidoPropietario" Type="varchar" MaxLength="100" />
           <Property Name="nombrePropietario" Type="varchar" MaxLength="100" />
           <Property Name="numeroDocumentoProp" Type="int" />
-          <Property Name="telefonoPropietario" Type="varchar" MaxLength="100" />
+          <Property Name="telefonoPropietario" Type="nvarchar" MaxLength="30" />
           <Property Name="tipoDocumentoProp" Type="varchar" MaxLength="100" />
           <Property Name="idCuenta" Type="int" />
           <Property Name="idDireccion" Type="int" />
@@ -341,7 +343,7 @@
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="iconClass" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityContainer Name="ArrendasysModelStoreContainer">
+        <EntityContainer Name="ARRENDASYSEntitiesStoreContainer">
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Arrendatario" EntityType="Self.Arrendatario" Schema="dbo" store:Type="Tables" />
@@ -378,7 +380,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="ArrendasysModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="ARRENDASYSEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Alquiler">
           <Key>
             <PropertyRef Name="idAlquiler" />
@@ -407,7 +409,7 @@
           <Property Name="apellidoArrendatario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreArrendatario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="numeroDocumentoArr" Type="Int32" />
-          <Property Name="telefonoArrendatario" Type="Int32" />
+          <Property Name="telefonoArrendatario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="tipoDocumentoArr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
           <Property Name="fechaNacimArrendatario" Type="DateTime" Precision="0" />
@@ -487,7 +489,7 @@
           <Property Name="altaInscripcion" Type="DateTime" Precision="0" />
           <Property Name="cuitInmobiliaria" Type="Int32" />
           <Property Name="nombreInmobiliaria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="telefonoInmobiliaria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefonoInmobiliaria" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="idCuenta" Type="Int32" />
           <Property Name="idDireccion" Type="Int32" />
         </EntityType>
@@ -538,6 +540,14 @@
           <Property Name="nombreLocalidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idDepartamento" Type="Int32" />
         </EntityType>
+        <EntityType Name="MultimediaInmueble">
+          <Key>
+            <PropertyRef Name="idMultimediaInmueble" />
+          </Key>
+          <Property Name="idMultimediaInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urlMultimediaInmueble" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="idInmueble" Type="Int32" />
+        </EntityType>
         <EntityType Name="Notificacion">
           <Key>
             <PropertyRef Name="idNotificacion" />
@@ -545,7 +555,20 @@
           <Property Name="idNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="descripcionNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombreNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaNotificación" Type="DateTime" Precision="0" />
+          <Property Name="fechaNotificacion" Type="DateTime" Precision="0" />
+          <Property Name="idCuenta" Type="Int32" />
+          <Property Name="leido" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PermisoRol">
+          <Key>
+            <PropertyRef Name="idPermisoRol" />
+          </Key>
+          <Property Name="idPermisoRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="edicionRol" Type="Boolean" />
+          <Property Name="eliminacionRol" Type="Boolean" />
+          <Property Name="lecturaRol" Type="Boolean" />
+          <Property Name="idURL" Type="Int32" />
+          <Property Name="idRol" Type="Int32" />
         </EntityType>
         <EntityType Name="Premium">
           <Key>
@@ -563,7 +586,7 @@
           <Property Name="apellidoPropietario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="nombrePropietario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="numeroDocumentoProp" Type="Int32" />
-          <Property Name="telefonoPropietario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefonoPropietario" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="tipoDocumentoProp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idCuenta" Type="Int32" />
           <Property Name="idDireccion" Type="Int32" />
@@ -673,6 +696,19 @@
           <Property Name="idReseñaAoAr" Type="Int32" />
           <Property Name="idItemReseña" Type="Int32" />
         </EntityType>
+        <EntityType Name="URL">
+          <Key>
+            <PropertyRef Name="idURL" />
+          </Key>
+          <Property Name="idURL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="linkURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="seMuestra" Type="Boolean" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="posicion" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="iconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" />
           <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" />
@@ -689,7 +725,9 @@
           <EntitySet Name="InmuebleEstado" EntityType="Self.InmuebleEstado" />
           <EntitySet Name="ItemReseña" EntityType="Self.ItemReseña" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
+          <EntitySet Name="MultimediaInmueble" EntityType="Self.MultimediaInmueble" />
           <EntitySet Name="Notificacion" EntityType="Self.Notificacion" />
+          <EntitySet Name="PermisoRol" EntityType="Self.PermisoRol" />
           <EntitySet Name="Premium" EntityType="Self.Premium" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
@@ -702,22 +740,9 @@
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
           <EntitySet Name="ReseñaItemAoAr" EntityType="Self.ReseñaItemAoAr" />
           <EntitySet Name="ReseñaItemArAo" EntityType="Self.ReseñaItemArAo" />
-          <EntitySet Name="PermisoRol" EntityType="ArrendasysModel.PermisoRol" />
-          <EntitySet Name="Rol" EntityType="ArrendasysModel.Rol" />
-          <EntitySet Name="URL" EntityType="ArrendasysModel.URL" />
-          <EntitySet Name="MultimediaInmueble" EntityType="ArrendasysModel.MultimediaInmueble" />
+          <EntitySet Name="URL" EntityType="Self.URL" />
+          <EntitySet Name="Rol" EntityType="ARRENDASYSEntities.Rol" />
         </EntityContainer>
-        <EntityType Name="PermisoRol">
-          <Key>
-            <PropertyRef Name="idPermisoRol" />
-          </Key>
-          <Property Name="idPermisoRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="edicionRol" Type="Boolean" />
-          <Property Name="eliminacionRol" Type="Boolean" />
-          <Property Name="lecturaRol" Type="Boolean" />
-          <Property Name="idURL" Type="Int32" />
-          <Property Name="idRol" Type="Int32" />
-        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="idRol" />
@@ -728,35 +753,14 @@
           <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
           <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="URL">
-          <Key>
-            <PropertyRef Name="idURL" />
-          </Key>
-          <Property Name="idURL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="linkURL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="seMuestra" Type="Boolean" />
-          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="codigo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="posicion" Type="Int32" />
-          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="iconClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="MultimediaInmueble">
-          <Key>
-            <PropertyRef Name="idMultimediaInmueble" />
-          </Key>
-          <Property Name="idMultimediaInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="urlMultimediaInmueble" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="idInmueble" Type="Int32" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ArrendasysModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="ARRENDASYSEntitiesStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Alquiler">
-            <EntityTypeMapping TypeName="ArrendasysModel.Alquiler">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Alquiler">
               <MappingFragment StoreEntitySet="Alquiler">
                 <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
                 <ScalarProperty Name="fechaAltaAlquiler" ColumnName="fechaAltaAlquiler" />
@@ -767,7 +771,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AlquilerEstado">
-            <EntityTypeMapping TypeName="ArrendasysModel.AlquilerEstado">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.AlquilerEstado">
               <MappingFragment StoreEntitySet="AlquilerEstado">
                 <ScalarProperty Name="idAlquilerEstado" ColumnName="idAlquilerEstado" />
                 <ScalarProperty Name="fechaAltaAlquilerEstado" ColumnName="fechaAltaAlquilerEstado" />
@@ -778,7 +782,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Arrendatario">
-            <EntityTypeMapping TypeName="ArrendasysModel.Arrendatario">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Arrendatario">
               <MappingFragment StoreEntitySet="Arrendatario">
                 <ScalarProperty Name="idArrendatario" ColumnName="idArrendatario" />
                 <ScalarProperty Name="apellidoArrendatario" ColumnName="apellidoArrendatario" />
@@ -792,7 +796,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cuenta">
-            <EntityTypeMapping TypeName="ArrendasysModel.Cuenta">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Cuenta">
               <MappingFragment StoreEntitySet="Cuenta">
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
                 <ScalarProperty Name="contrasenaCuenta" ColumnName="contrasenaCuenta" />
@@ -806,7 +810,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CuentaNotificacion">
-            <EntityTypeMapping TypeName="ArrendasysModel.CuentaNotificacion">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.CuentaNotificacion">
               <MappingFragment StoreEntitySet="CuentaNotificacion">
                 <ScalarProperty Name="idCuentaNotificacion" ColumnName="idCuentaNotificacion" />
                 <ScalarProperty Name="fechaAltaNotificacion" ColumnName="fechaAltaNotificacion" />
@@ -817,7 +821,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departamento">
-            <EntityTypeMapping TypeName="ArrendasysModel.Departamento">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Departamento">
               <MappingFragment StoreEntitySet="Departamento">
                 <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
                 <ScalarProperty Name="nombreDepartamento" ColumnName="nombreDepartamento" />
@@ -826,7 +830,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Direccion">
-            <EntityTypeMapping TypeName="ArrendasysModel.Direccion">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Direccion">
               <MappingFragment StoreEntitySet="Direccion">
                 <ScalarProperty Name="idDireccion" ColumnName="idDireccion" />
                 <ScalarProperty Name="idLote" ColumnName="idLote" />
@@ -839,7 +843,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoAlquiler">
-            <EntityTypeMapping TypeName="ArrendasysModel.EstadoAlquiler">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.EstadoAlquiler">
               <MappingFragment StoreEntitySet="EstadoAlquiler">
                 <ScalarProperty Name="idEstadoAlquiler" ColumnName="idEstadoAlquiler" />
                 <ScalarProperty Name="descripcionEstadoAlquiler" ColumnName="descripcionEstadoAlquiler" />
@@ -848,7 +852,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoInmueble">
-            <EntityTypeMapping TypeName="ArrendasysModel.EstadoInmueble">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.EstadoInmueble">
               <MappingFragment StoreEntitySet="EstadoInmueble">
                 <ScalarProperty Name="idEstadoInmueble" ColumnName="idEstadoInmueble" />
                 <ScalarProperty Name="descripcionEstadoInmueble" ColumnName="descripcionEstadoInmueble" />
@@ -857,7 +861,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EstadoPublicacion">
-            <EntityTypeMapping TypeName="ArrendasysModel.EstadoPublicacion">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.EstadoPublicacion">
               <MappingFragment StoreEntitySet="EstadoPublicacion">
                 <ScalarProperty Name="idEstadoPublicacion" ColumnName="idEstadoPublicacion" />
                 <ScalarProperty Name="descripcionEstadoPublicacion" ColumnName="descripcionEstadoPublicacion" />
@@ -866,7 +870,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inmobiliaria">
-            <EntityTypeMapping TypeName="ArrendasysModel.Inmobiliaria">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Inmobiliaria">
               <MappingFragment StoreEntitySet="Inmobiliaria">
                 <ScalarProperty Name="idInmobiliaria" ColumnName="idInmobiliaria" />
                 <ScalarProperty Name="altaInscripcion" ColumnName="altaInscripcion" />
@@ -879,7 +883,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inmueble">
-            <EntityTypeMapping TypeName="ArrendasysModel.Inmueble">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Inmueble">
               <MappingFragment StoreEntitySet="Inmueble">
                 <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
                 <ScalarProperty Name="cantAmbientes" ColumnName="cantAmbientes" />
@@ -898,7 +902,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InmuebleEstado">
-            <EntityTypeMapping TypeName="ArrendasysModel.InmuebleEstado">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.InmuebleEstado">
               <MappingFragment StoreEntitySet="InmuebleEstado">
                 <ScalarProperty Name="idInmuebleEstado" ColumnName="idInmuebleEstado" />
                 <ScalarProperty Name="fechaAltaInmuebleEstado" ColumnName="fechaAltaInmuebleEstado" />
@@ -909,7 +913,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ItemReseña">
-            <EntityTypeMapping TypeName="ArrendasysModel.ItemReseña">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ItemReseña">
               <MappingFragment StoreEntitySet="ItemReseña">
                 <ScalarProperty Name="idItemReseña" ColumnName="idItemReseña" />
                 <ScalarProperty Name="IR_esAI" ColumnName="IR_esAI" />
@@ -920,7 +924,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Localidad">
-            <EntityTypeMapping TypeName="ArrendasysModel.Localidad">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Localidad">
               <MappingFragment StoreEntitySet="Localidad">
                 <ScalarProperty Name="idLocalidad" ColumnName="idLocalidad" />
                 <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
@@ -929,18 +933,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MultimediaInmueble">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.MultimediaInmueble">
+              <MappingFragment StoreEntitySet="MultimediaInmueble">
+                <ScalarProperty Name="idMultimediaInmueble" ColumnName="idMultimediaInmueble" />
+                <ScalarProperty Name="urlMultimediaInmueble" ColumnName="urlMultimediaInmueble" />
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Notificacion">
-            <EntityTypeMapping TypeName="ArrendasysModel.Notificacion">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Notificacion">
               <MappingFragment StoreEntitySet="Notificacion">
                 <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
                 <ScalarProperty Name="descripcionNotificacion" ColumnName="descripcionNotificacion" />
                 <ScalarProperty Name="nombreNotificacion" ColumnName="nombreNotificacion" />
-                <ScalarProperty Name="fechaNotificación" ColumnName="fechaNotificación" />
+                <ScalarProperty Name="fechaNotificacion" ColumnName="fechaNotificacion" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="leido" ColumnName="leido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermisoRol">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.PermisoRol">
+              <MappingFragment StoreEntitySet="PermisoRol">
+                <ScalarProperty Name="idPermisoRol" ColumnName="idPermisoRol" />
+                <ScalarProperty Name="edicionRol" ColumnName="edicionRol" />
+                <ScalarProperty Name="eliminacionRol" ColumnName="eliminacionRol" />
+                <ScalarProperty Name="lecturaRol" ColumnName="lecturaRol" />
+                <ScalarProperty Name="idURL" ColumnName="idURL" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Premium">
-            <EntityTypeMapping TypeName="ArrendasysModel.Premium">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Premium">
               <MappingFragment StoreEntitySet="Premium">
                 <ScalarProperty Name="idPremium" ColumnName="idPremium" />
                 <ScalarProperty Name="fechaAltaPremium" ColumnName="fechaAltaPremium" />
@@ -949,7 +976,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Propietario">
-            <EntityTypeMapping TypeName="ArrendasysModel.Propietario">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Propietario">
               <MappingFragment StoreEntitySet="Propietario">
                 <ScalarProperty Name="idPropietario" ColumnName="idPropietario" />
                 <ScalarProperty Name="apellidoPropietario" ColumnName="apellidoPropietario" />
@@ -964,7 +991,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Provincia">
-            <EntityTypeMapping TypeName="ArrendasysModel.Provincia">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Provincia">
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="idProvincia" ColumnName="idProvincia" />
                 <ScalarProperty Name="nombreProvincia" ColumnName="nombreProvincia" />
@@ -972,7 +999,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Publicacion">
-            <EntityTypeMapping TypeName="ArrendasysModel.Publicacion">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Publicacion">
               <MappingFragment StoreEntitySet="Publicacion">
                 <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
                 <ScalarProperty Name="descripcionPublicacion" ColumnName="descripcionPublicacion" />
@@ -985,7 +1012,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PublicacionEstado">
-            <EntityTypeMapping TypeName="ArrendasysModel.PublicacionEstado">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.PublicacionEstado">
               <MappingFragment StoreEntitySet="PublicacionEstado">
                 <ScalarProperty Name="idPublicacionEstado" ColumnName="idPublicacionEstado" />
                 <ScalarProperty Name="fechaAltaPublicacionEstado" ColumnName="fechaAltaPublicacionEstado" />
@@ -996,7 +1023,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaArchivo">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaArchivo">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArchivo">
               <MappingFragment StoreEntitySet="ReseñaArchivo">
                 <ScalarProperty Name="idReseñaArchivo" ColumnName="idReseñaArchivo" />
                 <ScalarProperty Name="RA_esAI" ColumnName="RA_esAI" />
@@ -1009,7 +1036,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaArrendadorArrendatario">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaArrendadorArrendatario">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendadorArrendatario">
               <MappingFragment StoreEntitySet="ReseñaArrendadorArrendatario">
                 <ScalarProperty Name="idReseñaArAo" ColumnName="idReseñaArAo" />
                 <ScalarProperty Name="descripcionReseñaArAo" ColumnName="descripcionReseñaArAo" />
@@ -1022,7 +1049,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaArrendatarioArrendador">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaArrendatarioArrendador">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendatarioArrendador">
               <MappingFragment StoreEntitySet="ReseñaArrendatarioArrendador">
                 <ScalarProperty Name="idReseñaAoAr" ColumnName="idReseñaAoAr" />
                 <ScalarProperty Name="descripcionReseñaAoAr" ColumnName="descripcionReseñaAoAr" />
@@ -1035,7 +1062,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaArrendatarioInmueble">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaArrendatarioInmueble">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendatarioInmueble">
               <MappingFragment StoreEntitySet="ReseñaArrendatarioInmueble">
                 <ScalarProperty Name="idReseñaAI" ColumnName="idReseñaAI" />
                 <ScalarProperty Name="descripcionReseñaAI" ColumnName="descripcionReseñaAI" />
@@ -1048,7 +1075,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaItemAI">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaItemAI">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaItemAI">
               <MappingFragment StoreEntitySet="ReseñaItemAI">
                 <ScalarProperty Name="idReseñaItemAI" ColumnName="idReseñaItemAI" />
                 <ScalarProperty Name="puntuacionReseñaItemAI" ColumnName="puntuacionReseñaItemAI" />
@@ -1058,7 +1085,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaItemAoAr">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaItemAoAr">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaItemAoAr">
               <MappingFragment StoreEntitySet="ReseñaItemAoAr">
                 <ScalarProperty Name="idReseñaItemArAo" ColumnName="idReseñaItemArAo" />
                 <ScalarProperty Name="puntuacionReseñaItemAoAr" ColumnName="puntuacionReseñaItemAoAr" />
@@ -1068,7 +1095,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReseñaItemArAo">
-            <EntityTypeMapping TypeName="ArrendasysModel.ReseñaItemArAo">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaItemArAo">
               <MappingFragment StoreEntitySet="ReseñaItemArAo">
                 <ScalarProperty Name="idReseñaItemAoAr" ColumnName="idReseñaItemAoAr" />
                 <ScalarProperty Name="puntuacionReseñaItemArAo" ColumnName="puntuacionReseñaItemArAo" />
@@ -1077,49 +1104,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PermisoRol">
-            <EntityTypeMapping TypeName="ArrendasysModel.PermisoRol">
-              <MappingFragment StoreEntitySet="PermisoRol">
-                <ScalarProperty Name="idRol" ColumnName="idRol" />
+          <EntitySetMapping Name="URL">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.URL">
+              <MappingFragment StoreEntitySet="URL">
                 <ScalarProperty Name="idURL" ColumnName="idURL" />
-                <ScalarProperty Name="lecturaRol" ColumnName="lecturaRol" />
-                <ScalarProperty Name="eliminacionRol" ColumnName="eliminacionRol" />
-                <ScalarProperty Name="edicionRol" ColumnName="edicionRol" />
-                <ScalarProperty Name="idPermisoRol" ColumnName="idPermisoRol" />
+                <ScalarProperty Name="linkURL" ColumnName="linkURL" />
+                <ScalarProperty Name="seMuestra" ColumnName="seMuestra" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="posicion" ColumnName="posicion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="iconClass" ColumnName="iconClass" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rol">
-            <EntityTypeMapping TypeName="ArrendasysModel.Rol">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Rol">
               <MappingFragment StoreEntitySet="Rol">
                 <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
                 <ScalarProperty Name="fechaBajaRol" ColumnName="fechaBajaRol" />
                 <ScalarProperty Name="fechaAltaRol" ColumnName="fechaAltaRol" />
                 <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="URL">
-            <EntityTypeMapping TypeName="ArrendasysModel.URL">
-              <MappingFragment StoreEntitySet="URL">
-                <ScalarProperty Name="iconClass" ColumnName="iconClass" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="posicion" ColumnName="posicion" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="seMuestra" ColumnName="seMuestra" />
-                <ScalarProperty Name="linkURL" ColumnName="linkURL" />
-                <ScalarProperty Name="idURL" ColumnName="idURL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MultimediaInmueble">
-            <EntityTypeMapping TypeName="ArrendasysModel.MultimediaInmueble">
-              <MappingFragment StoreEntitySet="MultimediaInmueble">
-                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
-                <ScalarProperty Name="urlMultimediaInmueble" ColumnName="urlMultimediaInmueble" />
-                <ScalarProperty Name="idMultimediaInmueble" ColumnName="idMultimediaInmueble" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

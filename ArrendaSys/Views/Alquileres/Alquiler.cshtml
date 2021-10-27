@@ -1,0 +1,155 @@
+﻿@{
+    var usuario = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+}
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Alquiler</title>
+</head>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <div class="float-left">
+                            <div class="titulo">Alquiler</div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    @*Inmueble*@
+                                    <div class="container" id="Inmueble">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var idCuenta = parseInt(@idCuenta);
+    var idAlquiler = parseInt(GetUrlVars()["idAlquiler"]);
+    var esAoAr = false;
+    var esArAo = false;
+    var esAI = false;
+    var idInmueble;
+    (function () {
+        
+        if (tipoCuenta == 2) {
+            esArAo = true;
+            esAI = true;
+        }
+        if (tipoCuenta == 3) {
+            esAoAr = true;
+        }
+
+        completarDatos();
+        mostrarFormulario();
+    })();
+    function completarDatos() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Alquiler/ObtenerAlquiler?idAlquiler=' + idAlquiler + "&tipoCuenta=" + tipoCuenta,
+            async:false,
+            success: function (result) {
+                idInmueble = result.inmueble.idInmueble;
+                item = "";
+                var cont2 = 1;
+                var cont = 1;
+                item = item + "<div class='row'>";
+                item = item + "<p><h3>Inmueble</h3></p>";
+                item = item + "<div class='col-md-3'>";
+
+                item = item + "<div id='carouselexamplecontrols" + cont.toString() + "' class='carousel slide' data-ride='carousel'>";
+                item = item + "<div class='carousel-inner'>";
+                $.each(result.inmueble.listaMultimedia, function (i, archivo) {
+                    var ruta = archivo.url.split('\\')[archivo.url.split('\\').length - 1];
+                    var activo = "";
+                    if (cont2 == 1) {
+                        var activo = "active";
+                    }
+                    item = item + "<div class='carousel-item " + activo + "'><img src='..\\TempFolder\\" + ruta + "' alt='' class='card-img-top' height='240' width='350'></div>";
+                    cont2++;
+                })
+                item = item + "<a class='carousel-control-prev' href='#carouselexamplecontrols" + cont + "' role='button' data-slide='prev'>";
+                item = item + "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+                item = item + "<span class='sr-only'>Previous</span></a>";
+                //Boton prox imagen
+                item = item + "<a class='carousel-control-next' href='#carouselexamplecontrols" + cont + "' role='button' data-slide='next'>";
+                item = item + "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+                item = item + "<span class='sr-only'>Next</span></a>";
+
+                item = item + "</div></div></div>";
+                item = item + "<div class='col-md-9'>"; //Aca van los datos del inmueble
+                item = item + "<div class='card-body'><h5 class='card-title'>" + " " + result.inmueble.direccion.nombreCalle + " " + result.inmueble.direccion.numeroCalle + " - " + result.inmueble.direccion.localidad.nombreLocalidad + "</h5>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + result.inmueble.mtsCuadrados + "</p>";
+                item = item + "<p><i class='fas fa-home'></i>" + " " + result.inmueble.mtsCuadradosInt + "</p>";
+                item = item + "<p><i class='fas fa-bed'></i>" + " " + result.inmueble.cantHabitaciones + "</p>";
+                item = item + "<p><i class='fas fa-shower'></i>" + " " + result.inmueble.cantBanos + "</p>";
+                if (result.inmueble.cochera) {
+                    item = item + "<p><i class='fas fa-warehouse'></i>" + " " + "Tiene Cochera" + "</p>";
+                } else {
+                    item = item + "<p><i class='fas fa-warehouse'></i>" + "No tiene Cochera" + "</p>";
+                }
+                item = item + "</div>";
+                item = item + "</div>";
+
+                //Row Datos Arrendador u arrendatario (agregar condicion)
+                if (tipoCuenta == 2) {
+                    if (result.inmueble.tipoArrendador == 3) {
+                        item = item + "<div class='row'>";
+                        item = item + "<p><h3>Arrendador</h3></p>";
+                        item = item + "<p><h5>Nombre: " + result.arrendador.nombrePropietario + "</h5></p>";
+                        item = item + "<p><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></p>";
+                    } else {
+                        item = item + "<div class='row'>";
+                        item = item + "<p><h3>Inmobiliaria</h3></p>";
+                        item = item + "<p><h5>Nombre: " + result.arrendador.nombreInmobiliaria + "</h5></p>";
+                        item = item + "<p><h5>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h5></p>";
+                    }
+                }
+
+
+                item = item + "</div>";
+
+                //Boton Agregar reseña Arrendador
+
+
+
+                //Row Reseñas
+
+
+                //Boton Agregar reseña Inmueble
+                if (tipoCuenta == 2) {
+                    item = item + "<div class='row' id='formularioResenia'>";
+                    //item = item + "<div class='col-md-2' style='top:-12'>";
+                    //item = item + "<h3>Mis Reseñas Inmueble</h3>";
+                    //item = item + "</div>";
+                    //item = item + "<div class='col-md-2'>";
+                    //item = item + "<button class='btn btn-success' style='cursor:pointer' onclick='AgregarNuevoReseniaInmueble()'><i class='fas fa-plus'></i>Agregar reseña Inmueble</button>";
+                    //item = item + "</div>";
+                    item = item + "</div>";
+                }
+               
+
+                $("#Inmueble").append(item);
+            }
+        });
+    }
+    function mostrarFormulario() {
+        //Haces el ajax
+        //Success:
+
+        // $("#formularioResenia").append(asdas);
+    }
+</script>

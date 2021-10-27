@@ -12,7 +12,7 @@ namespace ArrendaSysServicios.Modelos
         public int idPropietario { get; set; }
         public string nombrePropietario { get; set; }
         public string apellidoPropietario { get; set; }
-        public int numeroDocumentoPropietario { get; set; }
+        public int? numeroDocumentoPropietario { get; set; }
         public DateTime fechaNacimiento { get; set; }
         public string fechaNacimientoStr { get; set; }
         public string tipoDocumentoProp { get; set; }

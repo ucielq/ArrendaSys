@@ -18,7 +18,7 @@ namespace ArrendaSysModelos
         public string apellidoArrendatario { get; set; }
         public string nombreArrendatario { get; set; }
         public Nullable<int> numeroDocumentoArr { get; set; }
-        public Nullable<int> telefonoArrendatario { get; set; }
+        public string telefonoArrendatario { get; set; }
         public string tipoDocumentoArr { get; set; }
         public Nullable<int> idCuenta { get; set; }
         public Nullable<System.DateTime> fechaNacimArrendatario { get; set; }
