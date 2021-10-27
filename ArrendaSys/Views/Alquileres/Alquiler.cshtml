@@ -39,14 +39,30 @@
     var tipoCuenta = parseInt(@tipoCuenta);
     var idCuenta = parseInt(@idCuenta);
     var idAlquiler = parseInt(GetUrlVars()["idAlquiler"]);
+    var esAoAr = false;
+    var esArAo = false;
+    var esAI = false;
+    var idInmueble;
     (function () {
+        
+        if (tipoCuenta == 2) {
+            esArAo = true;
+            esAI = true;
+        }
+        if (tipoCuenta == 3) {
+            esAoAr = true;
+        }
+
         completarDatos();
+        mostrarFormulario();
     })();
     function completarDatos() {
         $.ajax({
             type: 'Get',
-            url: '/Api/Alquiler/ObtenerAlquiler?idAlquiler=' +idAlquiler + "&tipoCuenta=" + tipoCuenta,
+            url: '/Api/Alquiler/ObtenerAlquiler?idAlquiler=' + idAlquiler + "&tipoCuenta=" + tipoCuenta,
+            async:false,
             success: function (result) {
+                idInmueble = result.inmueble.idInmueble;
                 item = "";
                 var cont2 = 1;
                 var cont = 1;
@@ -115,20 +131,25 @@
 
                 //Boton Agregar reseña Inmueble
                 if (tipoCuenta == 2) {
-                    item = item + "<div class='row'>";
-                    item = item + "<div class='col-md-2' style='top:-12'>";
-                    item = item + "<h3>Mis Reseñas Inmueble</h3>";
-                    item = item + "</div>";
-                    item = item + "<div class='col-md-2'>";
-                    item = item + "<button class='btn btn-success' style='cursor:pointer' onclick='AgregarNuevoReseniaInmueble()'><i class='fas fa-plus'></i>Agregar reseña Inmueble</button>";
-                    item = item + "</div>";
+                    item = item + "<div class='row' id='formularioResenia'>";
+                    //item = item + "<div class='col-md-2' style='top:-12'>";
+                    //item = item + "<h3>Mis Reseñas Inmueble</h3>";
+                    //item = item + "</div>";
+                    //item = item + "<div class='col-md-2'>";
+                    //item = item + "<button class='btn btn-success' style='cursor:pointer' onclick='AgregarNuevoReseniaInmueble()'><i class='fas fa-plus'></i>Agregar reseña Inmueble</button>";
+                    //item = item + "</div>";
                     item = item + "</div>";
                 }
                
 
                 $("#Inmueble").append(item);
-                debugger;
             }
         });
+    }
+    function mostrarFormulario() {
+        //Haces el ajax
+        //Success:
+
+        // $("#formularioResenia").append(asdas);
     }
 </script>
