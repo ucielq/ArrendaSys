@@ -86,13 +86,13 @@
 
                     item = item + "</div>";
 
-                    item = item + "<div class='card-body'><h5 class='card-title'>" + inmueble.descripcionInmueble + "</h5>";
-                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + inmueble.mtsCuadrados + "</p>";
-                    item = item + "<p><i class='fas fa-home'></i>" + inmueble.mtsCuadradosInt + "</p>";
-                    item = item + "<p><i class='fas fa-bed'></i>" + inmueble.cantHabitaciones + "</p>";
-                    item = item + "<p><i class='fas fa-shower'></i>" + inmueble.cantBanos + "</p>";
+                    item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + " - " + inmueble.direccion.localidad.nombreLocalidad + "</h5>";
+                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + inmueble.mtsCuadrados + "</p>";
+                    item = item + "<p><i class='fas fa-home'></i>" + " " + inmueble.mtsCuadradosInt + "</p>";
+                    item = item + "<p><i class='fas fa-bed'></i>" + " " + inmueble.cantHabitaciones + "</p>";
+                    item = item + "<p><i class='fas fa-shower'></i>" + " " + inmueble.cantBanos + "</p>";
                     if (inmueble.cochera) {
-                        item = item + "<p><i class='fas fa-warehouse'></i>" + "Tiene Cochera" + "</p>";
+                        item = item + "<p><i class='fas fa-warehouse'></i>" +" "+ "Tiene Cochera" + "</p>";
                     } else {
                         item = item + "<p><i class='fas fa-warehouse'></i>" + "No tiene Cochera" + "</p>";
                     }
