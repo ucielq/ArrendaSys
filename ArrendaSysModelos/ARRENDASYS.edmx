@@ -180,6 +180,8 @@
           <Property Name="descripcionNotificacion" Type="varchar" MaxLength="100" />
           <Property Name="nombreNotificacion" Type="varchar" MaxLength="100" />
           <Property Name="fechaNotificación" Type="date" />
+          <Property Name="idCuenta" Type="int" />
+          <Property Name="leido" Type="bit" />
         </EntityType>
         <EntityType Name="PermisoRol">
           <Key>
@@ -318,6 +320,8 @@
           <Property Name="idReseñaAoAr" Type="int" />
           <Property Name="idItemReseña" Type="int" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ARRENDASYS.dbo.Rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="idRol" />
@@ -372,8 +376,16 @@
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReseñaItemAoAr" EntityType="Self.ReseñaItemAoAr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReseñaItemArAo" EntityType="Self.ReseñaItemArAo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="URL" EntityType="Self.URL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Rol].[idRol] AS [idRol], 
+    [Rol].[descripcionRol] AS [descripcionRol], 
+    [Rol].[fechaAltaRol] AS [fechaAltaRol], 
+    [Rol].[fechaBajaRol] AS [fechaBajaRol], 
+    [Rol].[nombreRol] AS [nombreRol]
+    FROM [dbo].[Rol] AS [Rol]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -538,15 +550,6 @@
           <Property Name="nombreLocalidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idDepartamento" Type="Int32" />
         </EntityType>
-        <EntityType Name="Notificacion">
-          <Key>
-            <PropertyRef Name="idNotificacion" />
-          </Key>
-          <Property Name="idNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcionNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="nombreNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaNotificación" Type="DateTime" Precision="0" />
-        </EntityType>
         <EntityType Name="Premium">
           <Key>
             <PropertyRef Name="idPremium" />
@@ -689,7 +692,6 @@
           <EntitySet Name="InmuebleEstado" EntityType="Self.InmuebleEstado" />
           <EntitySet Name="ItemReseña" EntityType="Self.ItemReseña" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" />
-          <EntitySet Name="Notificacion" EntityType="Self.Notificacion" />
           <EntitySet Name="Premium" EntityType="Self.Premium" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
@@ -706,6 +708,7 @@
           <EntitySet Name="Rol" EntityType="ArrendasysModel.Rol" />
           <EntitySet Name="URL" EntityType="ArrendasysModel.URL" />
           <EntitySet Name="MultimediaInmueble" EntityType="ArrendasysModel.MultimediaInmueble" />
+          <EntitySet Name="Notificacion" EntityType="ArrendasysModel.Notificacion" />
         </EntityContainer>
         <EntityType Name="PermisoRol">
           <Key>
@@ -748,6 +751,17 @@
           <Property Name="idMultimediaInmueble" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="urlMultimediaInmueble" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="idInmueble" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Notificacion">
+          <Key>
+            <PropertyRef Name="idNotificacion" />
+          </Key>
+          <Property Name="idNotificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombreNotificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaNotificación" Type="DateTime" Precision="0" />
+          <Property Name="idCuenta" Type="Int32" />
+          <Property Name="leido" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -926,16 +940,6 @@
                 <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
                 <ScalarProperty Name="nombreLocalidad" ColumnName="nombreLocalidad" />
                 <ScalarProperty Name="idDepartamento" ColumnName="idDepartamento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Notificacion">
-            <EntityTypeMapping TypeName="ArrendasysModel.Notificacion">
-              <MappingFragment StoreEntitySet="Notificacion">
-                <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
-                <ScalarProperty Name="descripcionNotificacion" ColumnName="descripcionNotificacion" />
-                <ScalarProperty Name="nombreNotificacion" ColumnName="nombreNotificacion" />
-                <ScalarProperty Name="fechaNotificación" ColumnName="fechaNotificación" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1120,6 +1124,18 @@
                 <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
                 <ScalarProperty Name="urlMultimediaInmueble" ColumnName="urlMultimediaInmueble" />
                 <ScalarProperty Name="idMultimediaInmueble" ColumnName="idMultimediaInmueble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notificacion">
+            <EntityTypeMapping TypeName="ArrendasysModel.Notificacion">
+              <MappingFragment StoreEntitySet="Notificacion">
+                <ScalarProperty Name="leido" ColumnName="leido" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+                <ScalarProperty Name="fechaNotificación" ColumnName="fechaNotificación" />
+                <ScalarProperty Name="nombreNotificacion" ColumnName="nombreNotificacion" />
+                <ScalarProperty Name="descripcionNotificacion" ColumnName="descripcionNotificacion" />
+                <ScalarProperty Name="idNotificacion" ColumnName="idNotificacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
