@@ -35,6 +35,8 @@
                                     <div id="alertcantidadbaños"></div>
                                     <div id="alertcantidadmetros"></div>
                                     <div id="alertcantidadmetrosinternos"></div>
+                                    <div id="alertaItem"></div>
+                                    <div id="alertaItem2"></div>
 
                                     <div class="col-md-2">
                                         <label for="provincia">Provincia</label>
@@ -119,7 +121,7 @@
                                         <br />
                                         <textarea class="form-control2" id="descrInmueble" name="descrInmueble" style="width: 803.988636px; height:53.988636px;"></textarea>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-2" style="padding-left: 150px;">
                                         <div class=" row">
                                             <div class="col">
                                                 <label> Agregar Imágenes </label>
@@ -240,11 +242,11 @@
                 type: 'Get',
                 url: '/Api/Inmueble/ObtenerInmueble?idInmueble=' + idInmueble,
                 success: function (inmueble) {
-                    $("#cantAmbInmueble").text(inmueble.cantAmbientes);
-                    $("#cantHabInmueble").text(inmueble.cantHabitaciones);
-                    $("#cantBanInmueble").text(inmueble.cantBanos);
-                    $("#cantMtInmueble").text(inmueble.mtsCuadrados);
-                    $("#cantMtInmuebleInt").text(inmueble.mtsCuadradosInt);
+                    $("#cantidadambientes").text(inmueble.cantAmbientes);
+                    $("#cantidadhabitaciones").text(inmueble.cantHabitaciones);
+                    $("#cantidadbaños").text(inmueble.cantBanos);
+                    $("#cantidadmetros").text(inmueble.mtsCuadrados);
+                    $("#cantidadmetrosinternos").text(inmueble.mtsCuadradosInt);
                     $("#descrInmueble").text(inmueble.descripcionInmueble);
                     $("#departamento").text(inmueble.direccion.idLote);
                     $("#piso").text(inmueble.direccion.idManzana);
@@ -280,63 +282,66 @@
             });
         }
     function GuardarInmueble() {
-        if (ValidarInmueble()) {
-            var inmueble = new Object();
-            inmueble.cantAmbientes = $("#cantAmbInmueble").val();
-            inmueble.cantHabitaciones = $("#cantHabInmueble").val();
-            inmueble.cantBanos = $("#cantBanInmueble").val();
-            inmueble.mtsCuadrados = $("#cantMtInmueble").val();
-            inmueble.descripcionInmueble = $("#descrInmueble").val();
-            inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
-            inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
-            inmueble.cochera = $("#cochera").val() == 1 ? true : false;
-            inmueble.tipoArrendador = 4;
-            inmueble.idArrendador = idInmobiliaria;
+        if (ValidarDepto() && ValidarLocalidad()) {
+            if (ValidarInmueble()) {
+                var inmueble = new Object();
+                inmueble.cantAmbientes = $("#cantidadambientes").val();
+                inmueble.cantHabitaciones = $("#cantidadhabitaciones").val();
+                inmueble.cantBanos = $("#cantidadbaños").val();
+                inmueble.mtsCuadrados = $("#cantidadmetros").val();
+                inmueble.mtsCuadradosInt = $("#cantidadmetrosinternos").val();
+                inmueble.descripcionInmueble = $("#descrInmueble").val();
+                inmueble.permiteMascota = $("#mascota").val() == 1 ? true : false;
+                inmueble.incluyeExpensas = $("#expensa").val() == 1 ? true : false;
+                inmueble.cochera = $("#cochera").val() == 1 ? true : false;
+                inmueble.tipoArrendador = 4;
+                inmueble.idArrendador = idInmobiliaria;
 
-            var direccion = new Object();
-            var localidad = new Object();
-            var departamento = new Object();
+                var direccion = new Object();
+                var localidad = new Object();
+                var departamento = new Object();
 
-            localidad.departamento = departamento;
-            direccion.localidad = localidad;
-            inmueble.direccion = direccion;
+                localidad.departamento = departamento;
+                direccion.localidad = localidad;
+                inmueble.direccion = direccion;
 
-            departamento.idDepartamento = $("#departamentoid").val();
+                departamento.idDepartamento = $("#departamentoid").val();
 
-            localidad.idLocalidad = $("#localidad").val();
-            direccion.nombreCalle = $("#calle").val();
-            direccion.numeroCalle = $("#numero").val();
-            direccion.nombreBarrio = $("#barrio").val();
-            direccion.idlote = $("#departamento").val();
-            direccion.idManzana = $("#piso").val();
+                localidad.idLocalidad = $("#localidad").val();
+                direccion.nombreCalle = $("#calle").val();
+                direccion.numeroCalle = $("#numero").val();
+                direccion.nombreBarrio = $("#barrio").val();
+                direccion.idlote = $("#departamento").val();
+                direccion.idManzana = $("#piso").val();
 
-            if (crear) {
-                //No le agrego el idInmueble
-                $.ajax({
-                    type: 'Post',
-                    url: '/Api/Inmueble/AgregarInmueble',
-                    data: inmueble,
-                    success: function (result) {
-                        GuardarArchivo(result.idInmueble);
-                        location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
-                    }
-                });
-            } else {
-                inmueble.idInmueble = idInmueble;
-                //Hago un llamado editando, ver el tema de los archivos, si se cargan todos de vuelta, o los que agrego se suman a los anteriores (seria lo ideal)
-                $.ajax({
-                    type: 'Post',
-                    url: '/Api/Inmueble/AgregarInmueble',
-                    data: inmueble,
-                    success: function (result) {
-                        GuardarArchivo(result.idInmueble);
-                        location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
-                    }
+                if (crear) {
+                    //No le agrego el idInmueble
+                    $.ajax({
+                        type: 'Post',
+                        url: '/Api/Inmueble/AgregarInmueble',
+                        data: inmueble,
+                        success: function (result) {
+                            GuardarArchivo(result.idInmueble);
+                            location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
+                        }
+                    });
+                } else {
+                    inmueble.idInmueble = idInmueble;
+                    //Hago un llamado editando, ver el tema de los archivos, si se cargan todos de vuelta, o los que agrego se suman a los anteriores (seria lo ideal)
+                    $.ajax({
+                        type: 'Post',
+                        url: '/Api/Inmueble/AgregarInmueble',
+                        data: inmueble,
+                        success: function (result) {
+                            GuardarArchivo(result.idInmueble);
+                            location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
+                        }
 
-                });
+                    });
+                }
+
+
             }
-
-
         }
     }
 
@@ -411,29 +416,32 @@
         };
     }(jQuery));
 
-    $("#cantMtInmueble").inputFilter(function (value) {
+    $("#cantidadmetros").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
-    $("#cantAmbInmueble").inputFilter(function (value) {
+    $("#cantidadambientes").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
-    $("#cantBanInmueble").inputFilter(function (value) {
+    $("#cantidadBaños").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
-    $("#cantMtInmuebleInt").inputFilter(function (value) {
+    $("#cantidadmetrosinternos").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
     $("#numero").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
-    $("#cantHabInmueble").inputFilter(function (value) {
+    $("#cantidadhabitaciones").inputFilter(function (value) {
         return /^-?\d*[.,]?\d*$/.test(value);
     });
+
+
     $(".obligatoria").keydown(function () {
         var objetoAlert = $("#alert" + $(this).attr("id").toString());
         objetoAlert.clearQueue();
         objetoAlert.empty();
     });
+
     function ValidarInmueble() {
         var respuesta = true;
         $(".obligatoria").each(function (index, result) {
@@ -454,6 +462,55 @@
             }
         });
         return respuesta;
+    }
+    $("#departamentoid").keydown(function () {
+        $("#alertaItem1").clearQueue();
+        $("#alertaItem1").empty();
+    });
+
+    $("#localidad").keydown(function () {
+        $("#alertaItem2").clearQueue();
+        $("#alertaItem2").empty();
+    });
+
+    function ValidarDepto() {
+
+        if ($("#departamentoid").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe seleccionar <b>Departamento</b>.</span>" +
+                "</div>";
+
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#departamentoid").focus();
+            return false;
+        }
+        return true;
+    }
+    function ValidarLocalidad() {
+
+        if ($("#localidad").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe seleccionar <b>Localidad</b>.</span>" +
+                "</div>";
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#localidad").focus();
+            return false;
+        }
+        return true;
     }
 
 
