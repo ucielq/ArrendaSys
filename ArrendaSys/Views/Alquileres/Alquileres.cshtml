@@ -97,8 +97,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -217,6 +215,12 @@
             }
         });
 
+    }
+
+    function VerAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+        location.href = '/Alquileres/Alquiler?idAlquiler=' + id.idAlquiler;
     }
 
 

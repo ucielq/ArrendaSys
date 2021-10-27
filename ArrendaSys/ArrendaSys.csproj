@@ -819,6 +819,7 @@
     <Content Include="Views\Login\RecuperarContrasenia.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItemsResenias.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItem.cshtml" />
+    <Content Include="Views\Alquileres\Alquiler.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

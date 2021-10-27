@@ -21,7 +21,7 @@ namespace ArrendaSysServicios
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                
+
                 if (tipoCuenta == 3)
                 {
                     var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
@@ -30,11 +30,11 @@ namespace ArrendaSysServicios
                                       join p in db.Propietario on i.idArrendador equals p.idPropietario
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
-                                      where p.idPropietario == id && ae.fechaBajaAlquilerEstado==null
+                                      where p.idPropietario == id && ae.fechaBajaAlquilerEstado == null
                                       select new AlquileresViewModel
                                       {
                                           idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler =a.fechaAltaAlquiler,
+                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
                                           idInmueble = a.idInmueble,
@@ -80,7 +80,7 @@ namespace ArrendaSysServicios
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
                                           idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler=ea.nombreEstadoAlquiler
+                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -97,7 +97,7 @@ namespace ArrendaSysServicios
             {
 
                 Alquiler alquiler1 = new Alquiler();
-                
+
 
                 alquiler1.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
                 alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
@@ -149,26 +149,116 @@ namespace ArrendaSysServicios
                     nuevoEstado.fechaAltaAlquilerEstado = DateTime.Now;
                     nuevoEstado.idEstadoAlquiler = 2;
                     nuevoEstado.idAlquiler = idAlquiler;
-                    db.AlquilerEstado.Add(nuevoEstado);              
+                    db.AlquilerEstado.Add(nuevoEstado);
                     db.SaveChanges();
                 }
             }
         }
 
-        public AlquileresViewModel ObtenerAlquiler(int idAlquiler)
+        public AlquileresViewModel ObtenerAlquiler(int idAlquiler, int tipoCuenta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                AlquileresViewModel alquiler = (from i in db.Alquiler
-                                                where i.idAlquiler == idAlquiler
-                                                select new AlquileresViewModel
-                                                {
-                                                    idAlquiler = i.idAlquiler,
-                                                    fechaAltaAlquiler = i.fechaAltaAlquiler,
-                                                    fechaBajaAlquiler = i.fechaBajaAlquiler,
-                                                    idArrendatario = i.idArrendatario,
-                                                    idInmueble = i.idInmueble
-                                                }).FirstOrDefault();
+                AlquileresViewModel alquiler = alquiler = (from a in db.Alquiler
+                                                           join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                                           join d in db.Direccion on i.idDireccion equals d.idDireccion
+                                                           join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                                                           where a.idAlquiler == idAlquiler
+                                                           select new AlquileresViewModel
+                                                           {
+                                                               idAlquiler = a.idAlquiler,
+                                                               fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                                               fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                                               idArrendatario = a.idArrendatario,
+                                                               inmueble = new InmuebleViewModel
+                                                               {
+                                                                   cantAmbientes = i.cantAmbientes,
+                                                                   cantBanos = i.cantBanos,
+                                                                   cantHabitaciones = i.cantHabitaciones,
+                                                                   cochera = i.cochera,
+                                                                   descripcionInmueble = i.descripcionInmueble,
+                                                                   incluyeExpensas = i.incluyeExpensas,
+                                                                   mtsCuadrados = i.mtsCuadrados,
+                                                                   mtsCuadradosInt = i.mtsCuadradosInt,
+                                                                   permiteMascota = i.permiteMascota,
+                                                                   idDireccion = i.idDireccion,
+                                                                   idInmueble = i.idInmueble,
+                                                                   tipoArrendador=i.tipoArrendador,
+                                                                   idArrendador=i.idArrendador,
+                                                                   direccion = new DireccionViewModel
+                                                                   {
+                                                                       idDireccion = d.idDireccion,
+                                                                       nombreCalle = d.nombreCalle,
+                                                                       numeroCalle = d.numeroCalle,
+                                                                       localidad = new LocalidadViewModel
+                                                                       {
+                                                                           idLocalidad = l.idLocalidad,
+                                                                           codigopostal = l.codigoPostal,
+                                                                           nombreLocalidad = l.nombreLocalidad,
+                                                                           idDepartamento = l.idDepartamento
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }).FirstOrDefault();
+                var listaMultimedia = db.MultimediaInmueble.Where(x => x.idInmueble == alquiler.inmueble.idInmueble).ToList();
+                List<ArchivoVM> listaMulti = new List<ArchivoVM>();
+                foreach(var item in listaMultimedia)
+                {
+                    ArchivoVM archivo = new ArchivoVM
+                    {
+                        url=item.urlMultimediaInmueble                        
+                    };
+                    listaMulti.Add(archivo);
+                }
+
+                alquiler.inmueble.listaMultimedia = listaMulti;
+                if (tipoCuenta == 2)
+                {
+                    if (alquiler.inmueble.tipoArrendador == 3)
+                    {
+                        var idProp = alquiler.inmueble.idArrendador;
+                        var arrendador = db.Propietario.Where(x => x.idPropietario == idProp).FirstOrDefault();
+                        alquiler.arrendador = new PropietarioViewModel
+                        {
+                            nombrePropietario=arrendador.nombrePropietario,
+                            apellidoPropietario=arrendador.apellidoPropietario,
+                            idPropietario=arrendador.idPropietario,
+                            telefonoPropietario=arrendador.telefonoPropietario,
+                            numeroDocumentoPropietario=arrendador.numeroDocumentoProp
+                        };
+                    }
+                    else
+                    {
+                        if(alquiler.inmueble.tipoArrendador == 4)
+                        {
+                            var idInmo = alquiler.inmueble.idArrendador;
+                            var arrendador = db.Inmobiliaria.Where(x => x.idInmobiliaria == idInmo).FirstOrDefault();
+                            alquiler.arrendador = new InmobiliariaViewModel
+                            {
+                                nombreInmobiliaria = arrendador.nombreInmobiliaria,
+                                cuitInmobiliaria=arrendador.cuitInmobiliaria,
+                                idInmobiliaria = arrendador.idInmobiliaria,
+                                telefonoInmobiliaria = arrendador.telefonoInmobiliaria
+                            };
+                        }
+                    }
+                }
+                else
+                {
+                    if (tipoCuenta == 3 || tipoCuenta==4)
+                    {
+                        var idArrendatario = alquiler.idArrendatario;
+                        var arrendatario = db.Arrendatario.Where(x => x.idArrendatario == idArrendatario).FirstOrDefault();
+                        alquiler.arrendatario = new ArrendatarioViewModel
+                        {
+                            nombreArrendatario = arrendatario.nombreArrendatario,
+                            apellidoArrendatario = arrendatario.apellidoArrendatario,
+                            nroTelefono = arrendatario.telefonoArrendatario.ToString(),
+                            idArrendatario = arrendatario.idArrendatario,
+                            nroDocumento = arrendatario.numeroDocumentoArr,
+                        };
+                    }
+                }
                 return alquiler;
             }
         }

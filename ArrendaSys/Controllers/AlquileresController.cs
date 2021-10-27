@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers
 {
-    [SessionUtility]
+    //[SessionUtility]
     //Preguntar
     //[Permiso("ALQ")]
     public class AlquileresController : Controller
@@ -18,5 +18,7 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+        public ActionResult Alquiler()
+        { return View(); }
     }
 }
