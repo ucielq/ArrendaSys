@@ -16,64 +16,28 @@ namespace ArrendaSysServicios
     {
         public ArrendasysEntities db = new ArrendasysEntities();
         // ----------------------METODOS  ------------
-        public object ListarItemsReseñaPropietario(int idCuenta, int tipoCuenta)
+        public object ListarAlquileres(int idAoAr)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                if (tipoCuenta == 3)
-                {
-                    var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
-                    var alquileres = (from a in db.Reseña
-                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                      join p in db.Propietario on i.idArrendador equals p.idPropietario
-                                      where p.idPropietario == id
-                                      select new AlquileresViewModel
-                                      {
-                                          idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
-                                          fechaBajaAlquiler = a.fechaBajaAlquiler,
-                                          idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble
-                                      }).ToList();
-                    object json = new { data = alquileres };
-                    return json;
-                }
-                else if (tipoCuenta == 4)
-                {
-                    var id = db.Inmobiliaria.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idInmobiliaria;
-                    var alquileres = (from a in db.Reseña
-                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                      join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
-                                      where p.idInmobiliaria == idCuenta
-                                      select new AlquileresViewModel
-                                      {
-                                          idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
-                                          fechaBajaAlquiler = a.fechaBajaAlquiler,
-                                          idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble
-                                      }).ToList();
-                    object json = new { data = alquileres };
-                    return json;
-                }
-                else
-                {
 
-                    //
-                    var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
-                    var alquileres = (from a in db.Reseña
-                                      where a.idArrendatario == idCuenta
-                                      select new AlquileresViewModel
+                {
+                    var idItemReseña = db.ItemReseña.Where(x => x.IR_esAoAr == true).FirstOrDefault().idItemReseña;
+                    var idReseña = db.ReseñaArrendatarioArrendador.Where(x => x.idReseñaAoAr == 1 ).FirstOrDefault().idReseñaAoAr;
+                    var Items = (from a in db.ItemReseña
+                                      join i in db.ReseñaItemAoAr on a.idItemReseña equals i.idItemReseña
+                                      join p in db.ReseñaArrendatarioArrendador on i.idReseñaArAo equals p.idReseñaAoAr
+                                      where a.IR_esAoAr == true 
+                                      select new ItemViewModel
                                       {
-                                          idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
-                                          fechaBajaAlquiler = a.fechaBajaAlquiler,
-                                          idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble
+                                          idItemReseña = a.idItemReseña,
+                                          nombreItemReseña = a.nombreItemReseña
+
                                       }).ToList();
-                    object json = new { data = alquileres };
+                    object json = new { data = Items };
                     return json;
                 }
+                
 
             }
         }

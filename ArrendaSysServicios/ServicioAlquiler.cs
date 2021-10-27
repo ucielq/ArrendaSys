@@ -25,7 +25,7 @@ namespace ArrendaSysServicios
                 if (tipoCuenta == 3)
                 {
                     var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
-                    var alquileres = (from a in db.Reseña
+                    var alquileres = (from a in db.Alquiler
                                       join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                       join p in db.Propietario on i.idArrendador equals p.idPropietario
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
@@ -46,7 +46,7 @@ namespace ArrendaSysServicios
                 else if (tipoCuenta == 4)
                 {
                     var id = db.Inmobiliaria.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idInmobiliaria;
-                    var alquileres = (from a in db.Reseña
+                    var alquileres = (from a in db.Alquiler
                                       join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                       join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
@@ -139,7 +139,7 @@ namespace ArrendaSysServicios
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var alquiler1 = db.Reseña.Where(x => x.idAlquiler == idAlquiler).FirstOrDefault();
+                var alquiler1 = db.Alquiler.Where(x => x.idAlquiler == idAlquiler).FirstOrDefault();
                 if (alquiler1 != null)
                 {
 
@@ -159,7 +159,7 @@ namespace ArrendaSysServicios
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                AlquileresViewModel alquiler = (from i in db.Reseña
+                AlquileresViewModel alquiler = (from i in db.Alquiler
                                                 where i.idAlquiler == idAlquiler
                                                 select new AlquileresViewModel
                                                 {

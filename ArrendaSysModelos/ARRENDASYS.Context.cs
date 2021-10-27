@@ -25,7 +25,7 @@ namespace ArrendaSysModelos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Reseña> Reseña { get; set; }
+        public virtual DbSet<Alquiler> Alquiler { get; set; }
         public virtual DbSet<AlquilerEstado> AlquilerEstado { get; set; }
         public virtual DbSet<Arrendatario> Arrendatario { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
