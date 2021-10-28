@@ -105,8 +105,25 @@ namespace ArrendaSysServicios
                 alquiler1.idInmueble = alquiler.idInmueble;
 
                 db.Alquiler.Add(alquiler1);
-
                 db.SaveChanges();
+
+                var inmu = db.Inmueble.Where(x => x.idInmueble == alquiler.idInmueble).FirstOrDefault();
+                var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
+
+                if (inmuest != null)
+                {
+                    inmuest.fechaBajaInmuebleEstado = DateTime.Now;
+
+                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
+                    {
+                        fechaAltaInmuebleEstado = DateTime.Now,
+                        fechaBajaInmuebleEstado = null,
+                        idEstadoInmueble = 3,
+                        idInmueble = inmu.idInmueble
+                    };
+                    db.InmuebleEstado.Add(inmuEstadoNuevo);
+                    db.SaveChanges();
+                }
                 //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
                 CrearAlquilerEstado(alquiler1.idAlquiler);
                 return 1;
@@ -261,6 +278,51 @@ namespace ArrendaSysServicios
                 }
                 return alquiler;
             }
+        }
+
+        public List<InmuebleViewModel> ObtenerInmuebles(int idPropietario)
+        {
+            List<InmuebleViewModel> inmuebles;
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                inmuebles = (from i in db.Inmueble
+                             join d in db.Direccion on i.idDireccion equals d.idDireccion
+                             join ei in db.InmuebleEstado on i.idInmueble equals ei.idInmueble
+                             join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                             where i.idArrendador == idPropietario
+                             where ei.idEstadoInmueble == 1 && ei.fechaBajaInmuebleEstado == null
+                             select new InmuebleViewModel
+                             {
+                                 cantAmbientes = i.cantAmbientes,
+                                 cantBanos = i.cantBanos,
+                                 cantHabitaciones = i.cantHabitaciones,
+                                 cochera = i.cochera,
+                                 descripcionInmueble = i.descripcionInmueble,
+                                 incluyeExpensas = i.incluyeExpensas,
+                                 mtsCuadrados = i.mtsCuadrados,
+                                 mtsCuadradosInt = i.mtsCuadradosInt,
+                                 permiteMascota = i.permiteMascota,
+                                 idArrendador = idPropietario,
+                                 tipoArrendador = 4,
+                                 idDireccion = i.idDireccion,
+                                 idInmueble = i.idInmueble,
+                                 direccion = new DireccionViewModel
+                                 {
+                                     idDireccion = d.idDireccion,
+                                     nombreCalle = d.nombreCalle,
+                                     numeroCalle = d.numeroCalle,
+                                     localidad = new LocalidadViewModel
+                                     {
+                                         idLocalidad = l.idLocalidad,
+                                         codigopostal = l.codigoPostal,
+                                         nombreLocalidad = l.nombreLocalidad,
+                                         idDepartamento = l.idDepartamento
+                                     }
+                                 }
+
+                             }).ToList();
+            }
+            return inmuebles;
         }
 
     }
