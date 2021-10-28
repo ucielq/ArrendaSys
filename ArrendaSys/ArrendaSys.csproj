@@ -173,7 +173,7 @@
     <Compile Include="Controllers\Api\LoginApiController.cs" />
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\PublicacionApiController.cs" />
-    <Compile Include="Controllers\Api\ReseñaApiController.cs" />
+    <Compile Include="Controllers\Api\ReseniaApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />

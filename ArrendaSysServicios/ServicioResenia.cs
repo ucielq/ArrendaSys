@@ -48,7 +48,6 @@ namespace ArrendaSysServicios
 
                 ReseñaArrendadorArrendatario resenia1 = new ReseñaArrendadorArrendatario();
 
-
                 resenia1.fechaAltaReseñaArAo= resenia.fechaAltaReseñaArAo;
                 resenia1.fechaBajaReseñaArAo = resenia.fechaBajaReseñaArAo;
                 resenia1.idAlquiler = resenia.idAlquiler;

@@ -24,7 +24,7 @@
                                 <div class="row">
                                     @*Inmueble*@
                                     <div class="container" id="Inmueble">
-                                        <input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Submit' onclick="GuardarResenia()">
+                                        <button type="button" class="btn btn-info pull-center" onclick="GuardarResenia()">Guardar</button>
                                     </div>
                                 </div>
                             </div>
@@ -166,6 +166,7 @@
         //Success:
     }
     function GuardarResenia() {
+        debugger;
         var resenia = new Object();
 
         resenia.fechaAltaReseñaArAo = Date.now();
@@ -175,15 +176,16 @@
         resenia.descripcionReseñaArAo = $("#descripcionReseniaAoAr").val();
         resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
 
-
         $.ajax({
-            type: 'Post',
-            url: 'Api/Resenia/CrearResenia',
+            type:'Post',
+            url:'/Api/Resenia/CrearResenia',
             data: resenia,
             success: function (result) {
                 window.location.href = "/Alquileres/Alquiler";
             }
         });
+        
+        
 
     }
 </script>
