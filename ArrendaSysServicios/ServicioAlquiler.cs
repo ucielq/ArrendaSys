@@ -13,7 +13,7 @@ using System.Globalization;
 
 namespace ArrendaSysServicios
 {
-    public class ServicioReseña
+    public class ServicioAlquiler
     {
         public ArrendasysEntities db = new ArrendasysEntities();
         // ----------------------METODOS  ------------

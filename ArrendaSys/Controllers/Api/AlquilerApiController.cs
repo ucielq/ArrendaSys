@@ -20,7 +20,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpPost]
         public int Alquiler(AlquileresViewModel alquiler)
         {
-            ServicioReseña serv = new ServicioReseña();
+            ServicioAlquiler serv = new ServicioAlquiler();
             return serv.AgregarAlquiler(alquiler);
         }
 
@@ -30,7 +30,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpGet]
         public object ListarAlquileres(int idCuenta,int tipoCuenta)
         {
-            ServicioReseña servicio = new ServicioReseña();
+            ServicioAlquiler servicio = new ServicioAlquiler();
             var lista = servicio.ListarAlquileres(idCuenta,tipoCuenta);
             return lista;
         }
@@ -40,7 +40,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpPut]
         public void EliminarAlquiler(int idAlquiler)
         {
-            ServicioReseña servicio = new ServicioReseña();
+            ServicioAlquiler servicio = new ServicioAlquiler();
             servicio.EliminarAlquiler(idAlquiler);
         }
         [System.Web.Http.Route("Api/Alquiler/ObtenerAlquiler")]

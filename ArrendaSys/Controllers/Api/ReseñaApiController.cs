@@ -22,17 +22,17 @@ namespace ArrendaSys.Controllers.Api
             ServicioResenia serv = new ServicioResenia();
             return serv.AgregarReseña(reseña);
         }
-
-        [System.Web.Http.Route("Api/Reseña/ListarItems")]
-        [System.Web.Http.ActionName("ListarItems")]
-        [System.Web.Http.HttpGet]
-        public object ListarItems(int idAoAr)
-        {
-            ServicioReseña servicio = new ServicioReseña();
-            var lista = servicio.ListarAlquileres(idAoAr);
-            return lista;
-        }
-
+        /*
+       [System.Web.Http.Route("Api/Reseña/ListarItems")]
+       [System.Web.Http.ActionName("ListarItems")]
+       [System.Web.Http.HttpGet]
+       public object ListarItems(int idAoAr)
+       {
+           ServicioReseña servicio = new ServicioReseña();
+           var lista = servicio.ListarAlquileres(idAoAr);
+           return lista;
+       }
+       */
         /*// GET: ReseñaApi
         public ActionResult Index()
         {

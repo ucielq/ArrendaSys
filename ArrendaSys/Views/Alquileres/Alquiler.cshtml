@@ -132,13 +132,18 @@
                 //Boton Agregar reseña Inmueble
                 if (tipoCuenta == 2) {
                     item = item + "<div class='row' id='formularioResenia'>";
+                    item = item + "<div class='row' id='PuntuacionResenia'><input name='email' id='puntuacionReseñaAoAr' cols='30' class='Puntuacion form - control' rows='10' placeholder='Puntuacion del 1 al 10'></input></div>";
+                    item = item + "<div class='row' id='DetalleResenia'><input name='email' id='descripcionReseñaArAo' cols='30' class='form - control' rows='10' placeholder='Detalle Reseña'></input></div>";
+                    item = item + "<div class='card'><div class='card-body'><div class='container'><div class='row'><div class='col'><table id='listaItems' class='table table-bordered display nowrap' cellspacing='0' style='width:100%;'><thead><tr><th>Item</th><th>Puntuacion Item</th></tr></thead></table></div></div></div> </div ></div >";
+                    item = item + "<div class='card' id='tablaItems'></div>";
+                    item = item + "<div class='card - body'><div class='container'><div class='row'><div class='col'><table id='tablaRol' class='table table-bordered display nowrap' cellspacing='0' style='width:100%;'><thead><tr><th>id</th><th>Nombre Item</th><th>Descripción</th><th></th></tr></thead></table></div></div></div></div>";
                     //item = item + "<div class='col-md-2' style='top:-12'>";
                     //item = item + "<h3>Mis Reseñas Inmueble</h3>";
                     //item = item + "</div>";
                     //item = item + "<div class='col-md-2'>";
                     //item = item + "<button class='btn btn-success' style='cursor:pointer' onclick='AgregarNuevoReseniaInmueble()'><i class='fas fa-plus'></i>Agregar reseña Inmueble</button>";
                     //item = item + "</div>";
-                    item = item + "</div>";
+                    item = item + "</div>"; 
                 }
                
 
@@ -148,8 +153,15 @@
     }
     function mostrarFormulario() {
         //Haces el ajax
-        //Success:
+       /* $.ajax({
+            type: 'Get',
+            url: 'Api/Item/ListarItems?tipoCuenta=' + tipoCuenta + "&esAI=", + esAI + "&esAoAr=" + esAoAr + "&esArAo=" + esArAo,
+            async: false,
+            success: function (result) {
 
-        // $("#formularioResenia").append(asdas);
+
+
+        });*/
+        //Success:
     }
 </script>

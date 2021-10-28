@@ -18,11 +18,11 @@ namespace ArrendaSysServicios
                             where i.idItemReseña == idItem
                             select new ItemViewModel
                             {
-                                idItemReseña=i.idItemReseña,
-                                IR_esAI=i.IR_esAI,
-                                IR_esAoAr=i.IR_esAoAr,
-                                IR_esArAo=i.IR_esArAo,
-                                nombreItemReseña=i.nombreItemReseña
+                                idItemReseña = i.idItemReseña,
+                                IR_esAI = i.IR_esAI,
+                                IR_esAoAr = i.IR_esAoAr,
+                                IR_esArAo = i.IR_esArAo,
+                                nombreItemReseña = i.nombreItemReseña
                             }).FirstOrDefault();
                 return item;
             }
@@ -35,10 +35,10 @@ namespace ArrendaSysServicios
                 {
                     ItemReseña itemReseña = new ItemReseña
                     {
-                        IR_esAI=item.IR_esAI,
-                        IR_esAoAr=item.IR_esAoAr,
-                        IR_esArAo=item.IR_esArAo,
-                        nombreItemReseña=item.nombreItemReseña
+                        IR_esAI = item.IR_esAI,
+                        IR_esAoAr = item.IR_esAoAr,
+                        IR_esArAo = item.IR_esArAo,
+                        nombreItemReseña = item.nombreItemReseña
                     };
                     db.ItemReseña.Add(itemReseña);
                     db.SaveChanges();
@@ -58,7 +58,7 @@ namespace ArrendaSysServicios
                 return 1;
             }
         }
-        
+
         public object ObtenerItems()
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
@@ -68,12 +68,12 @@ namespace ArrendaSysServicios
                              select new ItemViewModel
                              {
                                  idItemReseña = i.idItemReseña,
-                                 IR_esAI=i.IR_esAI,
-                                 IR_esAoAr=i.IR_esAoAr,
-                                 IR_esArAo=i.IR_esArAo,
-                                 nombreItemReseña=i.nombreItemReseña
+                                 IR_esAI = i.IR_esAI,
+                                 IR_esAoAr = i.IR_esAoAr,
+                                 IR_esArAo = i.IR_esArAo,
+                                 nombreItemReseña = i.nombreItemReseña
                              }).ToList();
-                foreach(var item in lista)
+                foreach (var item in lista)
                 {
                     var descripcion = "Item utilizado para calificar:";
                     if ((bool)item.IR_esAI)
@@ -93,6 +93,61 @@ namespace ArrendaSysServicios
                 object json = new { data = lista };
                 return json;
 
+
+            }
+        }
+
+        public object ListarItems(int tipocuenta,Boolean esAI,Boolean esAoAr, Boolean esArAo)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                object json = null;
+                if (tipocuenta == 2 && esAoAr == true)
+                {
+                    var lista = (from i in db.ItemReseña where i.IR_esAoAr == true
+                             select new ItemViewModel
+                             {
+                                 idItemReseña = i.idItemReseña,
+                                 IR_esAI = i.IR_esAI,
+                                 IR_esAoAr = i.IR_esAoAr,
+                                 IR_esArAo = i.IR_esArAo,
+                                 nombreItemReseña = i.nombreItemReseña
+                             }).ToList();
+                    json = new { data = lista };
+           
+                }
+                if (tipocuenta == 2 && esAI == true)
+                {
+                    var lista = (from i in db.ItemReseña
+                                 where i.IR_esAI == true
+                                 select new ItemViewModel
+                                 {
+                                     idItemReseña = i.idItemReseña,
+                                     IR_esAI = i.IR_esAI,
+                                     IR_esAoAr = i.IR_esAoAr,
+                                     IR_esArAo = i.IR_esArAo,
+                                     nombreItemReseña = i.nombreItemReseña
+                                 }).ToList();
+                    json = new { data = lista };
+                    
+                }
+                if (tipocuenta == 3)
+                {
+                    var lista = (from i in db.ItemReseña
+                                 where i.IR_esArAo == true
+                                 select new ItemViewModel
+                                 {
+                                     idItemReseña = i.idItemReseña,
+                                     IR_esAI = i.IR_esAI,
+                                     IR_esAoAr = i.IR_esAoAr,
+                                     IR_esArAo = i.IR_esArAo,
+                                     nombreItemReseña = i.nombreItemReseña
+                                 }).ToList();
+                    json = new { data = lista };
+                    
+                }
+
+                return json;
 
             }
         }
