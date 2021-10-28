@@ -52,5 +52,15 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.ObtenerAlquiler(idAlquiler,tipoCuenta);
             return lista;
         }
+
+        [System.Web.Http.Route("Api/Alquiler/ObtenerInmuebles")]
+        [System.Web.Http.ActionName("ObtenerInmuebles")]
+        [System.Web.Http.HttpGet]
+        public List<InmuebleViewModel> ObtenerInmuebles(int idPropietario)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            var lista = servicio.ObtenerInmuebles(idPropietario);
+            return lista;
+        }
     }
 }
