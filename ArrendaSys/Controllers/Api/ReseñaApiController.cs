@@ -11,16 +11,16 @@ namespace ArrendaSys.Controllers.Api
 {
     [SessionUtility]
 
-    public class ReseñaApiController : ApiController
+    public class ReseniaApiController : ApiController
     {
 
-        [System.Web.Http.Route("Api/Reseña/CrearReseña")]
-        [System.Web.Http.ActionName("CrearReseña")]
+        [System.Web.Http.Route("Api/Resenia/CrearResenia")]
+        [System.Web.Http.ActionName("CrearResenia")]
         [System.Web.Http.HttpPost]
-        public int Reseña(ReseniaViewModel reseña)
+        public int Resenia(ReseniaViewModel resenia)
         {
             ServicioResenia serv = new ServicioResenia();
-            return serv.AgregarReseña(reseña);
+            return serv.AgregarResenia(resenia);
         }
         /*
        [System.Web.Http.Route("Api/Reseña/ListarItems")]

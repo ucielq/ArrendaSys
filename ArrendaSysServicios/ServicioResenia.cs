@@ -41,22 +41,22 @@ namespace ArrendaSysServicios
 
             }
         }
-        public int AgregarReseña(ReseniaViewModel resenia)
+        public int AgregarResenia(ReseniaViewModel resenia)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
 
-                ReseñaArrendadorArrendatario reseña1 = new ReseñaArrendadorArrendatario();
+                ReseñaArrendadorArrendatario resenia1 = new ReseñaArrendadorArrendatario();
 
 
-                reseña1.fechaAltaReseñaArAo= resenia.fechaAltaReseñaArAo;
-                reseña1.fechaBajaReseñaArAo = resenia.fechaBajaReseñaArAo;
-                reseña1.idAlquiler = resenia.idAlquiler;
-                reseña1.idReseñaArAo = resenia.idReseñaAoAr;
-                reseña1.puntuacionReseñaArAo = resenia.puntuacionReseñaAoAr;
-                reseña1.descripcionReseñaArAo = resenia.descripcionReseñaArAo;
+                resenia1.fechaAltaReseñaArAo= resenia.fechaAltaReseñaArAo;
+                resenia1.fechaBajaReseñaArAo = resenia.fechaBajaReseñaArAo;
+                resenia1.idAlquiler = resenia.idAlquiler;
+                resenia1.idReseñaArAo = resenia.idReseñaAoAr;
+                resenia1.puntuacionReseñaArAo = resenia.puntuacionReseñaAoAr;
+                resenia1.descripcionReseñaArAo = resenia.descripcionReseñaArAo;
 
-                db.ReseñaArrendadorArrendatario.Add(reseña1);
+                db.ReseñaArrendadorArrendatario.Add(resenia1);
 
                 db.SaveChanges();
 
