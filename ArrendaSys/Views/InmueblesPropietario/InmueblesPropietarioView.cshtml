@@ -52,14 +52,13 @@
         $("#inmuebles").empty();
         $.ajax({
             type: 'Get',
-            url: '/Api/Inmueble/ObtenerInmueblesPropietario?idPropietario=' +idPropietario,
+            url: '/Api/Inmueble/ObtenerInmueblesPropietario?idPropietario='+idPropietario,
             success: function (result) {
                 var item = "";
                 var cont = 0;
                 item = item + "<div class='row'>";
                 $.each(result,function (index,inmueble){
-                    cont++;
-                    
+                    cont++;                   
                     item = item + "<div class='col-md-4'>";
                     item = item + "<div class='cardV3'>";
                     item = item + "<div id='carouselexamplecontrols"+cont.toString()+"' class='carousel slide' data-ride='carousel'>";

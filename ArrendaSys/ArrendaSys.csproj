@@ -168,12 +168,13 @@
     <Compile Include="Controllers\Api\DireccionApiController.cs" />
     <Compile Include="Controllers\Api\InmobiliariaApiController.cs" />
     <Compile Include="Controllers\Api\InmuebleApiController.cs" />
+    <Compile Include="Controllers\Api\ItemApiController.cs" />
     <Compile Include="Controllers\Api\LocalidadApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
     <Compile Include="Controllers\Api\NotificacionesApiController.cs" />
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\PublicacionApiController.cs" />
-    <Compile Include="Controllers\Api\ReseñaApiController.cs" />
+    <Compile Include="Controllers\Api\ReseniaApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\ConfiguracionesController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
@@ -820,6 +821,7 @@
     <Content Include="Views\Login\RecuperarContrasenia.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItemsResenias.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItem.cshtml" />
+    <Content Include="Views\Alquileres\Alquiler.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -831,6 +833,7 @@
     <Folder Include="Views\Departamento\" />
     <Folder Include="Views\DireccionApi\" />
     <Folder Include="Views\InmuebleApi\" />
+    <Folder Include="Views\ItemApi\" />
     <Folder Include="Views\NotificacionesApi\" />
     <Folder Include="Views\PropietarioApi\" />
     <Folder Include="Views\RecuperarContrasenia\" />

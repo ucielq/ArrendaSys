@@ -248,7 +248,7 @@ namespace ArrendaSysServicios
                         arrendatarioVM.nroDocumento = (int)arrendatario.numeroDocumentoArr;
                         arrendatarioVM.nombreArrendatario = arrendatario.nombreArrendatario;
                         arrendatarioVM.apellidoArrendatario = arrendatario.apellidoArrendatario;
-                        arrendatarioVM.nroTelefono = (int)arrendatario.telefonoArrendatario;
+                        arrendatarioVM.nroTelefono = arrendatario.telefonoArrendatario.ToString();
                         arrendatarioVM.fechaNacimientoStr = String.Format("{0:yyyy-MM-dd}", arrendatario.fechaNacimArrendatario);
                         arrendatarioVM.fechaNacimiento = (DateTime)arrendatario.fechaNacimArrendatario;
                         arrendatarioVM.idArrendatario = arrendatario.idArrendatario;

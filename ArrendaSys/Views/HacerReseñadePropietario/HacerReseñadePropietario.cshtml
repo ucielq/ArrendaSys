@@ -1,4 +1,10 @@
 ﻿
+@{
+    var usuario = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+    var idAlquiler = Session["idAlquiler"];
+}
 <!DOCTYPE html>
 <style>
     /*seccion cabecera*/
@@ -200,6 +206,7 @@
         margin-left: -15px;
         width: 1130px;
     }
+
     .form-controlReseña {
         display: block;
         padding: 0.4375rem 0;
@@ -213,6 +220,7 @@
         box-shadow: none;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+
     .form-control {
         display: block;
         width: 1000px;
@@ -225,20 +233,25 @@
         border-radius: 0;
         box-shadow: none;
     }
+
     .form-control,
     .is-focused .form-control {
         background-image: linear-gradient(to top, #5cb874 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
     }
-    .meter{
-        height:50px;
-        width:500px;
+
+    .meter {
+        height: 50px;
+        width: 500px;
     }
-    .Puntuacion{
-        height:50px !important;
+
+    .Puntuacion {
+        height: 50px !important;
     }
+
     .Puntuacion, is-focused .Puntuacion {
         background-image: linear-gradient(to top, #5cb874 2px, rgba(156, 39, 176, 0) 2px), linear-gradient(to top, #d2d2d2 1px, rgba(210, 210, 210, 0) 1px);
     }
+
     .insertArchivos {
         color: #333333;
         background-color: rgba(153, 153, 153, 0.2);
@@ -248,17 +261,15 @@
         font-size: 0.875rem;
         line-height: 1.333333;
         border-radius: 0.2rem;
-        margin-left:331px;
-        margin-top:20px;
+        margin-left: 331px;
+        margin-top: 20px;
     }
+
     .btn {
         margin-left: 250px;
         margin-top: 50px;
         box-shadow: 0 2px 2px 0 #5cb874, 0 3px 1px -2px rgb(156 39 176 / 20%), 0 1px 5px 0 #5cb874 !important;
     }
-    
-
-
 </style>
 <html class="">
 
@@ -279,7 +290,7 @@
         <div class="card-body little-profile text-center">
             <div class="pro-img"><img src="https://i.imgur.com/8RKXAIV.jpg" alt="user"></div>
             <h3 class="m-b-0">Arrendatario: Rodrigo Acevedo</h3>
-            <p>Direccion del arrendatario</p> 
+            <p>Direccion del arrendatario</p>
             <div class="row text-center m-t-20">
                 <!-- <div class="col-lg-4 col-md-4 m-t-20">
                     <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
@@ -303,8 +314,8 @@
                         <h6 class="card-subtitle">Cual fue tu experiencia este mes?</h6>
                     </div>
                     <div class="comment-widgets m-b-20">
-                        
-                        
+
+
                         <div class="fh5co-section">
                             <div class="col-md-Reseña">
                                 <div class="container">
@@ -312,49 +323,68 @@
                                         <div class="col-md-4 col-sm-4 col-xs-12 section-heading">
                                             <!--<h2>Detalle</h2>-->
                                         </div>
-                                            <div class="col-md-12">
-                                                <form action="#" name="formulario" method="post" enctype="multipart/form-data">
+                                        <div class="col-md-12">
+                                            <form action="#" name="formulario" method="post" enctype="multipart/form-data">
 
 
 
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <textarea name="email" id="email" cols="30" class="Puntuacion form-control" rows="10" placeholder="Puntuacion del 1 al 10"></textarea>
-                                                            </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <input name="email" id="puntuacionReseñaAoAr" cols="30" class="Puntuacion form-control" rows="10" placeholder="Puntuacion del 1 al 10"></input>
+                                                        </div>
 
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <input name="email" id="descripcionReseñaArAo" cols="30" class="form-control" rows="10" placeholder="Detalle Reseña"></input>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-12">
-                                                                <textarea name="email" id="email" cols="30" class="form-control" rows="10" placeholder="Detalle Reseña"></textarea>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <table id="listaItems" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Item</th>
+                                                                                <th>Puntuacion Item</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+
+                                                <input class="insertArchivos" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
 
 
-                                                        <input class="insertArchivos" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
-                                                    
-
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <input type="submit" class="btn btn-primary btn-outline btn-lg btn-block" value="Submit">
-                                                            </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <input type="submit" class="btn btn-primary btn-outline btn-lg btn-block" value="Submit" onclick="GuardarReseñaArrendatarioArrendador()">
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                </form>
-                                            </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                       
-                        
-                       
+
+
+
                     </div>
                 </div>
             </div>
@@ -363,5 +393,104 @@
 
 
 </body>
+<script>
+    var user = '@usuario';
+    var idCuenta = parseInt(@idCuenta);
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var idAlquiler = parseInt(@idAlquiler);
+    var table;
+    (function () {
+        CrearTabla();
+    })();
+    function CrearTabla() {
+
+        var idiomaEspanol = {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla.",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            },
+            "buttons": {
+                "copy": "Copiar",
+                "colvis": "Visibilidad"
+            }
+        }
+
+        table = $('#listaItems').DataTable({
+            "colResize": {
+                isEnabled: true,
+                hoverClass: 'dt-colresizable-hover',
+                hasBoundCheck: true,
+                minBoundClass: 'dt-colresizable-bound-min',
+                maxBoundClass: 'dt-colresizable-bound-max',
+                isResizable: function (column) { return true; },
+                onResize: function (column) { },
+                onResizeEnd: function (column, columns) { },
+                getMinWidthOf: function ($thNode) { }
+            },
+            "responsive": true,
+            "order": [[1, "asc"]],
+            "ajax": "/Api/Reseña/ListarItems?idAoAr=" + idArAo,
+            "lengthMenu": [50, 10],
+            "columns": [
+                { data: "idAlquiler", "className": "text-left", "visible": false },
+                {
+                    data: "Item", "className": "text-left"
+                },
+                {
+                    data: "PuntuacionItem",
+                    orderable: false,
+                    "render": function () {
+                        var imput = "<imput class='fa fa-edit' ></imput>";
+                        return imput
+                    },
+                    "width": 35,
+                }
+            ],
+            "language": idiomaEspanol
+        });
+
+    }
+
+    function GuardarReseñaArrendatarioArrendador() {
+        var reseña = new Object();
+    
+        reseña.fechaAltaReseñaArAo = Date.now();
+
+        reseña.idAlquiler = $("#idAlquiler").val();
+
+        reseña.descripcionReseñaArAo = $("#descripcionReseñaArAo").val();
+        reseña.puntuacionReseñaAoAr = $("#puntuacionReseñaAoAr").val();
+
+
+        $.ajax({
+            type: 'Post',
+            url: 'Api/Reseña/CrearReseña',
+            data: reseña,
+            success: function (result) {
+                window.location.href = "/HacerReseñadePropietario/HacerReseñadePropietario";
+            }
+        });
+
+    }
+    
+</script>
 </html>
 
