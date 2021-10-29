@@ -41,7 +41,30 @@ namespace ArrendaSysServicios
 
             }
         }
-        public int AgregarResenia(ReseniaViewModel resenia)
+        public int AgregarReseniaArrendador(ReseniaViewModel resenia)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+
+                ReseñaArrendatarioArrendador resenia1 = new ReseñaArrendatarioArrendador();
+
+
+                resenia1.fechaAltaReseñaAoAr = DateTime.Now;
+                resenia1.fechaBajaReseñaAoAr = resenia.fechaBajaReseñaAoAr;
+                resenia1.idAlquiler = resenia.idAlquiler;
+                resenia1.idReseñaAoAr = resenia.idReseñaAoAr;
+                resenia1.puntuacionReseñaAoAr = resenia.puntuacionReseñaAoAr;
+                resenia1.descripcionReseñaAoAr = resenia.descripcionReseñaAoAr;
+
+                db.ReseñaArrendatarioArrendador.Add(resenia1);
+
+                db.SaveChanges();
+
+                return 1;
+
+            }
+        }
+        public int AgregarReseniaArrendatario(ReseniaViewModel resenia)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -49,14 +72,37 @@ namespace ArrendaSysServicios
                 ReseñaArrendadorArrendatario resenia1 = new ReseñaArrendadorArrendatario();
 
 
-                resenia1.fechaAltaReseñaArAo= resenia.fechaAltaReseñaArAo;
-                resenia1.fechaBajaReseñaArAo = resenia.fechaBajaReseñaArAo;
+                resenia1.fechaAltaReseñaArAo = DateTime.Now;
+                resenia1.fechaBajaReseñaArAo = resenia.fechaBajaReseñaAoAr;
                 resenia1.idAlquiler = resenia.idAlquiler;
                 resenia1.idReseñaArAo = resenia.idReseñaAoAr;
                 resenia1.puntuacionReseñaArAo = resenia.puntuacionReseñaAoAr;
-                resenia1.descripcionReseñaArAo = resenia.descripcionReseñaArAo;
+                resenia1.descripcionReseñaArAo = resenia.descripcionReseñaAoAr;
 
                 db.ReseñaArrendadorArrendatario.Add(resenia1);
+
+                db.SaveChanges();
+
+                return 1;
+
+            }
+        }
+        public int AgregarReseniaInmueble(ReseniaViewModel resenia)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+
+                ReseñaArrendatarioInmueble resenia1 = new ReseñaArrendatarioInmueble();
+
+
+                resenia1.fechaAltaReseñaAI = DateTime.Now;
+                resenia1.fechaBajaReseñaAI = resenia.fechaBajaReseñaAoAr;
+                resenia1.idAlquiler = resenia.idAlquiler;
+                resenia1.idReseñaAI = resenia.idReseñaAoAr;
+                resenia1.puntuacionReseñaAI= resenia.puntuacionReseñaAoAr;
+                resenia1.descripcionReseñaAI = resenia.descripcionReseñaAoAr;
+
+                db.ReseñaArrendatarioInmueble.Add(resenia1);
 
                 db.SaveChanges();
 
