@@ -170,6 +170,7 @@
     <Compile Include="Controllers\Api\InmuebleApiController.cs" />
     <Compile Include="Controllers\Api\LocalidadApiController.cs" />
     <Compile Include="Controllers\Api\LoginApiController.cs" />
+    <Compile Include="Controllers\Api\NotificacionesApiController.cs" />
     <Compile Include="Controllers\Api\PropietarioApiController.cs" />
     <Compile Include="Controllers\Api\PublicacionApiController.cs" />
     <Compile Include="Controllers\Api\ReseñaApiController.cs" />
@@ -830,6 +831,7 @@
     <Folder Include="Views\Departamento\" />
     <Folder Include="Views\DireccionApi\" />
     <Folder Include="Views\InmuebleApi\" />
+    <Folder Include="Views\NotificacionesApi\" />
     <Folder Include="Views\PropietarioApi\" />
     <Folder Include="Views\RecuperarContrasenia\" />
     <Folder Include="Views\ReseñaApi\" />

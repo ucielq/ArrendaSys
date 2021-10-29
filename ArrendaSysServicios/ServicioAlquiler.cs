@@ -172,6 +172,30 @@ namespace ArrendaSysServicios
                 return alquiler;
             }
         }
+        public void ConfirmarAlquiler(int? id)
+        {
+            AlquilerEstado alqEstado = new AlquilerEstado();
+            alqEstado.fechaAltaAlquilerEstado = DateTime.Now;
+            alqEstado.fechaBajaAlquilerEstado = null;
+            alqEstado.idEstadoAlquiler = 1;
+            alqEstado.idAlquiler = id;
+            db.AlquilerEstado.Add(alqEstado);
+            db.SaveChanges();
+        }
+        public void CancelarAlquiler(int? id)
+        {
+            AlquilerEstado alqEstado = new AlquilerEstado();
+            alqEstado.fechaAltaAlquilerEstado = DateTime.Now;
+            alqEstado.fechaBajaAlquilerEstado = null;
+            alqEstado.idEstadoAlquiler = 3;
+            alqEstado.idAlquiler = id;
+            db.AlquilerEstado.Add(alqEstado);
+            db.SaveChanges();
+        }
+
+
+
+
 
     }
 }
