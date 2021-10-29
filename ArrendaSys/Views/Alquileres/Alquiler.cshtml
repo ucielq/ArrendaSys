@@ -215,7 +215,6 @@
         resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
         resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
 
-
         $.ajax({
             type: 'Post',
             url: '/Api/Resenia/CrearReseniaInmueble',
@@ -224,6 +223,8 @@
                 window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
             }
         });
+        
+        
 
     }
 </script>
