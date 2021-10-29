@@ -18,6 +18,8 @@ namespace ArrendaSysServicios.Modelos
         public DateTime? fechaBajaAlquiler { get; set; }
         public int? idArrendatario { get; set; }
         public int? idInmueble { get; set; }
+        public int? idEstadoAlquiler { get; set; }
+        public int? idAlquilerEstado { get; set; }
         public InmuebleViewModel inmueble{get;set;}
         public ArrendatarioViewModel arrendatario { get; set; }
         public object arrendador { get; set; }

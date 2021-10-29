@@ -14,6 +14,17 @@ namespace ArrendaSys.Controllers.Api
 
     public class NotificacionesApiController : ApiController
     {
+        [System.Web.Http.Route("Api/Notificaciones/ListarNotificaciones")]
+        [System.Web.Http.ActionName("ListarNotificaciones")]
+        [System.Web.Http.HttpGet]
+        public object ListarNotificaciones(int idCuenta)
+        {
+            ServicioNotificaciones servicio = new ServicioNotificaciones();
+            var lista = servicio.ListarNotificaciones(idCuenta);
+            return lista;
+        }
+
+
         [System.Web.Http.Route("Api/Notificaciones/EliminarNotificaciones")]
         [System.Web.Http.ActionName("EliminarNotificaciones")]
         [System.Web.Http.HttpPut]

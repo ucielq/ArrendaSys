@@ -24,21 +24,22 @@ namespace ArrendaSysServicios
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
 
-                    var id = db.Notificacion.Where(x => x.idCuenta == idCuenta1).FirstOrDefault().idPropietario;
                     var notificaciones = (from n in db.Notificacion
-                                         join c in db.Cuenta on n.idCuenta equals c.idCuenta
-                                         where n.idCuenta == id 
-                                         select new NotificacionesViewModel
-                                         {
-                                             idNotificacion = n.idNotificacion,
-                                             fechaNotificacion = n.fechaNotificacion,
-                                             nombreNotificacion = n.nombreNotificacion,
-                                             descripcionNotificacion = n.descripcionNotificacion,
-                                             leido = n.leido,
-                                             idCuenta = n.idCuenta
-                                         }).ToList();
+                                          join c in db.Cuenta on n.idCuenta equals c.idCuenta
+                                          where n.idCuenta == idCuenta1
+                                          select new NotificacionesViewModel
+                                          {
+                                              idNotificacion = n.idNotificacion,
+                                              fechaNotificacion = n.fechaNotificacion,
+                                              nombreNotificacion = n.nombreNotificacion,
+                                              descripcionNotificacion = n.descripcionNotificacion,
+                                              leido = (bool)n.leido,
+                                              idCuenta = n.idCuenta
+                                          }).ToList();
                     object json = new { data = notificaciones };
                     return json;
+
+
             }
                
                // return new object { };

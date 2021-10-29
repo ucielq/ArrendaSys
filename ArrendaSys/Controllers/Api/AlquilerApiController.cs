@@ -67,20 +67,20 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Alquiler/ConfirmarAlquiler")]
         [System.Web.Http.ActionName("ConfirmarAlquiler")]
         [System.Web.Http.HttpPut]
-        public void ConfirmarAlquiler(int idAlquiler, int idEstadoAlquiler)
+        public void ConfirmarAlquiler(int idAlquiler, int idAlquilerEstado)
         {
             ServicioAlquiler servicio = new ServicioAlquiler();
-            servicio.ConfirmarAlquiler(idAlquiler, idEstadoAlquiler);
+            servicio.ConfirmarAlquiler(idAlquiler, idAlquilerEstado);
 
 
         }
         [System.Web.Http.Route("Api/Alquiler/CancelarAlquiler")]
         [System.Web.Http.ActionName("CancelarAlquiler")]
         [System.Web.Http.HttpPut]
-        public void CancelarAlquiler(int idAlquiler, int idEstadoAlquiler)
+        public void CancelarAlquiler(int idAlquiler, int idAlquilerEstado)
         {
             ServicioAlquiler servicio = new ServicioAlquiler();
-            servicio.CancelarAlquiler(idAlquiler, idEstadoAlquiler);
+            servicio.CancelarAlquiler(idAlquiler, idAlquilerEstado);
 
 
         }
