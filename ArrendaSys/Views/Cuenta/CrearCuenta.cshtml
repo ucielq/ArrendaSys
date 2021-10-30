@@ -433,14 +433,14 @@
                 <input type="email" name="email" id="email">
                 <span class="spin"></span>
             </div>
-            <div id="xmail"><h6>Ingresa un email valido</h6></div>
+            <div id="xmail"><h6>Ingrese un email válido</h6></div>
             <div class="input" id="divpass">
                 <label for="pass">Contraseña</label>
                 <input type="password" name="pass" id="pass">
                 <span class="spin"></span>
                 <br />
             </div>
-            <div id="xpass"><h6>La contraseña no cumple los requisitos</h6></div>
+            <div id="xpass"><h6>La contraseña no cumple los requisitos. Debe contener mínimo 8 caractéres incluyendo: Mayúscula, minúscula, número y caracter especial</h6></div>
             <div class="input" id="divpass1">
                 <label for="pass1">Confirmar Contraseña</label>
                 <input type="password" name="pass1" id="pass1">
@@ -651,14 +651,14 @@
                         if (result == 1) {
                             altaCuenta();
                         } else {
-                            alert("El mail ingresado ya esta registrado en el sistema")
+                            alert("El mail ingresado ya se encuentra registrado en el sistema")
                         }
                     }
                 });
                 }else alert ("Debe ingresar una contraseña válida")
             }
             else {
-                alert("Ingrese un mail válido")
+                alert("El formato de correo electrónico ingresado es incorrecto")
             }
         } else {
             alert("Las contraseñas deben coincidir")

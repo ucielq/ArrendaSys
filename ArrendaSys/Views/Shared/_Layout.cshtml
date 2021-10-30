@@ -41,45 +41,45 @@
         <!-- Topbar  -->
         <div id="content" style="padding:0px">
             <!-- Sidebar  -->
-                <div class="row" style="height: -webkit-fill-available;width:100%">
-                    <div class="col-md-2">
+            <div class="row" style="height: -webkit-fill-available;width:100%">
+                <div class="col-md-2">
 
-                        <nav id="sidebar" style="height:100%;position:fixed">
-                            <div class="sidebar-header">
-                                <img src="~/assets/img/arrendasys-sinfondo.png" class="img-fluid" alt="">
-                                <strong>
-                                    <!--Vacio-->
-                                </strong>
-                            </div>
-                            <ul class="list-unstyled components" id="MenuPrincipal">
-                            </ul>
-                        </nav>
-
-                    </div>
-                    <div class="col-md-9">
-                        <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
-                            
-                                <div class="dropdown float-right" style="text-align:right">
-                                    <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
-                                        Mi perfil
-                                    </button>
-                                    <ul class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
-                                        <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
-                                    </ul>
-                                </div>
-                        </nav>
-                        <div class="body-content">
-                            @RenderBody()
+                    <nav id="sidebar" style="height:100%;position:fixed">
+                        <div class="sidebar-header">
+                            <img src="~/assets/img/arrendasys-sinfondo.png" class="img-fluid" alt="">
+                            <strong>
+                                <!--Vacio-->
+                            </strong>
                         </div>
+                        <ul class="list-unstyled components" id="MenuPrincipal">
+                        </ul>
+                    </nav>
+
+                </div>
+                <div class="col-md-9">
+                    <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
+
+                        <div class="dropdown float-right" style="text-align:right">
+                            <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
+                                Mi perfil
+                            </button>
+                            <ul class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="body-content">
+                        @RenderBody()
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 
 
 
-
+    <img src="~/assets/img/cesped.jpg" class="img-fluid" alt="" style="height:131vh;">
 
     @RenderSection("scripts", required: false)
 </body>
