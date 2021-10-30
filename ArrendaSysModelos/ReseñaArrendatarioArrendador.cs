@@ -14,12 +14,12 @@ namespace ArrendaSysModelos
     
     public partial class ReseñaArrendatarioArrendador
     {
-        public int idReseñaAoAr { get; set; }
-        public string descripcionReseñaAoAr { get; set; }
-        public Nullable<System.DateTime> fechaAltaReseñaAoAr { get; set; }
-        public Nullable<System.DateTime> fechaBajaReseñaAoAr { get; set; }
-        public Nullable<int> puntuacionReseñaAoAr { get; set; }
-        public string respuestaReseñaAoAr { get; set; }
+        public int idReseñaArAo { get; set; }
+        public string descripcionReseñaArAo { get; set; }
+        public Nullable<System.DateTime> fechaAltaReseñaArAo { get; set; }
+        public Nullable<System.DateTime> fechaBajaReseñaArAo { get; set; }
+        public Nullable<decimal> puntuacionReseñaArAo { get; set; }
+        public string respuestaReseñaArAo { get; set; }
         public Nullable<int> idAlquiler { get; set; }
     }
 }

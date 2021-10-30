@@ -18,7 +18,7 @@ namespace ArrendaSysModelos
         public string descripcionReseñaAI { get; set; }
         public Nullable<System.DateTime> fechaAltaReseñaAI { get; set; }
         public Nullable<System.DateTime> fechaBajaReseñaAI { get; set; }
-        public Nullable<int> puntuacionReseñaAI { get; set; }
+        public Nullable<decimal> puntuacionReseñaAI { get; set; }
         public string respuestaReseñaAI { get; set; }
         public Nullable<int> idAlquiler { get; set; }
     }

@@ -9,18 +9,12 @@ namespace ArrendaSysServicios.Modelos
     public class ReseniaViewModel
     {
 
-        public int idReseñaAoAr { get; set; }
-        public DateTime? fechaAltaReseñaAoAr { get; set; }
-        public DateTime? fechaBajaReseñaAoAr { get; set; }
-        public int puntuacionReseñaAoAr { get; set; }
-        public int? respuestaReseñaAoAr { get; set; }
-        public int idAlquiler { get; set; }
-        public ItemViewModel item { get; set; }
-        public string descripcionReseñaAoAr { get; set; }
-        //Preguntar
-        //   public PropietarioViewModel propietario { get; set; }
-        //   public InmobiliariaViewModel inmobiliaria { get; set; }
-        //Ver si utiliza el crear o solo visualiza
-        //  public ArrendatarioViewModel arrendatario { get; set; }
+        public int idResenia { get; set; }
+        public DateTime? fechaAltaReseña { get; set; }
+        public DateTime? fechaBajaReseña { get; set; }
+        public string respuestaReseñaAoAr { get; set; }
+        public int? idAlquiler { get; set; }
+        public List<ReseniaItemViewModel> listaReseniaItems { get; set; }
+        public string descripcionResenia { get; set; }
     }
 }

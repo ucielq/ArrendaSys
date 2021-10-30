@@ -3,11 +3,60 @@
     var tipoCuenta = Session["tipoCuenta"];
     var idCuenta = Session["idCuenta"];
 }
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Alquiler</title>
 </head>
+<style>
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content:left;
+}
 
+.rating>input {
+    display: none
+}
+
+.rating>label {
+    position: relative;
+    width: 1em;
+    font-size: 30px;
+    color: #FFD600;
+    cursor: pointer
+}
+
+.rating>label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0
+}
+
+.rating>label:hover:before,
+.rating>label:hover~label:before {
+    opacity: 1 !important
+}
+
+.rating>input:checked~label:before {
+    opacity: 1
+}
+
+.rating:hover>input:checked~label:before {
+    opacity: 0.4
+}
+
+h1,
+h1 {
+    margin-top: 150px
+}
+
+p {
+    font-size: 1.2rem
+}
+
+
+</style>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -23,7 +72,8 @@
                             <div class="container">
                                 <div class="row">
                                     @*Inmueble*@
-                                    <div class="container" id="Inmueble">                                     
+                                    <div class="container" id="Inmueble">
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +93,7 @@
     var esAI = false;
     var idInmueble;
     (function () {
-        
+
         if (tipoCuenta == 2) {
             esArAo = true;
             esAI = true;
@@ -53,7 +103,7 @@
         }
 
         completarDatos();
-        mostrarFormulario();
+        /*cargarItems();*/
     })();
     function completarDatos() {
         $.ajax({
@@ -68,7 +118,6 @@
                 item = item + "<div class='row'>";
                 item = item + "<p><h3>Inmueble</h3></p>";
                 item = item + "<div class='col-md-3'>";
-
                 item = item + "<div id='carouselexamplecontrols" + cont.toString() + "' class='carousel slide' data-ride='carousel'>";
                 item = item + "<div class='carousel-inner'>";
                 $.each(result.inmueble.listaMultimedia, function (i, archivo) {
@@ -87,10 +136,9 @@
                 item = item + "<a class='carousel-control-next' href='#carouselexamplecontrols" + cont + "' role='button' data-slide='next'>";
                 item = item + "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
                 item = item + "<span class='sr-only'>Next</span></a>";
-
                 item = item + "</div></div></div>";
-                item = item + "<div class='col-md-9'>"; //Aca van los datos del inmueble
-                item = item + "<div class='card-body'><h5 class='card-title'>" + " " + result.inmueble.direccion.nombreCalle + " " + result.inmueble.direccion.numeroCalle + " - " + result.inmueble.direccion.localidad.nombreLocalidad + "</h5>";
+                item = item + "<div class='col-md-6'>"; //Aca van los datos del inmueble
+                item = item + "<div class='card-body' style='padding-left:20;padding-top:0'><h5 class='card-title'>" + " " + result.inmueble.direccion.nombreCalle + " " + result.inmueble.direccion.numeroCalle + " - " + result.inmueble.direccion.localidad.nombreLocalidad + "</h5>";
                 item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + result.inmueble.mtsCuadrados + "</p>";
                 item = item + "<p><i class='fas fa-home'></i>" + " " + result.inmueble.mtsCuadradosInt + "</p>";
                 item = item + "<p><i class='fas fa-bed'></i>" + " " + result.inmueble.cantHabitaciones + "</p>";
@@ -103,128 +151,363 @@
                 item = item + "</div>";
                 item = item + "</div>";
 
+                //Row reseñas del inmueble
+                
+                if (tipoCuenta == 2) {
+                    item = item + "<div class='row'>"
+                    item = item + "<div class='row' id='reseniasAI'>";
+                    item = item + "</div>";
+                    cargarReseniasAI();
+                    item = item + "<div class='row' id='formularioAI'>";
+                    item = item + "</div>";
+                    cargarItemsAI();
+                    item = item + "</div>";
+                    item = item + "</hr>";
+                }
+                
+
                 //Row Datos Arrendador u arrendatario (agregar condicion)
                 if (tipoCuenta == 2) {
                     if (result.inmueble.tipoArrendador == 3) {
+                        item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
                         item = item + "<p><h3>Arrendador</h3></p>";
                         item = item + "<p><h5>Nombre: " + result.arrendador.nombrePropietario + "</h5></p>";
                         item = item + "<p><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></p>";
+                        item = item + "<div class='row' id='reseniasArAo'>";
+                        item = item + "</div>";
+                        item = item + "</div>";
+                        item = item + "</hr>";                        
                     } else {
+                        item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
                         item = item + "<p><h3>Inmobiliaria</h3></p>";
                         item = item + "<p><h5>Nombre: " + result.arrendador.nombreInmobiliaria + "</h5></p>";
                         item = item + "<p><h5>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h5></p>";
+                        item = item + "<div class='row' id='reseniasArAo'>";
+                        item = item + "</div>";
+                        item = item + "</div>";
+                        item = item + "</hr>";
                     }
+                    cargarReseniasArAo();
+                    item = item + "<div class='row' id='formularioArAo'>";
+                    item = item + "</div>";
+                    cargarItemsArAo();
                 }
-
+                if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    item = item + "<hr/>";
+                    item = item + "<div class='row'>";
+                    item = item + "<p><h3>Arrendatario</h3></p>";
+                    item = item + "<p><h5>Nombre: " + result.arrendatario.nombreArrendatario + "</h5></p>";
+                    item = item + "<div class='row' id='reseniasAoAr'>";
+                    item = item + "</div>";
+                    cargarReseniasAoAr();
+                    item = item + "<div class='row' id='formularioAoAr'>";
+                    item = item + "</div>";
+                    cargarItemsAoAr();
+                }
 
                 item = item + "</div>";
 
-                //Boton Agregar reseña Arrendador
+                //Falta listar todas las reseñas.
 
-
-
-                //Row Reseñas
-
-
-                //Boton Agregar reseña Inmueble
-                if (tipoCuenta == 2) {
-                    item = item + "<div class='row' id='formularioResenia'>";
-                    item = item + "<div class='row' id='PuntuacionResenia'><input name='email' id='puntuacionReseniaAoAr' cols='30' class='Puntuacion form - control' rows='10' placeholder='Puntuacion del 1 al 10'></input></div>";
-                    item = item + "<div class='row' id='DetalleResenia'><input name='email' id='descripcionReseniaAoAr' cols='30' class='form - control' rows='10' placeholder='Detalle Reseña'></input></div>";
-                    item = item + "<div class='form - group'><div class='row'><div class='col-md-6'><input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Reseña Propietario' onclick='GuardarReseniaArrendador()'></div></div></div>"
-                    item = item + "<div class='form - group'><div class='row'><div class='col-md-6'><input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Reseña Arrendatario' onclick='GuardarReseniaArrendatario()'></div></div></div>"
-                    item = item + "<div class='form - group'><div class='row'><div class='col-md-6'><input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Reseña Inmueble' onclick='GuardarReseniaInmueble()'></div></div></div>"
-                    //item = item + "<div class='col-md-2' style='top:-12'>";
-                    //item = item + "<h3>Mis Reseñas Inmueble</h3>";
-                    //item = item + "</div>";
-                    //item = item + "<div class='col-md-2'>";
-                    //item = item + "<button class='btn btn-success' style='cursor:pointer' onclick='AgregarNuevoReseniaInmueble()'><i class='fas fa-plus'></i>Agregar reseña Inmueble</button>";
-                    //item = item + "</div>";
-                    item = item + "</div>"; 
-                }
-               
 
                 $("#Inmueble").append(item);
             }
         });
     }
-    function mostrarFormulario() {
+    var listaItemsAoAr;
+    var listaItemsAI;
+    var listaItemsArAo;
+    function cargarItemsAoAr() {
         //Haces el ajax
-       /* $.ajax({
+        $.ajax({
             type: 'Get',
-            url: 'Api/Item/ListarItems?tipoCuenta=' + tipoCuenta + "&esAI=", + esAI + "&esAoAr=" + esAoAr + "&esArAo=" + esArAo,
-            async: false,
+            url: '/Api/Item/ListarItemsAoAr',
             success: function (result) {
-
-
-
-        });*/
-        //Success:
-    }
-    function GuardarReseniaArrendador() {
-        var resenia = new Object();
-
-        resenia.fechaAltaReseñaAoAr = Date.now();
-
-        resenia.idAlquiler = idAlquiler;
-
-        resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
-        resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
-
-
-        $.ajax({
-            type: 'Post',
-            url: '/Api/Resenia/CrearReseniaArrendador',
-            data: resenia,
-            success: function (result) {
-                window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+                listaItemsAoAr = result;
+                result.forEach(function (data, index) {
+                    $("#formularioAoAr").append("<div class='col-md-3'>" + data.nombreItemReseña);
+                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
+                    item1 = item1 + "</div>";
+                    $("#formularioAoAr").append(item1);
+                });
+                var item2 = "<div class='row'>";
+                item2 = item2 + "<label>Descripción Reseña</label></br>"
+                item2 = item2 + "<textarea class='form-control' id='descripcionArAo' name='descripcionAoAr'></textarea>";
+                item2 = item2 + "</div>";
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>"
+                $("#formularioAoAr").append(item2)
             }
         });
-
     }
-    function GuardarReseniaArrendatario() {
-        var resenia = new Object();
-
-        resenia.fechaAltaReseñaAoAr = Date.now();
-
-        resenia.idAlquiler = idAlquiler;
-
-        resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
-        resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
-
-
+    function cargarItemsArAo() {
+        //Haces el ajax
         $.ajax({
-            type: 'Post',
-            url: '/Api/Resenia/CrearReseniaArrendatario',
-            data: resenia,
+            type: 'Get',
+            url: '/Api/Item/ListarItemsArAo',
             success: function (result) {
-                window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+                listaItemsArAo = result;
+                result.forEach(function (data, index) {
+                    $("#formularioArAo").append("<div class='col-md-3'>" + data.nombreItemReseña);
+                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
+                    item1 = item1 + "</div>";
+                    $("#formularioArAo").append(item1);
+                });
+                var item2 = "<div class='row'>";
+                item2 = item2 + "<label>Descripción Reseña</label></br>"
+                item2 = item2 + "<textarea class='form-control' id='descripcionArAo' name='descripcionArAo'></textarea>";
+                item2 = item2 + "</div>";
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>"
+                $("#formularioArAo").append(item2)
             }
         });
-
     }
-    function GuardarReseniaInmueble() {
-        var resenia = new Object();
-
-        resenia.fechaAltaReseñaAoAr = Date.now();
-
-        resenia.idAlquiler = idAlquiler;
-
-        resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
-        resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
-
+    function cargarItemsAI() {
+        //Haces el ajax
         $.ajax({
-            type: 'Post',
-            url: '/Api/Resenia/CrearReseniaInmueble',
-            data: resenia,
+            type: 'Get',
+            url: '/Api/Item/ListarItemsAI',
             success: function (result) {
-                window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+                listaItemsAI = result;
+                result.forEach(function (data, index) {
+                    $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
+                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
+                    item1 = item1 + "</div>";
+                    $("#formularioAI").append(item1);
+                });
+                var item2 = "<div class='row'>";
+                item2 = item2 + "<label>Descripción Reseña</label></br>"
+                item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
+                item2 = item2 + "</div>";
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
+                $("#formularioAI").append(item2)
             }
         });
-        
-        
+    }
+
+    function GuardarReseñaAoAr() {
+        if (verValorAoAr()) {
+            var resenia = new Object();
+            resenia.idAlquiler = idAlquiler;
+            resenia.descripcionResenia = $("#descripcionAoAr").val();
+            let listaReseniaItems = [];
+            listaItemsAoAr.forEach(function (data, index) {
+                var item = new Object();
+                var stars = document.getElementsByTagName("input");
+                for (var i = 0; i < stars.length; i++) {
+                    if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                        if (stars[i].getAttribute('type') == 'radio') {
+                            if ($("#" + stars[i].id).prop("checked")) {
+                                item.puntuacionReseniaItem = $("#" + stars[i].id).prop("value");
+                            }
+                        }
+                    }
+                }
+                item.idItemResenia = data.idItemReseña;
+                listaReseniaItems.push(item);
+            })
+            resenia.listaReseniaItems = listaReseniaItems;
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Resenia/CrearReseniaAorAr',
+                data: resenia,
+                success: function (result) {
+                    window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+                }
+            });
+
+        } else {
+            alert("Por favor puntúe todos los aspectos.");
+        }
+    }
+    function GuardarReseñaArAo() {
+        if (verValorArAo()) {
+            var resenia = new Object();
+            resenia.idAlquiler = idAlquiler;
+            resenia.descripcionResenia = $("#descripcionArAo").val();
+            let listaReseniaItems = [];
+            listaItemsArAo.forEach(function (data, index) {
+                var item = new Object();
+                var stars = document.getElementsByTagName("input");
+                for (var i = 0; i < stars.length; i++) {
+                    if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                        if (stars[i].getAttribute('type') == 'radio') {
+                            if ($("#" + stars[i].id).prop("checked")) {
+                                item.puntuacionReseniaItem = $("#" + stars[i].id).prop("value");
+                            }
+                        }
+                    }
+                }
+                item.idItemResenia = data.idItemReseña;
+                listaReseniaItems.push(item);
+            })
+            resenia.listaReseniaItems = listaReseniaItems;
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Resenia/CrearReseniaArAo',
+                data: resenia,
+                success: function (result) {
+                    window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+                }
+            });
+
+        } else {
+            alert("Por favor puntúe todos los aspectos.");
+        }
+    }
+    function GuardarReseñaAI() {
+        if (verValorAI()) {
+            var resenia = new Object();
+            resenia.idAlquiler = idAlquiler;
+            resenia.descripcionResenia = $("#descripcionAI").val();
+            let listaReseniaItems = [];
+            listaItemsAI.forEach(function (data, index) {
+                var item = new Object();
+                var stars = document.getElementsByTagName("input");
+                for (var i = 0; i < stars.length; i++) {
+                    if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                        if (stars[i].getAttribute('type') == 'radio') {
+                            if ($("#" + stars[i].id).prop("checked")) {
+                                item.puntuacionReseniaItem = $("#" + stars[i].id).prop("value");
+                            }
+                        }
+                    }
+                }
+                item.idItemResenia = data.idItemReseña;
+                listaReseniaItems.push(item);
+            })
+            resenia.listaReseniaItems = listaReseniaItems;
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Resenia/CrearReseniaAI',
+                data: resenia,
+                success: function (result) {
+                    window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+                }
+            });
+
+        } else {
+            alert("Por favor puntúe todos los aspectos.");
+        }
+    }
+    function verValorAoAr() {
+        let bool = [];
+        listaItemsAoAr.forEach(function (data, index) {
+            var stars = document.getElementsByTagName("input");
+            for (var i = 0; i < stars.length; i++) {
+                if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                    if (stars[i].getAttribute('type') == 'radio') {
+                        if ($("#" + stars[i].id).prop("checked")) {
+                            console.log("Valor final del item " + data.nombreItemReseña + "=" + $("#" + stars[i].id).prop("value"))
+                            bool.push(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        if (listaItemsAoAr.length == bool.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function verValorArAo() {
+        let bool = [];
+        listaItemsArAo.forEach(function (data, index) {
+            var stars = document.getElementsByTagName("input");
+            for (var i = 0; i < stars.length; i++) {
+                if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                    if (stars[i].getAttribute('type') == 'radio') {
+                        if ($("#" + stars[i].id).prop("checked")) {
+                            console.log("Valor final del item " + data.nombreItemReseña + "=" + $("#" + stars[i].id).prop("value"))
+                            bool.push(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        if (listaItemsArAo.length == bool.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function verValorAI() {
+        let bool = [];
+        listaItemsAI.forEach(function (data, index) {
+            var stars = document.getElementsByTagName("input");
+            for (var i = 0; i < stars.length; i++) {
+                if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                    if (stars[i].getAttribute('type') == 'radio') {
+                        if ($("#" + stars[i].id).prop("checked")) {
+                            console.log("Valor final del item " + data.nombreItemReseña + "=" + $("#" + stars[i].id).prop("value"))
+                            bool.push(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        if (listaItemsAI.length == bool.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function verValorArAo() {
+        let bool = [];
+        listaItemsArAo.forEach(function (data, index) {
+            var stars = document.getElementsByTagName("input");
+            for (var i = 0; i < stars.length; i++) {
+                if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                    if (stars[i].getAttribute('type') == 'radio') {
+                        if ($("#" + stars[i].id).prop("checked")) {
+                            console.log("Valor final del item " + data.nombreItemReseña + "=" + $("#" + stars[i].id).prop("value"))
+                            bool.push(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        if (listaItemsArAo.length == bool.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function verValorAI() {
+        let bool = [];
+        listaItemsAI.forEach(function (data, index) {
+            var stars = document.getElementsByTagName("input");
+            for (var i = 0; i < stars.length; i++) {
+                if (stars[i].getAttribute('name') == 'rating' + data.idItemReseña) {
+                    if (stars[i].getAttribute('type') == 'radio') {
+                        if ($("#" + stars[i].id).prop("checked")) {
+                            console.log("Valor final del item " + data.nombreItemReseña + "=" + $("#" + stars[i].id).prop("value"))
+                            bool.push(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        });
+        if (listaItemsAI.length == bool.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function cargarReseniasAoAr() {
+
+    }
+    function cargarReseniasArAo() {
+
+    }
+    function cargarReseniasAI() {
 
     }
 </script>

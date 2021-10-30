@@ -209,7 +209,7 @@
                 { data: "descripcionEstadoAlquiler", "className": "text-left" },
                {data:"idEstadoAlquiler",
                     orderable: false,
-                   "render": function () {
+                   "render": function (data) {
                        if (tipoCuenta == 2) {
                            if (data == 3) {
                                var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='ConfirmarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='CancelarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";

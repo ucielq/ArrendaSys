@@ -29,14 +29,14 @@
         <EntityTypeShape EntityType="ARRENDASYSEntities.Publicacion" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.PublicacionEstado" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArchivo" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendadorArrendatario" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" Width="1.5" PointX="6.75" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemAI" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemAoAr" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemArAo" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.URL" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Rol" Width="1.5" PointX="11.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" Width="1.5" PointX="13.375" PointY="14.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendadorArrendatario" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemAoAr" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemArAo" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" Width="1.5" PointX="13.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
