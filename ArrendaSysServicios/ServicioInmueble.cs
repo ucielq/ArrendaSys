@@ -336,12 +336,3 @@ namespace ArrendaSysServicios
     }
 }
 
-//eliminacion anterior y definitiva
-//db.Inmueble.Remove(inmu);                    
-//var multi = db.MultimediaInmueble.Where(x => x.idInmueble == idInmueble).ToList();
-//foreach (var i in multi)
-//{
-//    db.MultimediaInmueble.Remove(i);
-//    db.SaveChanges();
-//    //Aca borrar las imagenes de la tempFolder
-//}
