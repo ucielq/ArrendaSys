@@ -113,6 +113,23 @@ namespace ArrendaSysServicios
 
                 db.Publicacion.Add(publicacion1);
 
+                var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion.idInmueble).FirstOrDefault();
+                var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
+                if (inmuest != null)
+                {
+                    inmuest.fechaBajaInmuebleEstado = DateTime.Now;
+
+                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
+                    {
+                        fechaAltaInmuebleEstado = DateTime.Now,
+                        fechaBajaInmuebleEstado = null,
+                        idEstadoInmueble = 4,
+                        idInmueble = inmu.idInmueble
+                    };
+                    db.InmuebleEstado.Add(inmuEstadoNuevo);
+                    db.SaveChanges();
+                }
+
                 db.SaveChanges();
                 //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
                 CrearPublicacionEstado(publicacion1.idPublicacion);
@@ -149,6 +166,23 @@ namespace ArrendaSysServicios
                     nuevoEstado.idPublicacion = idPublicacion;
                     db.PublicacionEstado.Add(nuevoEstado);
                     db.SaveChanges();
+
+                    var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion1.idInmueble).FirstOrDefault();
+                    var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado==null).FirstOrDefault();
+                    if (inmuest != null)
+                    {
+                        inmuest.fechaBajaInmuebleEstado = DateTime.Now;
+
+                        InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
+                        {
+                            fechaAltaInmuebleEstado = DateTime.Now,
+                            fechaBajaInmuebleEstado = null,
+                            idEstadoInmueble = 1,
+                            idInmueble = inmu.idInmueble
+                        };
+                        db.InmuebleEstado.Add(inmuEstadoNuevo);
+                        db.SaveChanges();
+                    }
                 }
             }
         }

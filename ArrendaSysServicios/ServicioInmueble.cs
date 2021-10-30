@@ -206,10 +206,11 @@ namespace ArrendaSysServicios
             {
                 var inmuebles = (from i in db.Inmueble
                                  join d in db.Direccion on i.idDireccion equals d.idDireccion
-                                 join ei in db.InmuebleEstado on i.idInmueble equals ei.idInmueble
+                                 join ie in db.InmuebleEstado on i.idInmueble equals ie.idInmueble
+                                 join ei in db.EstadoInmueble on ie.idEstadoInmueble equals ei.idEstadoInmueble
                                  join l in db.Localidad on d.idLocalidad equals l.idLocalidad
                                  where i.idArrendador == idPropietario
-                                 where ei.idEstadoInmueble ==1 && ei.fechaBajaInmuebleEstado== null                                 
+                                 where ie.fechaBajaInmuebleEstado == null && (ie.idEstadoInmueble ==1 || ie.idEstadoInmueble == 3 || ie.idEstadoInmueble == 4)                                  
                                  select new InmuebleViewModel
                                  {
                                      cantAmbientes = i.cantAmbientes,
@@ -236,6 +237,16 @@ namespace ArrendaSysServicios
                                              codigopostal = l.codigoPostal,
                                              nombreLocalidad = l.nombreLocalidad,
                                              idDepartamento = l.idDepartamento                                                                                       
+                                         }
+                                     },
+                                     inmuebleEstado= new InmuebleEstadoViewModel
+                                     {
+                                         fechaAltaInmuebleEstado= ie.fechaAltaInmuebleEstado,
+                                         fechaBajaInmuebleEstado= ie.fechaBajaInmuebleEstado,                                        
+                                         nombreEstado= new EstadoInmuebleViewModel
+                                         {
+                                             descripcionEstadoInmueble = ei.descripcionEstadoInmueble,
+                                             nombreEstadoInmueble=ei.nombreEstadoInmueble
                                          }
                                      }
 
