@@ -16,12 +16,13 @@ namespace ArrendaSysServicios.Modelos
         public DateTime? fechaBajaPublicacion { get; set; }
         public decimal? precioAlquiler { get; set; }
         public string tituloPublicacion { get; set; }
-
         public int? idInmueble { get; set; }
-
         public string descripcionEstadoPublicacion { get; set; }
 
-       
+        public InmuebleViewModel inmueble { get; set; }
+        public List<ArchivoVM> listaMultimedia { get; set; }
+
+
 
     }
 }

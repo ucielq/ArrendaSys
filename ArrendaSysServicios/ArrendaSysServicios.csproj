@@ -148,6 +148,7 @@
     <Compile Include="Modelos\ABMPublicacionViewModel.cs" />
     <Compile Include="Modelos\AlquileresViewModel.cs" />
     <Compile Include="Modelos\ArchivoVM.cs" />
+    <Compile Include="Modelos\EstadoInmuebleViewModel.cs" />
     <Compile Include="Modelos\DepartamentoViewModel.cs" />
     <Compile Include="Modelos\DireccionViewModel.cs" />
     <Compile Include="Modelos\InmuebleEstadoViewModel.cs" />
