@@ -92,6 +92,7 @@
                                                     <th>Fecha Baja</th>
                                                     <th>Arrendatario</th>
                                                     <th>Inmueble</th>
+                                                    <th></th>
                                                     <th>Estado</th>
                                                     <th></th>
                                                 </tr>
@@ -204,13 +205,22 @@
                     ,"className": "text-left"},
                 { data: "idArrendatario", "className": "text-left" },
                 { data: "idInmueble", "className": "text-left" },
+                { data: "idAlquilerEstado", "className": "text-left", "visible": false },
                 { data: "descripcionEstadoAlquiler", "className": "text-left" },
-               {data:"idAlquiler",
+               {data:"idEstadoAlquiler",
                     orderable: false,
                    "render": function () {
                        if (tipoCuenta == 2) {
-                           var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
-                           return botones
+                           if (data == 3) {
+                               var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='ConfirmarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='CancelarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                               return botones
+                           } else {
+
+                               var botones = "<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                               return botones
+
+                           }
+                           
                        } else {
                            var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
                            return botones
@@ -277,6 +287,36 @@
         });
 
     }
+    //preguntar
+    function ConfirmarAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Alquiler/ConfirmarAlquiler?idAlquiler=' + id.idAlquiler + '&idAlquilerEstado=' +id.idAlquilerEstado,
+            success: function (result) {
+                location.href = '/Alquileres/Alquileres';
+            }
+        });
+
+    }
+    function CancelarAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Alquiler/CancelarAlquiler?idAlquiler=' + id.idAlquiler + '&idAlquilerEstado=' + id.idAlquilerEstado,
+            success: function (result) {
+                location.href = '/Alquileres/Alquileres';
+            }
+        });
+
+    }
+
+
+
 
     function ObtenerInmuebles(inmueble) {
         $.ajax({

@@ -14,13 +14,31 @@ namespace ArrendaSys.Controllers.Api
     public class ReseniaApiController : ApiController
     {
 
-        [System.Web.Http.Route("Api/Resenia/CrearResenia")]
-        [System.Web.Http.ActionName("CrearResenia")]
+        [System.Web.Http.Route("Api/Resenia/CrearReseniaArrendador")]
+        [System.Web.Http.ActionName("CrearReseniaArrendador")]
         [System.Web.Http.HttpPost]
-        public int Resenia(ReseniaViewModel resenia)
+        public int ReseniaArrendador(ReseniaViewModel resenia)
         {
             ServicioResenia serv = new ServicioResenia();
-            return serv.AgregarResenia(resenia);
+            return serv.AgregarReseniaArrendador(resenia);
+        }
+
+        [System.Web.Http.Route("Api/Resenia/CrearReseniaArrendatario")]
+        [System.Web.Http.ActionName("CrearReseniaArrendatario")]
+        [System.Web.Http.HttpPost]
+        public int ReseniaArrendatario(ReseniaViewModel resenia)
+        {
+            ServicioResenia serv = new ServicioResenia();
+            return serv.AgregarReseniaArrendatario(resenia);
+        }
+
+        [System.Web.Http.Route("Api/Resenia/CrearReseniaInmueble")]
+        [System.Web.Http.ActionName("CrearReseniaInmueble")]
+        [System.Web.Http.HttpPost]
+        public int ReseniaInmueble(ReseniaViewModel resenia)
+        {
+            ServicioResenia serv = new ServicioResenia();
+            return serv.AgregarReseniaInmueble(resenia);
         }
         /*
        [System.Web.Http.Route("Api/Reseña/ListarItems")]

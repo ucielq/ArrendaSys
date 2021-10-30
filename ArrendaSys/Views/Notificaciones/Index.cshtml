@@ -93,7 +93,7 @@
             }
         }
 
-        table = $('#alquilereslista').DataTable({
+        table = $('#notificacioneslista').DataTable({
             "colResize": {
                 isEnabled: true,
                 hoverClass: 'dt-colresizable-hover',
@@ -107,31 +107,26 @@
             },
             "responsive": true,
             "order": [[1, "asc"]],
-            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
+            "ajax": "/Api/Notificaciones/ListarNotificaciones?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
             "lengthMenu": [5, 10, 25, 50],
             "columns": [
-                { data: "idAlquiler", "className": "text-left", "visible": false },
-                { data: "fechaAltaAlquiler",
+                { data: "idNotificacion", "className": "text-left", "visible": false },
+                {
+                    data: "fechaNotificacion",
                     "render": function(data){
                         let fechaAA = new Date(Date.parse(data));
                         return fechaAA.getDate() + '/' + (fechaAA.getMonth()+1) + '/' + fechaAA.getFullYear()
                      }
-                    ,"className": "text-left"},
+                    ,"className": "text-left"},               
+                { data: "nombreNotificacion", "className": "text-left" },
+                { data: "descripcionNotificacion", "className": "text-left" },
+                { data: "leido", "className": "text-left" },
+                { data: "idCuenta", "className": "text-left", "visible": false },
                 {
-                    data: "fechaBajaAlquiler",
-                    "render": function (data) {
-                        let fechaBA = new Date(Date.parse(data));
-                        return fechaBA.getDate() + '/' + (fechaBA.getMonth() + 1) + '/' + fechaBA.getFullYear()
-                    }
-
-                    ,"className": "text-left"},
-                { data: "idArrendatario", "className": "text-left" },
-                { data: "idInmueble", "className": "text-left" },
-                { data: "descripcionEstadoAlquiler", "className": "text-left" },
-               {data:"idAlquiler",
+                    data:"idNotificacion",
                     orderable: false,
                     "render": function () {
-                        var botones = "<button class='fas fa-trash-alt' onclick='EliminarAlquiler(this)'></button>  <button class='far fa-eye' onclick='VerAlquiler(this)'></button>";
+                        var botones = "<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarNotificacion(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VistoNotificacion(this)'></button>";
                             return botones
                     },
                     "width": 35,
@@ -143,15 +138,27 @@
     }
 
 
-    function EliminarAlquiler(btn) {
+    function EliminarNotificacion(btn) {
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
 
         $.ajax({
             type: 'Put',
-            url: '/Api/Alquiler/EliminarAlquiler?idAlquiler=' + id.idAlquiler,
+            url: '/Api/Notificaciones/EliminarNotificaciones?idNotificacion=' + id.idNotificacion,
             success: function (result) {
-                location.href = '/Alquileres/Alquileres';
+                location.href = '/Notificaciones/Index';
+            }
+        });
+
+    } function VistoNotificacion(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Notificaciones/VistoNotificacion?idNotificacion=' + id.idNotificacion,
+            success: function (result) {
+                location.href = '/Notificaciones/Index';
             }
         });
 
