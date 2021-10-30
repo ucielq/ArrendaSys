@@ -38,7 +38,9 @@ namespace ArrendaSysServicios
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
                                           idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler
+                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                          idEstadoAlquiler=ea.idEstadoAlquiler,
+                                          idAlquilerEstado = ae.idAlquilerEstado
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -59,7 +61,9 @@ namespace ArrendaSysServicios
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
                                           idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler
+                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                          idEstadoAlquiler = ea.idEstadoAlquiler,
+                                          idAlquilerEstado = ae.idAlquilerEstado
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -80,7 +84,9 @@ namespace ArrendaSysServicios
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
                                           idArrendatario = a.idArrendatario,
                                           idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler
+                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                          idEstadoAlquiler = ea.idEstadoAlquiler,
+                                          idAlquilerEstado = ae.idAlquilerEstado
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -105,8 +111,25 @@ namespace ArrendaSysServicios
                 alquiler1.idInmueble = alquiler.idInmueble;
 
                 db.Alquiler.Add(alquiler1);
-
                 db.SaveChanges();
+
+                var inmu = db.Inmueble.Where(x => x.idInmueble == alquiler.idInmueble).FirstOrDefault();
+                var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
+
+                if (inmuest != null)
+                {
+                    inmuest.fechaBajaInmuebleEstado = DateTime.Now;
+
+                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
+                    {
+                        fechaAltaInmuebleEstado = DateTime.Now,
+                        fechaBajaInmuebleEstado = null,
+                        idEstadoInmueble = 3,
+                        idInmueble = inmu.idInmueble
+                    };
+                    db.InmuebleEstado.Add(inmuEstadoNuevo);
+                    db.SaveChanges();
+                }
                 //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
                 CrearAlquilerEstado(alquiler1.idAlquiler);
                 return 1;
@@ -261,6 +284,80 @@ namespace ArrendaSysServicios
                 }
                 return alquiler;
             }
+        }
+        public void ConfirmarAlquiler(int id, int idAlquilerEstado)
+        {
+            var alquilerestado1=db.AlquilerEstado.Where(x => x.idAlquilerEstado == idAlquilerEstado).FirstOrDefault();
+            alquilerestado1.fechaBajaAlquilerEstado = DateTime.Now;
+
+            AlquilerEstado alqEstado = new AlquilerEstado();
+            alqEstado.fechaAltaAlquilerEstado = DateTime.Now;
+            alqEstado.fechaBajaAlquilerEstado = null;
+            alqEstado.idEstadoAlquiler = 1;
+            alqEstado.idAlquiler = id;
+            db.AlquilerEstado.Add(alqEstado);
+            db.SaveChanges();
+        }
+        public void CancelarAlquiler(int id, int idAlquilerEstado)
+        {
+            var alquilerestado1 = db.AlquilerEstado.Where(x => x.idAlquilerEstado == idAlquilerEstado).FirstOrDefault();
+            alquilerestado1.fechaBajaAlquilerEstado = DateTime.Now;
+            AlquilerEstado alqEstado = new AlquilerEstado();
+            alqEstado.fechaAltaAlquilerEstado = DateTime.Now;
+            alqEstado.fechaBajaAlquilerEstado = null;
+            alqEstado.idEstadoAlquiler = 5;
+            alqEstado.idAlquiler = id;
+            db.AlquilerEstado.Add(alqEstado);
+            db.SaveChanges();
+        }
+
+
+
+
+
+        public List<InmuebleViewModel> ObtenerInmuebles(int idPropietario)
+        {
+            List<InmuebleViewModel> inmuebles;
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                inmuebles = (from i in db.Inmueble
+                             join d in db.Direccion on i.idDireccion equals d.idDireccion
+                             join ei in db.InmuebleEstado on i.idInmueble equals ei.idInmueble
+                             join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                             where i.idArrendador == idPropietario
+                             where ei.idEstadoInmueble == 1 && ei.fechaBajaInmuebleEstado == null
+                             select new InmuebleViewModel
+                             {
+                                 cantAmbientes = i.cantAmbientes,
+                                 cantBanos = i.cantBanos,
+                                 cantHabitaciones = i.cantHabitaciones,
+                                 cochera = i.cochera,
+                                 descripcionInmueble = i.descripcionInmueble,
+                                 incluyeExpensas = i.incluyeExpensas,
+                                 mtsCuadrados = i.mtsCuadrados,
+                                 mtsCuadradosInt = i.mtsCuadradosInt,
+                                 permiteMascota = i.permiteMascota,
+                                 idArrendador = idPropietario,
+                                 tipoArrendador = 4,
+                                 idDireccion = i.idDireccion,
+                                 idInmueble = i.idInmueble,
+                                 direccion = new DireccionViewModel
+                                 {
+                                     idDireccion = d.idDireccion,
+                                     nombreCalle = d.nombreCalle,
+                                     numeroCalle = d.numeroCalle,
+                                     localidad = new LocalidadViewModel
+                                     {
+                                         idLocalidad = l.idLocalidad,
+                                         codigopostal = l.codigoPostal,
+                                         nombreLocalidad = l.nombreLocalidad,
+                                         idDepartamento = l.idDepartamento
+                                     }
+                                 }
+
+                             }).ToList();
+            }
+            return inmuebles;
         }
 
     }

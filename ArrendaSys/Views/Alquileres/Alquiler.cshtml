@@ -23,8 +23,7 @@
                             <div class="container">
                                 <div class="row">
                                     @*Inmueble*@
-                                    <div class="container" id="Inmueble">
-
+                                    <div class="container" id="Inmueble">                                     
                                     </div>
                                 </div>
                             </div>
@@ -132,13 +131,18 @@
                 //Boton Agregar reseña Inmueble
                 if (tipoCuenta == 2) {
                     item = item + "<div class='row' id='formularioResenia'>";
+                    item = item + "<div class='row' id='PuntuacionResenia'><input name='email' id='puntuacionReseniaAoAr' cols='30' class='Puntuacion form - control' rows='10' placeholder='Puntuacion del 1 al 10'></input></div>";
+                    item = item + "<div class='row' id='DetalleResenia'><input name='email' id='descripcionReseniaAoAr' cols='30' class='form - control' rows='10' placeholder='Detalle Reseña'></input></div>";
+                    item = item + "<div class='form - group'><div class='row'><div class='col-md-6'><input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Reseña Propietario' onclick='GuardarReseniaArrendador()'></div></div></div>"
+                    item = item + "<div class='form - group'><div class='row'><div class='col-md-6'><input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Reseña Arrendatario' onclick='GuardarReseniaArrendatario()'></div></div></div>"
+                    item = item + "<div class='form - group'><div class='row'><div class='col-md-6'><input type='submit' class='btn btn-primary btn-outline btn-lg btn-block' value='Reseña Inmueble' onclick='GuardarReseniaInmueble()'></div></div></div>"
                     //item = item + "<div class='col-md-2' style='top:-12'>";
                     //item = item + "<h3>Mis Reseñas Inmueble</h3>";
                     //item = item + "</div>";
                     //item = item + "<div class='col-md-2'>";
                     //item = item + "<button class='btn btn-success' style='cursor:pointer' onclick='AgregarNuevoReseniaInmueble()'><i class='fas fa-plus'></i>Agregar reseña Inmueble</button>";
                     //item = item + "</div>";
-                    item = item + "</div>";
+                    item = item + "</div>"; 
                 }
                
 
@@ -148,8 +152,79 @@
     }
     function mostrarFormulario() {
         //Haces el ajax
-        //Success:
+       /* $.ajax({
+            type: 'Get',
+            url: 'Api/Item/ListarItems?tipoCuenta=' + tipoCuenta + "&esAI=", + esAI + "&esAoAr=" + esAoAr + "&esArAo=" + esArAo,
+            async: false,
+            success: function (result) {
 
-        // $("#formularioResenia").append(asdas);
+
+
+        });*/
+        //Success:
+    }
+    function GuardarReseniaArrendador() {
+        var resenia = new Object();
+
+        resenia.fechaAltaReseñaAoAr = Date.now();
+
+        resenia.idAlquiler = idAlquiler;
+
+        resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
+        resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
+
+
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Resenia/CrearReseniaArrendador',
+            data: resenia,
+            success: function (result) {
+                window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+            }
+        });
+
+    }
+    function GuardarReseniaArrendatario() {
+        var resenia = new Object();
+
+        resenia.fechaAltaReseñaAoAr = Date.now();
+
+        resenia.idAlquiler = idAlquiler;
+
+        resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
+        resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
+
+
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Resenia/CrearReseniaArrendatario',
+            data: resenia,
+            success: function (result) {
+                window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+            }
+        });
+
+    }
+    function GuardarReseniaInmueble() {
+        var resenia = new Object();
+
+        resenia.fechaAltaReseñaAoAr = Date.now();
+
+        resenia.idAlquiler = idAlquiler;
+
+        resenia.descripcionReseñaAoAr = $("#descripcionReseniaAoAr").val();
+        resenia.puntuacionReseñaAoAr = $("#puntuacionReseniaAoAr").val();
+
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Resenia/CrearReseniaInmueble',
+            data: resenia,
+            success: function (result) {
+                window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
+            }
+        });
+        
+        
+
     }
 </script>

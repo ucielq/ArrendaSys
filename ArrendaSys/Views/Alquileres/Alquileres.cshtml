@@ -11,6 +11,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>Alquileres</title>
 </head>
+<style>
+    .select2 {
+        width: 100%;
+    }
+</style>
 
 <div class="content">
     <div class="container-fluid">
@@ -60,9 +65,9 @@
                             <div class="col-md-2">
                                 <br />
                                 <span>Inmueble: </span>
-                                <br />
-                                <input type="text" class="form-control" id="idInmueble" placeholder="ingrese el Inmueble" />
-                            </div>
+                                <br />                               
+                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
+                            </div>                            
                         </div>
 
                         <div class="col-md-12">
@@ -87,6 +92,7 @@
                                                     <th>Fecha Baja</th>
                                                     <th>Arrendatario</th>
                                                     <th>Inmueble</th>
+                                                    <th></th>
                                                     <th>Estado</th>
                                                     <th></th>
                                                 </tr>
@@ -102,10 +108,28 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/select2.min.js"></script>
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+
 
 
 
 <script>
+    @{
+        var idPropietario = Session["id"];
+    }
+    var idPropietario = "@idPropietario";
+
+    $(document).ready(function () {
+        $('.select2').select2({
+            allowClear: false,
+            width: '100%',
+        });
+        ObtenerInmuebles(-1);
+
+    });
+
     var user = '@usuario';
     var idCuenta = parseInt(@idCuenta);
     var tipoCuenta = parseInt(@tipoCuenta);
@@ -181,13 +205,22 @@
                     ,"className": "text-left"},
                 { data: "idArrendatario", "className": "text-left" },
                 { data: "idInmueble", "className": "text-left" },
+                { data: "idAlquilerEstado", "className": "text-left", "visible": false },
                 { data: "descripcionEstadoAlquiler", "className": "text-left" },
-               {data:"idAlquiler",
+               {data:"idEstadoAlquiler",
                     orderable: false,
                    "render": function () {
                        if (tipoCuenta == 2) {
-                           var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
-                           return botones
+                           if (data == 3) {
+                               var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='ConfirmarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='CancelarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                               return botones
+                           } else {
+
+                               var botones = "<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                               return botones
+
+                           }
+                           
                        } else {
                            var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
                            return botones
@@ -239,10 +272,11 @@
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 
 
-            alquiler.idArrendatario = $("#idArrendatario").val();
+        alquiler.idArrendatario = $("#idArrendatario").val();
 
 
         alquiler.idInmueble = $("#idInmueble").val();
+
         $.ajax({
             type: 'Post',
             url: '/Api/Alquiler/CrearAlquiler',
@@ -252,6 +286,65 @@
             }
         });
 
+    }
+    //preguntar
+    function ConfirmarAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Alquiler/ConfirmarAlquiler?idAlquiler=' + id.idAlquiler + '&idAlquilerEstado=' +id.idAlquilerEstado,
+            success: function (result) {
+                location.href = '/Alquileres/Alquileres';
+            }
+        });
+
+    }
+    function CancelarAlquiler(btn) {
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+
+        $.ajax({
+            type: 'Put',
+            url: '/Api/Alquiler/CancelarAlquiler?idAlquiler=' + id.idAlquiler + '&idAlquilerEstado=' + id.idAlquilerEstado,
+            success: function (result) {
+                location.href = '/Alquileres/Alquileres';
+            }
+        });
+
+    }
+
+
+
+
+    function ObtenerInmuebles(inmueble) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Alquiler/ObtenerInmuebles?idPropietario='+ idPropietario,
+            async: false,
+            success: function (respuesta) {
+                listaInmu = respuesta;
+                if (inmueble == -1) {
+                    $('#idInmueble').append($('<option selected>').val(-1).text("Seleccione una opción"))
+                }
+                else {
+                    $('#idInmueble').append($('<option>').val(-1).text("Seleccione una opción"))
+                }
+
+                $.each(respuesta, function (index, result) {
+
+                    if (inmueble == result.idInmueble) {
+                        $('#idInmueble').append($('<option selected>').val(result.idInmueble).text(result.direccion.nombreCalle).text(result.direccion.numeroCalle))
+
+                    }
+                    else {
+                        $('#idInmueble').append($('<option>').val(result.idInmueble).text(result.direccion.nombreCalle + " - " + result.direccion.localidad.nombreLocalidad))
+
+                    }
+                });
+            }
+        });
     }
 
 </script>

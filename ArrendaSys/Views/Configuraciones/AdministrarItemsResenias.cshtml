@@ -111,11 +111,11 @@
         });
     }
     function EditarItem(btn) {
-        var id = table.row($(btn).parents('tr')).data();
+      var id = table.row($(btn).parents('tr')).data();
         window.location.href = '/Configuraciones/AdministrarItem?idItemResenia=' + id.idItemReseña;
     }
     function EliminarItem(btn) {
-        var id = table.row($(btn).parents('tr')).data();
+       var id = table.row($(btn).parents('tr')).data();
         $.ajax({
             type: 'Post',
             url: '/Api/Configuraciones/EliminarItem?idItem=' + id.idItemReseña,

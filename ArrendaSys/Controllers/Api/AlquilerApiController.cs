@@ -52,5 +52,39 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.ObtenerAlquiler(idAlquiler,tipoCuenta);
             return lista;
         }
+
+        [System.Web.Http.Route("Api/Alquiler/ObtenerInmuebles")]
+        [System.Web.Http.ActionName("ObtenerInmuebles")]
+        [System.Web.Http.HttpGet]
+        public List<InmuebleViewModel> ObtenerInmuebles(int idPropietario)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            var lista = servicio.ObtenerInmuebles(idPropietario);
+            return lista;
+        }
+
+        //preguntar que me ayude a seguir la idea
+        [System.Web.Http.Route("Api/Alquiler/ConfirmarAlquiler")]
+        [System.Web.Http.ActionName("ConfirmarAlquiler")]
+        [System.Web.Http.HttpPut]
+        public void ConfirmarAlquiler(int idAlquiler, int idAlquilerEstado)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            servicio.ConfirmarAlquiler(idAlquiler, idAlquilerEstado);
+
+
+        }
+        [System.Web.Http.Route("Api/Alquiler/CancelarAlquiler")]
+        [System.Web.Http.ActionName("CancelarAlquiler")]
+        [System.Web.Http.HttpPut]
+        public void CancelarAlquiler(int idAlquiler, int idAlquilerEstado)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            servicio.CancelarAlquiler(idAlquiler, idAlquilerEstado);
+
+
+        }
+
+
     }
 }

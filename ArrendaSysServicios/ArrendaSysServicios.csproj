@@ -118,10 +118,11 @@
     <Compile Include="Modelos\InmobiliariaViewModel.cs" />
     <Compile Include="Modelos\ItemViewModel.cs" />
     <Compile Include="Modelos\LocalidadViewModel.cs" />
+    <Compile Include="Modelos\NotificacionesViewModel.cs" />
     <Compile Include="Modelos\PropietarioViewModel.cs" />
     <Compile Include="Modelos\ArrendatarioViewModel.cs" />
     <Compile Include="Modelos\CuentaViewModel.cs" />
-    <Compile Include="Modelos\ReseñaViewModel.cs" />
+    <Compile Include="Modelos\ReseniaViewModel.cs" />
     <Compile Include="Modelos\RolViewModel.cs" />
     <Compile Include="Modelos\URLViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,8 +136,9 @@
     <Compile Include="ServicioInmueble.cs" />
     <Compile Include="ServicioItem.cs" />
     <Compile Include="ServicioLocalidad.cs" />
+    <Compile Include="ServicioNotificaciones.cs" />
     <Compile Include="ServicioPropietario.cs" />
-    <Compile Include="ServicioReseña.cs" />
+    <Compile Include="ServicioResenia.cs" />
     <Compile Include="ServicioRol.cs" />
   </ItemGroup>
   <ItemGroup>

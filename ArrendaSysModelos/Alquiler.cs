@@ -14,6 +14,8 @@ namespace ArrendaSysModelos
     
     public partial class Alquiler
     {
+
+
         public int idAlquiler { get; set; }
         public Nullable<System.DateTime> fechaAltaAlquiler { get; set; }
         public Nullable<System.DateTime> fechaBajaAlquiler { get; set; }
