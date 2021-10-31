@@ -190,6 +190,91 @@ namespace ArrendaSysServicios
             }
         }
 
+        public List<ABMPublicacionViewModel> TraerPublicaciones(int idDepto)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var publicaciones = (from p in db.Publicacion                                                                        
+                                     join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
+                                     join i in db.Inmueble on p.idInmueble equals i.idInmueble
+                                     join d in db.Direccion on i.idDireccion equals d.idDireccion
+                                     join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                                     join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento                                    
+                                     where pe.fechaBajaPublicacionEstado == null && pe.idEstadoPublicacion==1 
+                                     select new ABMPublicacionViewModel
+                                     {
+                                         idPublicacion = p.idPublicacion,
+                                         tituloPublicacion = p.tituloPublicacion,
+                                         fechaAltaPublicacion = p.fechaAltaPublicacion,
+                                         fechaBajaPublicacion = p.fechaBajaPublicacion,
+                                         precioAlquiler = p.precioAlquiler,
+                                         idInmueble = p.idInmueble,
+                                         descripcionPublicacion= p.descripcionPublicacion,
+                                         inmueble = new InmuebleViewModel
+                                         {
+                                             cantAmbientes= i.cantAmbientes,
+                                             cantBanos=i.cantBanos,
+                                             cantHabitaciones=i.cantHabitaciones,
+                                             cochera=i.cochera,
+                                             descripcionInmueble= i.descripcionInmueble,
+                                             incluyeExpensas=i.incluyeExpensas,
+                                             mtsCuadrados=i.mtsCuadrados,
+                                             mtsCuadradosInt=i.mtsCuadradosInt,
+                                             permiteMascota=i.permiteMascota,                                                                                       
+                                             direccion = new DireccionViewModel
+                                             {
+                                                 idDireccion = d.idDireccion,
+                                                 idLote = d.idLote,
+                                                 idManzana = d.idManzana,
+                                                 nombreBarrio = d.nombreBarrio,
+                                                 nombreCalle = d.nombreCalle,
+                                                 numeroCalle = d.numeroCalle,
+                                                 idLocalidad = d.idLocalidad,
+                                                 localidad = new LocalidadViewModel
+                                                 {
+                                                     idLocalidad = l.idLocalidad,
+                                                     codigopostal = l.codigoPostal,
+                                                     nombreLocalidad = l.nombreLocalidad,
+                                                     idDepartamento = l.idDepartamento,
+                                                     departamento = new DepartamentoViewModel
+                                                     {
+                                                         idDepartamento = dep.idDepartamento,
+                                                         nombreDepartamento = dep.nombreDepartamento
+                                                     }
+                                                 }
+                                             }
+                                         }
+                                                                             
+                                     });
+                if(idDepto!= -1)
+                {
+                    publicaciones = publicaciones.Where(x => x.inmueble.direccion.localidad.departamento.idDepartamento == idDepto);
+                }
+                var lista = publicaciones.ToList();
+
+                foreach (var inmu in lista)
+                {
+                    var listaArchivoVM = new List<ArchivoVM>();
+                    var archivos = db.MultimediaInmueble.Where(x => x.idInmueble == inmu.idInmueble).ToList();
+                    foreach (var multi in archivos)
+                    {
+                        var archivoVM = new ArchivoVM
+                        {
+                            idInmueble = inmu.idInmueble,
+                            url = multi.urlMultimediaInmueble
+                        };
+                        listaArchivoVM.Add(archivoVM);
+                    }
+                    inmu.listaMultimedia = listaArchivoVM;
+                }
+
+                //var inmu = db.Inmueble.Where(x => x.idInmueble == publicaciones.idInmueble).FirstOrDefault();
+                return lista ;
+
+                
+             
+            }
+        }
         
          public int EditarPublicacion(ABMPublicacionViewModel publicacion)
         {

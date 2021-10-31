@@ -96,58 +96,96 @@ namespace ArrendaSysServicios
 
             }
         }
-
-        public object ListarItems(int tipocuenta,Boolean esAI,Boolean esAoAr, Boolean esArAo)
+        public List<ItemViewModel> ListarItemsAoAr()
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                object json = null;
-                if (tipocuenta == 2 && esAoAr == true)
+                List<ItemViewModel> AoAr = (from ir in db.ItemReseña
+                        where ir.IR_esAoAr == true
+                        select new ItemViewModel
+                        {
+                            idItemReseña = ir.idItemReseña,
+                            nombreItemReseña = ir.nombreItemReseña
+                        }).ToList();
+                return AoAr;
+            }
+        }
+        public List<ItemViewModel> ListarItemsArAo()
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<ItemViewModel> AoAr = (from ir in db.ItemReseña
+                                            where ir.IR_esArAo == true
+                                            select new ItemViewModel
+                                            {
+                                                idItemReseña = ir.idItemReseña,
+                                                nombreItemReseña = ir.nombreItemReseña
+                                            }).ToList();
+                return AoAr;
+            }
+        }
+        public List<ItemViewModel> ListarItemsAI()
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<ItemViewModel> AoAr = (from ir in db.ItemReseña
+                                            where ir.IR_esAI == true
+                                            select new ItemViewModel
+                                            {
+                                                idItemReseña = ir.idItemReseña,
+                                                nombreItemReseña = ir.nombreItemReseña
+                                            }).ToList();
+                return AoAr;
+            }
+        }
+
+        public List<List<ItemViewModel>> ListarItems(bool esAI, bool esAoAr, bool esArAo)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<List<ItemViewModel>> listaFinal = new List<List<ItemViewModel>>();
+                List<ItemViewModel> AI = new List<ItemViewModel>();
+                List<ItemViewModel> AoAr = new List<ItemViewModel>();
+                List<ItemViewModel> ArAo = new List<ItemViewModel>();
+                if (esAI)
                 {
-                    var lista = (from i in db.ItemReseña where i.IR_esAoAr == true
-                             select new ItemViewModel
-                             {
-                                 idItemReseña = i.idItemReseña,
-                                 IR_esAI = i.IR_esAI,
-                                 IR_esAoAr = i.IR_esAoAr,
-                                 IR_esArAo = i.IR_esArAo,
-                                 nombreItemReseña = i.nombreItemReseña
-                             }).ToList();
-                    json = new { data = lista };
-           
-                }
-                if (tipocuenta == 2 && esAI == true)
-                {
-                    var lista = (from i in db.ItemReseña
-                                 where i.IR_esAI == true
-                                 select new ItemViewModel
-                                 {
-                                     idItemReseña = i.idItemReseña,
-                                     IR_esAI = i.IR_esAI,
-                                     IR_esAoAr = i.IR_esAoAr,
-                                     IR_esArAo = i.IR_esArAo,
-                                     nombreItemReseña = i.nombreItemReseña
-                                 }).ToList();
-                    json = new { data = lista };
-                    
-                }
-                if (tipocuenta == 3)
-                {
-                    var lista = (from i in db.ItemReseña
-                                 where i.IR_esArAo == true
-                                 select new ItemViewModel
-                                 {
-                                     idItemReseña = i.idItemReseña,
-                                     IR_esAI = i.IR_esAI,
-                                     IR_esAoAr = i.IR_esAoAr,
-                                     IR_esArAo = i.IR_esArAo,
-                                     nombreItemReseña = i.nombreItemReseña
-                                 }).ToList();
-                    json = new { data = lista };
-                    
+                    AI = (from ir in db.ItemReseña
+                          where ir.IR_esAI == true
+                          select new ItemViewModel
+                          {
+                              idItemReseña = ir.idItemReseña,
+                              nombreItemReseña = ir.nombreItemReseña
+                          }).ToList();
                 }
 
-                return json;
+                if (esAoAr)
+                {
+                    AoAr = (from ir in db.ItemReseña
+                            where ir.IR_esAoAr == esAoAr 
+                            select new ItemViewModel
+                            {
+                                idItemReseña = ir.idItemReseña,
+                                nombreItemReseña = ir.nombreItemReseña
+                            }).ToList();
+                }
+
+                if (esArAo)
+                {
+                    ArAo = (from ir in db.ItemReseña
+                            where ir.IR_esArAo == esArAo 
+                            select new ItemViewModel
+                            {
+                                idItemReseña = ir.idItemReseña,
+                                nombreItemReseña = ir.nombreItemReseña
+                            }).ToList();
+                }
+
+                listaFinal.Add(AI);
+                listaFinal.Add(AoAr);
+                listaFinal.Add(ArAo);
+
+                
+                return listaFinal;
 
             }
         }

@@ -14,9 +14,9 @@ namespace ArrendaSysModelos
     
     public partial class ReseñaItemArAo
     {
-        public int idReseñaItemAoAr { get; set; }
+        public int idReseñaItemArAo { get; set; }
         public Nullable<int> puntuacionReseñaItemArAo { get; set; }
-        public Nullable<int> idReseñaAoAr { get; set; }
+        public Nullable<int> idReseñaArAo { get; set; }
         public Nullable<int> idItemReseña { get; set; }
     }
 }
