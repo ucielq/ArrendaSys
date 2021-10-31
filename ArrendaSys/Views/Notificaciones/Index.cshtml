@@ -31,11 +31,11 @@
                                         <table id="notificacioneslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>idNotificacion</th>
                                                     <th>Fecha</th>
                                                     <th>Nombre</th>
                                                     <th>Descripcion</th>
-                                                    <th>Estado</th>
                                                     <th>idCuenta</th>
                                                     <th></th>
                                                 </tr>
@@ -110,6 +110,21 @@
             "ajax": "/Api/Notificaciones/ListarNotificaciones?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
             "lengthMenu": [5, 10, 25, 50],
             "columns": [
+                {
+                    data: "leido",
+                    orderable: false,
+                    "render": function (data) {
+                        if (data == false) {
+                            var botones = "<button class='fas fa-envelope'></button>";
+                            return botones
+                        } else {
+
+                            var botones = "<button class='fas fa-envelope-open'></button>";
+                            return botones
+                        }
+                    },
+                    "width": 35,
+                },
                 { data: "idNotificacion", "className": "text-left", "visible": false },
                 {
                     data: "fechaNotificacion",
@@ -120,10 +135,9 @@
                     ,"className": "text-left"},               
                 { data: "nombreNotificacion", "className": "text-left" },
                 { data: "descripcionNotificacion", "className": "text-left" },
-                { data: "leido", "className": "text-left" },
+                
                 { data: "idCuenta", "className": "text-left", "visible": false },
-                {
-                    data:"idNotificacion",
+                { data:"idNotificacion",
                     orderable: false,
                     "render": function () {
                         var botones = "<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarNotificacion(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VistoNotificacion(this)'></button>";

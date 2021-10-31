@@ -242,14 +242,27 @@
                             return botones
                     },
                     "width": 35,
-                }
+                },
+                { data: "descripcionPublicacion", "className": "text-left", "visible": false },
             ],
             "language": idiomaEspanol
         });
 
     }
 
+    function EditarPublicacion(btn) {
+        $("#formulario").show();
+        var id = table.row($(btn).parents('tr')).data();
+        console.log(id.idAlquiler);
+        $("#descripcionPublicacion").text(id.descripcionPublicacion);
+        $("#fechaAlta").val(id.fechaAltaPublicacion);
+        $("#fechaBaja").val(id.fechaBajaPublicacion);
+        $("#precio").text(id.precioAlquiler);
+        $("#titulo").text(id.tituloPublicacion);
+        $("#idInmueble").text(id.idInmueble);
+        $("#idInmueble").change();
 
+    }
     function EliminarPublicacion(btn) {
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
@@ -270,6 +283,9 @@
     });
     function mostrarformulario() {
         $("#formulario").show();
+
+
+
     }
 
 
