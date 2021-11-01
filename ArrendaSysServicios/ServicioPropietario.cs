@@ -34,6 +34,8 @@ namespace ArrendaSysServicios
                 propietario2.numeroDocumentoProp = propietario.numeroDocumentoPropietario;
                 propietario2.telefonoPropietario = propietario.telefonoPropietario;
                 propietario2.idCuenta = propietario.idCuenta;
+                db.SaveChanges();
+                return propietario2.idPropietario;
             }
             else
             {
@@ -47,9 +49,9 @@ namespace ArrendaSysServicios
                     idCuenta = propietario.idCuenta
                 };
                 db.Propietario.Add(propietario1);
+                db.SaveChangesAsync();
+                return propietario1.idPropietario;
             }
-            db.SaveChanges();
-            return 1;
         }
         
 

@@ -35,6 +35,8 @@ namespace ArrendaSysServicios
                     inmobiliaria2.cuitInmobiliaria = inmobiliaria.cuitInmobiliaria;
                     inmobiliaria2.telefonoInmobiliaria = inmobiliaria.telefonoInmobiliaria;
                     inmobiliaria2.idCuenta = inmobiliaria.idCuenta;
+                    db.SaveChanges();
+                    return inmobiliaria2.idInmobiliaria;
 
                 }
                 else
@@ -48,9 +50,9 @@ namespace ArrendaSysServicios
                         idCuenta = inmobiliaria.idCuenta
                     };
                     db.Inmobiliaria.Add(inmo);
+                    db.SaveChangesAsync();
+                    return inmo.idInmobiliaria;
                 }
-                db.SaveChanges();
-                return 1;
             }
         }
 
