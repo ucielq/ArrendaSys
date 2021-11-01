@@ -900,7 +900,7 @@
     <Content Include="Views\Perfil\AdministrarPerfil.cshtml" />
     <Content Include="Views\Alquileres\Alquileres.cshtml" />
     <Content Include="Views\Resenias\Reseñas.cshtml" />
-    <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
+    <Content Include="Views\Estadisticas\MisEstadisticas.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
     <Content Include="Views\Publicacion\Publicaciones.cshtml" />
     <Content Include="Views\ABMPublicacion\Index.cshtml" />
