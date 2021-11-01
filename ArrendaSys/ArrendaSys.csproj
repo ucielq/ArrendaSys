@@ -279,7 +279,7 @@
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PublicacionController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
-    <Compile Include="Controllers\ReseñaInmobiliariaController.cs" />
+    <Compile Include="Controllers\ReseniasController.cs" />
     <Compile Include="Controllers\ReseñaInmuebleController.cs" />
     <Compile Include="Controllers\ReseñaPropietarioController.cs" />
     <Compile Include="Controllers\ReseñasController.cs" />
@@ -894,14 +894,14 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Perfil\AdministrarPerfil.cshtml" />
     <Content Include="Views\Alquileres\Alquileres.cshtml" />
-    <Content Include="Views\Reseñas\Reseñas.cshtml" />
+    <Content Include="Views\Resenias\Reseñas.cshtml" />
     <Content Include="Views\Estadisticas\Estadisticas.cshtml" />
     <Content Include="Views\Notificaciones\Index.cshtml" />
     <Content Include="Views\Publicacion\Publicaciones.cshtml" />
     <Content Include="Views\ABMPublicacion\Index.cshtml" />
-    <Content Include="Views\Reseñas\ReseñaPropietarioView.cshtml" />
-    <Content Include="Views\Reseñas\ReseñaInmobiliariaView.cshtml" />
-    <Content Include="Views\Reseñas\ReseñaInmuebleView.cshtml" />
+    <Content Include="Views\Resenias\ReseñaPropietarioView.cshtml" />
+    <Content Include="Views\Resenias\ReseñaInmobiliariaView.cshtml" />
+    <Content Include="Views\Resenias\ReseñaInmuebleView.cshtml" />
     <Content Include="Views\InmueblesPropietario\InmueblesPropietarioView.cshtml">
       <BrowseToURL>~/InmueblesPropietario/InmueblesPropietario</BrowseToURL>
     </Content>
@@ -916,6 +916,7 @@
     <Content Include="Views\Configuraciones\AdministrarItemsResenias.cshtml" />
     <Content Include="Views\Configuraciones\AdministrarItem.cshtml" />
     <Content Include="Views\Alquileres\Alquiler.cshtml" />
+    <Content Include="Views\Resenias\MisResenias.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
