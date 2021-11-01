@@ -160,6 +160,9 @@
     <Compile Include="Modelos\PropietarioViewModel.cs" />
     <Compile Include="Modelos\ArrendatarioViewModel.cs" />
     <Compile Include="Modelos\CuentaViewModel.cs" />
+    <Compile Include="Modelos\ReseniaArrendadorArrendatarioViewModel.cs" />
+    <Compile Include="Modelos\ReseniaArrendatarioArrendadorViewModel.cs" />
+    <Compile Include="Modelos\ReseniaArrendatarioInmuebleViewModel.cs" />
     <Compile Include="Modelos\ReseniaItemViewModel.cs" />
     <Compile Include="Modelos\ReseniaViewModel.cs" />
     <Compile Include="Modelos\RolViewModel.cs" />

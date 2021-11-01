@@ -39,5 +39,38 @@ namespace ArrendaSys.Controllers.Api
             ServicioResenia serv = new ServicioResenia();
             return serv.CrearReseniaAI(resenia);
         }
+
+        //Listar reseñas
+
+
+        [System.Web.Http.Route("Api/Resenia/ListarReseniasAoAr")]
+        [System.Web.Http.ActionName("ListarReseniasAoAr")]
+        [System.Web.Http.HttpGet]
+        public object ListarReseniasAoAr(int idCuenta, int tipoCuenta)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var lista = servicio.ListarReseniasAoAr(idCuenta, tipoCuenta);
+            return lista;
+        }
+
+        [System.Web.Http.Route("Api/Resenia/ListarReseniasArAo")]
+        [System.Web.Http.ActionName("ListarReseniasArAo")]
+        [System.Web.Http.HttpGet]
+        public object ListarReseniasArAo(int idCuenta, int tipoCuenta)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var lista = servicio.ListarReseniasArAo(idCuenta, tipoCuenta);
+            return lista;
+        }
+        [System.Web.Http.Route("Api/Resenia/ListarReseniasAI")]
+        [System.Web.Http.ActionName("ListarReseniasAI")]
+        [System.Web.Http.HttpGet]
+        public object ListarReseniasAI(int idCuenta, int tipoCuenta)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var lista = servicio.ListarReseniasAI(idCuenta, tipoCuenta);
+            return lista;
+        }
+
     }
 }
