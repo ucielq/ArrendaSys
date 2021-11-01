@@ -67,8 +67,8 @@
                             </button>
                             <ul class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="Logout()">Mis Reseñas</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="Logout()">Mis Estadísticas</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="MisResenias()">Mis Reseñas</a></li>
+                                <li><a class="dropdown-item" href="#" onclick="MisEstadisticas()">Mis Estadísticas</a></li>
                                 <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
                             </ul>
                         </div>
@@ -127,4 +127,14 @@
     function Perfil() {
          window.location.href = "/Perfil/AdministrarPerfil";
     }
+
+    
+    function MisResenias() {
+        window.location.href = "/Resenias/MisResenias";
+    }
+
+    function MisEstadisticas() {
+        window.location.href = "/Estadisticas/MisEstadisticas";
+    }
+
 </script>

@@ -11,7 +11,7 @@ namespace ArrendaSys.Controllers
     public class EstadisticasController : Controller
     {
      
-        public ActionResult Estadisticas()
+        public ActionResult MisEstadisticas()
         {
             return View();
         }
