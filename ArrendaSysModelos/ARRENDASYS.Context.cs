@@ -52,10 +52,10 @@ namespace ArrendaSysModelos
         public virtual DbSet<ReseñaItemAI> ReseñaItemAI { get; set; }
         public virtual DbSet<URL> URL { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
-        public virtual DbSet<ReseñaArrendatarioArrendador> ReseñaArrendatarioArrendador { get; set; }
-        public virtual DbSet<ReseñaArrendadorArrendatario> ReseñaArrendadorArrendatario { get; set; }
         public virtual DbSet<ReseñaItemAoAr> ReseñaItemAoAr { get; set; }
         public virtual DbSet<ReseñaItemArAo> ReseñaItemArAo { get; set; }
+        public virtual DbSet<ReseñaArrendadorArrendatario> ReseñaArrendadorArrendatario { get; set; }
+        public virtual DbSet<ReseñaArrendatarioArrendador> ReseñaArrendatarioArrendador { get; set; }
         public virtual DbSet<ReseñaArrendatarioInmueble> ReseñaArrendatarioInmueble { get; set; }
     }
 }

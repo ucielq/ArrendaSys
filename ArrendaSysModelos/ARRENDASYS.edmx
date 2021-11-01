@@ -266,7 +266,7 @@
           <Property Name="fechaAltaReseñaAoAr" Type="date" />
           <Property Name="fechaBajaReseñaAoAr" Type="date" />
           <Property Name="puntuacionReseñaAoAr" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="respuestaReseñaAoAr" Type="varchar" MaxLength="100" />
+          <Property Name="respuestaReseñaAoAr" Type="varchar" MaxLength="500" />
           <Property Name="idAlquiler" Type="int" />
         </EntityType>
         <EntityType Name="ReseñaArrendatarioArrendador">
@@ -278,7 +278,7 @@
           <Property Name="fechaAltaReseñaArAo" Type="date" />
           <Property Name="fechaBajaReseñaArAo" Type="date" />
           <Property Name="puntuacionReseñaArAo" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="respuestaReseñaArAo" Type="varchar" MaxLength="100" />
+          <Property Name="respuestaReseñaArAo" Type="varchar" MaxLength="500" />
           <Property Name="idAlquiler" Type="int" />
         </EntityType>
         <EntityType Name="ReseñaArrendatarioInmueble">
@@ -290,7 +290,7 @@
           <Property Name="fechaAltaReseñaAI" Type="date" />
           <Property Name="fechaBajaReseñaAI" Type="date" />
           <Property Name="puntuacionReseñaAI" Type="decimal" Precision="16" Scale="2" />
-          <Property Name="respuestaReseñaAI" Type="varchar" MaxLength="100" />
+          <Property Name="respuestaReseñaAI" Type="varchar" MaxLength="500" />
           <Property Name="idAlquiler" Type="int" />
         </EntityType>
         <EntityType Name="ReseñaItemAI">
@@ -683,10 +683,10 @@
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
           <EntitySet Name="URL" EntityType="Self.URL" />
           <EntitySet Name="Rol" EntityType="ARRENDASYSEntities.Rol" />
-          <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" />
-          <EntitySet Name="ReseñaArrendadorArrendatario" EntityType="ARRENDASYSEntities.ReseñaArrendadorArrendatario" />
           <EntitySet Name="ReseñaItemAoAr" EntityType="ARRENDASYSEntities.ReseñaItemAoAr" />
           <EntitySet Name="ReseñaItemArAo" EntityType="ARRENDASYSEntities.ReseñaItemArAo" />
+          <EntitySet Name="ReseñaArrendadorArrendatario" EntityType="ARRENDASYSEntities.ReseñaArrendadorArrendatario" />
+          <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" />
           <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" />
         </EntityContainer>
         <EntityType Name="Rol">
@@ -698,30 +698,6 @@
           <Property Name="fechaAltaRol" Type="DateTime" Precision="0" />
           <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
           <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="ReseñaArrendatarioArrendador">
-          <Key>
-            <PropertyRef Name="idReseñaArAo" />
-          </Key>
-          <Property Name="idReseñaArAo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcionReseñaArAo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaAltaReseñaArAo" Type="DateTime" Precision="0" />
-          <Property Name="fechaBajaReseñaArAo" Type="DateTime" Precision="0" />
-          <Property Name="puntuacionReseñaArAo" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="respuestaReseñaArAo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idAlquiler" Type="Int32" />
-        </EntityType>
-        <EntityType Name="ReseñaArrendadorArrendatario">
-          <Key>
-            <PropertyRef Name="idReseñaAoAr" />
-          </Key>
-          <Property Name="idReseñaAoAr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcionReseñaAoAr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaAltaReseñaAoAr" Type="DateTime" Precision="0" />
-          <Property Name="fechaBajaReseñaAoAr" Type="DateTime" Precision="0" />
-          <Property Name="puntuacionReseñaAoAr" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="respuestaReseñaAoAr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idAlquiler" Type="Int32" />
         </EntityType>
         <EntityType Name="ReseñaItemAoAr">
           <Key>
@@ -741,6 +717,30 @@
           <Property Name="idReseñaArAo" Type="Int32" />
           <Property Name="idItemReseña" Type="Int32" />
         </EntityType>
+        <EntityType Name="ReseñaArrendadorArrendatario">
+          <Key>
+            <PropertyRef Name="idReseñaAoAr" />
+          </Key>
+          <Property Name="idReseñaAoAr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionReseñaAoAr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaReseñaAoAr" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaReseñaAoAr" Type="DateTime" Precision="0" />
+          <Property Name="puntuacionReseñaAoAr" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="respuestaReseñaAoAr" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="idAlquiler" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaArrendatarioArrendador">
+          <Key>
+            <PropertyRef Name="idReseñaArAo" />
+          </Key>
+          <Property Name="idReseñaArAo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionReseñaArAo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaReseñaArAo" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaReseñaArAo" Type="DateTime" Precision="0" />
+          <Property Name="puntuacionReseñaArAo" Type="Decimal" Precision="16" Scale="2" />
+          <Property Name="respuestaReseñaArAo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="idAlquiler" Type="Int32" />
+        </EntityType>
         <EntityType Name="ReseñaArrendatarioInmueble">
           <Key>
             <PropertyRef Name="idReseñaAI" />
@@ -750,7 +750,7 @@
           <Property Name="fechaAltaReseñaAI" Type="DateTime" Precision="0" />
           <Property Name="fechaBajaReseñaAI" Type="DateTime" Precision="0" />
           <Property Name="puntuacionReseñaAI" Type="Decimal" Precision="16" Scale="2" />
-          <Property Name="respuestaReseñaAI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="respuestaReseñaAI" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="idAlquiler" Type="Int32" />
         </EntityType>
       </Schema>
@@ -1070,32 +1070,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReseñaArrendatarioArrendador">
-            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendatarioArrendador">
-              <MappingFragment StoreEntitySet="ReseñaArrendatarioArrendador">
-                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
-                <ScalarProperty Name="respuestaReseñaArAo" ColumnName="respuestaReseñaArAo" />
-                <ScalarProperty Name="puntuacionReseñaArAo" ColumnName="puntuacionReseñaArAo" />
-                <ScalarProperty Name="fechaBajaReseñaArAo" ColumnName="fechaBajaReseñaArAo" />
-                <ScalarProperty Name="fechaAltaReseñaArAo" ColumnName="fechaAltaReseñaArAo" />
-                <ScalarProperty Name="descripcionReseñaArAo" ColumnName="descripcionReseñaArAo" />
-                <ScalarProperty Name="idReseñaArAo" ColumnName="idReseñaArAo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ReseñaArrendadorArrendatario">
-            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendadorArrendatario">
-              <MappingFragment StoreEntitySet="ReseñaArrendadorArrendatario">
-                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
-                <ScalarProperty Name="respuestaReseñaAoAr" ColumnName="respuestaReseñaAoAr" />
-                <ScalarProperty Name="puntuacionReseñaAoAr" ColumnName="puntuacionReseñaAoAr" />
-                <ScalarProperty Name="fechaBajaReseñaAoAr" ColumnName="fechaBajaReseñaAoAr" />
-                <ScalarProperty Name="fechaAltaReseñaAoAr" ColumnName="fechaAltaReseñaAoAr" />
-                <ScalarProperty Name="descripcionReseñaAoAr" ColumnName="descripcionReseñaAoAr" />
-                <ScalarProperty Name="idReseñaAoAr" ColumnName="idReseñaAoAr" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReseñaItemAoAr">
             <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaItemAoAr">
               <MappingFragment StoreEntitySet="ReseñaItemAoAr">
@@ -1113,6 +1087,32 @@
                 <ScalarProperty Name="idReseñaArAo" ColumnName="idReseñaArAo" />
                 <ScalarProperty Name="puntuacionReseñaItemArAo" ColumnName="puntuacionReseñaItemArAo" />
                 <ScalarProperty Name="idReseñaItemArAo" ColumnName="idReseñaItemArAo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArrendadorArrendatario">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendadorArrendatario">
+              <MappingFragment StoreEntitySet="ReseñaArrendadorArrendatario">
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+                <ScalarProperty Name="respuestaReseñaAoAr" ColumnName="respuestaReseñaAoAr" />
+                <ScalarProperty Name="puntuacionReseñaAoAr" ColumnName="puntuacionReseñaAoAr" />
+                <ScalarProperty Name="fechaBajaReseñaAoAr" ColumnName="fechaBajaReseñaAoAr" />
+                <ScalarProperty Name="fechaAltaReseñaAoAr" ColumnName="fechaAltaReseñaAoAr" />
+                <ScalarProperty Name="descripcionReseñaAoAr" ColumnName="descripcionReseñaAoAr" />
+                <ScalarProperty Name="idReseñaAoAr" ColumnName="idReseñaAoAr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArrendatarioArrendador">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArrendatarioArrendador">
+              <MappingFragment StoreEntitySet="ReseñaArrendatarioArrendador">
+                <ScalarProperty Name="idAlquiler" ColumnName="idAlquiler" />
+                <ScalarProperty Name="respuestaReseñaArAo" ColumnName="respuestaReseñaArAo" />
+                <ScalarProperty Name="puntuacionReseñaArAo" ColumnName="puntuacionReseñaArAo" />
+                <ScalarProperty Name="fechaBajaReseñaArAo" ColumnName="fechaBajaReseñaArAo" />
+                <ScalarProperty Name="fechaAltaReseñaArAo" ColumnName="fechaAltaReseñaArAo" />
+                <ScalarProperty Name="descripcionReseñaArAo" ColumnName="descripcionReseñaArAo" />
+                <ScalarProperty Name="idReseñaArAo" ColumnName="idReseñaArAo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
