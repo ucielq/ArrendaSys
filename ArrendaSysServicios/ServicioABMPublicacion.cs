@@ -41,7 +41,8 @@ namespace ArrendaSysServicios
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
                                           idInmueble = p.idInmueble,
-                                          descripcionEstadoPublicacion = ep.nombreEstadoPublicacion
+                                          descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
+                                          descripcionPublicacion=p.descripcionPublicacion
                                       }).ToList();
                     object json = new { data = publicaciones };
                     return json;
@@ -137,6 +138,8 @@ namespace ArrendaSysServicios
 
             }
         }
+
+
         public void CrearPublicacionEstado(int? id)
         {
             PublicacionEstado publiEstado = new PublicacionEstado();
@@ -273,6 +276,26 @@ namespace ArrendaSysServicios
             }
         }
         
+         public int EditarPublicacion(ABMPublicacionViewModel publicacion)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var publi = db.Publicacion.Where(x => x.idPublicacion== publicacion.idPublicacion).FirstOrDefault();
 
+                publi.descripcionPublicacion = publicacion.descripcionPublicacion;
+                publi.fechaAltaPublicacion = publicacion.fechaAltaPublicacion;
+                publi.fechaBajaPublicacion = publicacion.fechaBajaPublicacion;
+                publi.precioAlquiler = publicacion.precioAlquiler;
+                publi.tituloPublicacion = publicacion.tituloPublicacion;
+                publi.idInmueble = publicacion.idInmueble;
+                db.Publicacion.Add(publi);
+                db.SaveChanges();
+            }
+
+                db.SaveChanges();
+                return 1;
+
+         }            
+    
     }
 }

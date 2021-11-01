@@ -117,6 +117,119 @@ namespace ArrendaSysServicios
                 return 1;
             }
         }
+
+        //Listar Reseñas
+        public object ListarReseniasAoAr(int idCuenta, int tipoCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+
+                var reseniaAoAr1 = (from re in db.ReseñaArrendadorArrendatario
+                                      join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
+                                    join ao in db.Arrendatario on a.idArrendatario equals ao.idArrendatario
+                                    join c in db.Cuenta on ao.idCuenta equals c.idCuenta
+                                    where c.idCuenta == idCuenta
+                                      select new ReseniaArrendadorArrendatarioViewModel
+                                      {
+                                          idReseñaAoAr = re.idReseñaAoAr,
+                                          descripcionReseñaAoAr = re.descripcionReseñaAoAr,
+                                          fechaAltaReseñaAoAr = re.fechaAltaReseñaAoAr,
+                                          fechaBajaReseñaAoAr = re.fechaBajaReseñaAoAr,
+                                          puntuacionReseñaAoAr = re.puntuacionReseñaAoAr,
+                                          respuestaReseñaAoAr = re.respuestaReseñaAoAr,
+                                          idAlquiler = re.idAlquiler
+                                      }).ToList();
+                object json = new { data = reseniaAoAr1 };
+                return json;
+
+            }
+
+        }
+
+        public object ListarReseniasArAo(int idCuenta, int tipoCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                if (tipoCuenta == 3) {
+                    var reseniaArAo1 = (from re in db.ReseñaArrendatarioArrendador
+                                        join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
+                                        join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                        join p in db.Propietario on i.idArrendador equals p.idPropietario                                        
+                                        join c in db.Cuenta on p.idCuenta equals c.idCuenta
+                                        where c.idCuenta == idCuenta
+                                        select new ReseniaArrendatarioArrendadorViewModel
+                                        {
+
+
+                                            idReseñaArAo = re.idReseñaArAo,
+                                            descripcionReseñaArAo = re.descripcionReseñaArAo,
+                                            fechaAltaReseñaArAo = re.fechaAltaReseñaArAo,
+                                            fechaBajaReseñaArAo = re.fechaBajaReseñaArAo,
+                                            puntuacionReseñaArAo = re.puntuacionReseñaArAo,
+                                            respuestaReseñaArAo = re.respuestaReseñaArAo,
+                                            idAlquiler = re.idAlquiler
+                                        }).ToList();
+                    object json = new { data = reseniaArAo1 };
+                    return json;
+                }
+                else {
+                    var reseniaArAo1 = (from re in db.ReseñaArrendatarioArrendador
+                                        join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
+                                        join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                        join inmo in db.Inmobiliaria on i.idArrendador equals inmo.idInmobiliaria
+                                        join c in db.Cuenta on inmo.idCuenta equals c.idCuenta
+                                        where c.idCuenta == idCuenta
+                                        select new ReseniaArrendatarioArrendadorViewModel
+                                        {
+                                            idReseñaArAo = re.idReseñaArAo,
+                                            descripcionReseñaArAo = re.descripcionReseñaArAo,
+                                            fechaAltaReseñaArAo = re.fechaAltaReseñaArAo,
+                                            fechaBajaReseñaArAo = re.fechaBajaReseñaArAo,
+                                            puntuacionReseñaArAo = re.puntuacionReseñaArAo,
+                                            respuestaReseñaArAo = re.respuestaReseñaArAo,
+                                            idAlquiler = re.idAlquiler
+                                        }).ToList();
+                    object json = new { data = reseniaArAo1 };
+                    return json;
+
+
+                }
+
+            }
+
+        }
+
+        public object ListarReseniasAI(int idCuenta, int tipoCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                //traer idInmueble
+                var reseniaAI1 = (from re in db.ReseñaArrendatarioInmueble
+                                    join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
+                                    join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                    join ao in db.Arrendatario on a.idArrendatario equals ao.idArrendatario
+                                    join c in db.Cuenta on ao.idCuenta equals c.idCuenta
+                                    where c.idCuenta == idCuenta
+                                    select new ReseñaArrendatarioInmueble
+                                    {
+
+                                        idReseñaAI = re.idReseñaAI,
+                                        descripcionReseñaAI = re.descripcionReseñaAI,
+                                        fechaAltaReseñaAI = re.fechaAltaReseñaAI,
+                                        fechaBajaReseñaAI = re.fechaBajaReseñaAI,
+                                        puntuacionReseñaAI = re.puntuacionReseñaAI,
+                                        respuestaReseñaAI = re.respuestaReseñaAI,
+                                        idAlquiler = re.idAlquiler
+                                    }).ToList();
+                object json = new { data = reseniaAI1 };
+                return json;
+
+            }
+
+        }
+
+
+
     }
 
 }

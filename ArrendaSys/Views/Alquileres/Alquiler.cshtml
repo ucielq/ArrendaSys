@@ -502,12 +502,66 @@ p {
         }
     }
     function cargarReseniasAoAr() {
-        // Cuando tengan el resultado del ajax hacen $("#reseniasAoAr").append(*Lo que armen con javascript para mostrarlas*)
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/ListarReseniasAoAr',
+            /*success: function (result) {
+                listaItemsAI = result;
+                result.forEach(function (data, index) {
+                    $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
+                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
+                    item1 = item1 + "</div>";
+                    $("#formularioAI").append(item1);
+                });
+                var item2 = "<div class='row'>";
+                item2 = item2 + "<label>Descripción Reseña</label></br>"
+                item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
+                item2 = item2 + "</div>";
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
+                $("#formularioAI").append(item2)
+            }*/
+        });
     }
     function cargarReseniasArAo() {
-        // Cuando tengan el resultado del ajax hacen $("#reseniasArAo").append(*Lo que armen con javascript para mostrarlas*)
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/ListarReseniasArAo',
+            /*success: function (result) {
+                listaItemsAI = result;
+                result.forEach(function (data, index) {
+                    $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
+                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
+                    item1 = item1 + "</div>";
+                    $("#formularioAI").append(item1);
+                });
+                var item2 = "<div class='row'>";
+                item2 = item2 + "<label>Descripción Reseña</label></br>"
+                item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
+                item2 = item2 + "</div>";
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
+                $("#formularioAI").append(item2)
+            }*/
+        });
     }
     function cargarReseniasAI() {
-        // Cuando tengan el resultado del ajax hacen $("#reseniasAI").append(*Lo que armen con javascript para mostrarlas*)
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/ListarReseniasAI',
+            /*success: function (result) {
+                listaItemsAI = result;
+                result.forEach(function (data, index) {
+                    $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
+                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
+                    item1 = item1 + "</div>";
+                    $("#formularioAI").append(item1);
+                });
+                var item2 = "<div class='row'>";
+                item2 = item2 + "<label>Descripción Reseña</label></br>"
+                item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
+                item2 = item2 + "</div>";
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
+                $("#formularioAI").append(item2)
+            }*/
+        });
     }
 </script>
