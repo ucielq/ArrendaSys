@@ -23,7 +23,6 @@ function MostrarNombreMultiplesArchivos() {
     }
 }
 function GuardarArchivo(idInmueble) {
-    debugger;
     var data = new FormData();
     data.append("Ruta", "Inmueble");
     data.append("Id" + "," + idInmueble, idInmueble);

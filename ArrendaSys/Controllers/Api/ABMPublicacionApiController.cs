@@ -55,5 +55,18 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.TraerPublicaciones(idDepto, hab, banios, coch, masc,exp);
             return lista;
         }
+
+        [System.Web.Http.Route("Api/ABMPublicacion/EditarPublicacion")]
+        [System.Web.Http.ActionName("EditarPublicacion")]
+        [System.Web.Http.HttpPost]
+
+
+        public int EditarPublicacion(ABMPublicacionViewModel publicacion)
+        {
+            ServicioABMPublicacion serv = new ServicioABMPublicacion();
+            return serv.EditarPublicacion(publicacion);
+        }
+
+
     }
 }
