@@ -190,7 +190,7 @@ namespace ArrendaSysServicios
             }
         }
 
-        public List<ABMPublicacionViewModel> TraerPublicaciones(int idDepto)
+        public List<ABMPublicacionViewModel> TraerPublicaciones(int idDepto, int hab, int banios, int coch, int masc, int exp)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -250,6 +250,46 @@ namespace ArrendaSysServicios
                 {
                     publicaciones = publicaciones.Where(x => x.inmueble.direccion.localidad.departamento.idDepartamento == idDepto);
                 }
+                if (hab != -1)
+                {
+                    publicaciones = publicaciones.Where(x => x.inmueble.cantHabitaciones == hab);
+                }
+                if (banios != -1)
+                {
+                    publicaciones = publicaciones.Where(x => x.inmueble.cantBanos == banios);
+                }
+                if (coch != -1)
+                {
+                    if (coch == 1) {
+                        publicaciones = publicaciones.Where(x => x.inmueble.cochera == true); 
+                    }else { 
+                        publicaciones = publicaciones.Where(x => x.inmueble.cochera == false); 
+                    }
+                }
+                if (masc != -1)
+                {
+                    if (masc == 1)
+                    {
+                        publicaciones = publicaciones.Where(x => x.inmueble.permiteMascota == true);
+                    }
+                    else
+                    {
+                        publicaciones = publicaciones.Where(x => x.inmueble.permiteMascota == false);
+                    }
+                }
+                if (exp != -1)
+                {
+                    if (exp == 1)
+                    {
+                        publicaciones = publicaciones.Where(x => x.inmueble.incluyeExpensas == true);
+                    }
+                    else
+                    {
+                        publicaciones = publicaciones.Where(x => x.inmueble.incluyeExpensas == false);
+                    }
+                }
+
+
                 var lista = publicaciones.ToList();
 
                 foreach (var inmu in lista)

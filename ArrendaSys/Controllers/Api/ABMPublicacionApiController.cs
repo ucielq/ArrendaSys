@@ -49,10 +49,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/ABMPublicacion/TraerPublicaciones")]
         [System.Web.Http.ActionName("TraerPublicaciones")]
         [System.Web.Http.HttpGet]
-        public List<ABMPublicacionViewModel> TraerPublicaciones(int idDepto)
+        public List<ABMPublicacionViewModel> TraerPublicaciones(int idDepto, int hab, int banios, int coch, int masc, int exp)
         {
             ServicioABMPublicacion servicio = new ServicioABMPublicacion();
-            var lista = servicio.TraerPublicaciones(idDepto);
+            var lista = servicio.TraerPublicaciones(idDepto, hab, banios, coch, masc,exp);
             return lista;
         }
     }
