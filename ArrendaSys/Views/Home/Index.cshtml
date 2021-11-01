@@ -10,8 +10,7 @@
 
 <!--<section id="header" class="text-center" style="background-color: #dee2e6; padding-bottom:10px; padding-top:0px">
     <h2 class="display-6">Publicaciones</h2>-->
-    
-    @*<button type="button" class="btn btn-success" onclick="AgregarNuevoInmueble()">
+@*<button type="button" class="btn btn-success" onclick="AgregarNuevoInmueble()">
         <i class="fas fa-plus"></i> Agregar nuevo inmueble
     </button>*@
 <!--</section>-->
@@ -87,10 +86,10 @@
                                     <button class='btn btn-outline-success btn-sm' onclick="BuscarPubli()">Aplicar</button>
                                 </div>
                             </div>
-                                 
-                        </div>                       
+
+                        </div>
                     </div>
-                </div>                
+                </div>
             </div>
         </div>
     </div>
@@ -100,8 +99,8 @@
 
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 
-</body>
 
+</body>
 <section id="gallery">
     <div class="container" id="publicaciones">
         @*Cuerpo de la pagina*@
@@ -111,8 +110,9 @@
 
 
 
+
 @{
-    var idCuenta = Session["idCuenta"];    
+    var idCuenta = Session["idCuenta"];
 }
 
 <script>
@@ -123,11 +123,11 @@
         });
         ObtenerDepto(-1);
         BuscarPubli();
-        
+
 
     });
     var idCuenta = "@idCuenta";
-    
+
     function BuscarPubli() {
         $("#publicaciones").empty();
         debugger;
