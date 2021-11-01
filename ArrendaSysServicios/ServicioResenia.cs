@@ -119,17 +119,15 @@ namespace ArrendaSysServicios
         }
 
         //Listar Reseñas
-        public object ListarReseniasAoAr(int idCuenta, int tipoCuenta)
+        public object ListarReseniasAoAr(int idAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
 
                 var reseniaAoAr1 = (from re in db.ReseñaArrendadorArrendatario
-                                      join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
-                                    join ao in db.Arrendatario on a.idArrendatario equals ao.idArrendatario
-                                    join c in db.Cuenta on ao.idCuenta equals c.idCuenta
-                                    where c.idCuenta == idCuenta
-                                      select new ReseniaArrendadorArrendatarioViewModel
+                                    join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
+                                    where a.idAlquiler == idAlquiler
+                                    select new ReseniaArrendadorArrendatarioViewModel
                                       {
                                           idReseñaAoAr = re.idReseñaAoAr,
                                           descripcionReseñaAoAr = re.descripcionReseñaAoAr,
@@ -146,39 +144,13 @@ namespace ArrendaSysServicios
 
         }
 
-        public object ListarReseniasArAo(int idCuenta, int tipoCuenta)
+        public object ListarReseniasArAo(int idAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                if (tipoCuenta == 3) {
                     var reseniaArAo1 = (from re in db.ReseñaArrendatarioArrendador
                                         join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
-                                        join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                        join p in db.Propietario on i.idArrendador equals p.idPropietario                                        
-                                        join c in db.Cuenta on p.idCuenta equals c.idCuenta
-                                        where c.idCuenta == idCuenta
-                                        select new ReseniaArrendatarioArrendadorViewModel
-                                        {
-
-
-                                            idReseñaArAo = re.idReseñaArAo,
-                                            descripcionReseñaArAo = re.descripcionReseñaArAo,
-                                            fechaAltaReseñaArAo = re.fechaAltaReseñaArAo,
-                                            fechaBajaReseñaArAo = re.fechaBajaReseñaArAo,
-                                            puntuacionReseñaArAo = re.puntuacionReseñaArAo,
-                                            respuestaReseñaArAo = re.respuestaReseñaArAo,
-                                            idAlquiler = re.idAlquiler
-                                        }).ToList();
-                    object json = new { data = reseniaArAo1 };
-                    return json;
-                }
-                else {
-                    var reseniaArAo1 = (from re in db.ReseñaArrendatarioArrendador
-                                        join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
-                                        join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                        join inmo in db.Inmobiliaria on i.idArrendador equals inmo.idInmobiliaria
-                                        join c in db.Cuenta on inmo.idCuenta equals c.idCuenta
-                                        where c.idCuenta == idCuenta
+                                        where a.idAlquiler == idAlquiler
                                         select new ReseniaArrendatarioArrendadorViewModel
                                         {
                                             idReseñaArAo = re.idReseñaArAo,
@@ -191,28 +163,21 @@ namespace ArrendaSysServicios
                                         }).ToList();
                     object json = new { data = reseniaArAo1 };
                     return json;
-
-
-                }
+                
 
             }
 
         }
 
-        public object ListarReseniasAI(int idCuenta, int tipoCuenta)
+        public object ListarReseniasAI(int idAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                //traer idInmueble
                 var reseniaAI1 = (from re in db.ReseñaArrendatarioInmueble
                                     join a in db.Alquiler on re.idAlquiler equals a.idAlquiler
-                                    join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                    join ao in db.Arrendatario on a.idArrendatario equals ao.idArrendatario
-                                    join c in db.Cuenta on ao.idCuenta equals c.idCuenta
-                                    where c.idCuenta == idCuenta
+                                    where a.idAlquiler == idAlquiler
                                     select new ReseñaArrendatarioInmueble
                                     {
-
                                         idReseñaAI = re.idReseñaAI,
                                         descripcionReseñaAI = re.descripcionReseñaAI,
                                         fechaAltaReseñaAI = re.fechaAltaReseñaAI,

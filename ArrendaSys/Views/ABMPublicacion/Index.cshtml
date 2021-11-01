@@ -105,6 +105,93 @@
                             </div>
                         </div>
 
+
+
+
+
+                        <div class="col-md-12" id="formulario2" style="display:none">
+
+                            <div class="row" style="padding-top:6px">
+
+                                <div class="col-md-5">
+                                    <div id="alertprecio"></div>
+                                    <div id="alertfechaAlta"></div>
+                                    <div id="alertfechaBaja"></div>
+                                    <div id="alerttitulo"></div>
+                                    <div id="alertaItem"></div>
+                                    <span>Título: </span>
+                                    <input type="text" class="form-control obligatoria" id="titulo2" placeholder="Ingrese el título de la publicación" />
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="padding-top:6px">
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Fecha Alta: </span>
+                                    <br />
+                                    <input type="date" class="form-control obligatoria" id="fechaAlta2" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Fecha Baja: </span>
+                                    <br />
+                                    <input type="date" class="form-control obligatoria" id="fechaBaja2" />
+                                </div>
+
+
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Precio: </span>
+                                    <br />
+                                    <input type="text" class="form-control obligatoria" id="precio2" placeholder="Ingrese el precio del Alquiler" />
+                                </div>
+
+                                <div class="col-md-2">
+                                    <br />
+                                    <span>Inmueble: </span>
+                                    <br />
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble2"></select>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="padding-top:6px">
+                                <div class="col-md-12">
+                                    <br />
+                                    <span>Descipción: </span>
+                                    <input type="text" class="form-control" id="descripcionPublicacion2" placeholder="Ingrese descripción de la publicación" />
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Publicacion: </span>
+                                <br />
+                                <input type="text" class="form-control obligatoria" id="idPublicacion2" />
+                            </div>
+
+                            <div class="col-md-12">
+                                <br />
+                                <div>
+                                    <button type="button" class="btn btn-success" onclick="EditarPublicacion1()"><i class="fas fa-save"></i> Editar</button>
+                                    <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
                         <div class="card">
                             <div class="card-body">
                                 <div class="container">
@@ -251,16 +338,37 @@
     }
 
     function EditarPublicacion(btn) {
-        $("#formulario").show();
+        debugger;
+        $("#formulario2").show();
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
-        $("#descripcionPublicacion").text(id.descripcionPublicacion);
-        $("#fechaAlta").val(id.fechaAltaPublicacion);
-        $("#fechaBaja").val(id.fechaBajaPublicacion);
-        $("#precio").text(id.precioAlquiler);
-        $("#titulo").text(id.tituloPublicacion);
-        $("#idInmueble").text(id.idInmueble);
-        $("#idInmueble").change();
+        $("#descripcionPublicacion2").text(id.descripcionPublicacion);
+        $("#fechaAlta2").val(id.fechaAltaPublicacion);
+        $("#fechaBaja2").val(id.fechaBajaPublicacion);
+        $("#precio2").text(id.precioAlquiler);
+        $("#titulo2").text(id.tituloPublicacion);
+        $("#idInmueble2").text(id.idInmueble);
+        $("#idInmueble2").change();
+
+    }
+
+    function EditarPublicacion1(btn) {
+        
+                publicacion = new Object();
+                publicacion.descripcionPublicacion = $("#descripcionPublicacion2").val();
+                publicacion.fechaAltaPublicacion = $("#fechaAlta2").val();
+                publicacion.fechaBajaPublicacion = $("#fechaBaja2").val();
+                publicacion.precioAlquiler = $("#precio2").val();
+                publicacion.tituloPublicacion = $("#titulo2").val();
+                publicacion.idInmueble = $("#idInmueble2").val();
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/ABMPublicacion/EditarPublicacion',
+                    data: publicacion,
+                    success: function (result) {
+                        window.location.href = "/ABMPublicacion";
+                    }
+                });
 
     }
     function EliminarPublicacion(btn) {
@@ -281,6 +389,10 @@
     $("#btnvolver").click(function () {
         $("#formulario").hide();
     });
+    $("#btnvolver2").click(function () {
+        $("#formulario2").hide();
+    });
+
     function mostrarformulario() {
         $("#formulario").show();
 

@@ -46,29 +46,29 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Resenia/ListarReseniasAoAr")]
         [System.Web.Http.ActionName("ListarReseniasAoAr")]
         [System.Web.Http.HttpGet]
-        public object ListarReseniasAoAr(int idCuenta, int tipoCuenta)
+        public object ListarReseniasAoAr(int idAlquiler)
         {
             ServicioResenia servicio = new ServicioResenia();
-            var lista = servicio.ListarReseniasAoAr(idCuenta, tipoCuenta);
+            var lista = servicio.ListarReseniasAoAr(idAlquiler);
             return lista;
         }
 
         [System.Web.Http.Route("Api/Resenia/ListarReseniasArAo")]
         [System.Web.Http.ActionName("ListarReseniasArAo")]
         [System.Web.Http.HttpGet]
-        public object ListarReseniasArAo(int idCuenta, int tipoCuenta)
+        public object ListarReseniasArAo(int idAlquiler)
         {
             ServicioResenia servicio = new ServicioResenia();
-            var lista = servicio.ListarReseniasArAo(idCuenta, tipoCuenta);
+            var lista = servicio.ListarReseniasArAo(idAlquiler);
             return lista;
         }
         [System.Web.Http.Route("Api/Resenia/ListarReseniasAI")]
         [System.Web.Http.ActionName("ListarReseniasAI")]
         [System.Web.Http.HttpGet]
-        public object ListarReseniasAI(int idCuenta, int tipoCuenta)
+        public object ListarReseniasAI(int idAlquiler)
         {
             ServicioResenia servicio = new ServicioResenia();
-            var lista = servicio.ListarReseniasAI(idCuenta, tipoCuenta);
+            var lista = servicio.ListarReseniasAI(idAlquiler);
             return lista;
         }
 
