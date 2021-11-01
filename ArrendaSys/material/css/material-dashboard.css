@@ -5116,8 +5116,8 @@ tbody.collapse.show {
 .page-item.active .page-link {
     z-index: 1;
     color: #ffffff;
-    background-color: #5cb874;
-    border-color: #5cb874;
+    background-color: #2e7230;
+    border-color: #2e7230;
 }
 
 .page-item.disabled .page-link {
@@ -9642,7 +9642,7 @@ a.text-dark:focus {
 
     .btn.btn-info {
         color: #fff;
-        background-color: #5cb874;
+        background-color: #2e7230;
         border-color: #5cb874;
         box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
     }
@@ -9730,12 +9730,12 @@ a.text-dark:focus {
   color: #5cb874;
 }
 
-.btn.btn-success {
-  color: #fff;
-  background-color: #4caf50;
-  border-color: #4caf50;
-  box-shadow: 0 2px 2px 0 rgba(76, 175, 80, 0.14), 0 3px 1px -2px rgba(76, 175, 80, 0.2), 0 1px 5px 0 rgba(76, 175, 80, 0.12);
-}
+    .btn.btn-success {
+        color: #fff;
+        background-color: #2e7230;
+        border-color: white;
+        box-shadow: 0 2px 2px 0 rgba(76, 175, 80, 0.14), 0 3px 1px -2px rgba(76, 175, 80, 0.2), 0 1px 5px 0 rgba(76, 175, 80, 0.12);
+    }
 
 .btn.btn-success:hover {
   color: #fff;
@@ -10854,9 +10854,9 @@ fieldset[disabled][disabled] .btn-group-raised .btn,
 }
 
 .btn.btn-outline-success {
-  color: #4caf50;
-  background-color: transparent;
-  border-color: #4caf50;
+    color: #2e7230;
+    background-color: transparent;
+    border-color: #2e7230;
 }
 
 .btn.btn-outline-success:hover {
@@ -16059,12 +16059,12 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   color: #fafafa;
 }
 
-.fixed-plugin .btn.btn-info {
-  color: #fff;
-  background-color: #5cb874;
-  border-color: #5cb874;
-  box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
-}
+    .fixed-plugin .btn.btn-info {
+        color: #fff;
+        background-color: #2e7230;
+        border-color: #2e7230;
+        box-shadow: 0 2px 2px 0 rgba(0, 188, 212, 0.14), 0 3px 1px -2px rgba(0, 188, 212, 0.2), 0 1px 5px 0 rgba(0, 188, 212, 0.12);
+    }
 
 .fixed-plugin .btn.btn-info:hover {
   color: #fff;
@@ -17583,7 +17583,7 @@ html[dir="rtl"] .form-check .form-check-sign .check:before {
 .card.bg-info,
 .card.card-rotate.bg-info .front,
 .card.card-rotate.bg-info .back {
-    background: linear-gradient(60deg, #5cb874, #5cb874);
+    background: linear-gradient(60deg, #2e7230, #2e7230);
 }
 
 .card .card-header-success .card-icon,
