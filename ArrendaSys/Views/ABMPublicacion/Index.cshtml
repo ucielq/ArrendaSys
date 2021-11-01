@@ -21,203 +21,150 @@
                         <div class="float-left">
                             <div class="titulo">Administrar Publicaciones</div>
                         </div>
-
                     </div>
-
-
-                    <body>
-
+                    <div class="col-md12">
                         <div class="col-md12">
-                            <div class="col-md12">
-                                <br />
-                                <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
-                                <br />
-                            </div>
-
+                            <br />
+                            <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
+                            <br />
                         </div>
-
-                        <div class="col-md-12" id="formulario" style="display:none">
-
-                            <div class="row" style="padding-top:6px">
-
-                                <div class="col-md-5">
-                                    <div id="alertprecio"></div>
-                                    <div id="alertfechaAlta"></div>
-                                    <div id="alertfechaBaja"></div>
-                                    <div id="alerttitulo"></div>
-                                    <div id="alertaItem"></div>
-                                    <span>Título: </span>
-                                    <input type="text" class="form-control obligatoria" id="titulo" placeholder="Ingrese el título de la publicación" />
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="padding-top:6px">
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Fecha Alta: </span>
-                                    <br />
-                                    <input type="date" class="form-control obligatoria" id="fechaAlta" />
-                                </div>
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Fecha Baja: </span>
-                                    <br />
-                                    <input type="date" class="form-control obligatoria" id="fechaBaja" />
-                                </div>
-
-
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Precio: </span>
-                                    <br />
-                                    <input type="text" class="form-control obligatoria" id="precio" placeholder="Ingrese el precio del Alquiler" />
-                                </div>
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Inmueble: </span>
-                                    <br />
-                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="padding-top:6px">
-                                <div class="col-md-12">
-                                    <br />
-                                    <span>Descipción: </span>
-                                    <input type="text" class="form-control" id="descripcionPublicacion" placeholder="Ingrese descripción de la publicación" />
-                                </div>
-
-
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <br />
-                                <div>
-                                    <button type="button" class="btn btn-success" onclick="GuardarPublicacion()"><i class="fas fa-save"></i> Guardar</button>
-                                    <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
-                                </div>
+                    </div>
+                    <div class="col-md-12" id="formulario" style="display:none">
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-5">
+                                <div id="alertprecio"></div>
+                                <div id="alertfechaAlta"></div>
+                                <div id="alertfechaBaja"></div>
+                                <div id="alerttitulo"></div>
+                                <div id="alertaItem"></div>
+                                <span>Título: </span>
+                                <input type="text" class="form-control obligatoria" id="titulo" placeholder="Ingrese el título de la publicación" />
                             </div>
                         </div>
-
-
-
-
-
-                        <div class="col-md-12" id="formulario2" style="display:none">
-
-                            <div class="row" style="padding-top:6px">
-
-                                <div class="col-md-5">
-                                    <div id="alertprecio"></div>
-                                    <div id="alertfechaAlta"></div>
-                                    <div id="alertfechaBaja"></div>
-                                    <div id="alerttitulo"></div>
-                                    <div id="alertaItem"></div>
-                                    <span>Título: </span>
-                                    <input type="text" class="form-control obligatoria" id="titulo2" placeholder="Ingrese el título de la publicación" />
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="padding-top:6px">
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Fecha Alta: </span>
-                                    <br />
-                                    <input type="date" class="form-control obligatoria" id="fechaAlta2" />
-                                </div>
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Fecha Baja: </span>
-                                    <br />
-                                    <input type="date" class="form-control obligatoria" id="fechaBaja2" />
-                                </div>
-
-
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Precio: </span>
-                                    <br />
-                                    <input type="text" class="form-control obligatoria" id="precio2" placeholder="Ingrese el precio del Alquiler" />
-                                </div>
-
-                                <div class="col-md-2">
-                                    <br />
-                                    <span>Inmueble: </span>
-                                    <br />
-                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble2"></select>
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="padding-top:6px">
-                                <div class="col-md-12">
-                                    <br />
-                                    <span>Descipción: </span>
-                                    <input type="text" class="form-control" id="descripcionPublicacion2" placeholder="Ingrese descripción de la publicación" />
-                                </div>
-
-
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Alta: </span>
+                                <br />
+                                <input type="date" class="form-control obligatoria" id="fechaAlta" />
                             </div>
                             <div class="col-md-2">
                                 <br />
-                                <span>Publicacion: </span>
+                                <span>Fecha Baja: </span>
                                 <br />
-                                <input type="text" class="form-control obligatoria" id="idPublicacion2" />
+                                <input type="date" class="form-control obligatoria" id="fechaBaja" />
                             </div>
-
-                            <div class="col-md-12">
+                            <div class="col-md-2">
                                 <br />
-                                <div>
-                                    <button type="button" class="btn btn-success" onclick="EditarPublicacion1()"><i class="fas fa-save"></i> Editar</button>
-                                    <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
-                                </div>
+                                <span>Precio: </span>
+                                <br />
+                                <input type="text" class="form-control obligatoria" id="precio" placeholder="Ingrese el precio del Alquiler" />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Inmueble: </span>
+                                <br />
+                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
-
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            <table id="publicacionlista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
-                                                <thead>
-                                                    <tr>
-                                                        <th>idPublicacion</th>
-                                                        <th>Título</th>
-                                                        <th>Fecha Alta</th>
-                                                        <th>Fecha Baja</th>
-                                                        <th>Precio</th>
-                                                        <th>Inmueble</th>
-                                                        <th>Estado</th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                            </table>
-                                        </div>
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-12">
+                                <br />
+                                <span>Descipción: </span>
+                                <input type="text" class="form-control" id="descripcionPublicacion" placeholder="Ingrese descripción de la publicación" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-success" onclick="GuardarPublicacion()"><i class="fas fa-save"></i> Guardar</button>
+                                <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="formulario2" style="display:none">
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-5">
+                                <div id="alertprecio"></div>
+                                <div id="alertfechaAlta"></div>
+                                <div id="alertfechaBaja"></div>
+                                <div id="alerttitulo"></div>
+                                <div id="alertaItem"></div>
+                                <span>Título: </span>
+                                <input type="text" class="form-control obligatoriaS" id="titulo2" placeholder="Ingrese el título de la publicación" />
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Alta: </span>
+                                <br />
+                                <input type="date" class="form-control obligatoriaS" id="fechaAlta2" />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Baja: </span>
+                                <br />
+                                <input type="date" class="form-control obligatoriaS" id="fechaBaja2" />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Precio: </span>
+                                <br />
+                                <input type="text" class="form-control obligatoriaS" id="precio2" placeholder="Ingrese el precio del Alquiler" />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Inmueble: </span>
+                                <br />
+                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble2"></select>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-12">
+                                <br />
+                                <span>Descipción: </span>
+                                <input type="text" class="form-control" id="descripcionPublicacion2" placeholder="Ingrese descripción de la publicación" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <br />
+                            <span>Publicacion: </span>
+                            <br />
+                            <input type="text" class="form-control obligatoriaS" id="idPublicacion2" />
+                        </div>
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-success" onclick="EditarPublicacion1()"><i class="fas fa-save"></i> Editar</button>
+                                <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <table id="publicacionlista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>idPublicacion</th>
+                                                    <th>Título</th>
+                                                    <th>Fecha Alta</th>
+                                                    <th>Fecha Baja</th>
+                                                    <th>Precio</th>
+                                                    <th>Inmueble</th>
+                                                    <th>Estado</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </body>
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -338,37 +285,40 @@
     }
 
     function EditarPublicacion(btn) {
-        debugger;
+
         $("#formulario2").show();
         var id = table.row($(btn).parents('tr')).data();
-        console.log(id.idAlquiler);
-        $("#descripcionPublicacion2").text(id.descripcionPublicacion);
-        $("#fechaAlta2").val(id.fechaAltaPublicacion);
-        $("#fechaBaja2").val(id.fechaBajaPublicacion);
-        $("#precio2").text(id.precioAlquiler);
-        $("#titulo2").text(id.tituloPublicacion);
-        $("#idInmueble2").text(id.idInmueble);
+        console.log(id.descripcionPublicacion);
+        var fechaAltaStr = (id.fechaAltaPublicacion).toString().split('T')[0];
+        var fechaBajaStr = (id.fechaBajaPublicacion).toString().split('T')[0];
+        $("#descripcionPublicacion2").val(id.descripcionPublicacion);
+        $("#fechaAlta2").val(fechaAltaStr);
+        $("#fechaBaja2").val(fechaBajaStr);
+        $("#precio2").val(id.precioAlquiler);
+        $("#titulo2").val(id.tituloPublicacion);
+        $("#idInmueble2").val(id.idInmueble);
+        $("#idPublicacion2").val(id.idPublicacion);
         $("#idInmueble2").change();
 
     }
 
     function EditarPublicacion1(btn) {
-        
-                publicacion = new Object();
-                publicacion.descripcionPublicacion = $("#descripcionPublicacion2").val();
-                publicacion.fechaAltaPublicacion = $("#fechaAlta2").val();
-                publicacion.fechaBajaPublicacion = $("#fechaBaja2").val();
-                publicacion.precioAlquiler = $("#precio2").val();
-                publicacion.tituloPublicacion = $("#titulo2").val();
-                publicacion.idInmueble = $("#idInmueble2").val();
-                $.ajax({
-                    type: 'Post',
-                    url: '/Api/ABMPublicacion/EditarPublicacion',
-                    data: publicacion,
-                    success: function (result) {
-                        window.location.href = "/ABMPublicacion";
-                    }
-                });
+
+            publicacion = new Object();
+            publicacion.descripcionPublicacion = $("#descripcionPublicacion2").val();
+            publicacion.fechaAltaPublicacion = $("#fechaAlta2").val();
+            publicacion.fechaBajaPublicacion = $("#fechaBaja2").val();
+            publicacion.precioAlquiler = $("#precio2").val();
+            publicacion.tituloPublicacion = $("#titulo2").val();
+            publicacion.idInmueble = $("#idInmueble2").val();
+            $.ajax({
+                type: 'Post',
+                url: '/Api/ABMPublicacion/EditarPublicacion',
+                data: publicacion,
+                success: function (result) {
+                    window.location.href = "/ABMPublicacion";
+                }
+            });
 
     }
     function EliminarPublicacion(btn) {
@@ -455,7 +405,7 @@
     }
 
 
-    //VALIDACIONES 
+    //VALIDACIONES
     (function ($) {
         $.fn.inputFilter = function (inputFilter) {
             return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
@@ -477,7 +427,7 @@
         return /^-?\d*[.,]?\d*$/.test(value);
     });
 
-    
+
 
 
     $(".obligatoria").keydown(function () {
