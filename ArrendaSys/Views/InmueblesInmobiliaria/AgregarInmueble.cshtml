@@ -208,7 +208,7 @@
     @{
         var idInmobiliaria = Session["id"];
     }
-    var idInmobiliaria = "@idInmobiliaria";
+    var idInmobiliaria = parseInt(@idInmobiliaria);
 
     $(document).ready(function () {
         $('.select2').select2({

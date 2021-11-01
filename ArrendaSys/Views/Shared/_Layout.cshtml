@@ -39,7 +39,7 @@
     <div class="wrapper">
 
         <!-- Topbar  -->
-        <div id="content" style="padding:0px">
+        <div id="content" style="padding: 0px; background-image: url(/assets/img/cesped.jpg); background-size: cover; " >
             <!-- Sidebar  -->
             <div class="row" style="height: -webkit-fill-available;width:100%">
                 <div class="col-md-2">
@@ -58,7 +58,9 @@
                 </div>
                 <div class="col-md-9">
                     <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
-
+                        <button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
+                            pdf
+                        </button>
                         <div class="dropdown float-right" style="text-align:right">
                             <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#5cb874">
                                 Mi perfil
@@ -79,7 +81,7 @@
 
 
 
-    <img src="~/assets/img/cesped.jpg" class="img-fluid" alt="" style="height:131vh;">
+    @*<img src="~/assets/img/cesped.jpg" class="img-fluid" alt="" style="height:131vh;">*@
 
     @RenderSection("scripts", required: false)
 </body>
@@ -89,7 +91,11 @@
     @{
         var emailCuenta = Session["usuarioLogeado"];
     }
+    function prueba() {
 
+        window.open("/Api/Reportes/excel");
+
+    }
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');

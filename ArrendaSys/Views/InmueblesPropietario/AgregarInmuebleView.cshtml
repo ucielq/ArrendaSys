@@ -203,8 +203,9 @@
 <script>
     @{
         var idPropietario = Session["id"];
+        var hola = "ASD";
     }
-    var idPropietario = "@idPropietario";
+    var idPropietario = parseInt(@idPropietario);
 
     $(document).ready(function () {
         $('.select2').select2({

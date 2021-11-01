@@ -35,6 +35,8 @@ namespace ArrendaSysServicios
                     arrendatario2.numeroDocumentoArr = arrendatario.nroDocumento;
                     arrendatario2.telefonoArrendatario = arrendatario.nroTelefono;
                     arrendatario2.idCuenta = arrendatario.idCuenta;
+                    db.SaveChanges();
+                    return arrendatario2.idArrendatario;
                 }
                 else { 
                     Arrendatario arrendatario1 = new Arrendatario
@@ -47,9 +49,10 @@ namespace ArrendaSysServicios
                         idCuenta= arrendatario.idCuenta
                     };
                     db.Arrendatario.Add(arrendatario1);
+                    db.SaveChangesAsync();
+                    return arrendatario1.idArrendatario;
                 }
-                db.SaveChanges();
-                return 0;
+                
             }
         }
 

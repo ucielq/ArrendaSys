@@ -8,13 +8,13 @@
 }
 
 
-<section id="header" class="text-center" style="background-color: #dee2e6; padding-bottom:10px; padding-top:0px">
-    <h2 class="display-6">Publicaciones</h2>
+<!--<section id="header" class="text-center" style="background-color: #dee2e6; padding-bottom:10px; padding-top:0px">
+    <h2 class="display-6">Publicaciones</h2>-->
     
     @*<button type="button" class="btn btn-success" onclick="AgregarNuevoInmueble()">
         <i class="fas fa-plus"></i> Agregar nuevo inmueble
     </button>*@
-</section>
+<!--</section>-->
 
 
 <body>
@@ -23,19 +23,74 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-info">                           
+                        <div class="card-header card-header-info">
                             <p class="card-category">Filtros</p>
                         </div>
                         <div class="card-body">
-                            <div class="col-md-2">
-                                <label for="departamento">Departamento</label>
-                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamentoid" onchange=" BuscarPubli()">
-                                </select>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="departamento">Departamento</label>
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="departamento" id="departamentoid"></select>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="habitaciones">Número de habitaciones</label>
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="habitaciones" id="habitaciones">
+                                        <option value="-1">Seleccione una opción</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="banios">Baños</label>
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="banios" id="banios">
+                                        <option value="-1">Seleccione una opción</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="cochera">Cochera</label>
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="cochera" id="cochera">
+                                        <option value="-1">Seleccione una opción</option>
+                                        <option value="1">Sí</option>
+                                        <option value="2">No culiao pa que pingo queré cochera pobre</option>
+
+
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="mascota">Permite mascota</label>
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="mascota" id="masc">
+                                        <option value="-1">Seleccione una opción</option>
+                                        <option value="1">Sí</option>
+                                        <option value="2">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="patio">¿Incluye expensas?</label>
+                                    <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="exp" id="exp">
+                                        <option value="-1">Seleccione una opción</option>
+                                        <option value="1">Sí</option>
+                                        <option value="2">No</option>
+                                    </select>
+                                </div>
                             </div>
-                            
-                        </div>
+                            <div class=" row">
+                                <div class="col-md-2">
+                                    <button class='btn btn-outline-success btn-sm' onclick="BuscarPubli()">Aplicar</button>
+                                </div>
+                            </div>
+                                 
+                        </div>                       
                     </div>
-                </div>
+                </div>                
             </div>
         </div>
     </div>
@@ -75,11 +130,17 @@
     
     function BuscarPubli() {
         $("#publicaciones").empty();
-        var depto = $("#departamentoid").val();
         debugger;
+        var idDepto = $("#departamentoid").val();
+        var hab = $("#habitaciones").val();
+        var banios = $("#banios").val();
+        var coch = $("#cochera").val();
+        var masc = $("#masc").val();
+        var exp = $("#exp").val();
+        var hola = "123";
         $.ajax({
             type: 'Get',
-            url: '/Api/ABMPublicacion/TraerPublicaciones?idDepto='+depto,
+            url: '/Api/ABMPublicacion/TraerPublicaciones?idDepto=' + idDepto + '&hab=' + hab + '&banios=' + banios + '&coch=' + coch + '&masc=' + masc + '&exp=' + exp,
             success: function (result) {
                 var item = "";
                 var cont = 0;
