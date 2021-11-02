@@ -11,7 +11,18 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <p class="card-category">Mis Reseñas</p>
-                    </div>                   
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="container" id="body">
+                                        @*Aca va todo el cuerpo*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -25,3 +36,76 @@
 
 
 </body>
+@{ 
+    var usuario = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+    var id = Session["id"];
+}
+<script>
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var usuario = "@usuario";
+    var id = parseInt(@id);
+    var pag = 1;
+    (function () {
+        completarResenias();
+    })();
+    var cantidad = 0;
+    
+    function completarResenias() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/obtenerResenias?tipoCuenta=' + tipoCuenta + "&id=" + id+"&pag="+pag,
+            success: function (result) {
+                cantidad = result.cantidad;
+                $("#body").empty();
+                var item = "";
+                result.lista.forEach(function (data, index) {
+                    item = item + "<div class='row'>";
+                        item = item + "<div class='col-md-2'>";
+                            item = item + "<span>"+data.nombreAutor+"</span>";
+                            item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                        item = item + "</div>";
+                        item = item + "<div class='col-md-6'>";
+                            item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                        item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+                
+                $("#body").append(item);
+                paginas();
+            }
+        });
+    }
+    function paginas() {
+        var item = "<nav aria-label='...'>";
+        item = item + "<ul class='pagination'>";
+        var cantPag = 1;
+        var resto = cantidad % 6;
+        if (resto > 0) {
+            cantPag = cantidad / 6 + 1;
+        } else {
+            cantPag = cantidad / 6;
+        }
+        
+        for (var i = 1; i <= cantPag; i++) {
+            if (i == pag) {
+                item = item + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i +")>" + i + "</button></li>";
+            } else {
+                item = item + "<li class='page-item'><button class='page-link' id='pag" + i +"' onclick=cambiarPag("+i+")>" + i + "</button></li>";
+            }                        
+        }
+        item = item + "</ul>";
+        item = item + "</nav>";
+        $("#body").append(item);
+    }
+    function cambiarPag(num) {
+        pag = num;
+        completarResenias();
+    }
+</script>

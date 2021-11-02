@@ -287,7 +287,7 @@ namespace ArrendaSysServicios
                                     nombreInmobiliaria=inmobiliaria.nombreInmobiliaria,
                                     altaInscripcion=(DateTime)inmobiliaria.altaInscripcion,
                                     altaInscripcionStr= String.Format("{0:yyyy-MM-dd}",inmobiliaria.altaInscripcion),
-                                    cuitInmobiliaria=(int)inmobiliaria.cuitInmobiliaria,
+                                    cuitInmobiliaria=inmobiliaria.cuitInmobiliaria,
                                     telefonoInmobiliariaStr=inmobiliaria.telefonoInmobiliaria,
                                     idInmobiliaria=inmobiliaria.idInmobiliaria
 

@@ -163,12 +163,8 @@ namespace ArrendaSysServicios
                                         }).ToList();
                     object json = new { data = reseniaArAo1 };
                     return json;
-                
-
             }
-
         }
-
         public object ListarReseniasAI(int idAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
@@ -188,13 +184,55 @@ namespace ArrendaSysServicios
                                     }).ToList();
                 object json = new { data = reseniaAI1 };
                 return json;
-
             }
-
         }
+        public ViewModelReseniaAux obtenerResenias(int tipoCuenta, int id, int pag)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<ReseniaViewModel> listaFinal = new List<ReseniaViewModel>();
+                var tot = 0;
+                if (tipoCuenta == 2) //Arrendatario
+                {
+                    var lista = (from r in db.ReseñaArrendadorArrendatario
+                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                 where a.idArrendatario == id
+                                 select new ReseniaViewModel
+                                 {
+                                     descripcionResenia=r.descripcionReseñaAoAr,
+                                     fechaAltaReseña=r.fechaAltaReseñaAoAr,
+                                     puntuacionResenia=r.puntuacionReseñaAoAr,
+                                     idResenia=r.idReseñaAoAr,
+                                     idAlquiler=r.idAlquiler,
+                                     idInmueble=a.idInmueble
+                                 }).ToList();
 
-
-
+                    foreach(var re in lista)
+                    {
+                        var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
+                        if (inmu.tipoArrendador == 3) //Propietario
+                        {
+                            var prop = db.Propietario.Where(x => x.idPropietario == inmu.idArrendador).FirstOrDefault();
+                            re.nombreAutor = prop.apellidoPropietario + " " + prop.nombrePropietario;
+                        }
+                        if (inmu.tipoArrendador == 4)
+                        {
+                            var inmo = db.Inmobiliaria.Where(x => x.idInmobiliaria == inmu.idArrendador).FirstOrDefault();
+                            re.nombreAutor = inmo.nombreInmobiliaria;
+                        }
+                    }
+                    tot = lista.Count;
+                    listaFinal = lista.OrderByDescending(x=>x.fechaAltaReseña).ToList();
+                    listaFinal = listaFinal.Skip((pag-1) * 6).Take(6).ToList();
+                }
+                ViewModelReseniaAux response = new ViewModelReseniaAux
+                {
+                    cantidad = tot,
+                    lista = listaFinal
+                };
+                return response;
+            }
+        }
     }
-
 }
