@@ -271,6 +271,7 @@ namespace ArrendaSysServicios
                                 idPropietario = propietario.idPropietario
 
                             };
+
                             cuenta.propietario = propVM;
                             cuenta.tipoCuenta =3;
                             cuenta.idPropio = propietario.idPropietario;

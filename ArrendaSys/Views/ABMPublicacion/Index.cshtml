@@ -25,7 +25,7 @@
                     <div class="col-md12">
                         <div class="col-md12">
                             <br />
-                            <button type="button" class="btn btn-info btn-sm" style="float:right;" onclick="mostrarformulario()"> Agregar</button>
+                            <button type="button" class="btn btn-info btn-sm" style="float:right; margin:20px;" onclick="mostrarformulario()"> Agregar Nueva Publicación</button>
                             <br />
                         </div>
                     </div>
@@ -37,8 +37,7 @@
                                 <div id="alertfechaBaja"></div>
                                 <div id="alerttitulo"></div>
                                 <div id="alertaItem"></div>
-                                <span>Título: </span>
-                                <input type="text" class="form-control obligatoria" id="titulo" placeholder="Ingrese el título de la publicación" />
+                               
                             </div>
                         </div>
                         <div class="row" style="padding-top:6px">
@@ -56,7 +55,7 @@
                             </div>
                             <div class="col-md-2">
                                 <br />
-                                <span>Precio: </span>
+                                <span>Precio del Alquiler: </span>
                                 <br />
                                 <input type="text" class="form-control obligatoria" id="precio" placeholder="Ingrese el precio del Alquiler" />
                             </div>
@@ -70,15 +69,16 @@
                         <div class="row" style="padding-top:6px">
                             <div class="col-md-12">
                                 <br />
-                                <span>Descipción: </span>
+                                <span>Descripción: </span>
                                 <input type="text" class="form-control" id="descripcionPublicacion" placeholder="Ingrese descripción de la publicación" />
                             </div>
                         </div>
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <button type="button" class="btn btn-success" onclick="GuardarPublicacion()"><i class="fas fa-save"></i> Guardar</button>
-                                <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                                <a href="" class="btn btn-outline-success btn-sm" onclick="GuardarPublicacion()">Publicar</a>
+                                <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver">Cancelar</a>
+
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <div class="row" style="padding-top:6px">
                             <div class="col-md-12">
                                 <br />
-                                <span>Descipción: </span>
+                                <span>Descripción: </span>
                                 <input type="text" class="form-control" id="descripcionPublicacion2" placeholder="Ingrese descripción de la publicación" />
                             </div>
                         </div>
