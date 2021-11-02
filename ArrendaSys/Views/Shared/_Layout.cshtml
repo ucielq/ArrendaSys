@@ -39,7 +39,7 @@
     <div class="wrapper">
 
         <!-- Topbar  -->
-        <div id="content" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover; " >
+        <div id="content" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover; ">
             <!-- Sidebar  -->
             <div class="row" style="height: -webkit-fill-available;width:100%">
                 <div class="col-md-2">
@@ -59,8 +59,8 @@
                 <div class="col-md-9">
                     <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
                         @*<button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
-                            pdf
-                        </button>*@
+                                pdf
+                            </button>*@
                         <div class="dropdown float-right" style="text-align:right">
                             <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#2e7230">
                                 Mi perfil
@@ -92,12 +92,13 @@
 <script>
     @{
         var emailCuenta = Session["usuarioLogeado"];
+        var tipoCuenta = Session["tipoCuenta"];
+        var idCuenta = Session["idCuenta"];
+        var id = Session["id"];
     }
-    function prueba() {
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var id = parseInt(@id);
 
-        window.open("/Api/Reportes/excel");
-
-    }
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
@@ -128,13 +129,13 @@
          window.location.href = "/Perfil/AdministrarPerfil";
     }
 
-    
+
     function MisResenias() {
         window.location.href = "/Resenias/MisResenias";
     }
 
     function MisEstadisticas() {
-        window.location.href = "/Estadisticas/MisEstadisticas";
+        window.open("/Api/Reportes/excel?tipoCuenta=" + tipoCuenta + "&id=" + id);
     }
 
 </script>

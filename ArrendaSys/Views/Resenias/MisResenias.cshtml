@@ -12,12 +12,18 @@
                     <div class="card-header card-header-info">
                         <p class="card-category">Mis Reseñas</p>
                     </div>
-                    <div class="card">
+                    <div class="card" style="margin-top:0px">
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
-                                    <div class="container" id="body">
-                                        @*Aca va todo el cuerpo*@
+                                    <div class="container">
+                                        <div class="col-md-1">
+                                            <button class="btn btn-success" onclick="generarReporte()">Imprimir Reporte</button>
+                                            <br /><br />
+                                        </div>
+                                        <div class="container" id="body">
+                                            @*Aca va todo el cuerpo*@
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -43,6 +49,7 @@
     var id = Session["id"];
 }
 <script>
+
     var tipoCuenta = parseInt(@tipoCuenta);
     var usuario = "@usuario";
     var id = parseInt(@id);
@@ -83,8 +90,8 @@
         });
     }
     function paginas() {
-        var item = "<nav aria-label='...'>";
-        item = item + "<ul class='pagination'>";
+        var html = "<nav aria-label='...'>";
+        html = html + "<ul class='pagination'>";
         var cantPag = 1;
         var resto = cantidad % 6;
         if (resto > 0) {
@@ -95,17 +102,20 @@
         
         for (var i = 1; i <= cantPag; i++) {
             if (i == pag) {
-                item = item + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i +")>" + i + "</button></li>";
+                html = html + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i +")>" + i + "</button></li>";
             } else {
-                item = item + "<li class='page-item'><button class='page-link' id='pag" + i +"' onclick=cambiarPag("+i+")>" + i + "</button></li>";
+                html = html + "<li class='page-item'><button class='page-link' id='pag" + i +"' onclick=cambiarPag("+i+")>" + i + "</button></li>";
             }                        
         }
-        item = item + "</ul>";
-        item = item + "</nav>";
-        $("#body").append(item);
+        html = html + "</ul>";
+        html = html + "</nav>";
+        $("#body").append(html);
     }
     function cambiarPag(num) {
         pag = num;
         completarResenias();
+    }
+    function generarReporte() {
+        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuenta + "&id=" + id, "Reporte de Reseñas");
     }
 </script>

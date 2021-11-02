@@ -14,6 +14,8 @@ namespace ArrendaSysUtilidades
         public string autorResenia { get; set; }
         public decimal? puntuacionResenia { get; set; }
         public int? idResenia { get; set; }
+        public int? tipoArrendador { get; set; }
+        public int? idArrendador { get; set; }
     }
     public class ItemReseniaPDFVM
     {

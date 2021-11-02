@@ -18,65 +18,156 @@ namespace ArrendaSys.Controllers.Api
 {
     public class ReportesApiController : ApiController
     {
-        [System.Web.Http.Route("Api/Reportes/excel")]
-        [System.Web.Http.ActionName("excel")]
-        [System.Web.Http.HttpGet]
-        public HttpResponseMessage excel()
+        public Dictionary<string, Dictionary<int?, int>> obtenerLista(int tipoCuenta,int id)
         {
             ArrendasysEntities db = new ArrendasysEntities();
-
-
-            List<ReseniaPDFVM> lista = new List<ReseniaPDFVM>();
-            lista = (from r in db.ReseñaArrendadorArrendatario
-                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
-                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                     join p in db.Propietario on i.idArrendador equals p.idPropietario
-                     where a.idArrendatario == 14
-                     select new ReseniaPDFVM
-                     {
-                         autorResenia = p.apellidoPropietario + " " + p.nombrePropietario,
-                         fechaResenia = r.fechaAltaReseñaAoAr,
-                         descripcion = r.descripcionReseñaAoAr,
-                         puntuacionResenia = r.puntuacionReseñaAoAr,
-                         idResenia = r.idReseñaAoAr
-                     }).ToList();
-            int cont = 0;
             Dictionary<string, Dictionary<int?, int>> hash = new Dictionary<string, Dictionary<int?, int>>();
-            Dictionary<int?, int> hash2 = new Dictionary<int?, int>();
-            Dictionary<int?, int> hash3 = new Dictionary<int?, int>();
-            foreach (var item in lista)
+            if (tipoCuenta == 2) //Arrendatario
             {
-                var listaItems = db.ReseñaItemAoAr.Where(x => x.idReseñaAoAr == item.idResenia).ToList();
-                foreach (var i in listaItems)
+                var lista = (from r in db.ReseñaArrendadorArrendatario
+                         join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                         join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                         where a.idArrendatario == id
+                         select new ReseniaPDFVM
+                         {
+                             fechaResenia = r.fechaAltaReseñaAoAr,
+                             descripcion = r.descripcionReseñaAoAr,
+                             puntuacionResenia = r.puntuacionReseñaAoAr,
+                             idResenia = r.idReseñaAoAr
+                         }).ToList();
+
+
+                int cont = 0;
+                Dictionary<int?, int> hash2 = new Dictionary<int?, int>();
+                Dictionary<int?, int> hash3 = new Dictionary<int?, int>();
+                foreach (var item in lista)
                 {
-                    var nombre = db.ItemReseña.Where(x => x.idItemReseña == i.idItemReseña).FirstOrDefault().nombreItemReseña;
-                    if (hash.TryGetValue(nombre, out hash3))
+                    var listaItems = db.ReseñaItemAoAr.Where(x => x.idReseñaAoAr == item.idResenia).ToList();
+                    foreach (var i in listaItems)
                     {
-                        if(hash[nombre].TryGetValue(i.puntuacionReseñaItemAoAr, out cont))
+                        var nombre = db.ItemReseña.Where(x => x.idItemReseña == i.idItemReseña).FirstOrDefault().nombreItemReseña;
+                        if (hash.TryGetValue(nombre, out hash3))
                         {
-                            hash[nombre][i.puntuacionReseñaItemAoAr]++;
+                            if (hash[nombre].TryGetValue(i.puntuacionReseñaItemAoAr, out cont))
+                            {
+                                hash[nombre][i.puntuacionReseñaItemAoAr]++;
+                            }
+                            else
+                            {
+                                hash[nombre].Add(i.puntuacionReseñaItemAoAr, 1);
+                            }
                         }
                         else
                         {
-                            hash[nombre].Add(i.puntuacionReseñaItemAoAr, 1);
+                            Dictionary<int?, int> dic = new Dictionary<int?, int>();
+                            dic.Add(i.puntuacionReseñaItemAoAr, 1);
+                            hash.Add(nombre, dic);
+                        }
+
+                    }
+                }
+            } 
+            if (tipoCuenta == 3) //Propietario
+            {
+                var lista = (from r in db.ReseñaArrendatarioArrendador
+                         join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                         join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                         where i.tipoArrendador == 3 && i.idArrendador==id
+                         select new ReseniaPDFVM
+                         {
+                             fechaResenia = r.fechaAltaReseñaArAo,
+                             descripcion = r.descripcionReseñaArAo,
+                             puntuacionResenia = r.puntuacionReseñaArAo,
+                             idResenia = r.idReseñaArAo
+                         }).ToList();
+
+                int cont = 0;
+                Dictionary<int?, int> hash2 = new Dictionary<int?, int>();
+                Dictionary<int?, int> hash3 = new Dictionary<int?, int>();
+                foreach (var item in lista)
+                {
+                    var listaItems = db.ReseñaItemArAo.Where(x => x.idReseñaArAo == item.idResenia).ToList();
+                    foreach (var i in listaItems)
+                    {
+                        var nombre = db.ItemReseña.Where(x => x.idItemReseña == i.idItemReseña).FirstOrDefault().nombreItemReseña;
+                        if (hash.TryGetValue(nombre, out hash3))
+                        {
+                            if (hash[nombre].TryGetValue(i.puntuacionReseñaItemArAo, out cont))
+                            {
+                                hash[nombre][i.puntuacionReseñaItemArAo]++;
+                            }
+                            else
+                            {
+                                hash[nombre].Add(i.puntuacionReseñaItemArAo, 1);
+                            }
+                        }
+                        else
+                        {
+                            Dictionary<int?, int> dic = new Dictionary<int?, int>();
+                            dic.Add(i.puntuacionReseñaItemArAo, 1);
+                            hash.Add(nombre, dic);
                         }
                     }
-                    else
+                }
+            }
+            if (tipoCuenta == 4) //Inmobiliaria
+            {
+                var lista = (from r in db.ReseñaArrendadorArrendatario
+                         join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                         join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                         where i.tipoArrendador == 4 && i.idArrendador==id
+                         select new ReseniaPDFVM
+                         {
+                             fechaResenia = r.fechaAltaReseñaAoAr,
+                             descripcion = r.descripcionReseñaAoAr,
+                             puntuacionResenia = r.puntuacionReseñaAoAr,
+                             idResenia = r.idReseñaAoAr
+                         }).ToList();
+                int cont = 0;
+                Dictionary<int?, int> hash2 = new Dictionary<int?, int>();
+                Dictionary<int?, int> hash3 = new Dictionary<int?, int>();
+                foreach (var item in lista)
+                {
+                    var listaItems = db.ReseñaItemArAo.Where(x => x.idReseñaArAo == item.idResenia).ToList();
+                    foreach (var i in listaItems)
                     {
-                        Dictionary<int?, int> dic = new Dictionary<int?, int>();
-                        dic.Add(i.puntuacionReseñaItemAoAr, 1);
-                        hash.Add(nombre, dic);
+                        var nombre = db.ItemReseña.Where(x => x.idItemReseña == i.idItemReseña).FirstOrDefault().nombreItemReseña;
+                        if (hash.TryGetValue(nombre, out hash3))
+                        {
+                            if (hash[nombre].TryGetValue(i.puntuacionReseñaItemArAo, out cont))
+                            {
+                                hash[nombre][i.puntuacionReseñaItemArAo]++;
+                            }
+                            else
+                            {
+                                hash[nombre].Add(i.puntuacionReseñaItemArAo, 1);
+                            }
+                        }
+                        else
+                        {
+                            Dictionary<int?, int> dic = new Dictionary<int?, int>();
+                            dic.Add(i.puntuacionReseñaItemArAo, 1);
+                            hash.Add(nombre, dic);
+                        }
                     }
-                    
                 }
             }
             
+            return hash;
+        }
+        [System.Web.Http.Route("Api/Reportes/excel")]
+        [System.Web.Http.ActionName("excel")]
+        [System.Web.Http.HttpGet]
+        public HttpResponseMessage excel(int tipoCuenta,int id)
+        {
+
+            var hash = obtenerLista(tipoCuenta,id);
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excelPackage = new ExcelPackage();
             ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
             var aux = 1;
-
+            var cont = 0;
             foreach(var item in hash)
             {
                 worksheet.Cells[aux + 1, 1].Value = item.Key;

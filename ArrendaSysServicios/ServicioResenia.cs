@@ -68,13 +68,13 @@ namespace ArrendaSysServicios
                 foreach (var item in resenia.listaReseniaItems)
                 {
                     tot += item.puntuacionReseniaItem;
-                    ReseñaItemAoAr reseñaItemAoAr = new ReseñaItemAoAr
+                    ReseñaItemArAo reseñaItemAoAr = new ReseñaItemArAo
                     {
                         idItemReseña = item.idItemResenia,
-                        puntuacionReseñaItemAoAr = item.puntuacionReseniaItem,
-                        idReseñaAoAr = reseña.idReseñaArAo
+                        puntuacionReseñaItemArAo = item.puntuacionReseniaItem,
+                        idReseñaArAo = reseña.idReseñaArAo
                     };
-                    db.ReseñaItemAoAr.Add(reseñaItemAoAr);
+                    db.ReseñaItemArAo.Add(reseñaItemAoAr);
                     db.SaveChanges();
                 }
                 decimal prom = ((decimal)tot) / ((decimal)resenia.listaReseniaItems.Count);
@@ -225,6 +225,50 @@ namespace ArrendaSysServicios
                     tot = lista.Count;
                     listaFinal = lista.OrderByDescending(x=>x.fechaAltaReseña).ToList();
                     listaFinal = listaFinal.Skip((pag-1) * 6).Take(6).ToList();
+                }
+                if (tipoCuenta == 3) //Propietario
+                {
+                    var lista = (from r in db.ReseñaArrendatarioArrendador
+                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                 join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                 where i.tipoArrendador == 3 && i.idArrendador == id
+                                 select new ReseniaViewModel
+                                 {
+                                     descripcionResenia = r.descripcionReseñaArAo,
+                                     fechaAltaReseña = r.fechaAltaReseñaArAo,
+                                     puntuacionResenia = r.puntuacionReseñaArAo,
+                                     idResenia = r.idReseñaArAo,
+                                     idAlquiler = r.idAlquiler,
+                                     idInmueble = a.idInmueble,
+                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                 }).ToList();
+                    
+                    tot = lista.Count;
+                    listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                    listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                }
+                if (tipoCuenta == 4) //Inmobiliaria
+                {
+                    var lista = (from r in db.ReseñaArrendatarioArrendador
+                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                 join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                 where i.tipoArrendador == 4 && i.idArrendador == id
+                                 select new ReseniaViewModel
+                                 {
+                                     descripcionResenia = r.descripcionReseñaArAo,
+                                     fechaAltaReseña = r.fechaAltaReseñaArAo,
+                                     puntuacionResenia = r.puntuacionReseñaArAo,
+                                     idResenia = r.idReseñaArAo,
+                                     idAlquiler = r.idAlquiler,
+                                     idInmueble = a.idInmueble,
+                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                 }).ToList();
+
+                    tot = lista.Count;
+                    listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                    listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
                 }
                 ViewModelReseniaAux response = new ViewModelReseniaAux
                 {
