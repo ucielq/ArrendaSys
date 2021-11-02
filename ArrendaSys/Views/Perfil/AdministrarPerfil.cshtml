@@ -254,7 +254,7 @@
 
 
     function GuardarPerfil() {
-        if (ValidarDatos()) {
+       // if (ValidarDatos()) {
             if ($("#tipoCuenta").val() == 2) {
                 var arrendatario = new Object();
                 arrendatario.nombreArrendatario = $("#nombreArrendatario").val();
@@ -307,7 +307,7 @@
                     }
                 });
             }
-        }
+        //}
     }
 
     $(".obligatoria").keydown(function () {
