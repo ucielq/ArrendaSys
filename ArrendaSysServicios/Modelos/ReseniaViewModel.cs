@@ -16,5 +16,8 @@ namespace ArrendaSysServicios.Modelos
         public int? idAlquiler { get; set; }
         public List<ReseniaItemViewModel> listaReseniaItems { get; set; }
         public string descripcionResenia { get; set; }
+        public decimal? puntuacionResenia { get; set; }
+        public int? idInmueble { get; set; }
+        public string nombreAutor { get; set; }
     }
 }

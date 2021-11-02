@@ -72,5 +72,15 @@ namespace ArrendaSys.Controllers.Api
             return lista;
         }
 
+        [System.Web.Http.Route("Api/Resenia/obtenerResenias")]
+        [System.Web.Http.ActionName("obtenerResenias")]
+        [System.Web.Http.HttpGet]
+        public ViewModelReseniaAux obtenerResenias(int tipoCuenta,int id,int pag)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var lista = servicio.obtenerResenias(tipoCuenta,id,pag);
+            return lista;
+        }
+
     }
 }
