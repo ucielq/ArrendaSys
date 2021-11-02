@@ -59,8 +59,6 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/ABMPublicacion/EditarPublicacion")]
         [System.Web.Http.ActionName("EditarPublicacion")]
         [System.Web.Http.HttpPost]
-
-
         public int EditarPublicacion(ABMPublicacionViewModel publicacion)
         {
             ServicioABMPublicacion serv = new ServicioABMPublicacion();

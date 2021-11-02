@@ -35,7 +35,9 @@
                         <div class="card-body">
                             <form id="formulario">
                                 <div class="row">
+                                    <div id="alertaItem"></div>
                                     <div id="alertnombre"></div>
+                                    <div id="alertapellido"></div>
                                     <div class="col-md-2">
                                         <label for="email">Email</label>
                                         <br />
@@ -49,9 +51,9 @@
                                         <label for="tipoCuenta">Tipo de cuenta</label>
                                         <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" onchange="cambioTipoCuenta()">
                                             <option value="-1">Seleccione una opción</option>
-                                            <option value="4">Inmobiliaria</option>
-                                            <option value="3">Propietario</option>
                                             <option value="2">Arrendatario</option>
+                                            <option value="3">Propietario</option>
+                                            <option value="4">Inmobiliaria</option>
                                         </select>
                                     </div>
                                 </div>
@@ -60,27 +62,27 @@
                                         <div class="col-md-2">
                                             <label for="nombreArrendatario">Nombre</label>
                                             <br/>
-                                            <textarea class="form-control" id="nombre" name="nombreArrendatario"></textarea>
+                                            <textarea class="form-control obligatoria" id="nombre" name="nombreArrendatario"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="apellidoArrendatario">Apellido</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="apellidoArrendatario" name="apellidoArrendatario"></textarea>
+                                            <textarea class="form-control obligatoria" id="apellido" name="apellidoArrendatario"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="documento">Número de Documento</label>
+                                            <label for="documento">Nro Documento</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="documento" name="documento"></textarea>
+                                            <textarea class="form-control" id="documento" name="documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="telefono">Número de Teléfono</label>
+                                            <label for="telefono">Nro Telefono</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="telefono" name="telefono"></textarea>
+                                            <textarea class="form-control" id="telefono" name="telefono"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Fecha de Nacimiento</label>
+                                            <label>Fecha Nacimiento</label>
                                             <br />
-                                            <input type="date" id="fechaNacimiento" class="redondeado form-control obligatoria" />
+                                            <input type="date" id="fechaNacimiento" class="redondeado form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -89,25 +91,25 @@
                                         <div class="col-md-2">
                                             <label>Nombre</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="nombrePropietario" name="nombrePropietario" ></textarea>
+                                            <textarea class="form-control" id="nombrePropietario" name="nombrePropietario" ></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Apellido</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="apellidoPropietario" name="apellidoPropietario"></textarea>
+                                            <textarea class="form-control " id="apellidoPropietario" name="apellidoPropietario"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="documentoProp">Número de Documento</label>
+                                            <label for="documentoProp">Nro Documento</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="documentoPropietario" name="documentoProp"></textarea>
+                                            <textarea class="form-control " id="documentoProp" name="documentoProp"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="telefonoProp">Número de Teléfono</label>
+                                            <label for="telefonoProp">Nro Telefono</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="telefonoProp" name="telefonoProp"></textarea>
+                                            <textarea class="form-control " id="telefonoProp" name="telefonoProp"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Fecha de Nacimiento</label>
+                                            <label>Fecha Nacimiento</label>
                                             <br />
                                             <input type="date" id="fechaNacimientoProp" class="redondeado form-control obligatoria" />
                                         </div>
@@ -119,22 +121,22 @@
                                         <div class="col-md-2">
                                             <label>Razón Social</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="nombreInmo" name="nombreInmo"></textarea>
+                                            <textarea class="form-control" id="nombreInmo" name="nombreInmo"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="cuitInmo">CUIT</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="cuitInmo" name="cuitInmo"></textarea>
+                                            <textarea class="form-control" id="cuitInmo" name="cuitInmo"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="telefonoInmo">Número de Teléfono</label>
+                                            <label for="telefonoInmo">Teléfono</label>
                                             <br/>
-                                            <textarea class="form-control obligatoria" id="telefonoInmo" name="telefonoInmo"></textarea>
+                                            <textarea class="form-control" id="telefonoInmo" name="telefonoInmo"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Alta de Inscripción</label>
+                                            <label>Alta Inscripción</label>
                                             <br />
-                                            <input type="date" id="AltaInscripcionInmo" class="redondeado form-control obligatoria" />
+                                            <input type="date" id="AltaInscripcionInmo" class="redondeado form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -256,9 +258,10 @@
     function GuardarPerfil() {
         //if (ValidarDatos()) {
             if ($("#tipoCuenta").val() == 2) {
+
                 var arrendatario = new Object();
-                arrendatario.nombreArrendatario = $("#nombreArrendatario").val();
-                arrendatario.apellidoArrendatario = $("#apellidoArrendatario").val();
+                arrendatario.nombreArrendatario = $("#nombre").val();
+                arrendatario.apellidoArrendatario = $("#apellido").val();
                 arrendatario.fechaNacimiento = $("#fechaNacimiento").val();
                 arrendatario.nroDocumento = $("#documento").val();
                 arrendatario.nroTelefono = $("#telefono").val();
@@ -272,9 +275,11 @@
 
                     }
                 });
+
             }
 
             if ($("#tipoCuenta").val() == 3) {
+
                 var propietario = new Object();
                 propietario.nombrePropietario = $("#nombrePropietario").val();
                 propietario.apellidoPropietario = $("#apellidoPropietario").val();
@@ -290,6 +295,7 @@
                         window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=3&id=" + result;
                     }
                 });
+
             }
             if ($("#tipoCuenta").val() == 4) {
                 var inmobiliaria = new Object();
@@ -306,9 +312,15 @@
                         window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=4&id=" + result;
                     }
                 });
+
             }
         //}
+        
     }
+    $("#fechaNacimiento").keydown(function () {
+        $("#alertaItem").clearQueue();
+        $("#alertaItem").empty();
+    });
 
     $(".obligatoria").keydown(function () {
         var objetoAlert = $("#alert" + $(this).attr("id").toString());
@@ -327,7 +339,7 @@
                     "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
                     "<i class='material-icons'>Cerrar</i>" +
                     "</button>" +
-                    "<span>Debe llenar el campo <b>" + $(this).attr("id").toString() + "</b>.</span>" +
+                    "<span>Debe completar el campo <b>" + $(this).attr("id").toString() + "</b>.</span>" +
                     "</div>";
                 objetoAlert.clearQueue();
                 objetoAlert.empty();
@@ -338,6 +350,26 @@
         return respuesta;
     }
 
+   
+    function ValidarFecha() {
+        debugger;
+        if ($("#fechaNacimiento").val() == "") {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe completar el campo Fecha de Nacimiento.</span>" +
+                "</div>";
 
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#fechaNacimiento").focus();
+            return false;
+        }
+        return true;
+    }
 
 </script>
