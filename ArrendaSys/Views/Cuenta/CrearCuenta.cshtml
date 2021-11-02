@@ -429,6 +429,7 @@
             <div class="title">Crear Cuenta</div>
 
             <div class="input">
+                
                 <label for="email">E-mail</label>
                 <input type="email" name="email" id="email">
                 <span class="spin"></span>
@@ -446,7 +447,8 @@
                 <input type="password" name="pass1" id="pass1">
                 <span class="spin"></span>
             </div>
-            <span id="igualdad">Las contraseñas no coinciden</span>
+            <span id="igualdad">Debe confirmar la contraseña</span>
+           
             <div class="input" id="confirm">
                 <label for="codigo">Codigo confirmacion</label>
                 <input type="number" name="codigo" id="codigo">
@@ -637,6 +639,7 @@
 
     $("#crearCuenta").click(function () {
         //Valido todos los datos
+        
         validarMail();
 
     });
@@ -661,7 +664,7 @@
                 alert("El formato de correo electrónico ingresado es incorrecto")
             }
         } else {
-            alert("Las contraseñas deben coincidir")
+            //alert("Las contraseñas no coinciden")
         }
 
     }
@@ -690,5 +693,8 @@
             alert("El codigo no coincide");
         }
     });
+
+   
+
 
 </script>

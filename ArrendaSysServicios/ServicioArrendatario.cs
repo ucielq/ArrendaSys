@@ -10,7 +10,7 @@ namespace ArrendaSysServicios
 {
     public class ServicioArrendatario : IDisposable
     {
-        public int crearArrendatario(ArrendatarioViewModel arrendatario)
+        public async Task<int> crearArrendatario(ArrendatarioViewModel arrendatario)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -49,7 +49,8 @@ namespace ArrendaSysServicios
                         idCuenta= arrendatario.idCuenta
                     };
                     db.Arrendatario.Add(arrendatario1);
-                    db.SaveChangesAsync();
+
+                    await db.SaveChangesAsync();
                     return arrendatario1.idArrendatario;
                 }
                 
