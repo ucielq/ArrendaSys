@@ -60,7 +60,7 @@
                                         <div class="col-md-2">
                                             <label for="nombreArrendatario">Nombre</label>
                                             <br/>
-                                            <textarea class="form-control obligatoria" id="nombre" name="nombreArrendatario"></textarea>
+                                            <textarea class="form-control" id="nombre" name="nombreArrendatario"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="apellidoArrendatario">Apellido</label>
@@ -254,7 +254,7 @@
 
 
     function GuardarPerfil() {
-        if (ValidarDatos()) {
+        //if (ValidarDatos()) {
             if ($("#tipoCuenta").val() == 2) {
                 var arrendatario = new Object();
                 arrendatario.nombreArrendatario = $("#nombreArrendatario").val();
@@ -307,7 +307,7 @@
                     }
                 });
             }
-        }
+        //}
     }
 
     $(".obligatoria").keydown(function () {
