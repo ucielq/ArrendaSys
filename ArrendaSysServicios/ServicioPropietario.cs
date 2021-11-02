@@ -10,7 +10,7 @@ namespace ArrendaSysServicios
 {
     public class ServicioPropietario : IDisposable
     {
-        public int CrearPropietario(PropietarioViewModel propietario)
+        public async Task<int> CrearPropietario(PropietarioViewModel propietario)
         {
             ArrendasysEntities db = new ArrendasysEntities();
             var cuenta = db.Cuenta.Where(x => x.idCuenta == propietario.idCuenta).FirstOrDefault();
@@ -49,7 +49,7 @@ namespace ArrendaSysServicios
                     idCuenta = propietario.idCuenta
                 };
                 db.Propietario.Add(propietario1);
-                db.SaveChangesAsync();
+                await db.SaveChangesAsync();
                 return propietario1.idPropietario;
             }
         }

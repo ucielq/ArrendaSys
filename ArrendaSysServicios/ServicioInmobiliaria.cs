@@ -10,7 +10,7 @@ namespace ArrendaSysServicios
 {
     public class ServicioInmobiliaria :IDisposable
     {
-        public int crearInmobiliaria(InmobiliariaViewModel inmobiliaria)
+        public async Task<int> crearInmobiliaria(InmobiliariaViewModel inmobiliaria)
         {
 
             using (ArrendasysEntities db = new ArrendasysEntities())
@@ -50,7 +50,7 @@ namespace ArrendaSysServicios
                         idCuenta = inmobiliaria.idCuenta
                     };
                     db.Inmobiliaria.Add(inmo);
-                    db.SaveChangesAsync();
+                    await db.SaveChangesAsync();
                     return inmo.idInmobiliaria;
                 }
             }

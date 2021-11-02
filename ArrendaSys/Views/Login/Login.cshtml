@@ -432,8 +432,9 @@
                     Iniciar Sesión
 
                 </div>
-
+                <div id="alertaItem"style="color:red"></div>
                 <div class="input">
+
                     <label for="mail">Email</label>
                     <input type="text" name="name" id="mail">
                     <span class="spin"></span>
@@ -467,33 +468,36 @@
             function recuperarContrasenia() {
                 window.location.href = '/Login/RecuperarContrasenia';
             }
-            $(document).on('keypress', function (e) {
-                if (e.which == 13) {
-                    var mail = $("#mail").val();
-                    var password = $("#pass").val();
-                    $.ajax({
-                        type: 'Get',
-                        url: '/Api/Login/ValidarDatos?mailUsuario=' + mail + "&password=" + password,
+            
+                $(document).on('keypress', function (e) {
+                    if (e.which == 13) {
+                        var mail = $("#mail").val();
+                        var password = $("#pass").val();
+                         
+                            $.ajax({
+                                type: 'Get',
+                                url: '/Api/Login/ValidarDatos?mailUsuario=' + mail + "&password=" + password,
+                                success: function (result) {
+                                    if (result == 0) {
+                                        alert("Usuario no encontrado, intente nuevamente.")
+                                        window.location.href = '/Login/Login';
+                                    } else {
+                                        if (result == 1) {
+                                            alert("Contraseña incorrecta, intente nuevamente.");
+                                            window.location.href = '/Login/Login';
+                                        } else {
+                                            if (result == 2) {
+                                                window.location.href = '/Login/Validar?mail=' + mail + "&password=" + password;
+                                            }
+                                        }
 
-                        success: function (result) {
-                            if (result == 0) {
-                                alert("Usuario no encontrado, intente nuevamente.")
-                                window.location.href = '/Login/Login';
-                            } else {
-                                if (result == 1) {
-                                    alert("Contraseña incorrecta, intente nuevamente.");
-                                    window.location.href = '/Login/Login';
-                                } else {
-                                    if (result == 2) {
-                                        window.location.href = '/Login/Validar?mail=' + mail + "&password=" + password;
                                     }
                                 }
-
-                            }
-                        }
-                    });
-                }
-            });
+                            });
+                        
+                    }
+                });
+            
 
             $(".input input").focus(function () {
 
@@ -545,28 +549,29 @@
 
                 var mail = $("#mail").val();
                 var password = $("#pass").val();
-                $.ajax({
-                    type: 'Get',
-                    url: '/Api/Login/ValidarDatos?mailUsuario=' + mail + "&password=" + password,
+                if (ValidarEmail() && ValidarPass()) {
+                    $.ajax({
+                        type: 'Get',
+                        url: '/Api/Login/ValidarDatos?mailUsuario=' + mail + "&password=" + password,
 
-                    success: function (result) {
-                        if (result == 0) {
-                            alert("Usuario no encontrado, intente nuevamente.")
-                            window.location.href = '/Login/Login';
-                        } else {
-                            if (result == 1) {
-                                alert("Contraseña incorrecta, intente nuevamente.");
+                        success: function (result) {
+                            if (result == 0) {
+                                alert("Usuario no encontrado, intente nuevamente.")
                                 window.location.href = '/Login/Login';
                             } else {
-                                if (result == 2) {
-                                    window.location.href = '/Login/Validar?mail=' + mail + "&password=" + password;
+                                if (result == 1) {
+                                    alert("Contraseña incorrecta, intente nuevamente.");
+                                    window.location.href = '/Login/Login';
+                                } else {
+                                    if (result == 2) {
+                                        window.location.href = '/Login/Validar?mail=' + mail + "&password=" + password;
+                                    }
                                 }
+
                             }
-
                         }
-                    }
-                });
-
+                    });
+                }
             });
 
             $(".alt-2").click(function () {
@@ -638,7 +643,48 @@
 
             });
 
+            $("#mail").keydown(function () {
+                $("#alertaItem").clearQueue();
+                $("#alertaItem").empty();
+            });
+            function ValidarEmail() {
 
+                if ($("#mail").val() == "") {
+                    var alert = "";
+                    alert += "<div class='alert alert-danger'>"+                        
+                        "<span>Debe completar el campo E-mail</span>" +
+                        "</div>";
+
+                    $('#alertaItem').clearQueue();
+                    $("#alertaItem").empty();
+                    $('#alertaItem').append(alert);
+
+                    $("#mail").focus();
+                    return false;
+                }
+                return true;
+            }
+            $("#pass").keydown(function () {
+                $("#alertaItem").clearQueue();
+                $("#alertaItem").empty();
+            });
+            function ValidarPass() {
+
+                if ($("#pass").val() == "") {
+                    var alert = "";
+                    alert += "<div class='alert alert-danger'>" +
+                        "<span>Debe completar el campo Contraseña</span>" +
+                        "</div>";
+
+                    $('#alertaItem').clearQueue();
+                    $("#alertaItem").empty();
+                    $('#alertaItem').append(alert);
+
+                    $("#pass").focus();
+                    return false;
+                }
+                return true;
+            }
 
 
 

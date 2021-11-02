@@ -65,7 +65,7 @@
 
                                         <label for="numero">Número</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="numero" name="numero" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="numero" name="número" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="barrio">Barrio</label>
@@ -89,27 +89,27 @@
                                     <div class="col-md-2">
                                         <label for="cantAmbInmueble">Cantidad de Ambientes</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="cantidadambientes" name="cantAmbInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadambientes" name="cantidad de ambientes" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantHabInmueble">Cantidad de Habitaciones</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="cantidadhabitaciones" name="cantHabInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadhabitaciones" name="cantidad de habitaciones" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantBanInmueble">Cantidad de Baños</label>
 
-                                        <textarea class="form-control obligatoria" id="cantidadbaños" name="cantBanInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadbaños" name="cantidad de baños" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantMtInmueble">Cantidad de Metros Cuadrados</label>
 
-                                        <textarea class="form-control obligatoria" id="cantidadmetros" name="cantMtInmueble" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadmetros" name="cantidad de metros" style=" width:150px"></textarea>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="cantMtInmuebleInt">Cantidad de Metros Cuadrados Interior</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="cantidadmetrosinternos" name="cantMtInmuebleInt" style=" width:150px"></textarea>
+                                        <textarea class="form-control obligatoria" id="cantidadmetrosinternos" name="cantidad de metros internos" style=" width:150px"></textarea>
                                     </div>
 
                                 </div>
@@ -205,7 +205,7 @@
 <script>
     @{
         var idPropietario = Session["id"];
-        var hola = "ASD";
+        
     }
     var idPropietario = parseInt(@idPropietario);
 
@@ -281,8 +281,8 @@
     }
 
     function GuardarInmueble() {
-        if (ValidarDepto() && ValidarLocalidad()) {
-            if (ValidarInmueble()) {
+        if (ValidarDepto() && ValidarLocalidad() ) {
+            if (ValidarInmueble() && ValidarChecks()) {
                 var inmueble = new Object();
                 inmueble.cantAmbientes = $("#cantidadambientes").val();
                 inmueble.cantHabitaciones = $("#cantidadhabitaciones").val();
@@ -452,7 +452,7 @@
                     "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
                     "<i class='material-icons'>Cerrar</i>" +
                     "</button>" +
-                    "<span>Debe llenar el campo <b>" + $(this).attr("id").toString()+"</b>.</span>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString()+"</b>.</span>" +
                     "</div>";
                 objetoAlert.clearQueue();
                 objetoAlert.empty();
@@ -472,6 +472,73 @@
         $("#alertaItem").clearQueue();
         $("#alertaItem").empty();
     });
+    $("#expensa").keydown(function () {
+        $("#alertaItem").clearQueue();
+        $("#alertaItem").empty();
+    });
+    $("#mascota").keydown(function () {
+        $("#alertaItem").clearQueue();
+        $("#alertaItem").empty();
+    });
+    $("#cochera").keydown(function () {
+        $("#alertaItem").clearQueue();
+        $("#alertaItem").empty();
+    });
+    function ValidarChecks() {
+
+       
+        
+        if ($("#mascota").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe especificar si el inmueble permite mascotas</span>" +
+                "</div>";
+
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#mascota").focus();
+            return false;
+        }
+        if ($("#expensa").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe especificar si el inmueble contiene expensas</span>" +
+                "</div>";
+
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#expensa").focus();
+            return false;
+        }
+        if ($("#cochera").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe especificar si el inmueble contiene cochera</span>" +
+                "</div>";
+
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#cochera").focus();
+            return false;
+        }
+        return true;
+    }
+
     function ValidarDepto() {
 
         if ($("#departamentoid").val() == -1) {

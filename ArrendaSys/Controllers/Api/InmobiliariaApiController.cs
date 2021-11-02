@@ -7,6 +7,7 @@ using ArrendaSysServicios;
 using ArrendaSysModelos;
 using ArrendaSysServicios.Modelos;
 using System.Web.Http;
+using System.Threading.Tasks;
 
 namespace ArrendaSys.Controllers.Api
 {
@@ -15,10 +16,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Inmobiliaria/CrearInmobiliaria")]
         [System.Web.Http.ActionName("CrearInmobiliaria")]
         [System.Web.Http.HttpPost]
-        public int CrearInmobiliaria(InmobiliariaViewModel inmobiliaria)
+        public async Task<int> CrearInmobiliaria(InmobiliariaViewModel inmobiliaria)
         {
             ServicioInmobiliaria serv = new ServicioInmobiliaria();
-            return serv.crearInmobiliaria(inmobiliaria);
+            return await serv.crearInmobiliaria(inmobiliaria);
         }
 
     }

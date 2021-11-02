@@ -2,15 +2,19 @@
     .select2 {
         width: 100%;
     }
+
     .arrendatario {
-        display:none;
+        display: none;
     }
+
     .propietario {
         display: none;
     }
-    .inmobiliaria{
-        display:none;
+
+    .inmobiliaria {
+        display: none;
     }
+
     .redondeado {
         border-radius: 4px;
         border-color: lightgray;
@@ -19,8 +23,6 @@
         font-size: 13px;
         padding: 2px;
     }
-
-
 </style>
 <body>
     <div class="content" style="padding-left:10px">
@@ -35,17 +37,32 @@
                         <div class="card-body">
                             <form id="formulario">
                                 <div class="row">
-                                    <div id="alertaItem"></div>
-                                    <div id="alertnombre"></div>
-                                    <div id="alertapellido"></div>
+                                    <div id="alertfechaNacimiento" name="Fecha de Nacimiento"></div>
+                                    <div id="alertnombre" name="Nombre"></div>
+                                    <div id="alertapellido" name="Apellido"></div>
+                                    <div id="alertdocumento" name="documento"></div>
+                                    <div id="alerttelefono" name="telefono"></div>
+                                    <div id="alertnombrePropietario" name="nombre"></div>
+                                    <div id="alertapellidoPropietario" name="apellido"></div>
+                                    <div id="alertdocumentoProp" name="documento"></div>
+                                    <div id="alerttelefonoProp" name="telefono"></div>
+                                    <div id="alertfechaNacimientoProp" name="fecha de nacimiento"></div>
+
+                                    <div id="alertnombreInmo" name="nombre"></div>
+                                    <div id="alertapellidoInmo" name="apellido"></div>
+                                    <div id="alertcuitInmo" name="cuit"></div>
+                                    <div id="alerttelefonoInmo" name="telefono"></div>
+                                    <div id="alertAltaInscripcionInmo" name="fecha de inscripción"></div>
+
+
                                     <div class="col-md-2">
                                         <label for="email">Email</label>
                                         <br />
-                                        <textarea class="form-control obligatoria" id="email" name="email"></textarea>
+                                        <textarea class="form-control" id="email" name="email"></textarea>
                                     </div>
                                 </div>
                                 <hr />
-                                <br/>
+                                <br />
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label for="tipoCuenta">Tipo de cuenta</label>
@@ -60,29 +77,29 @@
                                 <div id="arrendatario" class="arrendatario">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label for="nombreArrendatario">Nombre</label>
-                                            <br/>
-                                            <textarea class="form-control obligatoria" id="nombre" name="nombreArrendatario"></textarea>
+                                            <label>Nombre</label>
+                                            <br />
+                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="apellidoArrendatario">Apellido</label>
+                                            <label>Apellido</label>
                                             <br />
-                                            <textarea class="form-control obligatoria" id="apellido" name="apellidoArrendatario"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="apellido" name="apellido"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="documento">Nro Documento</label>
                                             <br />
-                                            <textarea class="form-control" id="documento" name="documento"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="documento" name="Número de documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefono">Nro Telefono</label>
                                             <br />
-                                            <textarea class="form-control" id="telefono" name="telefono"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="telefono" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Fecha Nacimiento</label>
                                             <br />
-                                            <input type="date" id="fechaNacimiento" class="redondeado form-control" />
+                                            <input type="date" id="fechaNacimiento" class="redondeado form-control obligatoriaArr" name="fecha de nacimiento" />
                                         </div>
                                     </div>
                                 </div>
@@ -91,27 +108,27 @@
                                         <div class="col-md-2">
                                             <label>Nombre</label>
                                             <br />
-                                            <textarea class="form-control" id="nombrePropietario" name="nombrePropietario" ></textarea>
+                                            <textarea class="form-control obligatoriaProp" id="nombrePropietario" name="nombre"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Apellido</label>
                                             <br />
-                                            <textarea class="form-control " id="apellidoPropietario" name="apellidoPropietario"></textarea>
+                                            <textarea class="form-control obligatoriaProp" id="apellidoPropietario" name="apellido"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="documentoProp">Nro Documento</label>
                                             <br />
-                                            <textarea class="form-control " id="documentoProp" name="documentoProp"></textarea>
+                                            <textarea class="form-control obligatoriaProp " id="documentoProp" name="Número de Documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefonoProp">Nro Telefono</label>
                                             <br />
-                                            <textarea class="form-control " id="telefonoProp" name="telefonoProp"></textarea>
+                                            <textarea class="form-control obligatoriaProp" id="telefonoProp" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Fecha Nacimiento</label>
                                             <br />
-                                            <input type="date" id="fechaNacimientoProp" class="redondeado form-control obligatoria" />
+                                            <input type="date" id="fechaNacimientoProp" class="redondeado form-control obligatoriaProp" name="fecha de nacimiento" />
                                         </div>
 
                                     </div>
@@ -121,22 +138,22 @@
                                         <div class="col-md-2">
                                             <label>Razón Social</label>
                                             <br />
-                                            <textarea class="form-control" id="nombreInmo" name="nombreInmo"></textarea>
+                                            <textarea class="form-control obligatoriaInmo" id="nombreInmo" name="Razón Social"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="cuitInmo">CUIT</label>
                                             <br />
-                                            <textarea class="form-control" id="cuitInmo" name="cuitInmo"></textarea>
+                                            <textarea class="form-control obligatoriaInmo" id="cuitInmo" name="Número de CUIT"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefonoInmo">Teléfono</label>
-                                            <br/>
-                                            <textarea class="form-control" id="telefonoInmo" name="telefonoInmo"></textarea>
+                                            <br />
+                                            <textarea class="form-control obligatoriaInmo" id="telefonoInmo" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label>Alta Inscripción</label>
                                             <br />
-                                            <input type="date" id="AltaInscripcionInmo" class="redondeado form-control" />
+                                            <input type="date" id="AltaInscripcionInmo" class="redondeado form-control obligatoriaInmo" name="Fecha alta inscripción" />
                                         </div>
                                     </div>
                                 </div>
@@ -202,8 +219,8 @@
         html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
-        $("#nombreArrendatario").text(cuentaVM.arrendatario.nombreArrendatario);
-        $("#apellidoArrendatario").text(cuentaVM.arrendatario.apellidoArrendatario);
+        $("#nombre").text(cuentaVM.arrendatario.nombreArrendatario);
+        $("#apellido").text(cuentaVM.arrendatario.apellidoArrendatario);
         $("#documento").text(cuentaVM.arrendatario.nroDocumento);
         $("#telefono").text(cuentaVM.arrendatario.nroTelefono);
         $("#fechaNacimiento").val(cuentaVM.arrendatario.fechaNacimientoStr);
@@ -256,9 +273,9 @@
 
 
     function GuardarPerfil() {
-        //if (ValidarDatos()) {
-            if ($("#tipoCuenta").val() == 2) {
 
+        if ($("#tipoCuenta").val() == 2) {
+            if (ValidarDatos("obligatoriaArr")) {
                 var arrendatario = new Object();
                 arrendatario.nombreArrendatario = $("#nombre").val();
                 arrendatario.apellidoArrendatario = $("#apellido").val();
@@ -277,9 +294,10 @@
                 });
 
             }
+        }
 
-            if ($("#tipoCuenta").val() == 3) {
-
+        if ($("#tipoCuenta").val() == 3) {
+            if (ValidarDatos("obligatoriaProp")) {
                 var propietario = new Object();
                 propietario.nombrePropietario = $("#nombrePropietario").val();
                 propietario.apellidoPropietario = $("#apellidoPropietario").val();
@@ -297,10 +315,13 @@
                 });
 
             }
-            if ($("#tipoCuenta").val() == 4) {
+        }
+        if ($("#tipoCuenta").val() == 4) {
+            if (ValidarDatos("obligatoriaInmo")) {
                 var inmobiliaria = new Object();
                 inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
-                inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
+                debugger;
+                inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();              
                 inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
                 inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
                 inmobiliaria.idCuenta = idCuenta;
@@ -314,23 +335,31 @@
                 });
 
             }
-        //}
-        
-    }
-    $("#fechaNacimiento").keydown(function () {
-        $("#alertaItem").clearQueue();
-        $("#alertaItem").empty();
-    });
+        }
 
-    $(".obligatoria").keydown(function () {
+
+    }
+
+
+    $(".obligatoriaArr").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    $(".obligatoriaProp").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    $(".obligatoriaInmo").keydown(function () {
         var objetoAlert = $("#alert" + $(this).attr("id").toString());
         objetoAlert.clearQueue();
         objetoAlert.empty();
     });
 
-    function ValidarDatos() {
+    function ValidarDatos(clase) {
         var respuesta = true;
-        $(".obligatoria").each(function (index, result) {
+        $("."+clase).each(function (index, result) {
             var alert = "";
             var objeto = $("#" + $(this).attr("id").toString());
             var objetoAlert = $("#alert" + $(this).attr("id").toString());
@@ -339,7 +368,7 @@
                     "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
                     "<i class='material-icons'>Cerrar</i>" +
                     "</button>" +
-                    "<span>Debe completar el campo <b>" + $(this).attr("id").toString() + "</b>.</span>" +
+                    "<span>Debe completar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
                     "</div>";
                 objetoAlert.clearQueue();
                 objetoAlert.empty();
@@ -350,26 +379,29 @@
         return respuesta;
     }
 
-   
-    function ValidarFecha() {
-        debugger;
-        if ($("#fechaNacimiento").val() == "") {
-            var alert = "";
-            alert += "<div class='alert alert-danger'>" +
-                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
-                "<i class='material-icons'>Cerrar</i>" +
-                "</button>" +
-                "<span>Debe completar el campo Fecha de Nacimiento.</span>" +
-                "</div>";
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setselectionRange(this.oldSelectionstart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
 
-            $('#alertaItem').clearQueue();
-            $("#alertaItem").empty();
-            $('#alertaItem').append(alert);
+    //$("#cuitInmo").inputFilter(function (value) {
+    //    return /\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]/.test(value);
+    //});
 
-            $("#fechaNacimiento").focus();
-            return false;
-        }
-        return true;
-    }
+
 
 </script>
+
+
