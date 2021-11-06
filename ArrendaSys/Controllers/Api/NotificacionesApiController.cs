@@ -44,6 +44,17 @@ namespace ArrendaSys.Controllers.Api
 
         }
 
+        [System.Web.Http.Route("Api/Notificaciones/indicadorNotificacion")]
+        [System.Web.Http.ActionName("indicadorNotificacion")]
+        [System.Web.Http.HttpGet]
+        public int indicadorNotificacion(int idCuenta)
+        {
+            ServicioNotificaciones servicio = new ServicioNotificaciones();
+            var indicador = servicio.indicadorNotificacion(idCuenta);
+
+            return indicador;
+        }
+
 
 
     }

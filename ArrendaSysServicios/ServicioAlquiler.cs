@@ -360,6 +360,22 @@ namespace ArrendaSysServicios
             return inmuebles;
         }
 
+        public int verificarDNI(int DniArrendatario)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                ArrendatarioViewModel arrendatario = ((ArrendatarioViewModel)(from a in db.Arrendatario
+                                 where a.numeroDocumentoArr == DniArrendatario
+                                 select new ArrendatarioViewModel
+                                 {
+                                     idArrendatario = a.idArrendatario
+
+                                 }));
+                
+                return arrendatario.idArrendatario;
+            }
+
+        }
     }
 }
 

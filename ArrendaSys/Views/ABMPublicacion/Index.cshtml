@@ -286,7 +286,7 @@
     }
 
     function EditarPublicacion(btn) {
-
+        $("#formulario").hide();
         $("#formulario2").show();
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.descripcionPublicacion);
@@ -346,8 +346,7 @@
 
     function mostrarformulario() {
         $("#formulario").show();
-
-
+        $("#formulario2").hide();
 
     }
 

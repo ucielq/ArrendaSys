@@ -59,15 +59,15 @@
                                 <br />
                                 <span>Arrendatario: </span>
                                 <br />
-                                <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
+                                <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el DNI del Arrendatario" />
                             </div>
 
                             <div class="col-md-2">
                                 <br />
                                 <span>Inmueble: </span>
-                                <br />                               
+                                <br />
                                 <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="col-md-12">
@@ -78,7 +78,48 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="col-md-12" id="formulario2" style="display:none">
 
+                        <div class="row" style="padding-top:6px">
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Alta: </span>
+                                <br />
+                                <input type="date" class="form-control" id="fechaAltaAlquiler2" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Baja: </span>
+                                <br />
+                                <input type="date" class="form-control" id="fechaBajaAlquiler2" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Arrendatario: </span>
+                                <br />
+                                <input input readonly type="text" class="form-control" id="idArrendatario2" placeholder="ingrese el DNI del Arrendatario" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Inmueble: </span>
+                                <br />
+                                <input input readonly type="text" class="form-control" id="idInmueble2"  />
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-success" onclick="EditarAlquiler1()"><i class="fas fa-save"></i> Editar</button>
+                                <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="container">
@@ -118,9 +159,9 @@
 <script>
     @{
         var idPropietario = Session["id"];
+
     }
     var idPropietario = "@idPropietario";
-
     $(document).ready(function () {
         $('.select2').select2({
             allowClear: false,
@@ -220,7 +261,7 @@
                                return botones
 
                            }
-                           
+
                        } else {
                            var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
                            return botones
@@ -260,19 +301,41 @@
     $("#btnvolver").click(function () {
         $("#formulario").hide();
     });
+    $("#btnvolver2").click(function () {
+        $("#formulario2").hide();
+    });
+
     function mostrarformulario() {
         $("#formulario").show();
+        $("#formulario2").hide();
     }
 
+    function EditarAlquiler(btn) {
+        $("#formulario").hide();
+        $("#formulario2").show();
+        var id = table.row($(btn).parents('tr')).data();
+        var fechaAltaStr = (id.fechaAltaAlquiler).toString().split('T')[0];
+        var fechaBajaStr = (id.fechaBajaAlquiler).toString().split('T')[0];
+        $("#fechaAltaAlquiler2").val(fechaAltaStr);
+        $("#fechaBajaAlquiler2").val(fechaBajaStr);
+        $("#idArrendatario2").val(id.idInmueble);
+        $("#idInmueble").change();
 
+    }
+    function EditarAlquiler1() {
+
+
+
+    }
 
     function GuardarAlquiler() {
         var alquiler = new Object();
         alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 
-
-        alquiler.idArrendatario = $("#idArrendatario").val();
+        var DniArrendatario = $("#idArrendatario").val();
+        var idArrendatario = verificarDni(DniArrendatario);
+        alquiler.idArrendatario = idArrendatario;
 
 
         alquiler.idInmueble = $("#idInmueble").val();
@@ -343,6 +406,22 @@
 
                     }
                 });
+            }
+        });
+    }
+
+    function verificarDni(DniArrendatario) {
+
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Alquiler/verificarDNI?DniArrendatario=' + DniArrendatario,
+            success: function (result) {
+                if (result != 0 || result != null) {
+                    return result;
+                } else {
+                    console.log("no existe el arrendatario")
+                }
+
             }
         });
     }
