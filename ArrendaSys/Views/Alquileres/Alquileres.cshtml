@@ -59,15 +59,15 @@
                                 <br />
                                 <span>Arrendatario: </span>
                                 <br />
-                                <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el Arrendatario" />
+                                <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el DNI del Arrendatario" />
                             </div>
 
                             <div class="col-md-2">
                                 <br />
                                 <span>Inmueble: </span>
-                                <br />                               
+                                <br />
                                 <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
-                            </div>                            
+                            </div>
                         </div>
 
                         <div class="col-md-12">
@@ -78,7 +78,48 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="col-md-12" id="formulario2" style="display:none">
 
+                        <div class="row" style="padding-top:6px">
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Alta: </span>
+                                <br />
+                                <input type="date" class="form-control" id="fechaAltaAlquiler2" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Baja: </span>
+                                <br />
+                                <input type="date" class="form-control" id="fechaBajaAlquiler2" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Arrendatario: </span>
+                                <br />
+                                <input type="text" class="form-control" id="idArrendatario2" placeholder="ingrese el DNI del Arrendatario" />
+                            </div>
+
+                            <div class="col-md-2">
+                                <br />
+                                <span>Inmueble: </span>
+                                <br />
+                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-success" onclick="EditarAlquiler()"><i class="fas fa-save"></i> Editar</button>
+                                <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="container">
@@ -260,11 +301,33 @@
     $("#btnvolver").click(function () {
         $("#formulario").hide();
     });
+    $("#btnvolver2").click(function () {
+        $("#formulario2").hide();
+    });
     function mostrarformulario() {
         $("#formulario").show();
+        $("#formulario2").hide();
     }
 
+    function EditarAlquiler(btn) {
+        $("#formulario").hide();
+        $("#formulario2").show();
+        /*var id = table.row($(btn).parents('tr')).data();*/
+        //console.log(id.descripcionPublicacion);
+        //var fechaAltaStr = (id.fechaAltaAlquiler).toString().split('T')[0];
+        //var fechaBajaStr = (id.fechaBajaAlquiler).toString().split('T')[0];
+        //$("#descripcionPublicacion2").val(id.descripcionPublicacion);
+        //$("#fechaAlta2").val(fechaAltaStr);
+        //$("#fechaBaja2").val(fechaBajaStr);
+        //$("#precio2").val(id.precioAlquiler);
+        //$("#titulo2").val(id.tituloPublicacion);
+        //$("#idInmueble2").val(id.idInmueble);
+        //$("#idPublicacion2").val(id.idPublicacion);
+        //$("#idInmueble2").change();
 
+
+
+    }
 
     function GuardarAlquiler() {
         var alquiler = new Object();

@@ -490,7 +490,7 @@
 
     function caracteresCorreoValido(email) {
         var caract = new RegExp(/^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-        debugger;
+ /*       debugger;*/
         if (!caract.test(email)) {
             $("#xmail").show();
 
@@ -519,7 +519,7 @@
 
     function validarContraseña(pass) {
         var caract = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/);
-        debugger;
+/*        debugger;*/
         if (caract.test(pass)) {
             $("#xpass").hide();
             return true;
