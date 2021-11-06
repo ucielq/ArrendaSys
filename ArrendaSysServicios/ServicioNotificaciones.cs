@@ -70,6 +70,23 @@ namespace ArrendaSysServicios
             } 
         }
 
+        public int indicadorNotificacion(int idCuenta)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var indicador = (from n in db.Notificacion
+                                 where n.idCuenta == idCuenta && n.leido == false
+                                 select new NotificacionesViewModel
+                                 {
+                                     idNotificacion = n.idNotificacion
+
+                                 });
+                var count = indicador.Count();
+                return count;
+            }
+  
+        }
+
 
 
     }
