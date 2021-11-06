@@ -159,9 +159,9 @@
 <script>
     @{
         var idPropietario = Session["id"];
+
     }
     var idPropietario = "@idPropietario";
-
     $(document).ready(function () {
         $('.select2').select2({
             allowClear: false,
@@ -261,7 +261,7 @@
                                return botones
 
                            }
-                           
+
                        } else {
                            var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
                            return botones
@@ -304,6 +304,7 @@
     $("#btnvolver2").click(function () {
         $("#formulario2").hide();
     });
+
     function mostrarformulario() {
         $("#formulario").show();
         $("#formulario2").hide();
@@ -409,7 +410,7 @@
         });
     }
 
-    function verificarDni(int DniArrendatario) {
+    function verificarDni(DniArrendatario) {
 
         $.ajax({
             type: 'Get',
@@ -420,9 +421,9 @@
                 } else {
                     console.log("no existe el arrendatario")
                 }
-                
+
             }
         });
-    };
+    }
 
 </script>
