@@ -219,6 +219,7 @@
         html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
+        $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombre").text(cuentaVM.arrendatario.nombreArrendatario);
         $("#apellido").text(cuentaVM.arrendatario.apellidoArrendatario);
         $("#documento").text(cuentaVM.arrendatario.nroDocumento);
@@ -233,6 +234,7 @@
         html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
+        $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombrePropietario").text(cuentaVM.propietario.nombrePropietario);
         $("#apellidoPropietario").text(cuentaVM.propietario.apellidoPropietario);
         $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
@@ -247,6 +249,7 @@
         html = html + '<option value="4" selected>Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
+        $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombreInmo").text(cuentaVM.inmobiliaria.nombreInmobiliaria);
         $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
         $("#telefonoInmo").text(cuentaVM.inmobiliaria.telefonoInmobiliariaStr);
