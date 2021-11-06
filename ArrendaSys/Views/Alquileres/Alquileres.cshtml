@@ -101,21 +101,21 @@
                                 <br />
                                 <span>Arrendatario: </span>
                                 <br />
-                                <input type="text" class="form-control" id="idArrendatario2" placeholder="ingrese el DNI del Arrendatario" />
+                                <input input readonly type="text" class="form-control" id="idArrendatario2" placeholder="ingrese el DNI del Arrendatario" />
                             </div>
 
                             <div class="col-md-2">
                                 <br />
                                 <span>Inmueble: </span>
                                 <br />
-                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
+                                <input input readonly type="text" class="form-control" id="idInmueble2"  />
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <button type="button" class="btn btn-success" onclick="EditarAlquiler()"><i class="fas fa-save"></i> Editar</button>
+                                <button type="button" class="btn btn-success" onclick="EditarAlquiler1()"><i class="fas fa-save"></i> Editar</button>
                                 <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
                             </div>
                         </div>
@@ -312,18 +312,16 @@
     function EditarAlquiler(btn) {
         $("#formulario").hide();
         $("#formulario2").show();
-        /*var id = table.row($(btn).parents('tr')).data();*/
-        //console.log(id.descripcionPublicacion);
-        //var fechaAltaStr = (id.fechaAltaAlquiler).toString().split('T')[0];
-        //var fechaBajaStr = (id.fechaBajaAlquiler).toString().split('T')[0];
-        //$("#descripcionPublicacion2").val(id.descripcionPublicacion);
-        //$("#fechaAlta2").val(fechaAltaStr);
-        //$("#fechaBaja2").val(fechaBajaStr);
-        //$("#precio2").val(id.precioAlquiler);
-        //$("#titulo2").val(id.tituloPublicacion);
-        //$("#idInmueble2").val(id.idInmueble);
-        //$("#idPublicacion2").val(id.idPublicacion);
-        //$("#idInmueble2").change();
+        var id = table.row($(btn).parents('tr')).data();
+        var fechaAltaStr = (id.fechaAltaAlquiler).toString().split('T')[0];
+        var fechaBajaStr = (id.fechaBajaAlquiler).toString().split('T')[0];
+        $("#fechaAltaAlquiler2").val(fechaAltaStr);
+        $("#fechaBajaAlquiler2").val(fechaBajaStr);
+        $("#idArrendatario2").val(id.idInmueble);
+        $("#idInmueble").change();
+
+    }
+    function EditarAlquiler1() {
 
 
 
