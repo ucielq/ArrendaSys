@@ -274,6 +274,7 @@
     <Compile Include="Controllers\Api\ReseniaApiController.cs" />
     <Compile Include="Controllers\Api\RolApiController.cs" />
     <Compile Include="Controllers\ConfiguracionesController.cs" />
+    <Compile Include="Controllers\ConsultaController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
     <Compile Include="Controllers\CuentaController.cs" />
     <Compile Include="Controllers\HacerReseñadePropietarioController.cs" />
@@ -1048,6 +1049,7 @@
     <Folder Include="bin\es\" />
     <Folder Include="Views\ABMPublicacionApi\" />
     <Folder Include="Views\ArchivoApi\" />
+    <Folder Include="Views\Consulta\" />
     <Folder Include="Views\DepartamentoApi\" />
     <Folder Include="Views\Departamento\" />
     <Folder Include="Views\DireccionApi\" />

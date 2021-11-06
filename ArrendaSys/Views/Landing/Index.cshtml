@@ -5,7 +5,8 @@
 
 <script src="@RouteJs.RouteJsHandler.HandlerUrl"></script>
 <!DOCTYPE html>
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -15,7 +16,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - ArrendaSys</title>
-    
+
 </head>
 <body>
     <!-- Bidvertiser2062987 -->
@@ -607,7 +608,7 @@
                     </div>
 
                     <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form action="@Url.Action("enviarMail","Consulta")" class="php-email-form" method="post">
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="name">Nombre</label>
@@ -624,7 +625,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label for="name">Mensaje</label>
-                                <textarea class="form-control" name="message" rows="10" required></textarea>
+                                <textarea class="form-control" name="message" rows="10" required id="body"></textarea>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
@@ -670,5 +671,18 @@
     }
     function Creacion() {
         window.location.href = '/Cuenta/CrearCuenta';
+    }
+    function enviarMail(btn) {
+        $.ajax({
+            url: "/Api/Consulta/enviarMail?subject=" + $("#subject").val() + "&email=" + $("#email").val() + "&body=" + $("#body").val()+"&name="+$("#name").val(),
+            type: "Post",
+            success: function (response) {
+                $(".sent-message").show();
+                setTimeout(() => {
+                    $(".sent-message").hide();
+                }, 4000);
+            }
+        })
+        console.log(btn);
     }
 </script>
