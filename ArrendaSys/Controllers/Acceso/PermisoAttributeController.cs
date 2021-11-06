@@ -64,7 +64,7 @@ namespace ArrendaSys.Controllers.Acceso
                     filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new
                     {
                         controller = "Login",
-                        action = "PermisoDenegado"
+                        action = "ModuloDenegado"
                     }));
                 }
             }

@@ -38,7 +38,7 @@ namespace ArrendaSys.Controllers
                     return RedirectToAction("LoginManual", "Login");
                 }
                 var resp = servicio.ObtenerLoginUsuario(mail, password);
-                if (resp != "DatosIncorrectos#Login" && resp != "PermisoDenegado#Login")
+                if (resp != "DatosIncorrectos#Login")
                 {
                     var user = servicio.ObtenerDatosUsuarioLogueado(mail);
                     var usuario = servicio.ObtenerDatosCuenta(user.idCuenta);
