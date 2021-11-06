@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "VerInmuebleView";
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Alquileres</title>
+</head>
+<style>
+    .select2 {
+        width: 100%;
+    }
+
+    
+    h1,
+    h1 {
+        margin-top: 150px
+    }
+
+    p {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 1.7em;
+        color: #212529;
+    }
+
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <div class="float-left">
+                            <div class="titulo">Inmueble</div>
+                        </div>
+
+                    </div>
+                    <section id="gallery">
+                        <div class="container" id="inmuebles" style="margin-left: 75px">
+                            @*Cuerpo de la pagina*@
+                        </div>
+
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/select2.min.js"></script>
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
+@{
+    var idCuenta = Session["idCuenta"];
+    var idPropietario = Session["id"];
+}
+
+<script>
+
+    var idCuenta = "@idCuenta";
+    var idPropietario = parseInt("@idPropietario");
+    var idInmueble;
+    function GetUrlId() {
+        var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
+        return hash;
+    }
+   
+    idInmueble = GetUrlVars()["id"];
+
+    
+    (function () {
+        $("#inmuebles").empty();
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Inmueble/VerInmueble?idInmueble=' + idInmueble,
+            success: function (inmueble) {
+                var item = "";
+                var cont = 0;
+                item = item + "<div class='row' style='border-top-width:50px; padding-top:50px; padding-bottom:50px;'>";                                  
+                    cont++;
+                    item = item + "<div class='col-md-6'>";
+                    //item = item + "<div class='cardV3'>";
+                    item = item + "<div id='carouselexamplecontrols"+cont.toString()+"' class='carousel slide' data-ride='carousel'>";
+                    item = item + "<div class='carousel-inner'>";
+                    //Agrego imagenes al carousel
+                    var cont2 = 1;
+
+                    $.each(inmueble.listaMultimedia, function (i, archivo) {
+                        
+                        var ruta = archivo.url.split('\\')[archivo.url.split('\\').length - 1];
+                        var activo = "";
+                        if (cont2 == 1) {
+                            var activo = "active";
+                        }
+                        item = item + "<div class='carousel-item " + activo + "'><img src='..\\TempFolder\\" + ruta + "' alt='' class='card-img-top' height='500px' width='500px'></div>";
+                        cont2++;
+                    })
+                    //Boton anterior imagen
+                    item = item + "<a class='carousel-control-prev' href='#carouselexamplecontrols" + cont + "' role='button' data-slide='prev'>";
+                    item = item + "<span class='carousel-control-prev-icon' aria-hidden='true'></span>";
+                    item = item + "<span class='sr-only'>Previous</span></a>";
+                    //Boton prox imagen
+                    item = item + "<a class='carousel-control-next' href='#carouselexamplecontrols" + cont + "' role='button' data-slide='next'>";
+                    item = item + "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
+                    item = item + "<span class='sr-only'>Next</span></a>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+
+                    item = item + "<div class='col-md-6'>";
+                     item = item + "<p>" + "Dirección: " + "</p>";
+                item = item + "<p>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + "-" + inmueble.direccion.localidad.nombreLocalidad + " - " + inmueble.direccion.localidad.departamento.nombreDepartamento +  "</p>";
+                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + " Cantidad de metros cuadrados:  " + inmueble.mtsCuadrados + "</p>";
+                    item = item + "<p><i class='fas fa-home'></i>" + " Cantidad de metros cuadrados internos: " + inmueble.mtsCuadradosInt + "</p>";
+                    item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + inmueble.cantHabitaciones + "</p>";
+                    item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de baños: " + inmueble.cantBanos + "</p>";
+                    if (inmueble.cochera) {
+                    item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "Tiene Cochera" + "</p>";
+                    } else {
+                        item = item + "<p><i class='fas fa-warehouse'></i>" + "  "+ "No tiene Cochera" + "</p>";
+                    }
+                    
+                    item = item + "</div>";
+               
+                    
+                item = item + "</div>";
+                item = item + "<button class='btn btn-outline-danger btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
+
+               
+               
+                    item = item + "</div>";
+                    $("#inmuebles").append(item);
+            }
+        });
+    })()
+
+
+    
+
+    function Volver() {
+        location.href ='javascript: history.go(-1)';
+    }
+
+
+</script>
+
