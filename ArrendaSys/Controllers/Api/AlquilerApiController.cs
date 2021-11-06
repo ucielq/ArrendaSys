@@ -84,6 +84,14 @@ namespace ArrendaSys.Controllers.Api
 
 
         }
+        [System.Web.Http.Route("Api/Alquiler/EditarAlquiler")]
+        [System.Web.Http.ActionName("EditarAlquiler")]
+        [System.Web.Http.HttpPost]
+        public void EditarAlquiler(AlquileresViewModel alquiler)
+        {
+            ServicioAlquiler serv = new ServicioAlquiler();
+           serv.EditarAlquiler(alquiler);
+        }
 
 
     }
