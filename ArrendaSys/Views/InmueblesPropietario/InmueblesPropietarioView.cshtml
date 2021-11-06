@@ -52,16 +52,16 @@
         $("#inmuebles").empty();
         $.ajax({
             type: 'Get',
-            url: '/Api/Inmueble/ObtenerInmueblesPropietario?idPropietario='+idPropietario,
+            url: '/Api/Inmueble/ObtenerInmueblesPropietario?idPropietario=' + idPropietario,
             success: function (result) {
                 var item = "";
                 var cont = 0;
                 item = item + "<div class='row'>";
-                $.each(result,function (index,inmueble){
-                    cont++;                   
+                $.each(result, function (index, inmueble) {
+                    cont++;
                     item = item + "<div class='col-md-4'>";
                     item = item + "<div class='cardV3'>";
-                    item = item + "<div id='carouselexamplecontrols"+cont.toString()+"' class='carousel slide' data-ride='carousel'>";
+                    item = item + "<div id='carouselexamplecontrols" + cont.toString() + "' class='carousel slide' data-ride='carousel'>";
                     item = item + "<div class='carousel-inner'>";
                     //Agrego imagenes al carousel
                     var cont2 = 1;
@@ -70,7 +70,7 @@
                         var activo = "";
                         if (cont2 == 1) {
                             var activo = "active";
-                        } 
+                        }
                         item = item + "<div class='carousel-item " + activo + "'><img src='..\\TempFolder\\" + ruta + "' alt='' class='card-img-top' height='240' width='350'></div>";
                         cont2++;
                     })
@@ -85,35 +85,35 @@
 
                     item = item + "</div>";
 
-                    item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + " - " + inmueble.direccion.localidad.nombreLocalidad + "</h5>";                   
-                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + inmueble.mtsCuadrados + " Metros Cuadrados."+"</p>";
-                    item = item + "<p><i class='fas fa-home'></i>" + " " + inmueble.mtsCuadradosInt + " Metros Interior." +"</p>";
-                    item = item + "<p><i class='fas fa-bed'></i>" + " " + inmueble.cantHabitaciones + " Habitaciones." +"</p>";
-                    item = item + "<p><i class='fas fa-shower'></i>" + " " + inmueble.cantBanos + " Baños." +"</p>";
+                    item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + " - " + inmueble.direccion.localidad.nombreLocalidad + "</h5>";
+                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + inmueble.mtsCuadrados + " Metros Cuadrados." + "</p>";
+                    item = item + "<p><i class='fas fa-home'></i>" + " " + inmueble.mtsCuadradosInt + " Metros Interior." + "</p>";
+                    item = item + "<p><i class='fas fa-bed'></i>" + " " + inmueble.cantHabitaciones + " Habitaciones." + "</p>";
+                    item = item + "<p><i class='fas fa-shower'></i>" + " " + inmueble.cantBanos + " Baños." + "</p>";
 
                     if (inmueble.cochera) {
-                        item = item + "<p><i class='fas fa-warehouse'></i>" +" "+ "Tiene Cochera" + "</p>";
+                        item = item + "<p><i class='fas fa-warehouse'></i>" + " " + "Tiene Cochera" + "</p>";
                     } else {
                         item = item + "<p><i class='fas fa-warehouse'></i>" + "No tiene Cochera" + "</p>";
                     }
                     item = item + "<p>" + " " + inmueble.descripcionInmueble + "</p>";
                     item = item + "<p style='font-size:20px; color:green; !important'>" + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</p>";
 
-                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble("+inmueble.idInmueble+")'>Editar</button>";
-                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";                   
+                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble(" + inmueble.idInmueble + ")'>Editar</button>";
+                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";
                     //item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</h5>";
                     item = item + "</div>";
                     item = item + "</div>";
                     item = item + "</div>";
                     item = item + "</div>";
-                    
-                    
+
+
                 })
                 item = item + "</div>";
                 $("#inmuebles").append(item);
             }
         });
-    })()
+    })();
 
 
 
