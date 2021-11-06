@@ -93,6 +93,16 @@ namespace ArrendaSys.Controllers.Api
            serv.EditarAlquiler(alquiler);
         }
 
+        [System.Web.Http.Route("Api/Alquiler/verificarDNI")]
+        [System.Web.Http.ActionName("verificarDNI")]
+        [System.Web.Http.HttpGet]
+        public int verificarDNI(int DniArrendatario)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            var idArrendatario = servicio.verificarDNI(DniArrendatario);
+
+            return idArrendatario;
+        }
 
     }
 }

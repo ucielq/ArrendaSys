@@ -99,8 +99,9 @@
                     item = item + "<p>" + " " + inmueble.descripcionInmueble + "</p>";
                     item = item + "<p style='font-size:20px; color:green; !important'>" + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</p>";
 
-                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble(" + inmueble.idInmueble + ")'>Editar</button>";
-                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";
+                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='VerInmueble(" + inmueble.idInmueble + ")'>Ver</button>";
+                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble("+inmueble.idInmueble+")'>Editar</button>";
+                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";                   
                     //item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</h5>";
                     item = item + "</div>";
                     item = item + "</div>";
@@ -116,6 +117,9 @@
     })();
 
 
+    function VerInmueble(idInmueble) {
+        location.href = '/InmueblesPropietario/VerInmuebleView?id=' + idInmueble;
+    }
 
     function EditarInmueble(idInmueble) {
         location.href = '/InmueblesPropietario/AgregarInmuebleView?id=' + idInmueble;

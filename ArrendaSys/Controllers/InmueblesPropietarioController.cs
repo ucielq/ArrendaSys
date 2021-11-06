@@ -21,5 +21,11 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+
+        [Permiso("VERINMPROP")]
+        public ActionResult VerInmuebleView()
+        {
+            return View();
+        }
     }
 }
