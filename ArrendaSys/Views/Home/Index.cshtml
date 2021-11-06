@@ -143,7 +143,7 @@
         var coch = $("#cochera").val();
         var masc = $("#masc").val();
         var exp = $("#exp").val();
-        var hola = "123";
+        
         $.ajax({
             type: 'Get',
             url: '/Api/ABMPublicacion/TraerPublicaciones?idDepto=' + idDepto + '&hab=' + hab + '&banios=' + banios + '&coch=' + coch + '&masc=' + masc + '&exp=' + exp,
@@ -193,7 +193,7 @@
                     item = item + "<p>" + " " + "<b>" + publicacion.precioAlquiler + "</b>" + "</p>";
                     //item = item + "<p style='font-size:20px; color:green; !important'>" + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</p>";
                     //item = item + "<div class='card-body'><h5 class='card-title'>" + " " + publicacion.descripcionPublicacion + "</h5>";
-                    item = item + "<button class='btn btn-outline-success btn-sm'>Ver</button>";
+                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='VerPublicacion("+publicacion.idPublicacion+")'>Ver</button>";
                     //item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";
                     //item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</h5>";
                     item = item + "</div>";
@@ -237,6 +237,13 @@
             }
         });
     }
+
+    function VerPublicacion(idPublicacion) {
+        
+        location.href = '/ABMPublicacion/VerPublicacion?id=' + idPublicacion;      
+    }
+
+    
 
 </script>
 

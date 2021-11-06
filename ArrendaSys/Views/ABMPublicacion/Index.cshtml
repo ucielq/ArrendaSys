@@ -7,6 +7,7 @@
     var tipoCuenta = Session["tipoCuenta"];
     var idCuenta = Session["idCuenta"];
 }
+
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Publicaciones</title>
@@ -285,7 +286,7 @@
     }
 
     function EditarPublicacion(btn) {
-
+        $("#formulario").hide();
         $("#formulario2").show();
         var id = table.row($(btn).parents('tr')).data();
         console.log(id.descripcionPublicacion);
@@ -345,8 +346,7 @@
 
     function mostrarformulario() {
         $("#formulario").show();
-
-
+        $("#formulario2").hide();
 
     }
 

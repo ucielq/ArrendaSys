@@ -65,6 +65,15 @@ namespace ArrendaSys.Controllers.Api
             return serv.EditarPublicacion(publicacion);
         }
 
+        [System.Web.Http.Route("Api/ABMPublicacion/VerPublicacion")]
+        [System.Web.Http.ActionName("VerPublicacion")]
+        [System.Web.Http.HttpGet]
+        public ABMPublicacionViewModel VerPublicacion(int idPublicacion)
+        {
+            ServicioABMPublicacion serv = new ServicioABMPublicacion();
+            return serv.VerPublicacion(idPublicacion);
+        }
+
 
     }
 }

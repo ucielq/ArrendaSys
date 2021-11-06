@@ -79,7 +79,18 @@ namespace ArrendaSys.Controllers.Api
             return listaInmuebles;
         }
 
-        
+        [System.Web.Http.Route("Api/Inmueble/VerInmueble")]
+        [System.Web.Http.ActionName("VerInmueble")]
+        [System.Web.Http.HttpGet]
+        public InmuebleViewModel VerInmueble(int idInmueble)
+        {
+            ServicioInmueble servicio = new ServicioInmueble();
+            var listaInmuebles = servicio.VerInmueble(idInmueble);
+
+            return listaInmuebles;
+        }
+
+
 
         [System.Web.Http.Route("Api/Inmueble/EliminarInmueble")]
         [System.Web.Http.ActionName("EliminarInmueble")]
