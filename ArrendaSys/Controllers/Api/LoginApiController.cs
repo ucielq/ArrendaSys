@@ -18,7 +18,7 @@ namespace ArrendaSys.Controllers.Api
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta == null && x.fechaAltaCuenta!=null).FirstOrDefault();
+                var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta == null && x.fechaAltaCuenta != null).FirstOrDefault();
                 var ePass = Encrypt.GetSHA256(password);
                 if (user == null)
                 {
