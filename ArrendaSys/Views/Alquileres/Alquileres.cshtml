@@ -334,8 +334,9 @@
         alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 
-
-        alquiler.idArrendatario = $("#idArrendatario").val();
+        var DniArrendatario = $("#idArrendatario").val();
+        var idArrendatario = verificarDni(DniArrendatario);
+        alquiler.idArrendatario = idArrendatario;
 
 
         alquiler.idInmueble = $("#idInmueble").val();
@@ -409,5 +410,21 @@
             }
         });
     }
+
+    function verificarDni(int DniArrendatario) {
+
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Alquiler/verificarDNI?DniArrendatario=' + DniArrendatario,
+            success: function (result) {
+                if (result != 0 || result != null) {
+                    return result;
+                } else {
+                    console.log("no existe el arrendatario")
+                }
+                
+            }
+        });
+    };
 
 </script>
