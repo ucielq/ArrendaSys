@@ -21,7 +21,7 @@
 
     p {
         font-family: 'Poppins', sans-serif;
-        font-size: 1.1em;
+        font-size: 1.5em;
         font-weight: 300;
         line-height: 1.7em;
         color: #212529;
@@ -112,9 +112,11 @@
                     item = item + "</div>";
                     item = item + "</div>";
 
-                    item = item + "<div class='col-md-6'>";
+                     item = item + "<div class='col-md-6'>";
+                    item = item + "<p>" + inmueble.descripcionInmueble + "</p>";
+
                      item = item + "<p>" + "Dirección: " + "</p>";
-                item = item + "<p>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + "-" + inmueble.direccion.localidad.nombreLocalidad + " - " + inmueble.direccion.localidad.departamento.nombreDepartamento +  "</p>";
+                    item = item + "<p>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + "-" + inmueble.direccion.localidad.nombreLocalidad + " - " + inmueble.direccion.localidad.departamento.nombreDepartamento +  "</p>";
                     item = item + "<p><i class='fas fa-ruler-combined'></i>" + " Cantidad de metros cuadrados:  " + inmueble.mtsCuadrados + "</p>";
                     item = item + "<p><i class='fas fa-home'></i>" + " Cantidad de metros cuadrados internos: " + inmueble.mtsCuadradosInt + "</p>";
                     item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + inmueble.cantHabitaciones + "</p>";

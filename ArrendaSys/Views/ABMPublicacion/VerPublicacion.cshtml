@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "VerInmuebleInmo";
+    ViewBag.Title = "VerPublicacion";
 }
+
 
 
 <head>
@@ -21,7 +22,7 @@
 
     p {
         font-family: 'Poppins', sans-serif;
-        font-size: 1.1em;
+        font-size: 1.5em;
         font-weight: 300;
         line-height: 1.7em;
         color: #212529;
@@ -35,12 +36,12 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <div class="float-left">
-                            <div class="titulo">Inmueble</div>
+                            <div class="titulo">Publicación</div>
                         </div>
 
                     </div>
                     <section id="gallery">
-                        <div class="container" id="inmuebles" style="margin-left: 75px">
+                        <div class="container" id="publicacion" style="margin-left: 450px">
                             @*Cuerpo de la pagina*@
                         </div>
 
@@ -56,28 +57,29 @@
 <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 @{
     var idCuenta = Session["idCuenta"];
-    var idInmobiliaria = Session["id"];
+    var idPropietario = Session["id"];
 }
 
 <script>
 
     var idCuenta = "@idCuenta";
-    var idInmobiliaria = parseInt("@idInmobiliaria");
-    var idInmueble;
+    var idPropietario = parseInt("@idPropietario");
+    var idPublicacion;
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
     }
 
-    idInmueble = GetUrlVars()["id"];
+    idPublicacion = GetUrlVars()["id"];
 
 
     (function () {
-        $("#inmuebles").empty();
+        $("#publicacion").empty();
+        debugger;
         $.ajax({
             type: 'Get',
-            url: '/Api/Inmueble/VerInmueble?idInmueble=' + idInmueble,
-            success: function (inmueble) {
+            url: '/Api/ABMPublicacion/VerPublicacion?idPublicacion=' + idPublicacion,
+            success: function (publicacion) {
                 var item = "";
                 var cont = 0;
                 item = item + "<div class='row' style='border-top-width:50px; padding-top:50px; padding-bottom:50px;'>";
@@ -89,7 +91,7 @@
                     //Agrego imagenes al carousel
                     var cont2 = 1;
 
-                    $.each(inmueble.listaMultimedia, function (i, archivo) {
+                    $.each(publicacion.listaMultimedia, function (i, archivo) {
 
                         var ruta = archivo.url.split('\\')[archivo.url.split('\\').length - 1];
                         var activo = "";
@@ -109,31 +111,33 @@
                     item = item + "<span class='sr-only'>Next</span></a>";
                     item = item + "</div>";
                     item = item + "</div>";
+                    item = item + "</div>";                   
                     item = item + "</div>";
-
-                    item = item + "<div class='col-md-6'>";
-                     item = item + "<p>" + "Dirección: " + "</p>";
-                    item = item + "<p>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + "-" + inmueble.direccion.localidad.nombreLocalidad +  "</p>";
-                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + " Cantidad de metros cuadrados:  " + inmueble.mtsCuadrados + "</p>";
-                    item = item + "<p><i class='fas fa-home'></i>" + " Cantidad de metros cuadrados internos: " + inmueble.mtsCuadradosInt + "</p>";
-                    item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + inmueble.cantHabitaciones + "</p>";
-                    item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de baños: " + inmueble.cantBanos + "</p>";
-                    if (inmueble.cochera) {
-                    item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "Tiene Cochera" + "</p>";
-                    } else {
-                        item = item + "<p><i class='fas fa-warehouse'></i>" + "  "+ "No tiene Cochera" + "</p>";
-                    }
-
-                    item = item + "</div>";
-
 
                 item = item + "</div>";
+                item = item + "</div>";
+                item = item + "<div class='col-md-6' style='margin-left:-400'>";
+                item = item + "<p>" + publicacion.inmueble.descripcionInmueble + "</p>";
+                item = item + "<p>" + "Precio de Alquiler: $ " +publicacion.precioAlquiler+ "</p>";
+
+                item = item + "<p>" + "Dirección: " + "</p>";
+                item = item + "<p>" + " " + publicacion.inmueble.direccion.nombreCalle + " " + publicacion.inmueble.direccion.numeroCalle + "-" + publicacion.inmueble.direccion.localidad.nombreLocalidad + " - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</p>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " "+publicacion.inmueble.mtsCuadrados + " metros cuadrados"+ "</p>";
+                item = item + "<p><i class='fas fa-home'></i>" + " "+ publicacion.inmueble.mtsCuadradosInt + "  metros cuadrados internos "+ "</p>";
+                item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + publicacion.inmueble.cantHabitaciones + "</p>";
+                item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de baños: " + publicacion.inmueble.cantBanos + "</p>";
+                if (publicacion.inmueble.cochera) {
+                    item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "Tiene Cochera" + "</p>";
+                } else {
+                    item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "No tiene Cochera" + "</p>";
+                }
                 item = item + "<button class='btn btn-outline-danger btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
 
 
                     item = item + "</div>";
-                    $("#inmuebles").append(item);
+
+                    $("#publicacion").append(item);
             }
         });
     })()
@@ -142,8 +146,9 @@
 
 
     function Volver() {
-        location.href = '/InmueblesInmobiliaria/InmueblesInmobiliariaView';
+        location.href ='javascript: history.go(-1)';
     }
 
 
 </script>
+

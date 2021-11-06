@@ -388,7 +388,7 @@ namespace ArrendaSysServicios
 
                                               }).FirstOrDefault();
                 
-
+                    
                     var listaArchivoVM = new List<ArchivoVM>();
                     var archivos = db.MultimediaInmueble.Where(x => x.idInmueble == inmueble.idInmueble).ToList();
                     foreach (var multi in archivos)
