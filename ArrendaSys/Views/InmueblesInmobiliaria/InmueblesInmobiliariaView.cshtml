@@ -93,6 +93,7 @@
                     } else {
                         item = item + "<p><i class='fas fa-warehouse'></i>" + " " + "No tiene Cochera" + "</p>";
                     }
+                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='VerInmueble(" + inmueble.idInmueble + ")'>Ver</button>";
                     item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble("+inmueble.idInmueble+")'>Editar</button>";
                     item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble +")'>Eliminar</button>";
                     item = item + "</div>";
@@ -108,6 +109,9 @@
     })()
     function EditarInmueble(idInmueble) {
         location.href = '/InmueblesInmobiliaria/AgregarInmueble?id=' + idInmueble;
+    }
+    function VerInmueble(idInmueble) {
+        location.href = '/InmueblesPropietario/VerInmuebleView?id=' + idInmueble;
     }
     function AgregarNuevoInmueble() {
         location.href = '/InmueblesInmobiliaria/AgregarInmueble';

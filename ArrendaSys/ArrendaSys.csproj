@@ -1043,6 +1043,8 @@
     <Content Include="Views\Configuraciones\AdministrarItem.cshtml" />
     <Content Include="Views\Alquileres\Alquiler.cshtml" />
     <Content Include="Views\Resenias\MisResenias.cshtml" />
+    <Content Include="Views\InmueblesPropietario\VerInmuebleView.cshtml" />
+    <Content Include="Views\ABMPublicacion\VerPublicacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
