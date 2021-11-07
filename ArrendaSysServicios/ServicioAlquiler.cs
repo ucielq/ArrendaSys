@@ -364,15 +364,23 @@ namespace ArrendaSysServicios
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                ArrendatarioViewModel arrendatario = ((ArrendatarioViewModel)(from a in db.Arrendatario
-                                 where a.numeroDocumentoArr == DniArrendatario
-                                 select new ArrendatarioViewModel
-                                 {
-                                     idArrendatario = a.idArrendatario
 
-                                 }));
+                var arrendatario = (from a in db.Arrendatario
+                                    where a.numeroDocumentoArr == DniArrendatario
+                                    select new ArrendatarioViewModel
+                                    {
+                                        idArrendatario = a.idArrendatario
+
+                                    }).FirstOrDefault();
+                if(arrendatario != null)
+                {
+                    return arrendatario.idArrendatario;
+                }
+                else
+                {
+                    return 0;
+                }
                 
-                return arrendatario.idArrendatario;
             }
 
         }
