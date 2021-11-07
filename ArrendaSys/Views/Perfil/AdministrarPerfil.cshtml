@@ -115,36 +115,46 @@
                                         <div class="col-md-2">
                                             <label><b>Nombre</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="nombrePropietario" name="nombre"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label><b>Apellido</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaArr" id="apellido" name="apellido"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="apellidoPropietario" name="apellido"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="documento"><b>Número de Documento</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaArr" id="documento" name="Número de documento"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="documentoProp" name="Número de documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label for="telefono"><b>Número de Teléfono</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaArr" id="telefono" name="Número de teléfono"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="telefonoProp" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
                                             <label><b>Fecha de Nacimiento</b></label>
                                             <br />
-                                            <input type="date" id="fechaNacimiento" class="redondeado form-control obligatoriaArr" name="fecha de nacimiento" />
+                                            <input type="date" id="fechaNacimientoProp" class="redondeado form-control obligatoriaArr" name="fecha de nacimiento" />
                                         </div>
                                         <div class="col-md-2">
                                             <label><b>Imágen de Perfil</b></label>
                                             <br />
                                             <div class=" row">
                                                 <div class="col">
-                                                    <img type="image" onclick="agregarMultiplesArchivos()" src="~/assets/img/icono-perfil.png" style="width:50px;height:37px" />
+                                                    <img type="image" onclick="agregarImagen()" src="~/assets/img/icono-perfil.png" style="width:50px;height:37px" />
                                                 </div>
-                                            </div>                                        
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col" id="asd123">
+                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <label id="ArchivosYaCargados"></label>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-2">
                                             <label><b>Dirección (Calle y Número)</b></label>
@@ -208,7 +218,7 @@
 
     </div>
     <div hidden>
-        <input type="file" id="inputArchivosInmueble" value="cargarArchivos" onchange="MostrarNombreMultiplesArchivos()" multiple />
+        <input type="file" id="inputImagen" value="cargarArchivos" onchange="mostrarNombreImagen()" />
     </div>
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
@@ -335,7 +345,8 @@
                     url: '/Api/Arrendatario/CrearArrendatario',
                     data: arrendatario,
                     success: function (result) {
-                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=2&id=" + result;
+                        GuardarImagen(idCuenta);
+                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=2&id=" + result + "&idCuenta=" + idCuenta;
 
                     }
                 });
@@ -357,7 +368,8 @@
                     url: '/Api/Propietario/CrearPropietario',
                     data: propietario,
                     success: function (result) {
-                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=3&id=" + result;
+                        GuardarImagen(idCuenta);
+                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=3&id=" + result + "&idCuenta=" + idCuenta;
                     }
                 });
 
@@ -377,7 +389,8 @@
                     url: '/Api/Inmobiliaria/CrearInmobiliaria',
                     data: inmobiliaria,
                     success: function (result) {
-                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=4&id=" + result;
+                        GuardarImagen(idCuenta);
+                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=4&id=" + result + "&idCuenta=" + idCuenta;
                     }
                 });
 

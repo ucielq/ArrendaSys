@@ -31,6 +31,28 @@ namespace ArrendaSys.Controllers.Api
             }
         }
 
+        [System.Web.Http.Route("Api/Cuenta/GuardarImagenCuenta")]
+        [System.Web.Http.ActionName("GuardarImagenCuenta")]
+        [System.Web.Http.HttpPost]
+        public int GuardarImagenCuenta()
+        {
+            ArchivoApiController api = new ArchivoApiController();
+            ServicioCuenta serv2 = new ServicioCuenta();
+            var listaArchivos = api.Subir("Inmueble");
+            if (listaArchivos.Count > 0)
+            {
+                if (listaArchivos[0].error != 400)
+                {
+                    return serv2.GuardarImagenCuenta(listaArchivos);
+                }
+                else return 500;
+            }
+            else
+            {
+                return 500;
+            }
+        }
+
         [System.Web.Http.Route("Api/Cuenta/generarCodigoValidacion")]
         [System.Web.Http.ActionName("generarCodigoValidacion")]
         [System.Web.Http.HttpGet]
