@@ -51,6 +51,7 @@
           <Property Name="idPremium" Type="int" />
           <Property Name="codigoConfimacion" Type="int" />
           <Property Name="urlImagen" Type="varchar" MaxLength="500" />
+          <Property Name="direccion" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="CuentaNotificacion">
           <Key>
@@ -754,6 +755,7 @@
           <Property Name="idPremium" Type="Int32" />
           <Property Name="codigoConfimacion" Type="Int32" />
           <Property Name="urlImagen" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1120,6 +1122,7 @@
           <EntitySetMapping Name="Cuenta">
             <EntityTypeMapping TypeName="ARRENDASYSEntities.Cuenta">
               <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="urlImagen" ColumnName="urlImagen" />
                 <ScalarProperty Name="codigoConfimacion" ColumnName="codigoConfimacion" />
                 <ScalarProperty Name="idPremium" ColumnName="idPremium" />
