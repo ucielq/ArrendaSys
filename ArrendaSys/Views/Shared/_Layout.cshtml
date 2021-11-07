@@ -24,6 +24,7 @@
     var tipoCuenta = Session["tipoCuenta"];
     var idCuenta = Session["idCuenta"];
     var id = Session["id"];
+    var premium = Session["premium"].ToString();
     var fotoUsuario = Session["foto"];
     var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
 }
@@ -79,7 +80,7 @@
                             </button>*@
                         <div class="dropdown float-right" style="text-align:right">
                             <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
-                               <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
+                                <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
                             </button>
                         </div>
 
@@ -97,6 +98,10 @@
                                 <li><a class="dropdown-item" href="#" onclick="MisEstadisticas()">Mis Estadísticas</a></li>
                                 <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
                             </ul>
+                            @if (premium == "1")
+                                {
+                                <span style="color:white">PREMIUM</span>
+                                }
                         </div>
                     </nav>
                     <div class="body-content">
@@ -114,40 +119,44 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
-@*<script>
-    
+<script>
+    var premium = @premium;
+    if (premium == "1") {
+
+    } else {
         // Agrega credenciales de SDK
         const mp = new MercadoPago('APP_USR-579a8bef-0b8e-4246-8f8c-708eec0975a0', {
             locale: 'es-AR'
         });
-    var url = "/Api/MercadoPago/create_preference";
-    $.ajax({
-        type: 'Post',
-        url: url,
-        success: function (data) {
-            mp.checkout({
-                preference: {
-                    id: data.Id
-                },
-                render: {
-                    container: '.mercadoPago',
-                }
-            });
-        },
-        error: function (erro) {
-            console.log(erro);
-            alert('Error');
-        }
-    });
-       
-        // Inicializa el checkout
-       
+        var url = "/Api/MercadoPago/create_preference";
+        $.ajax({
+            type: 'Post',
+            url: url,
+            success: function (data) {
+                mp.checkout({
+                    preference: {
+                        id: data
+                    },
+                    render: {
+                        container: '.mercadoPago',
+                        label:'Convertite en premium',
+                    },
+                    theme: {
+                        elementsColor: '#17992e',
+                    }
+                });
+            },
+            error: function (erro) {
+                console.log(erro);
+                alert('Error');
+            }
+        });
+    // Inicializa el checkout
+    }
     
-</script>*@
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5518030199279545"
-        crossorigin="anonymous"></script>
+</script>
 <script>
-    
+
     var tipoCuenta = parseInt(@tipoCuenta);
     var id = parseInt(@id);
 
@@ -193,7 +202,7 @@
     function MisNotificaciones() {
         window.location.href = "/Notificaciones/index";
     }
-    
+
     (function () {
 
         $.ajax({
