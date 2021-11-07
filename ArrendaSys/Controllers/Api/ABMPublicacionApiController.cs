@@ -59,10 +59,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/ABMPublicacion/EditarPublicacion")]
         [System.Web.Http.ActionName("EditarPublicacion")]
         [System.Web.Http.HttpPost]
-        public int EditarPublicacion(ABMPublicacionViewModel publicacion)
+        public void EditarPublicacion(ABMPublicacionViewModel publicacion)
         {
             ServicioABMPublicacion serv = new ServicioABMPublicacion();
-            return serv.EditarPublicacion(publicacion);
+           serv.EditarPublicacion(publicacion);
         }
 
         [System.Web.Http.Route("Api/ABMPublicacion/VerPublicacion")]
