@@ -56,12 +56,8 @@
     <script src="~/Scripts/Generales.js"></script>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
-<body>
-
-    <div class="wrapper">
-
+<body class="container-fluid" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover; background-attachment:fixed"> 
         <!-- Topbar  -->
-        <div id="content" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover;">
             <!-- Sidebar  -->
             <div class="row" style="height: -webkit-fill-available;width:100%">
                 <div class="col-md-2">
@@ -81,8 +77,8 @@
                 <div class="col-md-9">
                     <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
                         @*<button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
-                                pdf
-                            </button>*@
+                        pdf
+                    </button>*@
                         <div class="dropdown float-right" style="text-align:right">
                             <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
                                 <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
@@ -104,23 +100,16 @@
                                 <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
                             </ul>
                             @if (premium == "1")
-                                {
+                            {
                                 <span style="color:white">PREMIUM</span>
-                                }
+                            }
                         </div>
                     </nav>
-                    <div class="body-content">
+                    <div class="content-wrapper" style="background-color:transparent">
                         @RenderBody()
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-
-
-    @*<img src="~/assets/img/cesped.jpg" class="img-fluid" alt="" style="height:131vh;">*@
-
     @RenderSection("scripts", required: false)
 </body>
 </html>
