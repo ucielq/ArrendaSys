@@ -21,12 +21,23 @@ namespace ArrendaSys.Controllers
             System.Web.HttpContext.Current.Session["idCuenta"] = id;
             return RedirectToAction("AdministrarPerfil","Perfil",new {id =id });
         }
-        public ActionResult CambiarTipoCuenta(int tipoCuenta,int id)
+        public ActionResult CambiarTipoCuenta(int tipoCuenta,int id,int idCuenta)
         {
             System.Web.HttpContext.Current.Session["tipoCuenta"] =tipoCuenta.ToString();
             System.Web.HttpContext.Current.Session["id"] = id.ToString();
-            return RedirectToAction("Index", "Home");
-
+            return RedirectToAction("cambiarFoto", "Cuenta",new { id=idCuenta });
+            
+        }
+        public ActionResult cambiarFoto(int id)
+        {
+            using (ArrendaSysModelos.ArrendasysEntities db = new ArrendaSysModelos.ArrendasysEntities())
+            {
+                var cuenta = db.Cuenta.Where(x => x.idCuenta == id).FirstOrDefault();
+                if (cuenta != null) {
+                    System.Web.HttpContext.Current.Session["foto"] = cuenta.urlImagen;
+                }
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

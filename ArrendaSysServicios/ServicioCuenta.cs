@@ -9,6 +9,7 @@ using System.Configuration;
 using ArrendaSysModelos;
 using ArrendaSysServicios.Modelos;
 using ArrendaSysUtilidades;
+using System.Data.Entity.Validation;
 
 namespace ArrendaSysServicios
 {
@@ -16,6 +17,31 @@ namespace ArrendaSysServicios
     {
         private ArrendasysEntities db = new ArrendasysEntities();
 
+        public int GuardarImagenCuenta(List<ArchivoVM> lista)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                try
+                {
+                    foreach (var archivo in lista)
+                    {
+                        var cuenta = db.Cuenta.Where(x => x.idCuenta == archivo.idInmueble).FirstOrDefault();
+                        if (cuenta != null)
+                        {
+                            cuenta.urlImagen = archivo.url;
+                        }      
+                        db.SaveChanges();
+
+                    }
+
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return 400;
+                }
+                return 200;
+            }
+        }
         public int altaCuenta(string email, string pass)
         {
             DateTime now = DateTime.Now;
@@ -68,6 +94,7 @@ namespace ArrendaSysServicios
             if (cuenta != null)
             {
                 cuenta.fechaAltaCuenta = DateTime.Now;
+                cuenta.urlImagen = "C:\\Users\\uciel\\OneDrive\\Escritorio\\Proyecto\\ArrendaSys\\ArrendaSys\\TempFolder\\sinFoto.jpg";
             }
             db.SaveChanges();
             return cuenta.idCuenta;
@@ -254,6 +281,7 @@ namespace ArrendaSysServicios
                         arrendatarioVM.idArrendatario = arrendatario.idArrendatario;
                         cuenta.arrendatario = arrendatarioVM;
                         cuenta.idPropio = arrendatario.idArrendatario;
+                        cuenta.rutaFoto = cuent.urlImagen;
                         return cuenta;
                     }
                     else
@@ -275,6 +303,7 @@ namespace ArrendaSysServicios
                             cuenta.propietario = propVM;
                             cuenta.tipoCuenta =3;
                             cuenta.idPropio = propietario.idPropietario;
+                            cuenta.rutaFoto = cuent.urlImagen;
                             return cuenta;
                         }
                         else
@@ -295,6 +324,7 @@ namespace ArrendaSysServicios
                                 cuenta.inmobiliaria = inmoVM;
                                 cuenta.tipoCuenta = 4;
                                 cuenta.idPropio = inmobiliaria.idInmobiliaria;
+                                cuenta.rutaFoto = cuent.urlImagen;
                                 return cuenta;
                             }
                             else

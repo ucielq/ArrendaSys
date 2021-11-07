@@ -50,6 +50,7 @@
           <Property Name="idRol" Type="int" />
           <Property Name="idPremium" Type="int" />
           <Property Name="codigoConfimacion" Type="int" />
+          <Property Name="urlImagen" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="CuentaNotificacion">
           <Key>
@@ -414,19 +415,6 @@
           <Property Name="idCuenta" Type="Int32" />
           <Property Name="fechaNacimArrendatario" Type="DateTime" Precision="0" />
         </EntityType>
-        <EntityType Name="Cuenta">
-          <Key>
-            <PropertyRef Name="idCuenta" />
-          </Key>
-          <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="contrasenaCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="emailCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaAltaCuenta" Type="DateTime" Precision="0" />
-          <Property Name="fechaBajaCuenta" Type="DateTime" Precision="0" />
-          <Property Name="idRol" Type="Int32" />
-          <Property Name="idPremium" Type="Int32" />
-          <Property Name="codigoConfimacion" Type="Int32" />
-        </EntityType>
         <EntityType Name="CuentaNotificacion">
           <Key>
             <PropertyRef Name="idCuentaNotificacion" />
@@ -647,7 +635,6 @@
           <EntitySet Name="Alquiler" EntityType="Self.Alquiler" />
           <EntitySet Name="AlquilerEstado" EntityType="Self.AlquilerEstado" />
           <EntitySet Name="Arrendatario" EntityType="Self.Arrendatario" />
-          <EntitySet Name="Cuenta" EntityType="Self.Cuenta" />
           <EntitySet Name="CuentaNotificacion" EntityType="Self.CuentaNotificacion" />
           <EntitySet Name="Departamento" EntityType="Self.Departamento" />
           <EntitySet Name="Direccion" EntityType="Self.Direccion" />
@@ -676,6 +663,7 @@
           <EntitySet Name="ReseñaArrendadorArrendatario" EntityType="ARRENDASYSEntities.ReseñaArrendadorArrendatario" />
           <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" />
           <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" />
+          <EntitySet Name="Cuenta" EntityType="ARRENDASYSEntities.Cuenta" />
         </EntityContainer>
         <EntityType Name="Rol">
           <Key>
@@ -753,6 +741,20 @@
           <Property Name="respuestaReseñaAI" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="idAlquiler" Type="Int32" />
         </EntityType>
+        <EntityType Name="Cuenta">
+          <Key>
+            <PropertyRef Name="idCuenta" />
+          </Key>
+          <Property Name="idCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contrasenaCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="emailCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaCuenta" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaCuenta" Type="DateTime" Precision="0" />
+          <Property Name="idRol" Type="Int32" />
+          <Property Name="idPremium" Type="Int32" />
+          <Property Name="codigoConfimacion" Type="Int32" />
+          <Property Name="urlImagen" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -792,20 +794,6 @@
                 <ScalarProperty Name="tipoDocumentoArr" ColumnName="tipoDocumentoArr" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
                 <ScalarProperty Name="fechaNacimArrendatario" ColumnName="fechaNacimArrendatario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Cuenta">
-            <EntityTypeMapping TypeName="ARRENDASYSEntities.Cuenta">
-              <MappingFragment StoreEntitySet="Cuenta">
-                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
-                <ScalarProperty Name="contrasenaCuenta" ColumnName="contrasenaCuenta" />
-                <ScalarProperty Name="emailCuenta" ColumnName="emailCuenta" />
-                <ScalarProperty Name="fechaAltaCuenta" ColumnName="fechaAltaCuenta" />
-                <ScalarProperty Name="fechaBajaCuenta" ColumnName="fechaBajaCuenta" />
-                <ScalarProperty Name="idRol" ColumnName="idRol" />
-                <ScalarProperty Name="idPremium" ColumnName="idPremium" />
-                <ScalarProperty Name="codigoConfimacion" ColumnName="codigoConfimacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1126,6 +1114,21 @@
                 <ScalarProperty Name="fechaAltaReseñaAI" ColumnName="fechaAltaReseñaAI" />
                 <ScalarProperty Name="descripcionReseñaAI" ColumnName="descripcionReseñaAI" />
                 <ScalarProperty Name="idReseñaAI" ColumnName="idReseñaAI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cuenta">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Cuenta">
+              <MappingFragment StoreEntitySet="Cuenta">
+                <ScalarProperty Name="urlImagen" ColumnName="urlImagen" />
+                <ScalarProperty Name="codigoConfimacion" ColumnName="codigoConfimacion" />
+                <ScalarProperty Name="idPremium" ColumnName="idPremium" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="fechaBajaCuenta" ColumnName="fechaBajaCuenta" />
+                <ScalarProperty Name="fechaAltaCuenta" ColumnName="fechaAltaCuenta" />
+                <ScalarProperty Name="emailCuenta" ColumnName="emailCuenta" />
+                <ScalarProperty Name="contrasenaCuenta" ColumnName="contrasenaCuenta" />
+                <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

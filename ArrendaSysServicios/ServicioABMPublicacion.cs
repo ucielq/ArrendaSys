@@ -36,7 +36,6 @@ namespace ArrendaSysServicios
                                       select new ABMPublicacionViewModel
                                       {
                                           idPublicacion = p.idPublicacion,
-                                          tituloPublicacion = p.tituloPublicacion,
                                           fechaAltaPublicacion = p.fechaAltaPublicacion,
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
@@ -59,7 +58,6 @@ namespace ArrendaSysServicios
                                       select new ABMPublicacionViewModel
                                       {
                                           idPublicacion = p.idPublicacion,
-                                          tituloPublicacion = p.tituloPublicacion,
                                           fechaAltaPublicacion = p.fechaAltaPublicacion,
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
@@ -109,7 +107,6 @@ namespace ArrendaSysServicios
                 publicacion1.fechaAltaPublicacion = publicacion.fechaAltaPublicacion;
                 publicacion1.fechaBajaPublicacion = publicacion.fechaBajaPublicacion;
                 publicacion1.precioAlquiler = publicacion.precioAlquiler;
-                publicacion1.tituloPublicacion = publicacion.tituloPublicacion;
                 publicacion1.idInmueble = publicacion.idInmueble;
 
                 db.Publicacion.Add(publicacion1);
@@ -204,7 +201,6 @@ namespace ArrendaSysServicios
                                      select new ABMPublicacionViewModel
                                      {
                                          idPublicacion = p.idPublicacion,
-                                         tituloPublicacion = p.tituloPublicacion,
                                          fechaAltaPublicacion = p.fechaAltaPublicacion,
                                          fechaBajaPublicacion = p.fechaBajaPublicacion,
                                          precioAlquiler = p.precioAlquiler,
@@ -316,7 +312,7 @@ namespace ArrendaSysServicios
             }
         }
         
-         public int EditarPublicacion(ABMPublicacionViewModel publicacion)
+         public void EditarPublicacion(ABMPublicacionViewModel publicacion)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -326,14 +322,10 @@ namespace ArrendaSysServicios
                 publi.fechaAltaPublicacion = publicacion.fechaAltaPublicacion;
                 publi.fechaBajaPublicacion = publicacion.fechaBajaPublicacion;
                 publi.precioAlquiler = publicacion.precioAlquiler;
-                publi.tituloPublicacion = publicacion.tituloPublicacion;
-                publi.idInmueble = publicacion.idInmueble;
-                db.Publicacion.Add(publi);
                 db.SaveChanges();
             }
 
-                db.SaveChanges();
-                return 1;
+               
 
          }
 
@@ -353,7 +345,6 @@ namespace ArrendaSysServicios
                                      select new ABMPublicacionViewModel
                                      {
                                          idPublicacion = p.idPublicacion,
-                                         tituloPublicacion = p.tituloPublicacion,
                                          fechaAltaPublicacion = p.fechaAltaPublicacion,
                                          fechaBajaPublicacion = p.fechaBajaPublicacion,
                                          precioAlquiler = p.precioAlquiler,

@@ -38,7 +38,7 @@ namespace ArrendaSys.Controllers
                     return RedirectToAction("LoginManual", "Login");
                 }
                 var resp = servicio.ObtenerLoginUsuario(mail, password);
-                if (resp != "DatosIncorrectos#Login" && resp != "PermisoDenegado#Login")
+                if (resp != "DatosIncorrectos#Login")
                 {
                     var user = servicio.ObtenerDatosUsuarioLogueado(mail);
                     var usuario = servicio.ObtenerDatosCuenta(user.idCuenta);
@@ -46,6 +46,7 @@ namespace ArrendaSys.Controllers
                     System.Web.HttpContext.Current.Session["tipoCuenta"] = usuario.tipoCuenta;
                     System.Web.HttpContext.Current.Session["idCuenta"] = user.idCuenta;
                     System.Web.HttpContext.Current.Session["id"] = usuario.idPropio;
+                    System.Web.HttpContext.Current.Session["foto"] = usuario.rutaFoto;
                     if (resp.Split('*')[0]== "Perfil#AdministrarPerfil")
                     {
                         return RedirectToAction("AdministrarPerfil", "Perfil", new { id = resp.Split('*')[1] });
