@@ -60,6 +60,7 @@
                                 <span>Arrendatario: </span>
                                 <br />
                                 <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el DNI del Arrendatario" />
+                                <button type="button" class="btn btn-success" onclick="verificarDni($('#idArrendatario').val())"><i class="fas fa-save"></i> verif</button>
                             </div>
 
                             <div class="col-md-2">
@@ -73,7 +74,7 @@
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <button type="button" class="btn btn-success" onclick="GuardarAlquiler()"><i class="fas fa-save"></i> Guardar</button>
+                                <button type="button" class="btn btn-success" id ="BotonGuardar" onclick="GuardarAlquiler()" ><i class="fas fa-save"></i> Guardar</button>
                                 <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
                             </div>
                         </div>
@@ -170,11 +171,12 @@
         ObtenerInmuebles(-1);
 
     });
-
     var user = '@usuario';
     var idCuenta = parseInt(@idCuenta);
     var tipoCuenta = parseInt(@tipoCuenta);
     var table;
+    var idArrendatario;
+
     (function () {
         if (tipoCuenta == 2) {
             $("#botonAgregar").hide();
@@ -307,6 +309,7 @@
 
     function mostrarformulario() {
         $("#formulario").show();
+        $("#BotonGuardar").hide();
         $("#formulario2").hide();
     }
 
@@ -330,11 +333,10 @@
 
     function GuardarAlquiler() {
         var alquiler = new Object();
+        debugger;
         alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 
-        var DniArrendatario = $("#idArrendatario").val();
-        var idArrendatario = verificarDni(DniArrendatario);
         alquiler.idArrendatario = idArrendatario;
 
 
@@ -416,12 +418,15 @@
             type: 'Get',
             url: '/Api/Alquiler/verificarDNI?DniArrendatario=' + DniArrendatario,
             success: function (result) {
-                if (result != 0 || result != null) {
-                    return result;
+                if (result != 0) {
+                    idArrendatario = result;
+                    $("#BotonGuardar").show();
                 } else {
-                    console.log("no existe el arrendatario")
+                    $("#BotonGuardar").hide();
+                    window.alert("no existe arrendatario, ingrese DNI valido");
+                    
                 }
-
+             
             }
         });
     }
