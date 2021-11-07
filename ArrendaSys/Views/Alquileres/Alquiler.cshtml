@@ -2,6 +2,7 @@
     var usuario = Session["usuarioLogeado"];
     var tipoCuenta = Session["tipoCuenta"];
     var idCuenta = Session["idCuenta"];
+    var id = Session["id"];
 }
 
 <head>
@@ -73,7 +74,10 @@ p {
                                 <div class="row">
                                     @*Inmueble*@
                                     <div class="container" id="Inmueble">
-                                        
+
+                                    </div>
+                                    <div class="container" id="body">
+                                        @*Aca va todo el cuerpo*@
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +89,11 @@ p {
     </div>
 </div>
 <script>
+    debugger;
     var tipoCuenta = parseInt(@tipoCuenta);
     var idCuenta = parseInt(@idCuenta);
+    var id = parseInt(@id);
+    var pag = 1;
     var idAlquiler = parseInt(GetUrlVars()["idAlquiler"]);
     var esAoAr = false;
     var esArAo = false;
@@ -103,6 +110,7 @@ p {
         }
 
         completarDatos();
+        completarResenias();
         /*cargarItems();*/
     })();
     function completarDatos() {
@@ -152,7 +160,7 @@ p {
                 item = item + "</div>";
 
                 //Row reseñas del inmueble
-                
+
                 if (tipoCuenta == 2) {
                     item = item + "<div class='row'>"
                     item = item + "<div class='row' id='reseniasAI'>";
@@ -164,7 +172,7 @@ p {
                     item = item + "</div>";
                     item = item + "</hr>";
                 }
-                
+
 
                 //Row Datos Arrendador u arrendatario (agregar condicion)
                 if (tipoCuenta == 2) {
@@ -177,7 +185,7 @@ p {
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
-                        item = item + "</hr>";                        
+                        item = item + "</hr>";
                     } else {
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
@@ -209,7 +217,8 @@ p {
 
                 item = item + "</div>";
 
-                //Falta listar todas las reseñas.
+                //Listar Reseñas
+
 
 
                 $("#Inmueble").append(item);
@@ -505,7 +514,7 @@ p {
         $.ajax({
             type: 'Get',
             url: '/Api/Resenia/ListarReseniasAoAr',
-            
+
         });
     }
     function cargarReseniasArAo() {
@@ -549,5 +558,61 @@ p {
                 $("#formularioAI").append(item2)
             }*/
         });
+    }
+    function completarResenias() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/obtenerReseniasAlquiler?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&IdAlquiler=" + idAlquiler,
+            success: function (result) {
+                cantidad = result.cantidad;
+                $("#body").empty();
+                var item = "";
+                result.lista.forEach(function (data, index) {
+                    item = item + "<div class='row'>";
+                    item = item + "<div class='col-md-2'>";
+                    item = item + "<span>" + data.nombreAutor + "</span>";
+                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+
+                $("#body").append(item);
+                paginas();
+            }
+        });
+    }
+    function paginas() {
+        var html = "<nav aria-label='...'>";
+        html = html + "<ul class='pagination'>";
+        var cantPag = 1;
+        var resto = cantidad % 6;
+        if (resto > 0) {
+            cantPag = cantidad / 6 + 1;
+        } else {
+            cantPag = cantidad / 6;
+        }
+
+        for (var i = 1; i <= cantPag; i++) {
+            if (i == pag) {
+                html = html + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            } else {
+                html = html + "<li class='page-item'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            }
+        }
+        html = html + "</ul>";
+        html = html + "</nav>";
+        $("#body").append(html);
+    }
+    function cambiarPag(num) {
+        pag = num;
+        completarResenias();
     }
 </script>
