@@ -10,7 +10,8 @@ using ArrendaSysModelos;
 using ArrendaSysServicios.Modelos;
 using ArrendaSysUtilidades;
 using System.Data.Entity.Validation;
-
+using System.IO;
+using System.Web;
 namespace ArrendaSysServicios
 {
     public class ServicioCuenta : IDisposable
@@ -47,11 +48,15 @@ namespace ArrendaSysServicios
             DateTime now = DateTime.Now;
             var codigo = Math.Abs((email+now.ToString()).GetHashCode());
             var ePass = Encrypt.GetSHA256(pass);
+            var pathInic = "~/TempFolder/";
+            var nombreArchivo = "sinFoto.jpg";
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathInic), nombreArchivo);
             Cuenta cuenta = new Cuenta
             {
                 emailCuenta=email,
                 contrasenaCuenta=ePass,
-                codigoConfimacion=codigo
+                codigoConfimacion=codigo,
+                urlImagen=path
             };
             db.Cuenta.Add(cuenta);
             db.SaveChanges();            
@@ -88,16 +93,19 @@ namespace ArrendaSysServicios
             }
         }
 
-        public int confirmaCuenta(string email)
+        public CuentaViewModel confirmaCuenta(string email)
         {
+            CuentaViewModel response = new CuentaViewModel();
             var cuenta = db.Cuenta.Where(x => x.emailCuenta == email).FirstOrDefault();
             if (cuenta != null)
             {
                 cuenta.fechaAltaCuenta = DateTime.Now;
                 cuenta.urlImagen = "~\\TempFolder\\sinFoto.jpg";
+                response.idCuenta = cuenta.idCuenta;
+                response.rutaFoto = cuenta.urlImagen;
             }
             db.SaveChanges();
-            return cuenta.idCuenta;
+            return response;
         }
         public void enviarMailCodigo(string email, int codigo)
         {

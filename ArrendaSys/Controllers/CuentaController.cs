@@ -16,11 +16,11 @@ namespace ArrendaSys.Controllers
         public ActionResult confirmaCuenta(string email)
         {
             ArrendaSysServicios.ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
-            var id = servicioCuenta.confirmaCuenta(email);
+            var cuenta = servicioCuenta.confirmaCuenta(email);
             System.Web.HttpContext.Current.Session["usuarioLogeado"] = email;
-            System.Web.HttpContext.Current.Session["idCuenta"] = id;
-            System.Web.HttpContext.Current.Session["foto"] = "~\\TempFolder\\sinFoto.jpg";
-            return RedirectToAction("AdministrarPerfil","Perfil",new {id =id });
+            System.Web.HttpContext.Current.Session["idCuenta"] = cuenta.idCuenta;
+            System.Web.HttpContext.Current.Session["foto"] = cuenta.rutaFoto;
+            return RedirectToAction("AdministrarPerfil","Perfil",new {id =cuenta.idCuenta });
         }
         public ActionResult CambiarTipoCuenta(int tipoCuenta,int id,int idCuenta)
         {
