@@ -19,6 +19,7 @@ namespace ArrendaSys.Controllers
             var id = servicioCuenta.confirmaCuenta(email);
             System.Web.HttpContext.Current.Session["usuarioLogeado"] = email;
             System.Web.HttpContext.Current.Session["idCuenta"] = id;
+            System.Web.HttpContext.Current.Session["foto"] = "~\\TempFolder\\sinFoto.jpg";
             return RedirectToAction("AdministrarPerfil","Perfil",new {id =id });
         }
         public ActionResult CambiarTipoCuenta(int tipoCuenta,int id,int idCuenta)

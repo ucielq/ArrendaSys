@@ -94,7 +94,7 @@ namespace ArrendaSysServicios
             if (cuenta != null)
             {
                 cuenta.fechaAltaCuenta = DateTime.Now;
-                cuenta.urlImagen = "C:\\Users\\uciel\\OneDrive\\Escritorio\\Proyecto\\ArrendaSys\\ArrendaSys\\TempFolder\\sinFoto.jpg";
+                cuenta.urlImagen = "~\\TempFolder\\sinFoto.jpg";
             }
             db.SaveChanges();
             return cuenta.idCuenta;
