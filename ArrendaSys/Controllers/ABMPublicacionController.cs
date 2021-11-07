@@ -7,10 +7,18 @@ using System.Web.Mvc;
 
 namespace ArrendaSys.Controllers
 {
+    [SessionUtility]
     public class ABMPublicacionController : Controller
     {
-        [SessionUtility]
+        
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        
+        [Permiso("VERPUBLI")]
+        public ActionResult VerPublicacion()
         {
             return View();
         }

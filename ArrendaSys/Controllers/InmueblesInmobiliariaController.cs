@@ -20,5 +20,6 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+       
     }
 }

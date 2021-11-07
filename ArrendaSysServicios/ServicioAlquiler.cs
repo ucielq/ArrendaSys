@@ -384,6 +384,14 @@ namespace ArrendaSysServicios
             }
 
         }
+        public void EditarAlquiler(AlquileresViewModel alquiler)
+        {
+            var alquiler1 = db.Alquiler.Where(x => x.idAlquiler == alquiler.idAlquiler).FirstOrDefault();
+            alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
+            //db.Alquiler.Add(alquiler1);
+            db.SaveChanges();
+        }
+
     }
 }
 

@@ -9,8 +9,24 @@
         font-size: 13px;
         padding: 2px;
     }
+    .img-bordered-sm2 {
+        width: 40px;
+        height: 40px;
+    }
+
+    .img-circle2 {
+        border-radius: 50%;
+    }
 </style>
 <html>
+@{
+    var emailCuenta = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+    var id = Session["id"];
+    var fotoUsuario = Session["foto"];
+    var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
+}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
@@ -39,7 +55,7 @@
     <div class="wrapper">
 
         <!-- Topbar  -->
-        <div id="content" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover; ">
+        <div id="content" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover;">
             <!-- Sidebar  -->
             <div class="row" style="height: -webkit-fill-available;width:100%">
                 <div class="col-md-2">
@@ -59,16 +75,18 @@
                 <div class="col-md-9">
                     <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
                         @*<button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
-            pdf
-        </button>*@
+                                pdf
+                            </button>*@
                         <div class="dropdown float-right" style="text-align:right">
-                            <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#2e7230">
+                            <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
                                <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
                             </button>
                         </div>
+
                         <div class="dropdown float-right" style="text-align:right">
-                            <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#2e7230">
-                                Mi perfil
+                            
+                            <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#2e7230; padding-top:5px; padding-bottom:5px; border-radius:50px; padding-left:15px;">
+                                <img class='img-circle2 img-bordered-sm2' src='~/TempFolder/@rutaParcial' title=@emailCuenta /> &nbsp&nbsp Mi perfil &nbsp
                             </button>
                             <div class="mercadoPago" id="btnmp">
 
@@ -129,15 +147,9 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5518030199279545"
         crossorigin="anonymous"></script>
 <script>
-    @{
-        var emailCuenta = Session["usuarioLogeado"];
-        var tipoCuenta = Session["tipoCuenta"];
-        var idCuenta = Session["idCuenta"];
-        var id = Session["id"];
-    }
+    
     var tipoCuenta = parseInt(@tipoCuenta);
     var id = parseInt(@id);
-    
 
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {

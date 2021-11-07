@@ -56,16 +56,18 @@
 
 
                                     <div class="col-md-2">
-                                        <label for="email">Email</label>
+                                        <label for="email"><b>Correo Electrónico</b></label>
                                         <br />
-                                        <textarea class="form-control" id="email" name="email"></textarea>
+                                        <label for="form-control" id="email" name="email"></label>
                                     </div>
+
+
                                 </div>
                                 <hr />
                                 <br />
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <label for="tipoCuenta">Tipo de cuenta</label>
+                                        <label for="tipoCuenta"><b>Tipo de Cuenta</b></label>
                                         <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" onchange="cambioTipoCuenta()">
                                             <option value="-1">Seleccione una opción</option>
                                             <option value="2">Arrendatario</option>
@@ -77,83 +79,131 @@
                                 <div id="arrendatario" class="arrendatario">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label>Nombre</label>
+                                            <label><b>Nombre</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Apellido</label>
+                                            <label><b>Apellido</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaArr" id="apellido" name="apellido"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="documento">Nro Documento</label>
+                                            <label for="documento"><b>Número de Documento</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaArr" id="documento" name="Número de documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="telefono">Nro Telefono</label>
+                                            <label for="telefono"><b>Número de Teléfono</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaArr" id="telefono" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Fecha Nacimiento</label>
+                                            <label><b>Fecha de Nacimiento</b></label>
                                             <br />
                                             <input type="date" id="fechaNacimiento" class="redondeado form-control obligatoriaArr" name="fecha de nacimiento" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label><b>Imágen de Perfil</b></label>
+                                            <br />
+                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="propietario" class="propietario">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label>Nombre</label>
+                                            <label><b>Nombre</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaProp" id="nombrePropietario" name="nombre"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="nombrePropietario" name="nombre"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Apellido</label>
+                                            <label><b>Apellido</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaProp" id="apellidoPropietario" name="apellido"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="apellidoPropietario" name="apellido"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="documentoProp">Nro Documento</label>
+                                            <label for="documento"><b>Número de Documento</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaProp " id="documentoProp" name="Número de Documento"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="documentoProp" name="Número de documento"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="telefonoProp">Nro Telefono</label>
+                                            <label for="telefono"><b>Número de Teléfono</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaProp" id="telefonoProp" name="Número de teléfono"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="telefonoProp" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Fecha Nacimiento</label>
+                                            <label><b>Fecha de Nacimiento</b></label>
                                             <br />
-                                            <input type="date" id="fechaNacimientoProp" class="redondeado form-control obligatoriaProp" name="fecha de nacimiento" />
+                                            <input type="date" id="fechaNacimientoProp" class="redondeado form-control obligatoriaArr" name="fecha de nacimiento" />
                                         </div>
+                                        <div class="col-md-2">
+                                            <label><b>Imágen de Perfil</b></label>
+                                            <br />
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <img type="image" onclick="agregarImagen()" src="~/assets/img/icono-perfil.png" style="width:50px;height:37px" />
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col" id="asd123">
+                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                </div>
+                                            </div>
+                                            <div class=" row">
+                                                <div class="col">
+                                                    <label id="ArchivosYaCargados"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label><b>Dirección (Calle y Número)</b></label>
+                                            <br />
+                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
+                                        </div>
+
+
+                                        <div class="col-md-2" style="padding-left: 150px;">
+
+                                            
+
+                                        </div>
+
+
 
                                     </div>
                                 </div>
                                 <div id="inmobiliaria" class="inmobiliaria">
                                     <div class="row" style="padding-top:6px">
                                         <div class="col-md-2">
-                                            <label>Razón Social</label>
+                                            <label><b>Razón Social</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaInmo" id="nombreInmo" name="Razón Social"></textarea>
                                         </div>
-                                        <div class="col-md-2">
-                                            <label for="cuitInmo">CUIT</label>
+                                        <div class="col-md-3">
+                                            <label for="cuitInmo"><b>Código Único de Identificación Tributaria (CUIT)</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaInmo" id="cuitInmo" name="Número de CUIT"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label for="telefonoInmo">Teléfono</label>
+                                            <label for="telefonoInmo"><b>Número de Teléfono</b></label>
                                             <br />
                                             <textarea class="form-control obligatoriaInmo" id="telefonoInmo" name="Número de teléfono"></textarea>
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Alta Inscripción</label>
+                                            <label><b>Alta de Inscripción</b></label>
                                             <br />
                                             <input type="date" id="AltaInscripcionInmo" class="redondeado form-control obligatoriaInmo" name="Fecha alta inscripción" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label><b>Imágen de Perfil</b></label>
+                                            <br />
+                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label><b>Dirección (Calle y Número)</b></label>
+                                            <br />
+                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -167,8 +217,12 @@
 
 
     </div>
+    <div hidden>
+        <input type="file" id="inputImagen" value="cargarArchivos" onchange="mostrarNombreImagen()" />
+    </div>
     <script src="~/Scripts/select2.js"></script>
     <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/Generales.js"></script>
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 
 </body>
@@ -219,6 +273,7 @@
         html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
+        $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombre").text(cuentaVM.arrendatario.nombreArrendatario);
         $("#apellido").text(cuentaVM.arrendatario.apellidoArrendatario);
         $("#documento").text(cuentaVM.arrendatario.nroDocumento);
@@ -233,6 +288,7 @@
         html = html + '<option value="4">Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
+        $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombrePropietario").text(cuentaVM.propietario.nombrePropietario);
         $("#apellidoPropietario").text(cuentaVM.propietario.apellidoPropietario);
         $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
@@ -247,6 +303,7 @@
         html = html + '<option value="4" selected>Inmobiliaria</option>';
         $("#tipoCuenta").append(html);
         $("#tipoCuenta").change();
+        $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombreInmo").text(cuentaVM.inmobiliaria.nombreInmobiliaria);
         $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
         $("#telefonoInmo").text(cuentaVM.inmobiliaria.telefonoInmobiliariaStr);
@@ -288,7 +345,8 @@
                     url: '/Api/Arrendatario/CrearArrendatario',
                     data: arrendatario,
                     success: function (result) {
-                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=2&id=" + result;
+                        GuardarImagen(idCuenta);
+                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=2&id=" + result + "&idCuenta=" + idCuenta;
 
                     }
                 });
@@ -310,7 +368,8 @@
                     url: '/Api/Propietario/CrearPropietario',
                     data: propietario,
                     success: function (result) {
-                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=3&id=" + result;
+                        GuardarImagen(idCuenta);
+                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=3&id=" + result + "&idCuenta=" + idCuenta;
                     }
                 });
 
@@ -330,7 +389,8 @@
                     url: '/Api/Inmobiliaria/CrearInmobiliaria',
                     data: inmobiliaria,
                     success: function (result) {
-                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=4&id=" + result;
+                        GuardarImagen(idCuenta);
+                        window.location.href = "/Cuenta/CambiarTipoCuenta?tipoCuenta=4&id=" + result + "&idCuenta=" + idCuenta;
                     }
                 });
 

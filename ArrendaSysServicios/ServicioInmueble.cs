@@ -195,6 +195,9 @@ namespace ArrendaSysServicios
                                                   }
 
                                               }).FirstOrDefault();
+                
+
+
                 return inmueble;
             }
         }
@@ -251,6 +254,7 @@ namespace ArrendaSysServicios
                                      }
 
                                  }).ToList();
+
                 foreach (var inmu in inmuebles)
                 {
                     var listaArchivoVM = new List<ArchivoVM>();
@@ -310,6 +314,7 @@ namespace ArrendaSysServicios
                                      }
 
                                  }).ToList();
+
                 foreach (var inmu in inmuebles)
                 {
                     var listaArchivoVM = new List<ArchivoVM>();
@@ -333,6 +338,75 @@ namespace ArrendaSysServicios
         {
             throw new NotImplementedException();
         }
+
+        public InmuebleViewModel VerInmueble(int idInmueble)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                InmuebleViewModel inmueble = (from i in db.Inmueble
+                                              join d in db.Direccion on i.idDireccion equals d.idDireccion
+                                              join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                                              join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento
+                                              where i.idInmueble == idInmueble
+                                              select new InmuebleViewModel
+                                              {
+                                                  cantAmbientes = i.cantAmbientes,
+                                                  cantBanos = i.cantBanos,
+                                                  cantHabitaciones = i.cantHabitaciones,
+                                                  cochera = i.cochera,
+                                                  mtsCuadrados = i.mtsCuadrados,
+                                                  mtsCuadradosInt = i.mtsCuadradosInt,
+                                                  permiteMascota = i.permiteMascota,
+                                                  descripcionInmueble = i.descripcionInmueble,
+                                                  idInmueble = i.idInmueble,
+                                                  incluyeExpensas = i.incluyeExpensas,
+                                                  idArrendador = i.idArrendador,
+                                                  tipoArrendador = i.tipoArrendador,
+                                                  direccion = new DireccionViewModel
+                                                  {
+                                                      idDireccion = d.idDireccion,
+                                                      idLote = d.idLote,
+                                                      idManzana = d.idManzana,
+                                                      nombreBarrio = d.nombreBarrio,
+                                                      nombreCalle = d.nombreCalle,
+                                                      numeroCalle = d.numeroCalle,
+                                                      idLocalidad = d.idLocalidad,
+                                                      localidad = new LocalidadViewModel
+                                                      {
+                                                          idLocalidad = l.idLocalidad,
+                                                          codigopostal = l.codigoPostal,
+                                                          nombreLocalidad = l.nombreLocalidad,
+                                                          idDepartamento = l.idDepartamento,
+                                                          departamento = new DepartamentoViewModel
+                                                          {
+                                                              idDepartamento = dep.idDepartamento,
+                                                              nombreDepartamento = dep.nombreDepartamento
+                                                          }
+                                                      }
+
+                                                  }
+
+                                              }).FirstOrDefault();
+                
+                    
+                    var listaArchivoVM = new List<ArchivoVM>();
+                    var archivos = db.MultimediaInmueble.Where(x => x.idInmueble == inmueble.idInmueble).ToList();
+                    foreach (var multi in archivos)
+                    {
+                        var archivoVM = new ArchivoVM
+                        {
+                            idInmueble = inmueble.idInmueble,
+                            url = multi.urlMultimediaInmueble
+                        };
+                        listaArchivoVM.Add(archivoVM);
+                    }
+                    inmueble.listaMultimedia = listaArchivoVM;
+                
+                return inmueble;
+            }
+        }
     }
+
+    
 }
 

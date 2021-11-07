@@ -31,7 +31,9 @@
                     <div class="col-md12" id="botonAgregar">
                         <div class="col-md12">
                             <br />
-                            <button type="button" class="btn btn-info btn-sm" style="float:right; margin:20px;" onclick="mostrarformulario()"> Agregar Nuevo Alquiler</button>
+                            <button type="button" class="btn btn-info btn-sm" style="float:right; margin:20px;" onclick="mostrarformulario()">
+                                <i class="fas fa-plus"></i> Agregar Nuevo Alquiler
+                            </button>
                             <br />
                         </div>
 
@@ -74,8 +76,8 @@
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <button type="button" class="btn btn-success" id ="BotonGuardar" onclick="GuardarAlquiler()" ><i class="fas fa-save"></i> Guardar</button>
-                                <button type="button" class="btn btn-danger" id="btnvolver"><i class=" fa fa-reply"> </i>Volver</button>
+                                <a href="" class="btn btn-outline-success btn-sm" onclick="GuardarAlquiler()">Guardar</a>
+                                <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver">Cancelar</a>
                             </div>
                         </div>
                     </div>
@@ -88,7 +90,7 @@
                                 <br />
                                 <span>Fecha Alta: </span>
                                 <br />
-                                <input type="date" class="form-control" id="fechaAltaAlquiler2" />
+                                <input input readonly type="date" class="form-control" id="fechaAltaAlquiler2" />
                             </div>
 
                             <div class="col-md-2">
@@ -109,7 +111,11 @@
                                 <br />
                                 <span>Inmueble: </span>
                                 <br />
-                                <input input readonly type="text" class="form-control" id="idInmueble2"  />
+                                <input input readonly type="text" class="form-control" id="idInmueble2" />
+                            </div>
+                            <div class="col-md-2">
+                                
+                                <input input readonly type="text" class="form-control" id="idAlquiler2" style="visibility:hidden"/>
                             </div>
                         </div>
 
@@ -314,20 +320,38 @@
     }
 
     function EditarAlquiler(btn) {
-        $("#formulario").hide();
-        $("#formulario2").show();
-        var id = table.row($(btn).parents('tr')).data();
-        var fechaAltaStr = (id.fechaAltaAlquiler).toString().split('T')[0];
-        var fechaBajaStr = (id.fechaBajaAlquiler).toString().split('T')[0];
-        $("#fechaAltaAlquiler2").val(fechaAltaStr);
-        $("#fechaBajaAlquiler2").val(fechaBajaStr);
-        $("#idArrendatario2").val(id.idInmueble);
-        $("#idInmueble").change();
 
+        var id = table.row($(btn).parents('tr')).data();
+     
+        if (id.idEstadoAlquiler == 2) {
+      
+            window.alert("No se puede editar un alquiler vencido.");
+        } else {
+            $("#formulario").hide();
+            $("#formulario2").show();
+            var fechaAltaStr = (id.fechaAltaAlquiler).toString().split('T')[0];
+            var fechaBajaStr = (id.fechaBajaAlquiler).toString().split('T')[0];
+            $("#fechaAltaAlquiler2").val(fechaAltaStr);
+            $("#fechaBajaAlquiler2").val(fechaBajaStr);
+            $("#idArrendatario2").val(id.idArrendatario);
+            $("#idInmueble2").val(id.idInmueble);
+            $("#idAlquiler2").val(id.idAlquiler);
+        }
     }
     function EditarAlquiler1() {
 
-
+        alquiler = new Object();
+        alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler2").val();
+        alquiler.idAlquiler = $("#idAlquiler2").val();
+        debugger;
+       $.ajax({
+            type: 'Post',
+            url: '/Api/Alquiler/EditarAlquiler',
+            data: alquiler,
+            success: function (result) {
+                window.location.href = "/Alquileres/Alquileres";
+            }
+        });
 
     }
 
