@@ -37,8 +37,8 @@ namespace ArrendaSys.Controllers.Api
 
         [System.Web.Http.Route("Api/Alquiler/EliminarAlquiler")]
         [System.Web.Http.ActionName("EliminarAlquiler")]
-        [System.Web.Http.HttpPut]
-        public void EliminarAlquiler(int idAlquiler)
+        [System.Web.Http.HttpPost]
+        public void EliminarAlquiler(AlquileresViewModel idAlquiler)
         {
             ServicioAlquiler servicio = new ServicioAlquiler();
             servicio.EliminarAlquiler(idAlquiler);

@@ -17,10 +17,30 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="container">
-                                        <div class="col-md-1">
-                                            <button class="btn btn-success" onclick="generarReporte()">Imprimir Reporte</button>
-                                            <br /><br />
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <label for="fechaDesdeInput">Desde</label>
+                                                <br />
+                                                <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
+                                            </div>
+                                            <div class="col-3">
+                                                <label for="fechaDesdeInput">Hasta</label>
+                                                <br />
+                                                <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
+                                            </div>
+                                            <div class="col-1">
+                                                <button class="btn btn-success" onclick="completarResenias()">Filtrar</button>
+                                                <br /><br />
+                                            </div>
+                                            <div class="col-1">
+
+                                            </div>
+                                            <div class="col-1">
+                                                <button class="btn btn-success" onclick="generarReporte()">Imprimir Reporte</button>
+                                                <br /><br />
+                                            </div>
                                         </div>
+                                        
                                         <div class="container" id="body">
                                             @*Aca va todo el cuerpo*@
                                         </div>
@@ -54,19 +74,39 @@
     var usuario = "@usuario";
     var id = parseInt(@id);
     var idCuenta = parseInt(@idCuenta);
+    var fechaDesde;
+    var fechaHasta;
     var pag = 1;
     (function () {
+        CargarFiltros();
         completarResenias();
     })();
     var cantidad = 0;
-    
+    function CargarFiltros() {
+        //Creo las fechas de hasta con dia de hoy y desde con 15 dias atras
+        var Hasta = new Date();
+        var Desde = new Date(Hasta);
+        var dias = 15;  //Dias para atras del dia de hoy para que salgan en Novedades
+        Desde.setDate(Desde.getDate() - dias);
+        var fechaDesdeInput = FechaformatoInput(Desde);
+        var fechaHastaInput = FechaformatoInput(Hasta);
+
+        //las cargo en las variables globales
+        fechaDesde = fechaHoyMostrar(Desde);
+        fechaHasta = fechaHoyMostrar(Hasta);
+        //las cargo en el input
+        $('#fechaDesdeFiltro').val(fechaDesdeInput);
+        $('#fechaHastaFiltro').val(fechaHastaInput);
+    }
     function completarResenias() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        $("#body").empty();
         $.ajax({
             type: 'Get',
-            url: '/Api/Resenia/obtenerResenias?tipoCuenta=' + tipoCuenta + "&id=" + id+"&pag="+pag,
+            url: '/Api/Resenia/obtenerResenias?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta,
             success: function (result) {
                 cantidad = result.cantidad;
-                $("#body").empty();
                 var item = "";
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
@@ -117,6 +157,8 @@
         completarResenias();
     }
     function generarReporte() {
-        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuenta + "&id=" + id, "Reporte de Reseñas");
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuenta + "&id=" + id + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, "Reporte de Reseñas");
     }
 </script>

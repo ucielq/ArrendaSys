@@ -16,7 +16,7 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpPost]
         public string create_preference()
         {
-            MercadoPagoConfig.AccessToken = "APP_USR-5188967914255972-072920-8569e9ebf8526fc9867cd6f044164209-434981148";
+            MercadoPagoConfig.AccessToken = "APP_USR-3158103808833716-110804-82b3dd8e48a945346b7ed7a01b24c7e5-434981148";
             var request = new PreferenceRequest
             {
                 Items = new List<PreferenceItemRequest>
