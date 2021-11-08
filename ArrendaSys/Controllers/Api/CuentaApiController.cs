@@ -30,7 +30,18 @@ namespace ArrendaSys.Controllers.Api
                 }
             }
         }
-
+        
+        [System.Web.Http.Route("Api/Cuenta/obtenerCodigoCuenta")]
+        [System.Web.Http.ActionName("obtenerCodigoCuenta")]
+        [System.Web.Http.HttpGet]
+        public int obtenerCodigoCuenta(int idCuenta)
+        {
+            using (ArrendasysEntities entities = new ArrendasysEntities())
+            {
+                var cuenta = entities.Cuenta.Where(x => x.idCuenta == idCuenta).FirstOrDefault();
+                return (int)cuenta.codigoConfimacion;
+            }
+        }
         [System.Web.Http.Route("Api/Cuenta/GuardarImagenCuenta")]
         [System.Web.Http.ActionName("GuardarImagenCuenta")]
         [System.Web.Http.HttpPost]

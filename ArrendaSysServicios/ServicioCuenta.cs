@@ -271,6 +271,7 @@ namespace ArrendaSysServicios
                 var cuent = db.Cuenta.Where(x => x.idCuenta == idCuenta && x.fechaBajaCuenta == null).FirstOrDefault();
                 if (cuent != null)
                 {
+                    cuenta.rutaFoto = cuent.urlImagen;
                     if (cuent.idPremium != null)
                     {
                         cuenta.premium = "1";

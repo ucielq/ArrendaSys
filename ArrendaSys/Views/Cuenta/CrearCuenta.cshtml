@@ -1,10 +1,11 @@
-﻿
+﻿@model ArrendaSysServicios.Modelos.CuentaViewModel
 @{
     ViewBag.Title = "CrearCuenta";
 }
 @{
     Layout = null;
 }
+@using ArrendaSysServicios.Modelos;
 
 <!DOCTYPE html>
 <link href="~/Sidebar/styles.css" rel="stylesheet" />
@@ -24,7 +25,7 @@
         -ms-transform: scale(1);
         z-index: 5;
     }
-
+    
         .box.back {
             transform: scale(.95);
             -webkit-transform: scale(.95);
@@ -417,7 +418,7 @@
     <meta name="viewport" content="width=device-width" />
     <meta charset="UTF-8">
     <title>CrearCuenta</title>
-    
+
 
 </head>
 <body>
@@ -470,11 +471,14 @@
         </div>
 
     </div>
+    <script src="~/Scripts/Generales.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
     <script src="~/Sidebar/scripts.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href="//fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900&subset=latin,latin-ext" rel="stylesheet" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 
     @*MODALES*@
     <div class="modal fade" id="modalEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -571,6 +575,7 @@
 
 </body>
 <script>
+
     $("#igualdad").hide();
     $("#xmail").hide();
     $("#xpass").hide();
@@ -581,10 +586,30 @@
     $("#email").keyup(function () {
         caracteresCorreoValido($(this).val())
     });
-
+    var idCuenta = GetUrlVars()["idCuenta"];
+    revisar();
+    function revisar() {
+        if (idCuenta != undefined && idCuenta != null && idCuenta != "") {
+            var id = parseInt(idCuenta);
+            $.ajax({
+                type: 'Get',
+                url: '/Api/Cuenta/obtenerCodigoCuenta?idCuenta=' + id,
+                async: false,
+                success: function (result) {
+                    codigo = result;
+                    $("#crearCuenta").hide();
+                    $("#divpass").hide();
+                    $("#divpass1").hide();
+                    $("#confirm").show();
+                    $("#confirmar").show();
+                }
+            });
+        }
+    }
+    
     function caracteresCorreoValido(email) {
         var caract = new RegExp(/^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
- /*       debugger;*/
+        /*       debugger;*/
         if (!caract.test(email)) {
             $("#xmail").show();
 
@@ -613,7 +638,7 @@
 
     function validarContraseña(pass) {
         var caract = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/);
-/*        debugger;*/
+        /*        debugger;*/
         if (caract.test(pass)) {
             $("#xpass").hide();
             return true;
@@ -733,7 +758,7 @@
 
     $("#crearCuenta").click(function () {
         //Valido todos los datos
-        
+
         validarMail();
 
     });
@@ -741,17 +766,17 @@
         if ($("#pass").val() == $("#pass1").val()) {
             if (caracteresCorreoValido($("#email").val())) {
                 if (validarContraseña($("#pass").val())) {
-                $.ajax({
-                    type: 'Get',
-                    url: '/Api/Cuenta/ValidarMail?email=' + $("#email").val(),
-                    success: function (result) {
-                        if (result == 1) {
-                            altaCuenta();
-                        } else {
-                            $("#modalEmailDuplicado").modal('show');
+                    $.ajax({
+                        type: 'Get',
+                        url: '/Api/Cuenta/ValidarMail?email=' + $("#email").val(),
+                        success: function (result) {
+                            if (result == 1) {
+                                altaCuenta();
+                            } else {
+                                $("#modalEmailDuplicado").modal('show');
+                            }
                         }
-                    }
-                });
+                    });
                 } else $("#modalContrasenaValida").modal('show');
             }
             else {
@@ -781,14 +806,14 @@
     }
     $("#confirmar").click(function () {
         if ($("#codigo").val() == codigo) {
-            window.location.href = "/Cuenta/confirmaCuenta?email="+$("#email").val();
+            window.location.href = "/Cuenta/confirmaCuenta?email=" + $("#email").val();
         }
         else {
             $("#modalCodigoErroneo").modal('show');
         }
     });
 
-   
+
 
 
 </script>
