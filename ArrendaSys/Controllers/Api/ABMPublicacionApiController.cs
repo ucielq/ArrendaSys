@@ -38,11 +38,11 @@ namespace ArrendaSys.Controllers.Api
 
         [System.Web.Http.Route("Api/ABMPublicacion/EliminarPublicacion")]
         [System.Web.Http.ActionName("EliminarPublicacion")]
-        [System.Web.Http.HttpPut]
-        public void EliminarPublicacion(int idPublicacion)
+        [System.Web.Http.HttpPost]
+        public void EliminarPublicacion(ABMPublicacionViewModel publicacion)
         {
             ServicioABMPublicacion servicio = new ServicioABMPublicacion();
-            servicio.EliminarPublicacion(idPublicacion);
+            servicio.EliminarPublicacion(publicacion);
 
 
         }

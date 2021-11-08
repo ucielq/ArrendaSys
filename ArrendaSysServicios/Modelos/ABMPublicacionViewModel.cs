@@ -17,6 +17,8 @@ namespace ArrendaSysServicios.Modelos
         public decimal? precioAlquiler { get; set; }
         public string tituloPublicacion { get; set; }
         public int? idInmueble { get; set; }
+
+        public int? idPublicacionEstado { get; set; }
         public string descripcionEstadoPublicacion { get; set; }
 
         public InmuebleViewModel inmueble { get; set; }
