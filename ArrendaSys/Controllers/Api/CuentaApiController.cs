@@ -30,7 +30,19 @@ namespace ArrendaSys.Controllers.Api
                 }
             }
         }
-        
+        [System.Web.Http.Route("Api/Cuenta/eliminarCuenta")]
+        [System.Web.Http.ActionName("eliminarCuenta")]
+        [System.Web.Http.HttpPost]
+        public void eliminarCuenta(int idCuenta)
+        {
+            using (ArrendasysEntities entities = new ArrendasysEntities())
+            {
+                var cuenta = entities.Cuenta.Where(x => x.idCuenta == idCuenta).FirstOrDefault();
+                cuenta.fechaBajaCuenta=DateTime.Now;
+                entities.SaveChanges();
+            }
+        }
+
         [System.Web.Http.Route("Api/Cuenta/obtenerCodigoCuenta")]
         [System.Web.Http.ActionName("obtenerCodigoCuenta")]
         [System.Web.Http.HttpGet]
