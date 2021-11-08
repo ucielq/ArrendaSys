@@ -40,6 +40,7 @@ namespace ArrendaSysServicios
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
                                           idInmueble = p.idInmueble,
+                                          idPublicacionEstado = pe.idPublicacionEstado,
                                           descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
                                           descripcionPublicacion=p.descripcionPublicacion
                                       }).ToList();
@@ -62,7 +63,9 @@ namespace ArrendaSysServicios
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
                                           idInmueble = p.idInmueble,
-                                          descripcionEstadoPublicacion = ep.nombreEstadoPublicacion
+                                          idPublicacionEstado = pe.idPublicacionEstado,
+                                          descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
+                                          descripcionPublicacion = p.descripcionPublicacion
                                       }).ToList();
                     object json = new { data = publicaciones };
                     return json;
@@ -150,24 +153,26 @@ namespace ArrendaSysServicios
       
 
 
-        public void EliminarPublicacion(int idPublicacion)
+        public void EliminarPublicacion(ABMPublicacionViewModel publicacion)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var publicacion1 = db.Publicacion.Where(x => x.idPublicacion == idPublicacion).FirstOrDefault();
+                var publicacion1 = db.Publicacion.Where(x => x.idPublicacion == publicacion.idPublicacion).FirstOrDefault();
+                
                 if (publicacion1 != null)
                 {
 
-                    var publicacionEstado = db.PublicacionEstado.Where(x => x.idPublicacion == idPublicacion && x.fechaBajaPublicacionEstado == null).FirstOrDefault();
+                    var publicacionEstado = db.PublicacionEstado.Where(x => x.idPublicacion == publicacion.idPublicacion && x.fechaBajaPublicacionEstado == null).FirstOrDefault();
                     publicacionEstado.fechaBajaPublicacionEstado = DateTime.Now;
                     PublicacionEstado nuevoEstado = new PublicacionEstado();
                     nuevoEstado.fechaAltaPublicacionEstado = DateTime.Now;
+                    nuevoEstado.fechaBajaPublicacionEstado= DateTime.Now;
                     nuevoEstado.idEstadoPublicacion = 2;
-                    nuevoEstado.idPublicacion = idPublicacion;
+                    nuevoEstado.idPublicacion = publicacion.idPublicacion;
                     db.PublicacionEstado.Add(nuevoEstado);
                     db.SaveChanges();
 
-                    var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion1.idInmueble).FirstOrDefault();
+                    var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion.idInmueble).FirstOrDefault();
                     var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado==null).FirstOrDefault();
                     if (inmuest != null)
                     {
@@ -183,6 +188,13 @@ namespace ArrendaSysServicios
                         db.InmuebleEstado.Add(inmuEstadoNuevo);
                         db.SaveChanges();
                     }
+
+                   
+
+                    db.Publicacion.Remove(publicacion1);
+                    db.SaveChanges();
+
+
                 }
             }
         }

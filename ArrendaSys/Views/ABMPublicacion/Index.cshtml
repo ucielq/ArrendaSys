@@ -159,6 +159,7 @@
                                                     <th>Precio</th>
                                                     <th>Inmueble</th>
                                                     <th>Descripción</th>
+                                                    <th>idPublicacionEstado</th>
                                                     <th>Estado</th>
                                                     <th></th>
                                                 </tr>
@@ -271,6 +272,7 @@
                 { data: "precioAlquiler", "className": "text-left" },
                 { data: "idInmueble", "className": "text-left" },
                 { data: "descripcionPublicacion", "className": "text-left" },
+                { data: "idPublicacionEstado", "className": "text-left", "visible": false },
                 { data: "descripcionEstadoPublicacion", "className": "text-left" },
                {data:"idPublicacion",
                     orderable: false,
@@ -322,16 +324,32 @@
 
     }
     function EliminarPublicacion(btn) {
-        var id = table.row($(btn).parents('tr')).data();
-        console.log(id.idAlquiler);
 
+        var id = table.row($(btn).parents('tr')).data();
+        debugger;
+        publicacion1 = new Object();
+        publicacion1.idPublicacion = id.idPublicacion;
+        publicacion1.idInmueble = id.idInmueble;
+        publicacion1.idPublicacionEstado = id.idPublicacionEstado;
+        debugger;
         $.ajax({
-            type: 'Put',
-            url: '/Api/ABMPublicacion/EliminarPublicacion?idPublicacion=' + id.idPublicacion,
+            type: 'Post',
+            url: '/Api/ABMPublicacion/EliminarPublicacion',
+            data: publicacion1,
             success: function (result) {
-                location.href = '/ABMPublicacion';
+                window.location.href = "/ABMPublicacion";
             }
         });
+        //var id = table.row($(btn).parents('tr')).data();
+        //console.log(id.idAlquiler);
+
+        //$.ajax({
+        //    type: 'Put',
+        //    url: '/Api/ABMPublicacion/EliminarPublicacion?idPublicacion=' + id.idPublicacion,
+        //    success: function (result) {
+        //        location.href = '/ABMPublicacion';
+        //    }
+        //});
 
     }
 
