@@ -39,7 +39,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Por favor ingrese un formato de correo electrónico válido.
+                    <div><p><h3>Reseñas del Inmueble</h3></p></div>
+                    <div class="container" id="bodyInmueble">
+                        @*Aca va todo el cuerpo*@
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
@@ -57,7 +60,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Por favor ingrese un formato de correo electrónico válido.
+                    <div><p><h3>Reseñas recibidas</h3></p></div>
+                    <div class="container" id="bodyArrendador">
+                        @*Aca va todo el cuerpo*@
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
@@ -178,8 +184,8 @@
                     if (publicacion.inmueble.tipoArrendador == 4) {
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
                         item = item + "<p>" + "Publicado por: " + publicacion.inmobiliaria.nombrePropietario + "</p>";
-                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerResenia(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
-                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerResenia(" + publicacion.inmobiliaria.idInmobiliaria + ")'>Ver Reseñas Arrendador</button>";
+                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerReseniaIn(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
+                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerReseniaArr(" + publicacion.inmobiliaria.idInmobiliaria + ")'>Ver Reseñas Arrendador</button>";
                     }
                 }
                 
@@ -205,8 +211,69 @@
     function Volver() {
         location.href ='javascript: history.go(-1)';
     }
-    function VerResenia() {
+   
+    function VerReseniaIn(idInmueble) {
         $("#modalinmueble").modal('show');
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/listarReseniaInmueble?idInmueble=' +idInmueble ,
+            success: function (result) {
+                cantidad = result.cantidad;
+                $("#bodyInmueble").empty();
+                var item = "";
+                result.lista.forEach(function (data, index) {
+                    item = item + "<div class='row'>";
+                    item = item + "<div class='col-md-2'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span>";
+                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+
+                $("#bodyInmueble").append(item);
+                paginasInmueble();
+            }
+        });
+    }
+
+    function VerReseniaArr(idPropietario) {
+        $("#modalarrendador").modal('show');
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/listarReseniaArr?idInmueble=' + idPropietario,
+            success: function (result) {
+                cantidad = result.cantidad;
+                $("#bodyArrendador").empty();
+                var item = "";
+                result.lista.forEach(function (data, index) {
+                    item = item + "<div class='row'>";
+                    item = item + "<div class='col-md-2'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span>";
+                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+
+                $("#bodyArrendador").append(item);
+                paginasInmueble();
+            }
+        });
     }
 
 </script>

@@ -101,6 +101,24 @@ namespace ArrendaSys.Controllers.Api
             var lista = servicio.obtenerReseniasAlquilerInmueble(tipoCuenta, id, pag, idAlquiler);
             return lista;
         }
+        [System.Web.Http.Route("Api/Resenia/listarReseniaInmueble")]
+        [System.Web.Http.ActionName("listarReseniaInmueble")]
+        [System.Web.Http.HttpGet]
+        public List<ReseniaViewModel> listarReseniaInmueble(int idInmueble)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var lista = servicio.listarReseniaInmueble(idInmueble);
+            return lista;
+        }
+        [System.Web.Http.Route("Api/Resenia/listarReseniaArr")]
+        [System.Web.Http.ActionName("listarReseniaArr")]
+        [System.Web.Http.HttpGet]
+        public List<ReseniaViewModel> listarReseniaArr(int idPropietario)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var lista = servicio.listarReseniaArr(idPropietario);
+            return lista;
+        }
 
     }
 }

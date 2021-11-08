@@ -396,5 +396,59 @@ namespace ArrendaSysServicios
 
             }
         }
+
+        public List<ReseniaViewModel> listarReseniaInmueble(int idInmueble)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<ReseniaViewModel> listaFinal = new List<ReseniaViewModel>();
+
+                var lista = (from r in db.ReseñaArrendatarioInmueble
+                             join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                             join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                             join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                             where i.idInmueble== idInmueble
+                             select new ReseniaViewModel
+                             {
+                                 descripcionResenia = r.descripcionReseñaAI,
+                                 fechaAltaReseña = r.fechaAltaReseñaAI,
+                                 puntuacionResenia = r.puntuacionReseñaAI,
+                                 idResenia = r.idReseñaAI,
+                                 idAlquiler = r.idAlquiler,
+                                 idInmueble = a.idInmueble,
+                                 nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                             }).ToList();
+                listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                return listaFinal;
+            }
+            
+        }
+        public List<ReseniaViewModel> listarReseniaArr(int idPropietario)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<ReseniaViewModel> listaFinal = new List<ReseniaViewModel>();
+
+                var lista = (from r in db.ReseñaArrendatarioArrendador
+                             join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                             join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                             join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                             join pr in db.Propietario on i.idArrendador equals pr.idPropietario
+                             where pr.idPropietario== idPropietario
+                             select new ReseniaViewModel
+                             {
+                                 descripcionResenia = r.descripcionReseñaArAo,
+                                 fechaAltaReseña = r.fechaAltaReseñaArAo,
+                                 puntuacionResenia = r.puntuacionReseñaArAo,
+                                 idResenia = r.idReseñaArAo,
+                                 idAlquiler = r.idAlquiler,
+                                 idInmueble = a.idInmueble,
+                                 nombreAutor = arr.nombreArrendatario + " " + arr.apellidoArrendatario
+                             }).ToList();
+                listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                return listaFinal;
+            }
+
+        }
     }
 }
