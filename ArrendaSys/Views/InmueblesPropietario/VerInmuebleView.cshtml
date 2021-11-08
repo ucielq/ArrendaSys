@@ -33,7 +33,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="height:720px;">
                     <div class="card-header card-header-info">
                         <div class="float-left">
                             <div class="titulo">Inmueble</div>
@@ -113,11 +113,12 @@
                     item = item + "</div>";
 
                      item = item + "<div class='col-md-6'>";
-                    item = item + "<p>" + inmueble.descripcionInmueble + "</p>";
+                    
 
-                     item = item + "<p>" + "Dirección: " + "</p>";
-                    item = item + "<p>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + "-" + inmueble.direccion.localidad.nombreLocalidad + " - " + inmueble.direccion.localidad.departamento.nombreDepartamento +  "</p>";
-                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + " Metros Cuadrados:  " + inmueble.mtsCuadrados + "</p>";
+                     item = item + "<h3><b>" + "Dirección: " + "</b></h3>";
+                    item = item + "<p>" + " " + inmueble.direccion.nombreCalle + " " + inmueble.direccion.numeroCalle + " - " + inmueble.direccion.localidad.nombreLocalidad + " - " + inmueble.direccion.localidad.departamento.nombreDepartamento +  "</p>";
+                item = item + "<h3><b>" + "Especificaciones: " + "</b></h3>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " Metros Cuadrados:  " + inmueble.mtsCuadrados + "</p>";
                     item = item + "<p><i class='fas fa-home'></i>" + " Metros Interior: " + inmueble.mtsCuadradosInt + "</p>";
                     item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de Habitaciones: " + inmueble.cantHabitaciones + "</p>";
                     item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de Baños: " + inmueble.cantBanos + "</p>";
@@ -126,12 +127,12 @@
                     } else {
                         item = item + "<p><i class='fas fa-warehouse'></i>" + "  "+ "No tiene Cochera" + "</p>";
                     }
-                    
+                     item = item + "<p>" + inmueble.descripcionInmueble + "</p>";
                     item = item + "</div>";
                
                     
                 item = item + "</div>";
-                item = item + "<button class='btn btn-outline-danger btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
+                item = item + "<button class='btn btn-outline-secondary btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
                
                
