@@ -18,6 +18,7 @@ namespace ArrendaSysServicios.Modelos
         public string apellidoArrendatario { get; set; }
         public int idCuenta { get; set; }
         public int idArrendatario { get; set; }
+        public string foto { get; set; }
 
 
     }

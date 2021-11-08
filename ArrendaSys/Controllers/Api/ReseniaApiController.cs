@@ -133,6 +133,7 @@ namespace ArrendaSys.Controllers.Api
             return indicador;
         }
 
+
     }
 
 }
