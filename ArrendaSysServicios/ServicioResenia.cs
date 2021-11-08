@@ -498,9 +498,6 @@ namespace ArrendaSysServicios
                 return response;
             }
         }
-    }
-    
-
         public int? indicadorAlquilerActivo(int idAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
@@ -517,5 +514,6 @@ namespace ArrendaSysServicios
             }
 
         }
-    }
+    } 
 }
+
