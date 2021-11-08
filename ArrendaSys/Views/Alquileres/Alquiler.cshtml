@@ -171,10 +171,10 @@ p {
 
                 if (tipoCuenta == 2) {
                     item = item + "<div class='row'>"
-                    item = item + "<div class='row' id='reseniasAI'>";
+                    item = item + "<div class='row' id='reseniasAI' style='display:none'>";
                     item = item + "</div>";
                     cargarReseniasAI();
-                    item = item + "<div class='row' id='formularioAI'>";
+                    item = item + "<div class='row' id='formularioAI' style='display:none'>";
                     item = item + "</div>";
                     cargarItemsAI();
                     item = item + "</div>";
@@ -206,7 +206,7 @@ p {
                         item = item + "</hr>";
                     }
                     cargarReseniasArAo();
-                    item = item + "<div class='row' id='formularioArAo'>";
+                    item = item + "<div class='row' id='formularioArAo' style='display:none'>";
                     item = item + "</div>";
                     cargarItemsArAo();
                 }
@@ -218,11 +218,11 @@ p {
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
                     cargarReseniasAoAr();
-                    item = item + "<div class='row' id='formularioAoAr'>";
+                    item = item + "<div class='row' id='formularioAoAr' style='display:none'>";
                     item = item + "</div>";
                     cargarItemsAoAr();
                 }
-
+                
                 item = item + "</div>";
 
                 //Listar Reseñas
