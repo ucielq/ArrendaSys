@@ -173,8 +173,9 @@ p {
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
                         item = item + "<p><h3>Arrendador</h3></p><img src='..\\TempFolder\\" + rutaParcial + "' style='height:100px; width:120px;'></img> ";
-                        item = item + "<p><h5>Nombre: " + result.arrendador.nombrePropietario + "</h5></p>";
+                        item = item + "<p><h5>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h5></p>";
                         item = item + "<p><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></p>";
+                        item = item + "<p><h5>Telefono: " + result.arrendador.telefonoPropietario + "</h5></p>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
@@ -182,7 +183,7 @@ p {
                     } else {
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
-                        item = item + "<p><h3>Inmobiliaria</h3></p>";
+                        item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + rutaParcial + "' style='height:100px; width:120px;'></img> ";
                         item = item + "<p><h5>Nombre: " + result.arrendador.nombreInmobiliaria + "</h5></p>";
                         item = item + "<p><h5>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h5></p>";
                         item = item + "<div class='row' id='reseniasArAo'>";
@@ -194,9 +195,10 @@ p {
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
                     item = item + "<hr/>";
                     item = item + "<div class='row'>";
-                    item = item + "<p><h3>Arrendatario</h3></p>";
+                    item = item + "<p><h3>Arrendatario</h3></p><img src='..\\TempFolder\\" + rutaParcial + "' style='height:100px; width:120px;'></img> ";
                     item = item + "<p><h5>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</h5></p>";
                     item = item + "<p><h5>Documento: " + result.arrendatario.nroDocumento + "</h5></p>";
+                    item = item + "<p><h5>Telefono: " + result.arrendatario.telefonoArrendatario + "</h5></p>";
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
                 }
