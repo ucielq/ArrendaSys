@@ -106,19 +106,27 @@ namespace ArrendaSysServicios
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-
                 Alquiler alquiler1 = new Alquiler();
-
-
                 alquiler1.fechaAltaAlquiler = alquiler.fechaAltaAlquiler;
                 alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
                 alquiler1.idArrendatario = alquiler.idArrendatario;
                 alquiler1.idInmueble = alquiler.idInmueble;
-
                 db.Alquiler.Add(alquiler1);
                 db.SaveChanges();
-
+                var arrendatario1 = db.Arrendatario.Where(x => x.idArrendatario == alquiler.idArrendatario).FirstOrDefault();
                 var inmu = db.Inmueble.Where(x => x.idInmueble == alquiler.idInmueble).FirstOrDefault();
+                var dir = db.Direccion.Where(x => x.idDireccion == inmu.idDireccion).FirstOrDefault();
+                Notificacion noti1 = new Notificacion();
+                noti1.descripcionNotificacion ="Se ha creado un alquiler en "+dir.nombreBarrio+", calle "+dir.nombreCalle+".";
+                noti1.nombreNotificacion ="Creación Alquiler";
+                noti1.fechaNotificacion = DateTime.Now;
+                noti1.idCuenta = arrendatario1.idCuenta;
+                noti1.leido = false;
+                db.Notificacion.Add(noti1);
+                db.SaveChanges();
+
+
+               
                 var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
 
                 if (inmuest != null)
@@ -163,21 +171,42 @@ namespace ArrendaSysServicios
         }
 
 
-        public void EliminarAlquiler(int idAlquiler)
+        public void EliminarAlquiler(AlquileresViewModel alquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var alquiler1 = db.Alquiler.Where(x => x.idAlquiler == idAlquiler).FirstOrDefault();
+                var alquiler1 = db.Alquiler.Where(x => x.idAlquiler == alquiler.idAlquiler).FirstOrDefault();
                 if (alquiler1 != null)
                 {
 
-                    var alquilerEstado = db.AlquilerEstado.Where(x => x.idAlquiler == idAlquiler && x.fechaBajaAlquilerEstado == null).FirstOrDefault();
+                    var alquilerEstado = db.AlquilerEstado.Where(x => x.idAlquiler == alquiler.idAlquiler && x.fechaBajaAlquilerEstado == null).FirstOrDefault();
                     alquilerEstado.fechaBajaAlquilerEstado = DateTime.Now;
                     AlquilerEstado nuevoEstado = new AlquilerEstado();
                     nuevoEstado.fechaAltaAlquilerEstado = DateTime.Now;
+                    nuevoEstado.fechaBajaAlquilerEstado = null;
                     nuevoEstado.idEstadoAlquiler = 2;
-                    nuevoEstado.idAlquiler = idAlquiler;
+                    nuevoEstado.idAlquiler = alquiler.idAlquiler;
                     db.AlquilerEstado.Add(nuevoEstado);
+                    db.SaveChanges();
+                    var inmuebleestado = db.InmuebleEstado.Where(x => x.idInmueble == alquiler.idInmueble && x.fechaBajaInmuebleEstado == null && x.idEstadoInmueble == 3).FirstOrDefault();
+                    inmuebleestado.fechaBajaInmuebleEstado = DateTime.Now;
+                    InmuebleEstado nuevoinmuestado = new InmuebleEstado();
+                    nuevoinmuestado.fechaAltaInmuebleEstado= DateTime.Now;
+                    nuevoinmuestado.fechaBajaInmuebleEstado=null;
+                    nuevoinmuestado.idEstadoInmueble=1;
+                    nuevoinmuestado.idInmueble= alquiler.idInmueble;
+                    db.InmuebleEstado.Add(nuevoinmuestado);
+                    db.SaveChanges();
+                    var arrendatario1 = db.Arrendatario.Where(x=>x.idArrendatario == alquiler.idArrendatario).FirstOrDefault();
+                    var inmueble1 = db.Inmueble.Where(x => x.idInmueble == alquiler.idInmueble).FirstOrDefault();
+                    var direccion1 = db.Direccion.Where(x => x.idDireccion == inmueble1.idDireccion).FirstOrDefault();
+                    Notificacion notif = new Notificacion();
+                    notif.descripcionNotificacion = "Se ha dado de baja el Alquiler de " + direccion1.nombreBarrio + ", calle " + direccion1.nombreCalle + ".";
+                    notif.nombreNotificacion = "Eliminación Alquiler";
+                    notif.fechaNotificacion = DateTime.Now;
+                    notif.idCuenta = arrendatario1.idCuenta;
+                    notif.leido = false;
+                    db.Notificacion.Add(notif);
                     db.SaveChanges();
                 }
             }
@@ -394,6 +423,17 @@ namespace ArrendaSysServicios
             var alquiler1 = db.Alquiler.Where(x => x.idAlquiler == alquiler.idAlquiler).FirstOrDefault();
             alquiler1.fechaBajaAlquiler = alquiler.fechaBajaAlquiler;
             //db.Alquiler.Add(alquiler1);
+            db.SaveChanges();
+            Notificacion notif2 = new Notificacion();
+            var inmueble1 = db.Inmueble.Where(x => x.idInmueble == alquiler.idInmueble).FirstOrDefault();
+            var direccion1 = db.Direccion.Where(x => x.idDireccion == inmueble1.idDireccion).FirstOrDefault();
+            var arrendatario1 = db.Arrendatario.Where(x => x.idArrendatario == alquiler.idArrendatario).FirstOrDefault();
+            notif2.descripcionNotificacion = "Se ha modificado el Alquiler de " + direccion1.nombreBarrio + ", calle " + direccion1.nombreCalle + ".";
+            notif2.nombreNotificacion = "Modificación Alquiler";
+            notif2.fechaNotificacion = DateTime.Now;
+            notif2.idCuenta = arrendatario1.idCuenta;
+            notif2.leido = false;
+            db.Notificacion.Add(notif2);
             db.SaveChanges();
         }
 

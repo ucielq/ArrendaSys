@@ -111,27 +111,26 @@ namespace ArrendaSysServicios
                 publicacion1.fechaBajaPublicacion = publicacion.fechaBajaPublicacion;
                 publicacion1.precioAlquiler = publicacion.precioAlquiler;
                 publicacion1.idInmueble = publicacion.idInmueble;
-
+                
                 db.Publicacion.Add(publicacion1);
-
+                db.SaveChanges();
                 var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion.idInmueble).FirstOrDefault();
                 var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
                 if (inmuest != null)
                 {
                     inmuest.fechaBajaInmuebleEstado = DateTime.Now;
 
-                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
-                    {
-                        fechaAltaInmuebleEstado = DateTime.Now,
-                        fechaBajaInmuebleEstado = null,
-                        idEstadoInmueble = 4,
-                        idInmueble = inmu.idInmueble
-                    };
+                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado();
+
+                    inmuEstadoNuevo.fechaAltaInmuebleEstado = DateTime.Now;
+                    inmuEstadoNuevo.fechaBajaInmuebleEstado = null;
+                    inmuEstadoNuevo.idEstadoInmueble = 4;
+                    inmuEstadoNuevo.idInmueble = inmu.idInmueble;
+                    
                     db.InmuebleEstado.Add(inmuEstadoNuevo);
                     db.SaveChanges();
                 }
 
-                db.SaveChanges();
                 //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
                 CrearPublicacionEstado(publicacion1.idPublicacion);
                 return 1;
