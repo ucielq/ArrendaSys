@@ -29,6 +29,43 @@
     }
 </style>
 
+    <div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Formato no válido</b></h5>
+                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Por favor ingrese un formato de correo electrónico válido.
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                </div>
+             </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Formato no válido</b></h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Por favor ingrese un formato de correo electrónico válido.
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -41,7 +78,7 @@
 
                     </div>
                     <section id="gallery">
-                        <div class="container" id="publicacion" style="margin-left: 450px">
+                        <div class="container" id="publicacion" style="margin-left: 10px">
                             @*Cuerpo de la pagina*@
                         </div>
 
@@ -110,27 +147,47 @@
                     item = item + "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
                     item = item + "<span class='sr-only'>Next</span></a>";
                     item = item + "</div>";
-                    item = item + "</div>";
-                    item = item + "</div>";                   
-                    item = item + "</div>";
-
                 item = item + "</div>";
                 item = item + "</div>";
-                item = item + "<div class='col-md-6' style='margin-left:-400'>";
+                item = item + "<div class='col-md-4' style='margin-left:-1'>";
                 item = item + "<p>" + publicacion.inmueble.descripcionInmueble + "</p>";
-                item = item + "<p>" + "Precio de Alquiler: $ " +publicacion.precioAlquiler+ "</p>";
+                item = item + "<p>" + "Precio de Alquiler: $ " + publicacion.precioAlquiler + "</p>";
 
                 item = item + "<p>" + "Dirección: " + "</p>";
-                item = item + "<p>" + " " + publicacion.inmueble.direccion.nombreCalle + " " + publicacion.inmueble.direccion.numeroCalle + "-" + publicacion.inmueble.direccion.localidad.nombreLocalidad + " - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</p>";
-                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " "+publicacion.inmueble.mtsCuadrados + " metros cuadrados"+ "</p>";
-                item = item + "<p><i class='fas fa-home'></i>" + " "+ publicacion.inmueble.mtsCuadradosInt + "  metros cuadrados internos "+ "</p>";
+                item = item + "<p>" + " " + publicacion.inmueble.direccion.nombreCalle + " " + publicacion.inmueble.direccion.numeroCalle + "-" + publicacion.inmueble.direccion.localidad.nombreLocalidad + "</p>";
+                item = item + "<p>" + " " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</p>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + publicacion.inmueble.mtsCuadrados + " metros cuadrados" + "</p>";
+                item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + "  metros cuadrados internos " + "</p>";
                 item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + publicacion.inmueble.cantHabitaciones + "</p>";
                 item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de baños: " + publicacion.inmueble.cantBanos + "</p>";
                 if (publicacion.inmueble.cochera) {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "Tiene Cochera" + "</p>";
                 } else {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "No tiene Cochera" + "</p>";
+                }                 
+                item = item + "</div>";
+
+                if (publicacion.inmueble.tipoArrendador == 3) {
+
+                    item = item + "<div class='col-md-2' style='margin-left:-1'>";
+                    item = item + "<p>" + "Publicado por: " + publicacion.propietario.nombrePropietario + " " + publicacion.propietario.apellidoPropietario + "</p>";
+                    item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerResenia(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
+                    item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerResenia(" + publicacion.propietario.idPropietario + ")'>Ver Reseñas Arrendador</button>";
+
+                } else {
+                    if (publicacion.inmueble.tipoArrendador == 4) {
+                        item = item + "<div class='col-md-2' style='margin-left:-1'>";
+                        item = item + "<p>" + "Publicado por: " + publicacion.inmobiliaria.nombrePropietario + "</p>";
+                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerResenia(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
+                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='VerResenia(" + publicacion.inmobiliaria.idInmobiliaria + ")'>Ver Reseñas Arrendador</button>";
+                    }
                 }
+                
+                
+                item = item + "</div>";
+
+                item = item + "</div>";
+                
                 item = item + "<button class='btn btn-outline-danger btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
 
@@ -148,7 +205,9 @@
     function Volver() {
         location.href ='javascript: history.go(-1)';
     }
-
+    function VerResenia() {
+        $("#modalinmueble").modal('show');
+    }
 
 </script>
 

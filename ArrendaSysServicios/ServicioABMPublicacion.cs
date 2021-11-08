@@ -336,57 +336,84 @@ namespace ArrendaSysServicios
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 ABMPublicacionViewModel publicacion = (from p in db.Publicacion
-                                     join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
-                                     join i in db.Inmueble on p.idInmueble equals i.idInmueble
-                                     join d in db.Direccion on i.idDireccion equals d.idDireccion
-                                     join l in db.Localidad on d.idLocalidad equals l.idLocalidad
-                                     join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento
-                                     where p.idPublicacion== idPublicacion
-                                     select new ABMPublicacionViewModel
-                                     {
-                                         idPublicacion = p.idPublicacion,
-                                         fechaAltaPublicacion = p.fechaAltaPublicacion,
-                                         fechaBajaPublicacion = p.fechaBajaPublicacion,
-                                         precioAlquiler = p.precioAlquiler,
-                                         idInmueble = p.idInmueble,
-                                         descripcionPublicacion = p.descripcionPublicacion,
-                                         inmueble = new InmuebleViewModel
-                                         {
-                                             cantAmbientes = i.cantAmbientes,
-                                             cantBanos = i.cantBanos,
-                                             cantHabitaciones = i.cantHabitaciones,
-                                             cochera = i.cochera,
-                                             descripcionInmueble = i.descripcionInmueble,
-                                             incluyeExpensas = i.incluyeExpensas,
-                                             mtsCuadrados = i.mtsCuadrados,
-                                             mtsCuadradosInt = i.mtsCuadradosInt,
-                                             permiteMascota = i.permiteMascota,
-                                             direccion = new DireccionViewModel
-                                             {
-                                                 idDireccion = d.idDireccion,
-                                                 idLote = d.idLote,
-                                                 idManzana = d.idManzana,
-                                                 nombreBarrio = d.nombreBarrio,
-                                                 nombreCalle = d.nombreCalle,
-                                                 numeroCalle = d.numeroCalle,
-                                                 idLocalidad = d.idLocalidad,
-                                                 localidad = new LocalidadViewModel
-                                                 {
-                                                     idLocalidad = l.idLocalidad,
-                                                     codigopostal = l.codigoPostal,
-                                                     nombreLocalidad = l.nombreLocalidad,
-                                                     idDepartamento = l.idDepartamento,
-                                                     departamento = new DepartamentoViewModel
-                                                     {
-                                                         idDepartamento = dep.idDepartamento,
-                                                         nombreDepartamento = dep.nombreDepartamento
-                                                     }
-                                                 }
-                                             }
-                                         }
+                                                       join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
+                                                       join i in db.Inmueble on p.idInmueble equals i.idInmueble
+                                                       join d in db.Direccion on i.idDireccion equals d.idDireccion
+                                                       join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                                                       join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento
+                                                       where p.idPublicacion == idPublicacion
+                                                       select new ABMPublicacionViewModel
+                                                       {
+                                                           idPublicacion = p.idPublicacion,
+                                                           fechaAltaPublicacion = p.fechaAltaPublicacion,
+                                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
+                                                           precioAlquiler = p.precioAlquiler,
+                                                           idInmueble = p.idInmueble,
+                                                           descripcionPublicacion = p.descripcionPublicacion,
+                                                           inmueble = new InmuebleViewModel
+                                                           {
+                                                               cantAmbientes = i.cantAmbientes,
+                                                               cantBanos = i.cantBanos,
+                                                               cantHabitaciones = i.cantHabitaciones,
+                                                               cochera = i.cochera,
+                                                               descripcionInmueble = i.descripcionInmueble,
+                                                               incluyeExpensas = i.incluyeExpensas,
+                                                               mtsCuadrados = i.mtsCuadrados,
+                                                               mtsCuadradosInt = i.mtsCuadradosInt,
+                                                               permiteMascota = i.permiteMascota,
+                                                               idInmueble= i.idInmueble,
+                                                               tipoArrendador= i.tipoArrendador,
+                                                               idArrendador= i.idArrendador,
+                                                               direccion = new DireccionViewModel
+                                                               {
+                                                                   idDireccion = d.idDireccion,
+                                                                   idLote = d.idLote,
+                                                                   idManzana = d.idManzana,
+                                                                   nombreBarrio = d.nombreBarrio,
+                                                                   nombreCalle = d.nombreCalle,
+                                                                   numeroCalle = d.numeroCalle,
+                                                                   idLocalidad = d.idLocalidad,
+                                                                   localidad = new LocalidadViewModel
+                                                                   {
+                                                                       idLocalidad = l.idLocalidad,
+                                                                       codigopostal = l.codigoPostal,
+                                                                       nombreLocalidad = l.nombreLocalidad,
+                                                                       idDepartamento = l.idDepartamento,
+                                                                       departamento = new DepartamentoViewModel
+                                                                       {
+                                                                           idDepartamento = dep.idDepartamento,
+                                                                           nombreDepartamento = dep.nombreDepartamento
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
 
-                                     }).FirstOrDefault();
+                                                       }).FirstOrDefault();
 
+                //Datos del perfil que publica
+                if (publicacion.inmueble.tipoArrendador == 3)
+                {
+                    PropietarioViewModel propietario = (from p in db.Propietario where p.idPropietario == publicacion.inmueble.idArrendador
+                                                        select new PropietarioViewModel { 
+                                                            idPropietario=p.idPropietario,
+                                                            nombrePropietario= p.nombrePropietario,
+                                                            apellidoPropietario=p.apellidoPropietario,
+
+                                                        }).FirstOrDefault();
+                    publicacion.propietario = propietario;
+
+                }
+                else
+                {
+                    InmobiliariaViewModel inmobiliaria = (from i in db.Inmobiliaria where i.idInmobiliaria == publicacion.inmueble.idArrendador
+                                                          select new InmobiliariaViewModel { 
+                                                          idInmobiliaria=i.idInmobiliaria,
+                                                          nombreInmobiliaria= i.nombreInmobiliaria                                                         
+                                                          }).FirstOrDefault();
+                    publicacion.inmobiliaria = inmobiliaria;
+                }
+                                       
+                //imágenes
                 var listaArchivoVM = new List<ArchivoVM>();
                 var archivos = db.MultimediaInmueble.Where(x => x.idInmueble == publicacion.idInmueble).ToList();
                 foreach (var multi in archivos)

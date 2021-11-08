@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArrendaSysServicios.Modelos
 {
-   public class ABMPublicacionViewModel
+    public class ABMPublicacionViewModel
     {
 
         public int idPublicacion { get; set; }
@@ -21,7 +21,8 @@ namespace ArrendaSysServicios.Modelos
 
         public InmuebleViewModel inmueble { get; set; }
         public List<ArchivoVM> listaMultimedia { get; set; }
-
+        public PropietarioViewModel propietario{ get; set; }
+        public InmobiliariaViewModel inmobiliaria { get; set; }
 
 
     }
