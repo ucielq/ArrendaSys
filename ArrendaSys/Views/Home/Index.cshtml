@@ -65,7 +65,7 @@
                                     <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="cochera" id="cochera">
                                         <option value="-1">Seleccione una opción</option>
                                         <option value="1">Sí</option>
-                                        <option value="2">No culiao pa que pingo queré cochera pobre</option>
+                                        <option value="2">No</option>
 
 
                                     </select>
@@ -180,10 +180,10 @@
                     item = item + "</div>";
 
                     item = item + "<div class='card-body'><h5 class='card-title'>" + "Calle " + publicacion.inmueble.direccion.nombreCalle + " " +" - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</h5>";
-                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + "  " + publicacion.inmueble.mtsCuadrados +" metros cuadrados "+ "</p>";
-                    item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + " metros cuadrados internos"+"</p>";
-                    item = item + "<p><i class='fas fa-bed'></i>" + "  " + publicacion.inmueble.cantHabitaciones + " Habitaciones "+"</p>";
-                    item = item + "<p><i class='fas fa-shower'></i>" + " " + publicacion.inmueble.cantBanos + " Baños"+"</p>";
+                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + "  " + publicacion.inmueble.mtsCuadrados +" Metros Cuadrados."+ "</p>";
+                    item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + " Metros Interior."+"</p>";
+                    item = item + "<p><i class='fas fa-bed'></i>" + "  " + publicacion.inmueble.cantHabitaciones + " Habitaciones. "+"</p>";
+                    item = item + "<p><i class='fas fa-shower'></i>" + " " + publicacion.inmueble.cantBanos + " Baños."+"</p>";
                     if (publicacion.inmueble.cochera) {
                         item = item + "<p><i class='fas fa-warehouse'></i>" +" "+ "Tiene Cochera" + "</p>";
                     } else {

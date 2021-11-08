@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Premium";
+}
+@{
+    var emailCuenta = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+    var id = Session["id"];
+    var premium = Session["premium"].ToString();
+    var fotoUsuario = Session["foto"];
+    var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
+}
+<style>
+    button.mercadopago-button {
+        font-family: Raleway;
+        background-color: #bf8e2d;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-radius: 50px;
+        padding-left: 15px;
+    }
+</style>
+
+<body>
+    <div class="content" style="padding-left:10px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info">
+                            <p class="card-category">¡Pasate a Premium!</p>
+                        </div>
+                        <div class="card" style="margin-top:0px">
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="container">
+                                            <div class="col-md-12" style="height: 330px; width: 500px; margin-left: auto; margin-right: auto; ">
+                                                <img src="~/assets/img/arrendasys_premium.png" class="img-fluid" style="padding-left: 10px;" alt="">
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <h3><b>¡Únete a otros miembros de Arrendasys que ya usan Premium para llevar la delantera!</b></h3>
+                                                &nbsp
+                                                <h4 style="color:black"><i>Una cuenta premium permite destacar tus inmuebles publicados en la plataforma. De esta manera, tus inmuebles serán los primeros en la lista a consultar cuando un arrendatario se encuentre en búsqueda de un nuevo alquiler. </i></h4>
+                                                &nbsp
+                                                <h4 style="color:black"><i>Contamos con un precio muy accesible y asesoramiento personalizado.</i></h4>
+                                                <h3><b>¡Pasate a Premium ya!</b></h3>
+                                            </div>
+
+                                            <div class="mercadoPago" id="contenedor" style="padding-left:75px;">
+
+                                            </div>
+                                            <div class="container" id="body">
+                                                @*Aca va todo el cuerpo*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/select2.js"></script>
+    <script src="~/Scripts/select2.min.js"></script>
+    <script src="~/Scripts/Generales.js"></script>
+
+    <link href="~/Content/css/select2.min.css" rel="stylesheet" />
+
+
+</body>
+<script>
+    var premium = @premium;
+    if (premium == "1") {
+        var item = "<span>¡Tu cuenta ya es una Cuenta Premium!</span>";
+        $('#contenedor').empty();
+        $('#contenedor').append(item);
+    } else {
+        // Agrega credenciales de SDK
+        const mp = new MercadoPago('APP_USR-579a8bef-0b8e-4246-8f8c-708eec0975a0', {
+            locale: 'es-AR'
+        });
+        var url = "/Api/MercadoPago/create_preference";
+        $.ajax({
+            type: 'Post',
+            url: url,
+            success: function (data) {
+                mp.checkout({
+                    preference: {
+                        id: data
+                    },
+                    render: {
+                        container: '.mercadoPago',
+                        label:'Cuenta Premium',
+                    },
+                    theme: {
+                        elementsColor: '#17992e',
+                    }
+                });
+            },
+            error: function (erro) {
+                console.log(erro);
+                alert('Error');
+            }
+        });
+    // Inicializa el checkout
+    }
+
+</script>
+

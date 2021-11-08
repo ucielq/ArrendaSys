@@ -13,12 +13,7 @@
         width: 40px;
         height: 40px;
     }
-    button.mercadopago-button {
-        background-color: darkgreen;
-        color: white;
-        border: 1px solid darkgreen;
-        border-radius: 0;
-    }
+
     .img-circle2 {
         border-radius: 50%;
     }
@@ -71,9 +66,15 @@
                         </div>
                         <ul class="list-unstyled components" id="MenuPrincipal">
                         </ul>
-                        <div style="position:absolute; bottom:0">
-                            <span style="color:white; padding-left:35px; padding-bottom:10px;">@emailCuenta</span>
-                        </div>
+
+                    <div style="position:absolute; bottom:0">
+                        @if (premium == "1")
+                        {
+                            <h5 style="color: #bf8e2d; padding-left: 60px; "><b>Cuenta Premium</b></h5>
+                        }
+                        <span style="color: darkgreen; padding-left: 40px; padding-bottom: 10px; padding-right: 40px; background-color: #a7a9a8; padding-top: 10px; border-radius: 30px; "><b> @emailCuenta </b></span>
+                        &nbsp
+                    </div>
                     </nav>
                         
                 </div>
@@ -83,30 +84,27 @@
                 pdf
             </button>*@
                         <div class="dropdown float-right" style="text-align:right">
-                            <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
-                                <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
-                            </button>
+                            <div onclick="MisNotificaciones()">
+                                <div class="indicadorNroNotif" style="padding-left:10px; padding-right:10px; text-align:center;" id="indicadorNotificacion"></div>
+                                <i class="fas fa-bell" id="campanita"></i>
+                            </div>
+                            @*<button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
+            <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
+        </button>*@
                         </div>
 
                         <div class="dropdown float-right" style="text-align:right">
                             
                             <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#2e7230; padding-top:5px; padding-bottom:5px; border-radius:50px; padding-left:15px;">
-                                <img class='img-circle2 img-bordered-sm2' src='~/TempFolder/@rutaParcial' title=@emailCuenta /> &nbsp&nbsp Mi perfil &nbsp
-                                
+                                <img class='img-circle2 img-bordered-sm2' src='~/TempFolder/@rutaParcial' title=@emailCuenta /> &nbsp&nbsp Mi perfil &nbsp                                
                             </button>
-                            <div class="mercadoPago" id="btnmp">
-
-                            </div>
                             <ul class="dropdown-menu float-right" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="#" onclick="Perfil()">Editar Perfil</a></li>
                                 <li><a class="dropdown-item" href="#" onclick="MisResenias()">Mis Reseñas</a></li>
                                 <li><a class="dropdown-item" href="#" onclick="MisEstadisticas()">Mis Estadísticas</a></li>
                                 <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
                             </ul>
-                            @if (premium == "1")
-                            {
-                                <span style="color:white">PREMIUM</span>
-                            }
+
                         </div>
                     </nav>
                     <div class="content-wrapper" style="background-color:transparent">
@@ -120,42 +118,7 @@
 
 </body>
 </html>
-<script>
-    var premium = @premium;
-    if (premium == "1") {
 
-    } else {
-        // Agrega credenciales de SDK
-        const mp = new MercadoPago('APP_USR-579a8bef-0b8e-4246-8f8c-708eec0975a0', {
-            locale: 'es-AR'
-        });
-        var url = "/Api/MercadoPago/create_preference";
-        $.ajax({
-            type: 'Post',
-            url: url,
-            success: function (data) {
-                mp.checkout({
-                    preference: {
-                        id: data
-                    },
-                    render: {
-                        container: '.mercadoPago',
-                        label:'Convertite en premium',
-                    },
-                    theme: {
-                        elementsColor: '#17992e',
-                    }
-                });
-            },
-            error: function (erro) {
-                console.log(erro);
-                alert('Error');
-            }
-        });
-    // Inicializa el checkout
-    }
-    
-</script>
 <script>
 
     var tipoCuenta = parseInt(@tipoCuenta);
