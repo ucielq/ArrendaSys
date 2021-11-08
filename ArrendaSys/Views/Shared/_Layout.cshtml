@@ -18,6 +18,9 @@
     .img-circle2 {
         border-radius: 50%;
     }
+    .pointer {
+        cursor: pointer;
+    }
 </style>
 <html>
 @{
@@ -73,24 +76,27 @@
                     {
                         <h5 style="color: #bf8e2d; padding-left: 60px; "><b>Cuenta Premium</b></h5>
                     }
-                    <span style="color: darkgreen; padding-left: 40px; padding-bottom: 10px; padding-right: 40px; background-color: #a7a9a8; padding-top: 10px; border-radius: 30px; "><b> @emailCuenta </b></span>
+                    <span style="color: darkgreen; padding-left: 40px; padding-bottom: 10px; padding-right: 40px; background-color: #a7a9a8; padding-top: 10px; border-radius: 30px; width: 251px; "><b style="margin-left: -30;"> @emailCuenta </b></span>
                     &nbsp
                 </div>
             </nav>
+
 
         </div>
         <div class="col-md-9">
             <nav class="navbar navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
                 @*<button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
-                        pdf
-                    </button>*@
+            pdf
+        </button>*@
                 <div class="dropdown float-right" style="text-align:right">
-                    </div>
+                </div>
 
-                <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; padding-top: 5px; padding-bottom: 5px; border-radius: 50px; padding-left: 15px; border-color: transparent;">
-                        <i class="fas fa-bell" id="campanita" ></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
-                    </button>
+                @*<icon class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; padding-top: 5px; padding-bottom: 5px; border-radius: 50px; padding-left: 15px; border-color: transparent;">
+            <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
+        </icon>*@
+                <i class="fas fa-bell " id="campanita" onclick="MisNotificaciones()" style="cursor: pointer;"></i><div class="indicadorNroNotif" id="indicadorNotificacion" style="margin-left:5px; padding-left: 5px; width:20px"></div>
 
+                
 
                 <div class="dropdown float-right" style="text-align:right">
 

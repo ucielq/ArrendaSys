@@ -19,29 +19,29 @@
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-3">
-                                                <label for="fechaDesdeInput">Desde</label>
+                                                <h6 for="fechaDesdeInput">Fecha Desde</h6>
                                                 <br />
                                                 <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
                                             </div>
                                             <div class="col-3">
-                                                <label for="fechaDesdeInput">Hasta</label>
+                                                <h6 for="fechaDesdeInput">Fecha Hasta</h6>
                                                 <br />
                                                 <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
                                             </div>
                                             <div class="col-1">
-                                                <button class="btn btn-success" onclick="completarResenias()">Filtrar</button>
+                                                <a href="" class="btn btn-outline-secondary btn-sm" onclick="completarResenias()">Filtrar</a>
                                                 <br /><br />
                                             </div>
-                                            <div class="col-1">
+                                            <div class="col-3">
 
                                             </div>
                                             <div class="col-1">
-                                                <button class="btn btn-success" onclick="generarReporte()">Imprimir Reporte</button>
+                                                <a href="" class="btn btn-outline-secondary btn-sm" onclick="generarReporte()">Imprimir Reporte</a>
                                                 <br /><br />
                                             </div>
                                         </div>
                                         
-                                        <div class="container" id="body">
+                                        <div class="container" id="body" style="padding-top:30px;">
                                             @*Aca va todo el cuerpo*@
                                         </div>
                                     </div>
@@ -111,15 +111,15 @@
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                         item = item + "<div class='col-md-2'>";
-                            item = item + "<span>"+data.nombreAutor+"</span>";
-                            item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "<h4><span>" + data.nombreAutor +"</h4></span>";
+                    item = item + "<h4><span>" + data.fechaAltaReseña.toString().split('T')[0] + "</h4></span></br>";
                         item = item + "</div>";
-                        item = item + "<div class='col-md-6'>";
-                            item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                        item = item + "<div class='col-md-8'>";
+                    item = item + "<h4><span>" + data.descripcionResenia + "</h4></span></br>";
                         item = item + "</div>";
-                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><h4><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</h4></span></div>";
                     item = item + "</div>";
-                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<div class='col-md-12' style='padding-left:0px;'>";
                     item = item + "<hr>";
                     item = item + "</div>";
                     item = item + "</div>";
