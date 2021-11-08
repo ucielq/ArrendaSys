@@ -14,28 +14,32 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/MercadoPago/create_preference")]
         [System.Web.Http.ActionName("create_preference")]
         [System.Web.Http.HttpPost]
-        public object create_preference()
+        public string create_preference()
         {
-            MercadoPagoConfig.AccessToken = "app_usr-579a8bef-0b8e-4246-8f8c-708eec0975a0";
+            MercadoPagoConfig.AccessToken = "APP_USR-5188967914255972-072920-8569e9ebf8526fc9867cd6f044164209-434981148";
             var request = new PreferenceRequest
             {
                 Items = new List<PreferenceItemRequest>
                 {
                     new PreferenceItemRequest
                     {
-            Title = "Premium",
-            Quantity = 1,
-            CurrencyId = "ARS",
-            UnitPrice = 100m,
+                        Title = "Premium",
+                        Quantity = 1,
+                        CurrencyId = "ARS",
+                        UnitPrice = 1m,
                     },
                 },
+                BackUrls = new PreferenceBackUrlsRequest
+                {
+                    Success = "https://localhost:44346/MercadoPago/pagoAprobado",
+                    Failure = "https://localhost:44346/Home",
+                    Pending = "https://localhost:44346/Home",
+                },
+                AutoReturn = "approved",
             };
-            request.AutoReturn = "Approved";
-            // Crea la preferencia usando el client
             var client = new PreferenceClient();
-            
             Preference preference = client.Create(request);
-            object response = new{ data = preference };
+            string response = preference.Id;
             return response;
         }
     }

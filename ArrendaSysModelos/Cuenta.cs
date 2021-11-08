@@ -23,5 +23,6 @@ namespace ArrendaSysModelos
         public Nullable<int> idPremium { get; set; }
         public Nullable<int> codigoConfimacion { get; set; }
         public string urlImagen { get; set; }
+        public string direccion { get; set; }
     }
 }

@@ -289,6 +289,7 @@
     <Compile Include="Controllers\InmueblesPropietarioController.cs" />
     <Compile Include="Controllers\LandingController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MercadoPagoController.cs" />
     <Compile Include="Controllers\NotificacionesController.cs" />
     <Compile Include="Controllers\PerfilController.cs" />
     <Compile Include="Controllers\PublicacionController.cs" />
@@ -300,7 +301,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MercadoPago.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1064,6 +1064,7 @@
     <Folder Include="Views\DireccionApi\" />
     <Folder Include="Views\InmuebleApi\" />
     <Folder Include="Views\ItemApi\" />
+    <Folder Include="Views\MercadoPago\" />
     <Folder Include="Views\NotificacionesApi\" />
     <Folder Include="Views\PropietarioApi\" />
     <Folder Include="Views\RecuperarContrasenia\" />
