@@ -325,13 +325,11 @@
     }
     function EliminarPublicacion(btn) {
 
-        var id = table.row($(btn).parents('tr')).data();
-        debugger;
+        var id = table.row($(btn).parents('tr')).data();        
         publicacion1 = new Object();
         publicacion1.idPublicacion = id.idPublicacion;
         publicacion1.idInmueble = id.idInmueble;
         publicacion1.idPublicacionEstado = id.idPublicacionEstado;
-        debugger;
         $.ajax({
             type: 'Post',
             url: '/Api/ABMPublicacion/EliminarPublicacion',
@@ -378,8 +376,8 @@
                 publicacion.fechaAltaPublicacion = $("#fechaAlta").val();
                 publicacion.fechaBajaPublicacion = $("#fechaBaja").val();
                 publicacion.precioAlquiler = $("#precio").val();
-                publicacion.tituloPublicacion = $("#titulo").val();
                 publicacion.idInmueble = $("#idInmueble").val();
+                debugger;
                 $.ajax({
                     type: 'Post',
                     url: '/Api/ABMPublicacion/CrearPublicacion',

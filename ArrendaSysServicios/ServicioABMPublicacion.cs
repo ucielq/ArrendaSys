@@ -99,57 +99,47 @@ namespace ArrendaSysServicios
 
 
 
-        public int AgregarPublicacion(ABMPublicacionViewModel publicacion)
+        public void AgregarPublicacion(ABMPublicacionViewModel publicacion)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
 
                 Publicacion publicacion1 = new Publicacion();
-
                 publicacion1.descripcionPublicacion = publicacion.descripcionPublicacion;
                 publicacion1.fechaAltaPublicacion = publicacion.fechaAltaPublicacion;
                 publicacion1.fechaBajaPublicacion = publicacion.fechaBajaPublicacion;
                 publicacion1.precioAlquiler = publicacion.precioAlquiler;
-                publicacion1.idInmueble = publicacion.idInmueble;
-
+                publicacion1.idInmueble = publicacion.idInmueble;                
                 db.Publicacion.Add(publicacion1);
+                db.SaveChanges();
 
                 var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion.idInmueble).FirstOrDefault();
                 var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
-                if (inmuest != null)
-                {
-                    inmuest.fechaBajaInmuebleEstado = DateTime.Now;
-
-                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
-                    {
-                        fechaAltaInmuebleEstado = DateTime.Now,
-                        fechaBajaInmuebleEstado = null,
-                        idEstadoInmueble = 4,
-                        idInmueble = inmu.idInmueble
-                    };
+                inmuest.fechaBajaInmuebleEstado = DateTime.Now;
+                db.SaveChanges();
+                InmuebleEstado inmuEstadoNuevo = new InmuebleEstado();
+                    inmuEstadoNuevo.fechaAltaInmuebleEstado = DateTime.Now;
+                    inmuEstadoNuevo.fechaBajaInmuebleEstado = null;
+                    inmuEstadoNuevo.idEstadoInmueble = 4;
+                    inmuEstadoNuevo.idInmueble = inmu.idInmueble;                    
                     db.InmuebleEstado.Add(inmuEstadoNuevo);
                     db.SaveChanges();
-                }
+                
 
+                var ultimoGuardado = db.Publicacion.OrderByDescending(x => x.idPublicacion).FirstOrDefault();
+               
+                PublicacionEstado publiEstado = new PublicacionEstado();
+                publiEstado.fechaAltaPublicacionEstado = DateTime.Now;
+                publiEstado.fechaBajaPublicacionEstado = null;
+                publiEstado.idEstadoPublicacion = 1;
+                publiEstado.idPublicacion = ultimoGuardado.idPublicacion;
+                db.PublicacionEstado.Add(publiEstado);
                 db.SaveChanges();
-                //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
-                CrearPublicacionEstado(publicacion1.idPublicacion);
-                return 1;
 
             }
         }
 
 
-        public void CrearPublicacionEstado(int? id)
-        {
-            PublicacionEstado publiEstado = new PublicacionEstado();
-            publiEstado.fechaAltaPublicacionEstado = DateTime.Now;
-            publiEstado.fechaBajaPublicacionEstado = null;
-            publiEstado.idEstadoPublicacion = 1;
-            publiEstado.idPublicacion = id;
-            db.PublicacionEstado.Add(publiEstado);
-            db.SaveChanges();
-        }
       
 
 
