@@ -2,6 +2,12 @@
 @{
     ViewBag.Title = "MisEstadisticas";
 }
+@{
+    var usuario = Session["usuarioLogeado"];
+    var tipoCuenta = Session["tipoCuenta"];
+    var idCuenta = Session["idCuenta"];
+    var id = Session["id"];
+}
 
 <body>
     <div class="content" style="padding-left:10px">
@@ -17,12 +23,44 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="container">
-                                            <div class="col-md-1">
-                                                <button class="btn btn-success" onclick="generarReporteEstadisticas()">Imprimir Reporte</button>
-                                                <br /><br />
-                                            </div>
                                             <div class="container" id="body">
                                                 @*Aca va todo el cuerpo*@
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <label for="fechaDesdeInput">Desde</label>
+                                                                <br />
+                                                                <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
+                                                            </div>
+                                                            <div class="col-3">
+                                                                <label for="fechaDesdeInput">Hasta</label>
+                                                                <br />
+                                                                <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-1 centrar">
+                                                        <div class="row botones">
+                                                            <div class="centrar">
+                                                                <button type="button" class="btn botonFiltrar" style="background-color:#5cb85c" onclick="Filtrar()">Filtrar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-1 centrar">
+                                                       
+                                                    </div>
+                                                    <div class="col-1 centrar">
+                                                        <div class="row botones">
+                                                            <div class="centrar">
+                                                                <button type="button" class="btn" style="background-color:#5cb85c" onclick="imprimirReporte()">Generar Estadísticas</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row" id="estadisticas">
+                                                    @*Aca van las est*@
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +81,64 @@
 
 </body>
 <script>
-    function generarReporteEstadisticas() {
-        window.open("/Api/Reportes/excel?tipoCuenta=" + tipoCuenta + "&id=" + id);
+    var tipoCuenta = parseInt(@tipoCuenta);
+    var idCuenta = parseInt(@idCuenta);
+    var id = parseInt(@id);
+    var fechaDesde;
+    var fechaHasta;
+    iniciarVista();
+    function iniciarVista() {
+        CargarFiltros();
+        cargarBody();
+    }
+    function imprimirReporte() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        window.open("/Api/Reportes/excel?tipoCuenta=" + tipoCuenta + "&id=" + id + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta);
+    }
+
+    function Filtrar() {
+        cargarBody();
+    }
+    /*cargarBody();*/
+    function cargarBody() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        $("#estadisticas").empty();
+        var item = "";
+        $.ajax({
+            url: '/Api/Reportes/obtenerEstadisticas?tipoCuenta=' + tipoCuenta + "&id=" + id + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta,
+            type: 'Get',
+            success: function (response) {
+                for (const key in response) {
+                    if (response.hasOwnProperty(key))
+                    {
+                        for (const key2 in response[key]) {
+                            if (response[key].hasOwnProperty(key2)) {
+                                item = item + "<br><span>" + key + " " + key2 + " estrellas: " + response[key][key2] + "</span>";                              
+                            }
+                        }
+                    }
+                    item = item + "<hr>"
+                }
+                $("#estadisticas").append(item);
+            }
+        })
+    }
+    function CargarFiltros() {
+        //Creo las fechas de hasta con dia de hoy y desde con 15 dias atras
+        var Hasta = new Date();
+        var Desde = new Date(Hasta);
+        var dias = 15;  //Dias para atras del dia de hoy para que salgan en Novedades
+        Desde.setDate(Desde.getDate() - dias);
+        var fechaDesdeInput = FechaformatoInput(Desde);
+        var fechaHastaInput = FechaformatoInput(Hasta);
+
+        //las cargo en las variables globales
+        fechaDesde = fechaHoyMostrar(Desde);
+        fechaHasta = fechaHoyMostrar(Hasta);
+        //las cargo en el input
+        $('#fechaDesdeFiltro').val(fechaDesdeInput);
+        $('#fechaHastaFiltro').val(fechaHastaInput);
     }
 </script>

@@ -18,16 +18,18 @@ namespace ArrendaSys.Controllers.Api
 {
     public class ReportesApiController : ApiController
     {
-        public Dictionary<string, Dictionary<int?, int>> obtenerLista(int tipoCuenta,int id)
+        public Dictionary<string, Dictionary<int?, int>> obtenerLista(int tipoCuenta,int id,string fechaDesde, string fechaHasta)
         {
             ArrendasysEntities db = new ArrendasysEntities();
             Dictionary<string, Dictionary<int?, int>> hash = new Dictionary<string, Dictionary<int?, int>>();
+            DateTime desde = Convert.ToDateTime(fechaDesde);
+            DateTime hasta = Convert.ToDateTime(fechaHasta);
             if (tipoCuenta == 2) //Arrendatario
             {
                 var lista = (from r in db.ReseñaArrendadorArrendatario
                          join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                         where a.idArrendatario == id
+                         where a.idArrendatario == id && r.fechaAltaReseñaAoAr>=desde && r.fechaAltaReseñaAoAr<=hasta
                          select new ReseniaPDFVM
                          {
                              fechaResenia = r.fechaAltaReseñaAoAr,
@@ -72,8 +74,8 @@ namespace ArrendaSys.Controllers.Api
                 var lista = (from r in db.ReseñaArrendatarioArrendador
                          join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                         where i.tipoArrendador == 3 && i.idArrendador==id
-                         select new ReseniaPDFVM
+                         where i.tipoArrendador == 3 && i.idArrendador==id && r.fechaAltaReseñaArAo >= desde && r.fechaAltaReseñaArAo <= hasta
+                             select new ReseniaPDFVM
                          {
                              fechaResenia = r.fechaAltaReseñaArAo,
                              descripcion = r.descripcionReseñaArAo,
@@ -115,7 +117,7 @@ namespace ArrendaSys.Controllers.Api
                 var lista = (from r in db.ReseñaArrendadorArrendatario
                          join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                         where i.tipoArrendador == 4 && i.idArrendador==id
+                         where i.tipoArrendador == 4 && i.idArrendador==id && r.fechaAltaReseñaAoAr >= desde && r.fechaAltaReseñaAoAr <= hasta
                          select new ReseniaPDFVM
                          {
                              fechaResenia = r.fechaAltaReseñaAoAr,
@@ -158,10 +160,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Reportes/excel")]
         [System.Web.Http.ActionName("excel")]
         [System.Web.Http.HttpGet]
-        public HttpResponseMessage excel(int tipoCuenta,int id)
+        public HttpResponseMessage excel(int tipoCuenta,int id,string fechaDesde,string fechaHasta)
         {
 
-            var hash = obtenerLista(tipoCuenta,id);
+            var hash = obtenerLista(tipoCuenta,id,fechaDesde,fechaHasta);
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excelPackage = new ExcelPackage();
@@ -241,5 +243,18 @@ namespace ArrendaSys.Controllers.Api
             response.Content.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(nombreArchivo));
             return response;
         }
+
+        [System.Web.Http.Route("Api/Reportes/obtenerEstadisticas")]
+        [System.Web.Http.ActionName("obtenerEstadisticas")]
+        [System.Web.Http.HttpGet]
+        public Dictionary<string, Dictionary<int?, int>> obtenerEstadisticas(int tipoCuenta, int id, string fechaDesde, string fechaHasta)
+        {
+            var response = obtenerLista(tipoCuenta, id, fechaDesde, fechaHasta);
+            return response;
+        }
+    }
+
+    public class estadisticaViewModel
+    {
     }
 }

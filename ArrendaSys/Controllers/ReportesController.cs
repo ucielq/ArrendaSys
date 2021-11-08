@@ -23,10 +23,11 @@ namespace ArrendaSys.Controllers
     public class ReportesController : Controller
     {
         // GET: Reportes
-        public ActionResult ReporteResenias(int tipoCuenta,int id)
+        public ActionResult ReporteResenias(int tipoCuenta,int id,string fechaDesde,string fechaHasta)
         {
+
             ServicioReportes servicio = new ServicioReportes();
-            var result = servicio.prueba(tipoCuenta,id);
+            var result = servicio.prueba(tipoCuenta,id,fechaDesde,fechaHasta);
 
             
             MemoryStream ms = new MemoryStream();
