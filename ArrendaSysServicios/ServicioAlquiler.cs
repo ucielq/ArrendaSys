@@ -275,13 +275,15 @@ namespace ArrendaSysServicios
                     {
                         var idProp = alquiler.inmueble.idArrendador;
                         var arrendador = db.Propietario.Where(x => x.idPropietario == idProp).FirstOrDefault();
+                        var cuenta = db.Cuenta.Where(x => x.idCuenta == arrendador.idCuenta).FirstOrDefault();
                         alquiler.arrendador = new PropietarioViewModel
                         {
                             nombrePropietario=arrendador.nombrePropietario,
                             apellidoPropietario=arrendador.apellidoPropietario,
                             idPropietario=arrendador.idPropietario,
                             telefonoPropietario=arrendador.telefonoPropietario,
-                            numeroDocumentoPropietario=arrendador.numeroDocumentoProp
+                            numeroDocumentoPropietario=arrendador.numeroDocumentoProp,
+                            foto = cuenta.urlImagen
                         };
                     }
                     else
@@ -290,12 +292,14 @@ namespace ArrendaSysServicios
                         {
                             var idInmo = alquiler.inmueble.idArrendador;
                             var arrendador = db.Inmobiliaria.Where(x => x.idInmobiliaria == idInmo).FirstOrDefault();
+                            var cuenta = db.Cuenta.Where(x => x.idCuenta == arrendador.idCuenta).FirstOrDefault();
                             alquiler.arrendador = new InmobiliariaViewModel
                             {
                                 nombreInmobiliaria = arrendador.nombreInmobiliaria,
                                 cuitInmobiliaria=arrendador.cuitInmobiliaria,
                                 idInmobiliaria = arrendador.idInmobiliaria,
-                                telefonoInmobiliaria = arrendador.telefonoInmobiliaria
+                                telefonoInmobiliaria = arrendador.telefonoInmobiliaria,
+                                foto = cuenta.urlImagen
                             };
                         }
                     }
@@ -306,6 +310,7 @@ namespace ArrendaSysServicios
                     {
                         var idArrendatario = alquiler.idArrendatario;
                         var arrendatario = db.Arrendatario.Where(x => x.idArrendatario == idArrendatario).FirstOrDefault();
+                        var cuenta = db.Cuenta.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
                         alquiler.arrendatario = new ArrendatarioViewModel
                         {
                             nombreArrendatario = arrendatario.nombreArrendatario,
@@ -313,6 +318,7 @@ namespace ArrendaSysServicios
                             nroTelefono = arrendatario.telefonoArrendatario.ToString(),
                             idArrendatario = arrendatario.idArrendatario,
                             nroDocumento = arrendatario.numeroDocumentoArr,
+                            foto = cuenta.urlImagen
                         };
                     }
                 }

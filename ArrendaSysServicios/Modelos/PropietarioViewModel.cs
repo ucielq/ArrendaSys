@@ -17,6 +17,7 @@ namespace ArrendaSysServicios.Modelos
         public string fechaNacimientoStr { get; set; }
         public string tipoDocumentoProp { get; set; }
         public string telefonoPropietario { get; set; }
+        public string foto { get; set; }
 
     }
 }
