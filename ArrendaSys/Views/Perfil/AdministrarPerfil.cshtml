@@ -110,6 +110,12 @@
                                             <br />
                                             <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
                                         </div>
+                                        <div class="col-md-2">
+                                            <label><b>Dirección (Calle y Número)</b></label>
+                                            <br />
+                                            <textarea class="form-control obligatoriaArr" id="direccionArr" name="nombre"></textarea>
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div id="propietario" class="propietario">
@@ -161,7 +167,7 @@
                                         <div class="col-md-2">
                                             <label><b>Dirección (Calle y Número)</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="direccionProp" name="nombre"></textarea>
                                         </div>
 
 
@@ -205,7 +211,7 @@
                                         <div class="col-md-2">
                                             <label><b>Dirección (Calle y Número)</b></label>
                                             <br />
-                                            <textarea class="form-control obligatoriaArr" id="nombre" name="nombre"></textarea>
+                                            <textarea class="form-control obligatoriaArr" id="direccionInmo" name="nombre"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -320,6 +326,7 @@
         $("#documento").text(cuentaVM.arrendatario.nroDocumento);
         $("#telefono").text(cuentaVM.arrendatario.nroTelefono);
         $("#fechaNacimiento").val(cuentaVM.arrendatario.fechaNacimientoStr);
+        $("#direccionArr").val(cuentaVM.arrendatario.direccion);
     }
     function completarDatosPropietario(cuentaVM) {
         $("#tipoCuenta").empty();
@@ -335,6 +342,7 @@
         $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
         $("#telefonoProp").text(cuentaVM.propietario.telefonoPropietario);
         $("#fechaNacimientoProp").val(cuentaVM.propietario.fechaNacimientoStr);
+        $("#direccionProp").val(cuentaVM.propietario.direccion);
     }
     function completarDatosInmobiliaria(cuentaVM) {
         $("#tipoCuenta").empty();
@@ -349,6 +357,7 @@
         $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
         $("#telefonoInmo").text(cuentaVM.inmobiliaria.telefonoInmobiliariaStr);
         $("#AltaInscripcionInmo").val(cuentaVM.inmobiliaria.altaInscripcionStr);
+        $("#direccionInmo").val(cuentaVM.inmobiliaria.direccion);
     }
 
     function cambioTipoCuenta() {
@@ -380,6 +389,7 @@
                 arrendatario.fechaNacimiento = $("#fechaNacimiento").val();
                 arrendatario.nroDocumento = $("#documento").val();
                 arrendatario.nroTelefono = $("#telefono").val();
+                arrendatario.direccion = $("#direccionArr").val();
                 arrendatario.idCuenta = idCuenta;
                 $.ajax({
                     type: 'Post',
@@ -403,6 +413,7 @@
                 propietario.fechaNacimiento = $("#fechaNacimientoProp").val();
                 propietario.numeroDocumentoPropietario = $("#documentoProp").val();
                 propietario.telefonoPropietario = $("#telefonoProp").val();
+                propietario.direccion = $("#direccionProp").val();
                 propietario.idCuenta = idCuenta;
                 $.ajax({
                     type: 'Post',
@@ -424,6 +435,7 @@
                 inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
                 inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
                 inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
+                inmobiliaria.direccion = $("#direccionInmo").val();
                 inmobiliaria.idCuenta = idCuenta;
                 $.ajax({
                     type: 'Post',
