@@ -75,10 +75,10 @@
 
                 </div>
                 <div class="col-md-9">
-                    <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
+                    <nav class="navbar navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
                         @*<button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
-                        pdf
-                    </button>*@
+                pdf
+            </button>*@
                         <div class="dropdown float-right" style="text-align:right">
                             <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
                                 <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
@@ -108,8 +108,10 @@
                     <div class="content-wrapper" style="background-color:transparent">
                         @RenderBody()
                     </div>
+                    
                 </div>
             </div>
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>
