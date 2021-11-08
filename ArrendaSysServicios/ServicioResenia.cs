@@ -342,12 +342,58 @@ namespace ArrendaSysServicios
                     listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
                 }
 
+        
+
                 ViewModelReseniaAux response = new ViewModelReseniaAux
                 {
                     cantidad = tot,
                     lista = listaFinal
                 };
                 return response;
+
+
+            }
+        }
+
+        public ViewModelReseniaAux obtenerReseniasAlquilerInmueble(int tipoCuenta, int id, int pag, int IdAlquiler)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                List<ReseniaViewModel> listaFinal = new List<ReseniaViewModel>();
+                var tot = 0;
+                if (tipoCuenta == 2) //Soy Arrendatario, quiero ver las reseñas que he hecho
+                {
+                    var lista = (from r in db.ReseñaArrendatarioInmueble
+                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                 join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                 where a.idAlquiler == IdAlquiler && a.idArrendatario == id
+                                 select new ReseniaViewModel
+                                 {
+                                     descripcionResenia = r.descripcionReseñaAI,
+                                     fechaAltaReseña = r.fechaAltaReseñaAI,
+                                     puntuacionResenia = r.puntuacionReseñaAI,
+                                     idResenia = r.idReseñaAI,
+                                     idAlquiler = r.idAlquiler,
+                                     idInmueble = a.idInmueble,
+                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                 }).ToList();
+
+                    tot = lista.Count;
+                    listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                    listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                }
+
+
+
+                ViewModelReseniaAux response = new ViewModelReseniaAux
+                {
+                    cantidad = tot,
+                    lista = listaFinal
+                };
+                return response;
+
+
             }
         }
     }

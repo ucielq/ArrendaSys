@@ -20,5 +20,7 @@ namespace ArrendaSysServicios.Modelos
         public InmobiliariaViewModel inmobiliaria{get;set;}
         public int idPropio { get; set; }
         public string rutaFoto { get; set; }
+        public string premium { get; set; }
+        public int? codigoConfirmacion { get; set; }
     }
 }

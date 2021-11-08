@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArrendaSysServicios.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace ArrendaSys.Controllers
         {
             return View();
         }
+
         public ActionResult confirmaCuenta(string email)
         {
             ArrendaSysServicios.ServicioCuenta servicioCuenta = new ArrendaSysServicios.ServicioCuenta();
@@ -20,6 +22,7 @@ namespace ArrendaSys.Controllers
             System.Web.HttpContext.Current.Session["usuarioLogeado"] = email;
             System.Web.HttpContext.Current.Session["idCuenta"] = cuenta.idCuenta;
             System.Web.HttpContext.Current.Session["foto"] = cuenta.rutaFoto;
+            System.Web.HttpContext.Current.Session["premium"] = "0";
             return RedirectToAction("AdministrarPerfil","Perfil",new {id =cuenta.idCuenta });
         }
         public ActionResult CambiarTipoCuenta(int tipoCuenta,int id,int idCuenta)

@@ -1,5 +1,6 @@
 ﻿using ArrendaSysModelos;
 using ArrendaSysServicios;
+using ArrendaSysServicios.Modelos;
 using ArrendaSysUtilidades;
 using System;
 using System.Collections.Generic;
@@ -14,30 +15,45 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Login/ValidarDatos")]
         [System.Web.Http.ActionName("ValidarDatos")]
         [System.Web.Http.HttpGet]
-        public int ValidarDatos(string mailUsuario,string password)
+        public CuentaViewModel ValidarDatos(string mailUsuario, string password)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta == null && x.fechaAltaCuenta != null).FirstOrDefault();
+                var user = db.Cuenta.Where(x => x.emailCuenta == mailUsuario && x.fechaBajaCuenta == null).FirstOrDefault();
                 var ePass = Encrypt.GetSHA256(password);
+                CuentaViewModel model = new CuentaViewModel();
+
                 if (user == null)
                 {
-                    return 0;
+                    model.idCuenta = 0;
+                    return model;
                 }
                 else
                 {
-                    if (user.contrasenaCuenta != ePass)
+                    if (user.fechaAltaCuenta == null && user.contrasenaCuenta==ePass)
                     {
-                        return 1;
+                        model.idCuenta = 3;
+                        model.codigoConfirmacion = user.idCuenta;
+                        return model;
+
                     }
                     else
                     {
-                        return 2;
+                        if (user.contrasenaCuenta != ePass)
+                        {
+                            model.idCuenta = 1;
+                            return model;
+                        }
+                        else
+                        {
+                            model.idCuenta = 2;
+                            return model;
+                        }
                     }
                 }
             }
         }
-        
-        
+
+
     }
 }
