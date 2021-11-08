@@ -63,6 +63,7 @@
                                 <br />
                                 <input type="text" class="form-control" id="idArrendatario" placeholder="ingrese el DNI del Arrendatario" />
                                 <button type="button" class="btn btn-success" onclick="verificarDni($('#idArrendatario').val())"><i class="fas fa-save"></i> verif</button>
+                                <div id='mensajeError' style='display: none; font-size: 15px; background-color: #bf3131; width:500px; color: white; border-radius: 10px; justify-content: center; text-align:center; margin-left:auto; margin-right:auto;'>No existe un Arrendatario con dicho DNI</div>
                             </div>
 
                             <div class="col-md-2">
@@ -450,9 +451,10 @@
                 if (result != 0) {
                     idArrendatario = result;
                     $("#BotonGuardar").show();
+                    $("#mensajeError").hide();
                 } else {
                     $("#BotonGuardar").hide();
-                    window.alert("no existe arrendatario, ingrese DNI valido");
+                    $("#mensajeError").show();
                     
                 }
              
