@@ -60,9 +60,9 @@
                                         <br />
                                         <label for="form-control" id="email" name="email"></label>
                                     </div>
-                                    
+
                                     <div class="col-md-2">
-                                        <button class="btn btn-danger" onclick="eliminarCuenta()">Eliminar cuenta</button>
+                                        <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="eliminarCuenta()">Eliminar Cuenta</a>
                                     </div>
                                 </div>
                                 <hr />
@@ -219,7 +219,7 @@
 
 
     </div>
-    
+
     <div hidden>
         <input type="file" id="inputImagen" value="cargarArchivos" onchange="mostrarNombreImagen()" />
     </div>
@@ -228,26 +228,31 @@
     <script src="~/Scripts/Generales.js"></script>
     <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 
-</body>
-<div class="modal fade" id="modalCuentaEliminada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar Cuenta</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Seguro que desea eliminar la cuenta?
-            </div>
-            <div class="modal-footer">
-                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</a>
-                <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar">Eliminar</a>
+    @*MODALES*@
+    <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Cuenta</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ¿Seguro que desea eliminar la cuenta?
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</a>
+                    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</body>
+
+
+
+
 <script>
     @{
         var idCuenta = Session["idCuenta"];
@@ -265,7 +270,11 @@
     }
     completarDatos();
 
-    function eliminarCuenta() {        
+    function eliminarCuenta() {
+        $("#modalEliminar").modal('show');
+
+    }
+    function aceptarEliminacion() {
         var id = parseInt(idCuenta);
         $.ajax({
             type: 'Post',
@@ -412,7 +421,7 @@
                 var inmobiliaria = new Object();
                 inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
                 debugger;
-                inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();              
+                inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
                 inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
                 inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
                 inmobiliaria.idCuenta = idCuenta;
