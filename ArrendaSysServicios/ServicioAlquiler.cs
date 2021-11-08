@@ -27,11 +27,12 @@ namespace ArrendaSysServicios
                     var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
                     var alquileres = (from a in db.Alquiler
                                       join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                      join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
                                       join p in db.Propietario on i.idArrendador equals p.idPropietario
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
                                       where p.idPropietario == id && ae.fechaBajaAlquilerEstado == null
-                                      select new AlquileresViewModel
+                                      select new 
                                       {
                                           idAlquiler = a.idAlquiler,
                                           fechaAltaAlquiler = a.fechaAltaAlquiler,
@@ -40,7 +41,8 @@ namespace ArrendaSysServicios
                                           idInmueble = a.idInmueble,
                                           descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
                                           idEstadoAlquiler=ea.idEstadoAlquiler,
-                                          idAlquilerEstado = ae.idAlquilerEstado
+                                          idAlquilerEstado = ae.idAlquilerEstado,
+                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -49,13 +51,13 @@ namespace ArrendaSysServicios
                 {
                     var id = db.Inmobiliaria.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idInmobiliaria;
                     var alquileres = (from a in db.Alquiler
+                                      join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
                                       join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                       join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
                                       where p.idInmobiliaria == idCuenta && ae.fechaBajaAlquilerEstado == null
-                                      select new AlquileresViewModel
-                                      {
+                                      select new                                       {
                                           idAlquiler = a.idAlquiler,
                                           fechaAltaAlquiler = a.fechaAltaAlquiler,
                                           fechaBajaAlquiler = a.fechaBajaAlquiler,
@@ -63,7 +65,8 @@ namespace ArrendaSysServicios
                                           idInmueble = a.idInmueble,
                                           descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
                                           idEstadoAlquiler = ea.idEstadoAlquiler,
-                                          idAlquilerEstado = ae.idAlquilerEstado
+                                          idAlquilerEstado = ae.idAlquilerEstado,
+                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
@@ -74,10 +77,11 @@ namespace ArrendaSysServicios
                     //
                     var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
                     var alquileres = (from a in db.Alquiler
+                                      join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
                                       where a.idArrendatario == id && ae.fechaBajaAlquilerEstado == null
-                                      select new AlquileresViewModel
+                                      select new 
                                       {
                                           idAlquiler = a.idAlquiler,
                                           fechaAltaAlquiler = a.fechaAltaAlquiler,
@@ -86,7 +90,8 @@ namespace ArrendaSysServicios
                                           idInmueble = a.idInmueble,
                                           descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
                                           idEstadoAlquiler = ea.idEstadoAlquiler,
-                                          idAlquilerEstado = ae.idAlquilerEstado
+                                          idAlquilerEstado = ae.idAlquilerEstado,
+                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
