@@ -13,7 +13,12 @@
         width: 40px;
         height: 40px;
     }
-
+    button.mercadopago-button {
+        background-color: darkgreen;
+        color: white;
+        border: 1px solid darkgreen;
+        border-radius: 0;
+    }
     .img-circle2 {
         border-radius: 50%;
     }
@@ -24,6 +29,7 @@
     var tipoCuenta = Session["tipoCuenta"];
     var idCuenta = Session["idCuenta"];
     var id = Session["id"];
+    var premium = Session["premium"].ToString();
     var fotoUsuario = Session["foto"];
     var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
 }
@@ -50,12 +56,8 @@
     <script src="~/Scripts/Generales.js"></script>
     <script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
-<body>
-
-    <div class="wrapper">
-
+<body class="container-fluid" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover; background-attachment:fixed"> 
         <!-- Topbar  -->
-        <div id="content" style="padding: 0px; background-image: url(../../assets/img/slide/Ciudad_Mendoza.jpg); background-size: cover;">
             <!-- Sidebar  -->
             <div class="row" style="height: -webkit-fill-available;width:100%">
                 <div class="col-md-2">
@@ -76,13 +78,13 @@
                         
                 </div>
                 <div class="col-md-9">
-                    <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
+                    <nav class="navbar navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
                         @*<button class="btn btn-success" type="button" id="uciel" style="background-color:#5cb874" onclick="prueba()">
-                                pdf
-                            </button>*@
+                pdf
+            </button>*@
                         <div class="dropdown float-right" style="text-align:right">
                             <button class="btn btn-success float-right" type="button" id="dropdownMenuButton1" href="#" onclick="MisNotificaciones()" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: transparent; border-radius: 50px; border-color:transparent;">
-                               <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
+                                <i class="fas fa-bell" id="campanita"></i><div class="indicadorNroNotif" id="indicadorNotificacion"></div>
                             </button>
                         </div>
 
@@ -101,58 +103,61 @@
                                 <li><a class="dropdown-item" href="#" onclick="MisEstadisticas()">Mis Estadísticas</a></li>
                                 <li><a class="dropdown-item" href="#" onclick="Logout()">Cerrar Sesión</a></li>
                             </ul>
+                            @if (premium == "1")
+                            {
+                                <span style="color:white">PREMIUM</span>
+                            }
                         </div>
                     </nav>
-                    <div class="body-content">
+                    <div class="content-wrapper" style="background-color:transparent">
                         @RenderBody()
                     </div>
+                    
                 </div>
             </div>
-        </div>
-    </div>
-
-
-
-    @*<img src="~/assets/img/cesped.jpg" class="img-fluid" alt="" style="height:131vh;">*@
-
+    
     @RenderSection("scripts", required: false)
 
 </body>
 </html>
-@*<script>
-    
+<script>
+    var premium = @premium;
+    if (premium == "1") {
+
+    } else {
         // Agrega credenciales de SDK
         const mp = new MercadoPago('APP_USR-579a8bef-0b8e-4246-8f8c-708eec0975a0', {
             locale: 'es-AR'
         });
-    var url = "/Api/MercadoPago/create_preference";
-    $.ajax({
-        type: 'Post',
-        url: url,
-        success: function (data) {
-            mp.checkout({
-                preference: {
-                    id: data.Id
-                },
-                render: {
-                    container: '.mercadoPago',
-                }
-            });
-        },
-        error: function (erro) {
-            console.log(erro);
-            alert('Error');
-        }
-    });
-       
-        // Inicializa el checkout
-       
+        var url = "/Api/MercadoPago/create_preference";
+        $.ajax({
+            type: 'Post',
+            url: url,
+            success: function (data) {
+                mp.checkout({
+                    preference: {
+                        id: data
+                    },
+                    render: {
+                        container: '.mercadoPago',
+                        label:'Convertite en premium',
+                    },
+                    theme: {
+                        elementsColor: '#17992e',
+                    }
+                });
+            },
+            error: function (erro) {
+                console.log(erro);
+                alert('Error');
+            }
+        });
+    // Inicializa el checkout
+    }
     
-</script>*@
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5518030199279545"
-        crossorigin="anonymous"></script>
+</script>
 <script>
-    
+
     var tipoCuenta = parseInt(@tipoCuenta);
     var id = parseInt(@id);
 
@@ -199,7 +204,7 @@
     function MisNotificaciones() {
         window.location.href = "/Notificaciones/index";
     }
-    
+
     (function () {
 
         $.ajax({

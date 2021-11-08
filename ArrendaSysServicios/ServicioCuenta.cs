@@ -271,6 +271,14 @@ namespace ArrendaSysServicios
                 var cuent = db.Cuenta.Where(x => x.idCuenta == idCuenta && x.fechaBajaCuenta == null).FirstOrDefault();
                 if (cuent != null)
                 {
+                    if (cuent.idPremium != null)
+                    {
+                        cuenta.premium = "1";
+                    }
+                    else
+                    {
+                        cuenta.premium="0";
+                    }
                     cuenta.email = cuent.emailCuenta;
                     var arrendatario = db.Arrendatario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
                     var propietario = db.Propietario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
