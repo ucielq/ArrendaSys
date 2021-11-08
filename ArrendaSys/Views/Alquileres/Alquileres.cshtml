@@ -287,11 +287,15 @@
 
     function EliminarAlquiler(btn) {
         var id = table.row($(btn).parents('tr')).data();
-        console.log(id.idAlquiler);
-
+        alquiler1 = new Object();
+        alquiler1.idAlquiler = id.idAlquiler;
+        alquiler1.idInmueble = id.idInmueble;
+        alquiler1.idArrendatario = id.idArrendatario;
+        debugger;
         $.ajax({
-            type: 'Put',
-            url: '/Api/Alquiler/EliminarAlquiler?idAlquiler=' + id.idAlquiler,
+            type: 'Post',
+            url: '/Api/Alquiler/EliminarAlquiler',
+            data: alquiler1,
             success: function (result) {
                 location.href = '/Alquileres/Alquileres';
             }
@@ -343,6 +347,8 @@
         alquiler = new Object();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler2").val();
         alquiler.idAlquiler = $("#idAlquiler2").val();
+        alquiler.idArrendatario = $("#idArrendatario2").val();
+        alquiler.idInmueble = $("#idInmueble2").val();
         debugger;
        $.ajax({
             type: 'Post',
@@ -357,7 +363,6 @@
 
     function GuardarAlquiler() {
         var alquiler = new Object();
-        debugger;
         alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 

@@ -40,6 +40,7 @@ namespace ArrendaSysServicios
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
                                           idInmueble = p.idInmueble,
+                                          idPublicacionEstado = pe.idPublicacionEstado,
                                           descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
                                           descripcionPublicacion=p.descripcionPublicacion
                                       }).ToList();
@@ -62,7 +63,9 @@ namespace ArrendaSysServicios
                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
                                           precioAlquiler = p.precioAlquiler,
                                           idInmueble = p.idInmueble,
-                                          descripcionEstadoPublicacion = ep.nombreEstadoPublicacion
+                                          idPublicacionEstado = pe.idPublicacionEstado,
+                                          descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
+                                          descripcionPublicacion = p.descripcionPublicacion
                                       }).ToList();
                     object json = new { data = publicaciones };
                     return json;
@@ -96,78 +99,70 @@ namespace ArrendaSysServicios
 
 
 
-        public int AgregarPublicacion(ABMPublicacionViewModel publicacion)
+        public void AgregarPublicacion(ABMPublicacionViewModel publicacion)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
 
                 Publicacion publicacion1 = new Publicacion();
-
                 publicacion1.descripcionPublicacion = publicacion.descripcionPublicacion;
                 publicacion1.fechaAltaPublicacion = publicacion.fechaAltaPublicacion;
                 publicacion1.fechaBajaPublicacion = publicacion.fechaBajaPublicacion;
                 publicacion1.precioAlquiler = publicacion.precioAlquiler;
-                publicacion1.idInmueble = publicacion.idInmueble;
-
+                publicacion1.idInmueble = publicacion.idInmueble;                
                 db.Publicacion.Add(publicacion1);
+                db.SaveChanges();
 
                 var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion.idInmueble).FirstOrDefault();
                 var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado == null).FirstOrDefault();
-                if (inmuest != null)
-                {
-                    inmuest.fechaBajaInmuebleEstado = DateTime.Now;
-
-                    InmuebleEstado inmuEstadoNuevo = new InmuebleEstado
-                    {
-                        fechaAltaInmuebleEstado = DateTime.Now,
-                        fechaBajaInmuebleEstado = null,
-                        idEstadoInmueble = 4,
-                        idInmueble = inmu.idInmueble
-                    };
+                inmuest.fechaBajaInmuebleEstado = DateTime.Now;
+                db.SaveChanges();
+                InmuebleEstado inmuEstadoNuevo = new InmuebleEstado();
+                    inmuEstadoNuevo.fechaAltaInmuebleEstado = DateTime.Now;
+                    inmuEstadoNuevo.fechaBajaInmuebleEstado = null;
+                    inmuEstadoNuevo.idEstadoInmueble = 4;
+                    inmuEstadoNuevo.idInmueble = inmu.idInmueble;                    
                     db.InmuebleEstado.Add(inmuEstadoNuevo);
                     db.SaveChanges();
-                }
+                
 
+                var ultimoGuardado = db.Publicacion.OrderByDescending(x => x.idPublicacion).FirstOrDefault();
+               
+                PublicacionEstado publiEstado = new PublicacionEstado();
+                publiEstado.fechaAltaPublicacionEstado = DateTime.Now;
+                publiEstado.fechaBajaPublicacionEstado = null;
+                publiEstado.idEstadoPublicacion = 1;
+                publiEstado.idPublicacion = ultimoGuardado.idPublicacion;
+                db.PublicacionEstado.Add(publiEstado);
                 db.SaveChanges();
-                //var ultimoGuardado = db.Alquiler.OrderByDescending(x => x.idAlquiler).FirstOrDefault();
-                CrearPublicacionEstado(publicacion1.idPublicacion);
-                return 1;
 
             }
         }
 
 
-        public void CrearPublicacionEstado(int? id)
-        {
-            PublicacionEstado publiEstado = new PublicacionEstado();
-            publiEstado.fechaAltaPublicacionEstado = DateTime.Now;
-            publiEstado.fechaBajaPublicacionEstado = null;
-            publiEstado.idEstadoPublicacion = 1;
-            publiEstado.idPublicacion = id;
-            db.PublicacionEstado.Add(publiEstado);
-            db.SaveChanges();
-        }
       
 
 
-        public void EliminarPublicacion(int idPublicacion)
+        public void EliminarPublicacion(ABMPublicacionViewModel publicacion)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
-                var publicacion1 = db.Publicacion.Where(x => x.idPublicacion == idPublicacion).FirstOrDefault();
+                var publicacion1 = db.Publicacion.Where(x => x.idPublicacion == publicacion.idPublicacion).FirstOrDefault();
+                
                 if (publicacion1 != null)
                 {
 
-                    var publicacionEstado = db.PublicacionEstado.Where(x => x.idPublicacion == idPublicacion && x.fechaBajaPublicacionEstado == null).FirstOrDefault();
+                    var publicacionEstado = db.PublicacionEstado.Where(x => x.idPublicacion == publicacion.idPublicacion && x.fechaBajaPublicacionEstado == null).FirstOrDefault();
                     publicacionEstado.fechaBajaPublicacionEstado = DateTime.Now;
                     PublicacionEstado nuevoEstado = new PublicacionEstado();
                     nuevoEstado.fechaAltaPublicacionEstado = DateTime.Now;
+                    nuevoEstado.fechaBajaPublicacionEstado= DateTime.Now;
                     nuevoEstado.idEstadoPublicacion = 2;
-                    nuevoEstado.idPublicacion = idPublicacion;
+                    nuevoEstado.idPublicacion = publicacion.idPublicacion;
                     db.PublicacionEstado.Add(nuevoEstado);
                     db.SaveChanges();
 
-                    var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion1.idInmueble).FirstOrDefault();
+                    var inmu = db.Inmueble.Where(x => x.idInmueble == publicacion.idInmueble).FirstOrDefault();
                     var inmuest = db.InmuebleEstado.Where(x => x.idInmueble == inmu.idInmueble && x.fechaBajaInmuebleEstado==null).FirstOrDefault();
                     if (inmuest != null)
                     {
@@ -183,6 +178,13 @@ namespace ArrendaSysServicios
                         db.InmuebleEstado.Add(inmuEstadoNuevo);
                         db.SaveChanges();
                     }
+
+                   
+
+                    db.Publicacion.Remove(publicacion1);
+                    db.SaveChanges();
+
+
                 }
             }
         }
@@ -336,57 +338,84 @@ namespace ArrendaSysServicios
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 ABMPublicacionViewModel publicacion = (from p in db.Publicacion
-                                     join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
-                                     join i in db.Inmueble on p.idInmueble equals i.idInmueble
-                                     join d in db.Direccion on i.idDireccion equals d.idDireccion
-                                     join l in db.Localidad on d.idLocalidad equals l.idLocalidad
-                                     join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento
-                                     where p.idPublicacion== idPublicacion
-                                     select new ABMPublicacionViewModel
-                                     {
-                                         idPublicacion = p.idPublicacion,
-                                         fechaAltaPublicacion = p.fechaAltaPublicacion,
-                                         fechaBajaPublicacion = p.fechaBajaPublicacion,
-                                         precioAlquiler = p.precioAlquiler,
-                                         idInmueble = p.idInmueble,
-                                         descripcionPublicacion = p.descripcionPublicacion,
-                                         inmueble = new InmuebleViewModel
-                                         {
-                                             cantAmbientes = i.cantAmbientes,
-                                             cantBanos = i.cantBanos,
-                                             cantHabitaciones = i.cantHabitaciones,
-                                             cochera = i.cochera,
-                                             descripcionInmueble = i.descripcionInmueble,
-                                             incluyeExpensas = i.incluyeExpensas,
-                                             mtsCuadrados = i.mtsCuadrados,
-                                             mtsCuadradosInt = i.mtsCuadradosInt,
-                                             permiteMascota = i.permiteMascota,
-                                             direccion = new DireccionViewModel
-                                             {
-                                                 idDireccion = d.idDireccion,
-                                                 idLote = d.idLote,
-                                                 idManzana = d.idManzana,
-                                                 nombreBarrio = d.nombreBarrio,
-                                                 nombreCalle = d.nombreCalle,
-                                                 numeroCalle = d.numeroCalle,
-                                                 idLocalidad = d.idLocalidad,
-                                                 localidad = new LocalidadViewModel
-                                                 {
-                                                     idLocalidad = l.idLocalidad,
-                                                     codigopostal = l.codigoPostal,
-                                                     nombreLocalidad = l.nombreLocalidad,
-                                                     idDepartamento = l.idDepartamento,
-                                                     departamento = new DepartamentoViewModel
-                                                     {
-                                                         idDepartamento = dep.idDepartamento,
-                                                         nombreDepartamento = dep.nombreDepartamento
-                                                     }
-                                                 }
-                                             }
-                                         }
+                                                       join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
+                                                       join i in db.Inmueble on p.idInmueble equals i.idInmueble
+                                                       join d in db.Direccion on i.idDireccion equals d.idDireccion
+                                                       join l in db.Localidad on d.idLocalidad equals l.idLocalidad
+                                                       join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento
+                                                       where p.idPublicacion == idPublicacion
+                                                       select new ABMPublicacionViewModel
+                                                       {
+                                                           idPublicacion = p.idPublicacion,
+                                                           fechaAltaPublicacion = p.fechaAltaPublicacion,
+                                                           fechaBajaPublicacion = p.fechaBajaPublicacion,
+                                                           precioAlquiler = p.precioAlquiler,
+                                                           idInmueble = p.idInmueble,
+                                                           descripcionPublicacion = p.descripcionPublicacion,
+                                                           inmueble = new InmuebleViewModel
+                                                           {
+                                                               cantAmbientes = i.cantAmbientes,
+                                                               cantBanos = i.cantBanos,
+                                                               cantHabitaciones = i.cantHabitaciones,
+                                                               cochera = i.cochera,
+                                                               descripcionInmueble = i.descripcionInmueble,
+                                                               incluyeExpensas = i.incluyeExpensas,
+                                                               mtsCuadrados = i.mtsCuadrados,
+                                                               mtsCuadradosInt = i.mtsCuadradosInt,
+                                                               permiteMascota = i.permiteMascota,
+                                                               idInmueble= i.idInmueble,
+                                                               tipoArrendador= i.tipoArrendador,
+                                                               idArrendador= i.idArrendador,
+                                                               direccion = new DireccionViewModel
+                                                               {
+                                                                   idDireccion = d.idDireccion,
+                                                                   idLote = d.idLote,
+                                                                   idManzana = d.idManzana,
+                                                                   nombreBarrio = d.nombreBarrio,
+                                                                   nombreCalle = d.nombreCalle,
+                                                                   numeroCalle = d.numeroCalle,
+                                                                   idLocalidad = d.idLocalidad,
+                                                                   localidad = new LocalidadViewModel
+                                                                   {
+                                                                       idLocalidad = l.idLocalidad,
+                                                                       codigopostal = l.codigoPostal,
+                                                                       nombreLocalidad = l.nombreLocalidad,
+                                                                       idDepartamento = l.idDepartamento,
+                                                                       departamento = new DepartamentoViewModel
+                                                                       {
+                                                                           idDepartamento = dep.idDepartamento,
+                                                                           nombreDepartamento = dep.nombreDepartamento
+                                                                       }
+                                                                   }
+                                                               }
+                                                           }
 
-                                     }).FirstOrDefault();
+                                                       }).FirstOrDefault();
 
+                //Datos del perfil que publica
+                if (publicacion.inmueble.tipoArrendador == 3)
+                {
+                    PropietarioViewModel propietario = (from p in db.Propietario where p.idPropietario == publicacion.inmueble.idArrendador
+                                                        select new PropietarioViewModel { 
+                                                            idPropietario=p.idPropietario,
+                                                            nombrePropietario= p.nombrePropietario,
+                                                            apellidoPropietario=p.apellidoPropietario,
+
+                                                        }).FirstOrDefault();
+                    publicacion.propietario = propietario;
+
+                }
+                else
+                {
+                    InmobiliariaViewModel inmobiliaria = (from i in db.Inmobiliaria where i.idInmobiliaria == publicacion.inmueble.idArrendador
+                                                          select new InmobiliariaViewModel { 
+                                                          idInmobiliaria=i.idInmobiliaria,
+                                                          nombreInmobiliaria= i.nombreInmobiliaria                                                         
+                                                          }).FirstOrDefault();
+                    publicacion.inmobiliaria = inmobiliaria;
+                }
+                                       
+                //imágenes
                 var listaArchivoVM = new List<ArchivoVM>();
                 var archivos = db.MultimediaInmueble.Where(x => x.idInmueble == publicacion.idInmueble).ToList();
                 foreach (var multi in archivos)

@@ -29,6 +29,48 @@
     }
 </style>
 
+    <div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Formato no válido</b></h5>
+                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container" id="bodyInmueble">
+                        @*Aca va todo el cuerpo*@
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                </div>
+             </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Formato no válido</b></h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div><p><h3>Reseñas recibidas</h3></p></div>
+                    <div class="container" id="bodyArrendador">
+                        @*Aca va todo el cuerpo*@
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -41,11 +83,13 @@
 
                     </div>
                     <section id="gallery">
-                        <div class="container" id="publicacion" style="margin-left: 450px">
+                        <div class="container" id="publicacion" style="margin-left: 10px">
                             @*Cuerpo de la pagina*@
                         </div>
-
+                        
+                        
                     </section>
+                    
 
                 </div>
             </div>
@@ -58,6 +102,8 @@
 @{
     var idCuenta = Session["idCuenta"];
     var idPropietario = Session["id"];
+    var tipoCuenta = Session["tipoCuenta"];
+
 }
 
 <script>
@@ -71,7 +117,7 @@
     }
 
     idPublicacion = GetUrlVars()["id"];
-
+    var pag = 1;
 
     (function () {
         $("#publicacion").empty();
@@ -110,27 +156,48 @@
                     item = item + "<span class='carousel-control-next-icon' aria-hidden='true'></span>";
                     item = item + "<span class='sr-only'>Next</span></a>";
                     item = item + "</div>";
-                    item = item + "</div>";
-                    item = item + "</div>";                   
-                    item = item + "</div>";
-
                 item = item + "</div>";
                 item = item + "</div>";
-                item = item + "<div class='col-md-6' style='margin-left:-400'>";
+                item = item + "<div class='col-md-4' style='margin-left:-1'>";
                 item = item + "<p>" + publicacion.inmueble.descripcionInmueble + "</p>";
-                item = item + "<p>" + "Precio de Alquiler: $ " +publicacion.precioAlquiler+ "</p>";
+                item = item + "<p>" + "Precio de Alquiler: $ " + publicacion.precioAlquiler + "</p>";
 
                 item = item + "<p>" + "Dirección: " + "</p>";
-                item = item + "<p>" + " " + publicacion.inmueble.direccion.nombreCalle + " " + publicacion.inmueble.direccion.numeroCalle + "-" + publicacion.inmueble.direccion.localidad.nombreLocalidad + " - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</p>";
-                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " "+publicacion.inmueble.mtsCuadrados + " metros cuadrados"+ "</p>";
-                item = item + "<p><i class='fas fa-home'></i>" + " "+ publicacion.inmueble.mtsCuadradosInt + "  metros cuadrados internos "+ "</p>";
+                item = item + "<p>" + " " + publicacion.inmueble.direccion.nombreCalle + " " + publicacion.inmueble.direccion.numeroCalle + "-" + publicacion.inmueble.direccion.localidad.nombreLocalidad + "</p>";
+                item = item + "<p>" + " " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</p>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + publicacion.inmueble.mtsCuadrados + " metros cuadrados" + "</p>";
+                item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + "  metros cuadrados internos " + "</p>";
                 item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + publicacion.inmueble.cantHabitaciones + "</p>";
                 item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de baños: " + publicacion.inmueble.cantBanos + "</p>";
                 if (publicacion.inmueble.cochera) {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "Tiene Cochera" + "</p>";
                 } else {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "No tiene Cochera" + "</p>";
+                }                 
+                item = item + "</div>";
+
+                if (publicacion.inmueble.tipoArrendador == 3) {
+
+                    item = item + "<div class='col-md-2' style='margin-left:-1'>";
+                    item = item + "<p>" + "Publicado por: " + publicacion.propietario.nombrePropietario + " " + publicacion.propietario.apellidoPropietario + "</p>";
+                    item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
+                    item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.propietario.idPropietario + "," + 3+ ")'>Ver Reseñas Arrendador</button>";
+
+                } else {
+                    if (publicacion.inmueble.tipoArrendador == 4) {
+                        item = item + "<div class='col-md-2' style='margin-left:-1'>";
+                        item = item + "<p>" + "Publicado por: " + publicacion.inmobiliaria.nombrePropietario + "</p>";
+                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
+                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.inmobiliaria.idInmobiliaria +"," + 4+ ")'>Ver Reseñas Arrendador</button>";
+                    }
                 }
+                
+                
+                
+                item = item + "</div>";
+
+                item = item + "</div>";
+                
                 item = item + "<button class='btn btn-outline-danger btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
 
@@ -148,6 +215,128 @@
     function Volver() {
         location.href ='javascript: history.go(-1)';
     }
+   
+    
+    function completarReseniasInmueble(idInmueble) {
+        $("#modalinmueble").modal('show');
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/obtenerReseniasInmueble?idInmueble=' + idInmueble + "&pag=" + pag,
+            success: function (result) {
+                debugger;
+                cantidad = result.cantidad;
+                $("#bodyInmueble").empty();
+                var item = "";
+                item = item + "<div><p><h3> Reseñas del Inmueble</h3></p></div>";
+                result.lista.forEach(function (data, index) {
+                    item = item + "<div class='row'>";
+                    item = item + "<div class='col-md-2'>";
+                    item = item + "<span>" + data.nombreAutor + "</span>";
+                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+
+                $("#bodyInmueble").append(item);
+                paginasInmueble();
+            }
+        });
+    }
+    function ObtenerReseniasArrendatario(id, tipo) {
+        debugger;
+        $("#modalarrendador").modal('show');
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/obtenerReseniasV2?id='+ id +"&tipo="+ tipo + "&pag=" + pag,
+            success: function (result) {
+                cantidad = result.cantidad;
+                $("#bodyArrendador").empty();
+                var item = "";
+                result.lista.forEach(function (data, index) {
+                    item = item + "<div class='row'>";
+                    item = item + "<div class='col-md-2'>";
+                    item = item + "<span>" + data.nombreAutor + "</span>";
+                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+
+                $("#bodyArrendador").append(item);
+                paginas();
+            }
+        });
+    }
+    function paginas() {
+        var html = "<nav aria-label='...'>";
+        html = html + "<ul class='pagination'>";
+        var cantPag = 1;
+        var resto = cantidad % 6;
+        if (resto > 0) {
+            cantPag = cantidad / 6 + 1;
+        } else {
+            cantPag = cantidad / 6;
+        }
+
+        for (var i = 1; i <= cantPag; i++) {
+            if (i == pag) {
+                html = html + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            } else {
+                html = html + "<li class='page-item'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            }
+        }
+        html = html + "</ul>";
+        html = html + "</nav>";
+        $("#bodyArrendador").append(html);
+    }
+    function cambiarPag(num) {
+        pag = num;
+        
+        ObtenerReseniasArrendatario();
+    }
+
+    function paginasInmueble() {
+        var html = "<nav aria-label='...'>";
+        html = html + "<ul class='pagination'>";
+        var cantPag = 1;
+        var resto = cantidad % 6;
+        if (resto > 0) {
+            cantPag = cantidad / 6 + 1;
+        } else {
+            cantPag = cantidad / 6;
+        }
+
+        for (var i = 1; i <= cantPag; i++) {
+            if (i == pag) {
+                html = html + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPagInmueble(" + i + ")>" + i + "</button></li>";
+            } else {
+                html = html + "<li class='page-item'><button class='page-link' id='pag" + i + "' onclick=cambiarPagInmueble(" + i + ")>" + i + "</button></li>";
+            }
+        }
+        html = html + "</ul>";
+        html = html + "</nav>";
+        $("#bodyInmueble").append(html);
+    }
+    function cambiarPagInmueble(num) {
+        pag = num;
+        completarReseniasInmueble();
+    }
+    
 
 
 </script>
