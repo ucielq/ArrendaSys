@@ -19,10 +19,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.HttpPost]
 
 
-        public int CrearPublicacion(ABMPublicacionViewModel publicacion)
+        public void CrearPublicacion(ABMPublicacionViewModel publicacion)
         {
             ServicioABMPublicacion serv = new ServicioABMPublicacion();
-            return serv.AgregarPublicacion(publicacion);
+           serv.AgregarPublicacion(publicacion);
         }
 
 
