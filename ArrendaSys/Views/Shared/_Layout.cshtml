@@ -69,8 +69,11 @@
                         </div>
                         <ul class="list-unstyled components" id="MenuPrincipal">
                         </ul>
+                        <div style="position:absolute; bottom:0">
+                            <span style="color:white; padding-left:35px; padding-bottom:10px;">@emailCuenta</span>
+                        </div>
                     </nav>
-
+                        
                 </div>
                 <div class="col-md-9">
                     <nav class="navbar sticky-top navbar-light float-right" style="background-color: transparent !important; box-shadow: none !important; width: 100%; justify-content:right !important;display:flex">
@@ -84,9 +87,10 @@
                         </div>
 
                         <div class="dropdown float-right" style="text-align:right">
-                            <span style="color:white">@emailCuenta</span>
+                            
                             <button class="btn btn-success dropdown-toggle float-right" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" style="background-color:#2e7230; padding-top:5px; padding-bottom:5px; border-radius:50px; padding-left:15px;">
                                 <img class='img-circle2 img-bordered-sm2' src='~/TempFolder/@rutaParcial' title=@emailCuenta /> &nbsp&nbsp Mi perfil &nbsp
+                                
                             </button>
                             <div class="mercadoPago" id="btnmp">
 
@@ -112,6 +116,7 @@
     @*<img src="~/assets/img/cesped.jpg" class="img-fluid" alt="" style="height:131vh;">*@
 
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
 @*<script>
@@ -187,7 +192,8 @@
     }
 
     function MisEstadisticas() {
-        window.open("/Api/Reportes/excel?tipoCuenta=" + tipoCuenta + "&id=" + id);
+        window.location.href = "/Estadisticas/MisEstadisticas";
+/*        window.open("/Api/Reportes/excel?tipoCuenta=" + tipoCuenta + "&id=" + id);*/
     }
 
     function MisNotificaciones() {
