@@ -122,6 +122,17 @@ namespace ArrendaSys.Controllers.Api
             return lista;
         }
 
+        [System.Web.Http.Route("Api/Resenia/indicadorAlquilerActivo")]
+        [System.Web.Http.ActionName("indicadorAlquilerActivo")]
+        [System.Web.Http.HttpGet]
+        public int? indicadorAlquilerActivo(int idAlquiler)
+        {
+            ServicioResenia servicio = new ServicioResenia();
+            var indicador = servicio.indicadorAlquilerActivo(idAlquiler);
+
+            return indicador;
+        }
+
     }
 
 }

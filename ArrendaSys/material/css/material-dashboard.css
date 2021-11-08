@@ -5080,13 +5080,13 @@ tbody.collapse.show {
   padding: 0.5rem 0.75rem;
   margin-left: 0;
   line-height: 1.25;
-  color: #2196f3;
+  color: black;
   background-color: transparent;
   border: 0 solid #dee2e6;
 }
 
 .page-link:hover {
-  color: #0a6ebd;
+  color: black;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -13700,7 +13700,7 @@ fieldset[disabled] .form-group .form-control {
 
 .img-thumbnail {
   border-radius: 16px;
-}
+}.card
 
 .img-raised {
   box-shadow: 0 5px 15px -8px rgba(0, 0, 0, 0.24), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
@@ -19853,5 +19853,17 @@ Copyright (c) 2015 Daniel Eden
 
 #campanita{
     font-size: 35px;
+}
+
+#mensajeError {
+    display: none;
+    font-size: 15px;
+    background-color: #ea0606;
+    border-radius: 10px;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 /*# sourceMappingURL=dashboard-free.css.map */
