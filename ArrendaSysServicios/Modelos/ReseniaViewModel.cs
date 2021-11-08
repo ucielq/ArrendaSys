@@ -19,5 +19,6 @@ namespace ArrendaSysServicios.Modelos
         public decimal? puntuacionResenia { get; set; }
         public int? idInmueble { get; set; }
         public string nombreAutor { get; set; }
+        public int? estadoAlquiler { get; set; }
     }
 }

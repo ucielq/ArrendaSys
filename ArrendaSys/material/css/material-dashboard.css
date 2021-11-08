@@ -19854,4 +19854,16 @@ Copyright (c) 2015 Daniel Eden
 #campanita{
     font-size: 16px;
 }
+
+#mensajeError {
+    display: none;
+    font-size: 15px;
+    background-color: #ea0606;
+    border-radius: 10px;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
 /*# sourceMappingURL=dashboard-free.css.map */

@@ -396,5 +396,22 @@ namespace ArrendaSysServicios
 
             }
         }
+
+        public int? indicadorAlquilerActivo(int idAlquiler)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var indicador = (from e in db.AlquilerEstado
+                                 where e.idAlquiler == idAlquiler && e.fechaBajaAlquilerEstado == null
+                                 select new ReseniaViewModel
+                                 {
+                                     estadoAlquiler = e.idEstadoAlquiler
+
+                                 }).FirstOrDefault();
+                var estado = indicador.estadoAlquiler;
+                return estado;
+            }
+
+        }
     }
 }
