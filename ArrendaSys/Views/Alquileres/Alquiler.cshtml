@@ -76,11 +76,9 @@ p {
                                     <div class="container" id="Inmueble">
 
                                     </div>
-                                    <div><p><h3>Mis Reseñas</h3></p></div>
                                     <div class="container" id="body">
                                         @*Aca va todo el cuerpo*@
                                     </div>
-                                    <div><p><h3>Mis Reseñas del Inmueble</h3></p></div>
                                     <div class="container" id="bodyInmueble">
                                         @*Aca va todo el cuerpo*@
                                     </div>
@@ -94,7 +92,6 @@ p {
     </div>
 </div>
 <script>
-    debugger;
     var tipoCuenta = parseInt(@tipoCuenta);
     var idCuenta = parseInt(@idCuenta);
     var id = parseInt(@id);
@@ -167,21 +164,6 @@ p {
                 item = item + "</div>";
                 item = item + "</div>";
 
-                //Row reseñas del inmueble
-
-                if (tipoCuenta == 2) {
-                    item = item + "<div class='row'>"
-                    item = item + "<div class='row' id='reseniasAI' style='display:none'>";
-                    item = item + "</div>";
-                    cargarReseniasAI();
-                    item = item + "<div class='row' id='formularioAI' style='display:none'>";
-                    item = item + "</div>";
-                    cargarItemsAI();
-                    item = item + "</div>";
-                    item = item + "</hr>";
-                }
-
-
                 //Row Datos Arrendador u arrendatario (agregar condicion)
                 if (tipoCuenta == 2) {
                     if (result.inmueble.tipoArrendador == 3) {
@@ -205,10 +187,6 @@ p {
                         item = item + "</div>";
                         item = item + "</hr>";
                     }
-                    cargarReseniasArAo();
-                    item = item + "<div class='row' id='formularioArAo' style='display:none'>";
-                    item = item + "</div>";
-                    cargarItemsArAo();
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
                     item = item + "<hr/>";
@@ -222,11 +200,34 @@ p {
                     item = item + "</div>";
                     cargarItemsAoAr();
                 }
-                
+
                 item = item + "</div>";
 
-                //Listar Reseñas
+                //Row reseñas del inmueble
+                if (tipoCuenta == 2) {
+                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;' onclick = 'mostrarformularioArrendador()'><i class='fas fa-plus'></i> Hacer Reseña Propietario</button >"
+                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;'  onclick = 'mostrarformularioInmueble()'><i class='fas fa-plus'></i> Hacer Reseña Inmueble</button >"
+                }
 
+                if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    item = item + "<br/><button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:20px;' onclick = 'mostrarformulario()'><i class='fas fa-plus'></i> Hacer Reseña Arrendatario</button ><br/>"
+                }
+
+                if (tipoCuenta == 2) {
+                    item = item + "<div class='row'>"
+                    item = item + "<div class='row' id='reseniasAI' style='display:none'>";
+                    item = item + "</div>";
+                    cargarReseniasAI();
+                    item = item + "<div class='row' id='formularioAI' style='display:none'>";
+                    item = item + "</div>";
+                    cargarItemsAI();
+                    item = item + "</div>";
+                    item = item + "</hr>";
+                    cargarReseniasArAo();
+                    item = item + "<div class='row' id='formularioArAo' style='display:none'>";
+                    item = item + "</div>";
+                    cargarItemsArAo();
+                }
 
 
                 $("#Inmueble").append(item);
@@ -244,6 +245,7 @@ p {
             success: function (result) {
                 listaItemsAoAr = result;
                 result.forEach(function (data, index) {
+                    $("#formularioAoAr").append("<p><h3>Haz tu Reseña</h3></p>")
                     $("#formularioAoAr").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
                     item1 = item1 + "</div>";
@@ -253,7 +255,8 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionAoAr' name='descripcionAoAr'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>"
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
+                item2 = item2 + "<a href='' class='btn btn - outline - danger btn - sm' id='btnvolver' style='width:120px; background-color:#ea0606;'>Cancelar</a>"
                 $("#formularioAoAr").append(item2)
             }
         });
@@ -266,6 +269,7 @@ p {
             success: function (result) {
                 listaItemsArAo = result;
                 result.forEach(function (data, index) {
+                    $("#formularioArAo").append("<p><h3>Haz tu Reseña</h3></p>")
                     $("#formularioArAo").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
                     item1 = item1 + "</div>";
@@ -275,7 +279,8 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionArAo' name='descripcionArAo'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>"
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
+                item2 = item2 + "<a href='' class='btn btn - outline - danger btn - sm' id='btnvolver' style='width:120px; background-color:#ea0606;'>Cancelar</a>"
                 $("#formularioArAo").append(item2)
             }
         });
@@ -288,6 +293,7 @@ p {
             success: function (result) {
                 listaItemsAI = result;
                 result.forEach(function (data, index) {
+                    $("#formularioAI").append("<p><h3>Haz tu Reseña</h3></p>")
                     $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
                     item1 = item1 + "</div>";
@@ -297,7 +303,8 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
+                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
+                item2 = item2 + "<a href='' class='btn btn - outline - danger btn - sm' id='btnvolver' style='width:120px; background-color:#ea0606;'>Cancelar</a>"
                 $("#formularioAI").append(item2)
             }
         });
@@ -575,6 +582,12 @@ p {
                 cantidad = result.cantidad;
                 $("#body").empty();
                 var item = "";
+                if (tipoCuenta == 2) {
+                    item = item + "<div><p><h3>Mis Reseñas sobre el Arrendador</h3></p></div>";
+                }
+                if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    item = item + "<div><p><h3>Mis Reseñas sobre el Arrendatario</h3></p></div>";
+                }
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -632,6 +645,7 @@ p {
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
+                item = item + "<div><p><h3>Mis Reseñas sobre el Inmueble</h3></p></div>";
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -679,5 +693,21 @@ p {
     function cambiarPagInmueble(num) {
         pag = num;
         completarReseniasInmueble();
+    }
+    function mostrarformularioArrendador() {
+        $("#formularioArAo").show();
+        $("#reseniasAI").hide();
+        $("#formularioAI").hide();
+    }
+    function mostrarformularioInmueble() {
+        $("#reseniasAI").show();
+        $("#formularioAI").show();
+        $("#formularioArAo").hide();
+        $("#formulario2").hide();
+        formularioAoAr
+    }
+
+    function mostrarformularioArrendatario() {
+        $("#formularioAoAr").show();
     }
 </script>

@@ -343,7 +343,6 @@
         alquiler = new Object();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler2").val();
         alquiler.idAlquiler = $("#idAlquiler2").val();
-        debugger;
        $.ajax({
             type: 'Post',
             url: '/Api/Alquiler/EditarAlquiler',
@@ -357,7 +356,6 @@
 
     function GuardarAlquiler() {
         var alquiler = new Object();
-        debugger;
         alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
         alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 
