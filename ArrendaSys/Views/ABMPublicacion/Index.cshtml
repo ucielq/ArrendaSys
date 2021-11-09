@@ -271,7 +271,26 @@
                 { data: "precioAlquiler", "className": "text-left" },
                 { data: "idInmueble", "className": "text-left", "visible": false },
                 { data: "direccion", "className": "text-left" },
-                { data: "descripcionPublicacion", "className": "text-left" },
+                {
+                    data: "descripcionPublicacion",
+                    render: function (data) {
+                        var detalle = "";
+                        detalle = data;
+                        if (data.length > 59) {
+                            detalle = data.substring(0, 60) + "</br>" + data.substring(60,data.length);
+                        }
+                        if (data.length > 119) {
+                            detalle = data.substring(0, 60) + "</br>" + data.substring(60, 120) + "</br>" + data.substring(120, data.length);
+
+                        }
+                        if (data.length > 179) {
+                            detalle = data.substring(0, 60) + "</br>" + data.substring(60, 120) + "</br>" + data.substring(120, 180) + "</br>" + "...";
+                        }
+                        
+                        return detalle;
+                    },
+                    "className": "text-left"
+                },
                 { data: "idPublicacionEstado", "className": "text-left", "visible": false },
                 { data: "descripcionEstadoPublicacion", "className": "text-left" },
                {data:"idPublicacion",

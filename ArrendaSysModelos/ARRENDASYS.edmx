@@ -230,7 +230,7 @@
             <PropertyRef Name="idPublicacion" />
           </Key>
           <Property Name="idPublicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="descripcionPublicacion" Type="varchar" MaxLength="100" />
+          <Property Name="descripcionPublicacion" Type="varchar" MaxLength="500" />
           <Property Name="fechaAltaPublicacion" Type="date" />
           <Property Name="fechaBajaPublicacion" Type="date" />
           <Property Name="precioAlquiler" Type="decimal" Precision="9" Scale="2" />
@@ -576,18 +576,6 @@
           <Property Name="idProvincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombreProvincia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Publicacion">
-          <Key>
-            <PropertyRef Name="idPublicacion" />
-          </Key>
-          <Property Name="idPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcionPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaAltaPublicacion" Type="DateTime" Precision="0" />
-          <Property Name="fechaBajaPublicacion" Type="DateTime" Precision="0" />
-          <Property Name="precioAlquiler" Type="Decimal" Precision="9" Scale="2" />
-          <Property Name="tituloPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idInmueble" Type="Int32" />
-        </EntityType>
         <EntityType Name="PublicacionEstado">
           <Key>
             <PropertyRef Name="idPublicacionEstado" />
@@ -652,7 +640,6 @@
           <EntitySet Name="Premium" EntityType="Self.Premium" />
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
-          <EntitySet Name="Publicacion" EntityType="Self.Publicacion" />
           <EntitySet Name="PublicacionEstado" EntityType="Self.PublicacionEstado" />
           <EntitySet Name="ReseñaArchivo" EntityType="Self.ReseñaArchivo" />
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
@@ -665,6 +652,7 @@
           <EntitySet Name="ReseñaArrendatarioArrendador" EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" />
           <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" />
           <EntitySet Name="Cuenta" EntityType="ARRENDASYSEntities.Cuenta" />
+          <EntitySet Name="Publicacion" EntityType="ARRENDASYSEntities.Publicacion" />
         </EntityContainer>
         <EntityType Name="Rol">
           <Key>
@@ -756,6 +744,18 @@
           <Property Name="codigoConfimacion" Type="Int32" />
           <Property Name="urlImagen" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Publicacion">
+          <Key>
+            <PropertyRef Name="idPublicacion" />
+          </Key>
+          <Property Name="idPublicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionPublicacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaPublicacion" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaPublicacion" Type="DateTime" Precision="0" />
+          <Property Name="precioAlquiler" Type="Decimal" Precision="9" Scale="2" />
+          <Property Name="tituloPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="idInmueble" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -975,19 +975,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Publicacion">
-            <EntityTypeMapping TypeName="ARRENDASYSEntities.Publicacion">
-              <MappingFragment StoreEntitySet="Publicacion">
-                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
-                <ScalarProperty Name="descripcionPublicacion" ColumnName="descripcionPublicacion" />
-                <ScalarProperty Name="fechaAltaPublicacion" ColumnName="fechaAltaPublicacion" />
-                <ScalarProperty Name="fechaBajaPublicacion" ColumnName="fechaBajaPublicacion" />
-                <ScalarProperty Name="precioAlquiler" ColumnName="precioAlquiler" />
-                <ScalarProperty Name="tituloPublicacion" ColumnName="tituloPublicacion" />
-                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="PublicacionEstado">
             <EntityTypeMapping TypeName="ARRENDASYSEntities.PublicacionEstado">
               <MappingFragment StoreEntitySet="PublicacionEstado">
@@ -1132,6 +1119,19 @@
                 <ScalarProperty Name="emailCuenta" ColumnName="emailCuenta" />
                 <ScalarProperty Name="contrasenaCuenta" ColumnName="contrasenaCuenta" />
                 <ScalarProperty Name="idCuenta" ColumnName="idCuenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Publicacion">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Publicacion">
+              <MappingFragment StoreEntitySet="Publicacion">
+                <ScalarProperty Name="idInmueble" ColumnName="idInmueble" />
+                <ScalarProperty Name="tituloPublicacion" ColumnName="tituloPublicacion" />
+                <ScalarProperty Name="precioAlquiler" ColumnName="precioAlquiler" />
+                <ScalarProperty Name="fechaBajaPublicacion" ColumnName="fechaBajaPublicacion" />
+                <ScalarProperty Name="fechaAltaPublicacion" ColumnName="fechaAltaPublicacion" />
+                <ScalarProperty Name="descripcionPublicacion" ColumnName="descripcionPublicacion" />
+                <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

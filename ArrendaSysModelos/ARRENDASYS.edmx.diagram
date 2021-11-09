@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="ARRENDASYSEntities.Premium" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Propietario" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Provincia" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.Publicacion" Width="1.5" PointX="2.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.PublicacionEstado" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArchivo" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemAI" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
@@ -37,6 +36,7 @@
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendatarioArrendador" Width="1.5" PointX="0.75" PointY="15.75" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" Width="1.5" PointX="2.75" PointY="15.75" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Cuenta" Width="1.5" PointX="5.375" PointY="15.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.Publicacion" Width="1.5" PointX="3.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
