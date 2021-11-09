@@ -81,6 +81,7 @@ namespace ArrendaSysServicios
                     //
                     var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
                     var alquileres = (from a in db.Alquiler
+                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                       join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
