@@ -193,10 +193,10 @@
                         item = item + "<p><i class='fas fa-warehouse'></i>" + " " +"No tiene Cochera" + "</p>";
                     }
                     var descrip = "";
-                    if (publicacion.inmueble.descripcionInmueble.length >= 80) {
-                        descrip = publicacion.inmueble.descripcionInmueble.substring(0, 77) + "...";
+                    if (publicacion.descripcionPublicacion.length >= 80) {
+                        descrip = publicacion.descripcionPublicacion.substring(0, 77) + "...";
                     } else {
-                        descrip = publicacion.inmueble.descripcionInmueble;
+                        descrip = publicacion.descripcionPublicacion;
                     }
                     item = item + "<p>" + " " + descrip + "</p>";
                     item = item + "<p><b>" + "Precio: $" + publicacion.precioAlquiler + "</b></p>";
