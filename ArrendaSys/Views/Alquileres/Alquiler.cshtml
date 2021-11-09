@@ -176,9 +176,9 @@ p {
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
                         item = item + "<p><h3>Arrendador</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:100px; width:120px;'></img> ";
-                        item = item + "<p><h5>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h5></p>";
-                        item = item + "<p><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></p>";
-                        item = item + "<p><h5>Telefono: " + result.arrendador.telefonoPropietario + "</h5></p>";
+                        item = item + "<span><h5>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h5></span>";
+                        item = item + "<span><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></span>";
+                        item = item + "<span><h5>Telefono: " + result.arrendador.telefonoPropietario + "</h5></span>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
@@ -199,10 +199,10 @@ p {
                     var ruta3 = result.arrendatario.foto.split('\\')[result.arrendatario.foto.split('\\').length - 1];
                     item = item + "<hr/>";
                     item = item + "<div class='row'>";
-                    item = item + "<p><h4>Datos del Arrendatario:</h4></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:100px; width:120px;'></img> ";
-                    item = item + "<h4><b>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</b></h4>";
-                    item = item + "<h4><b>Documento: " + result.arrendatario.nroDocumento + "</b></h4>";
-                    item = item + "<h4><b>Telefono: " + result.arrendatario.telefonoArrendatario + "</b></h4>";
+                    item = item + "<p><h>Datos del Arrendatario:</h4></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:100px; width:120px;'></img> ";
+                    item = item + "<p><h5>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</h5></p>";
+                    item = item + "<p><h5>Documento: " + result.arrendatario.nroDocumento + "</h5></p>";
+                    item = item + "<p><h5>Telefono: " + result.arrendatario.nroTelefono + "</h5></p>";
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
                 }
@@ -325,13 +325,13 @@ p {
         });
     }
     $("#btnvolverArAo").click(function () {
-        $("#formularioArAo").hide();
+        $("#formularioArAo").empty();
     });
     $("#btnvolverAoAr").click(function () {
-        $("#formularioAoAr").hide();
+        $("#formularioAoAr").empty();
     });
     $("#btnvolverAI").click(function () {
-        $("#formularioAI").hide();
+        $("#formularioAI").empty();
     });
 
     function GuardarReseñaAoAr() {

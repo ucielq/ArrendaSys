@@ -234,6 +234,7 @@ namespace ArrendaSysServicios
                                                                fechaAltaAlquiler = a.fechaAltaAlquiler,
                                                                fechaBajaAlquiler = a.fechaBajaAlquiler,
                                                                idArrendatario = a.idArrendatario,
+
                                                                inmueble = new InmuebleViewModel
                                                                {
                                                                    cantAmbientes = i.cantAmbientes,
