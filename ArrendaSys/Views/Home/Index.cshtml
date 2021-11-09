@@ -181,7 +181,7 @@
 
                     item = item + "<div class='card-body'><h5 class='card-title'>" + "Calle " + publicacion.inmueble.direccion.nombreCalle + " "+publicacion.inmueble.direccion.numeroCalle+" " + " - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</h5>";
                     if (publicacion.esPremium) {
-                        item = item + "<p>Publicacion destacada</p>";
+                        item = item + "<p style='color: #bf8e2d; background-color: #dfd9d9; border-radius:10px; padding-left:50px;'><b>¡Publicación destacada!</b></p>";
                     }
                     item = item + "<p><i class='fas fa-ruler-combined'></i>" + "  " + publicacion.inmueble.mtsCuadrados + " Metros Cuadrados." + "</p>";
                     item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + " Metros Interior."+"</p>";

@@ -16,7 +16,43 @@
         width: 100%;
     }
 </style>
-
+<!-- Modal -->
+<div class="modal fade" id="modalDniNo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:darkred;">Arrendatario no existe</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                No existe un arrendatario registrado en el sistema con el DNI indicado.
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modalDniSi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:darkgreen;">Arrendatario existe</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                El arrendatario se encuentra registrado en el sistema con el DNI indicado.
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -64,7 +100,7 @@
                                 <input type="text" class="form-control" id="idArrendatario" placeholder="Ingrese el DNI del Arrendatario" />
                                 <button type="button" class="btn btn-outline-success btn-sm" onclick="verificarDni($('#idArrendatario').val())">Verificar</button>
                                 
-                                <div id='mensajeError' style='display: none; font-size: 15px; background-color: #bf3131; width:500px; color: white; border-radius: 10px; justify-content: center; text-align:center; margin-left:auto; margin-right:auto;'>No existe un Arrendatario con dicho DNI</div>
+                                
                             </div>
 
                             <div class="col-md-2">
@@ -83,7 +119,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-12" id="formulario2" style="display:none">
 
                         <div class="row" style="padding-top:6px">
@@ -116,16 +152,16 @@
                                 <input input readonly type="text" class="form-control" id="idInmueble2" />
                             </div>
                             <div class="col-md-2">
-                                
-                                <input input readonly type="text" class="form-control" id="idAlquiler2" style="visibility:hidden"/>
+
+                                <input input readonly type="text" class="form-control" id="idAlquiler2" style="visibility:hidden" />
                             </div>
                         </div>
 
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <button type="button" class="btn btn-success" onclick="EditarAlquiler1()"><i class="fas fa-save"></i> Editar</button>
-                                <button type="button" class="btn btn-danger" id="btnvolver2"><i class=" fa fa-reply"> </i>Volver</button>
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="EditarAlquiler1()">Editar</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" id="btnvolver2">Cancelar</button>
                             </div>
                         </div>
                     </div>
@@ -330,9 +366,9 @@
     function EditarAlquiler(btn) {
 
         var id = table.row($(btn).parents('tr')).data();
-     
+
         if (id.idEstadoAlquiler == 2) {
-      
+
             window.alert("No se puede editar un alquiler vencido.");
         } else {
             $("#formulario").hide();
@@ -453,14 +489,15 @@
             success: function (result) {
                 if (result != 0) {
                     idArrendatario = result;
+                    $("#modalDniSi").modal('show');
                     $("#BotonGuardar").show();
                     $("#mensajeError").hide();
                 } else {
                     $("#BotonGuardar").hide();
-                    $("#mensajeError").show();
-                    
+                    $("#modalDniNo").modal('show');
+
                 }
-             
+
             }
         });
     }
