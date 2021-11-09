@@ -15,7 +15,7 @@ namespace ArrendaSysUtilidades
 
         public string EnviarMailGenerico(string destino,string body,string subject)
         {
-            var apiKey = "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";
+            var apiKey = "aca va la api key";
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("arrendasys@gmail.com", "Arrendasys");
             var subject2 = subject;
