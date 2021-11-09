@@ -62,7 +62,7 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                        <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="eliminarCuenta()">Eliminar Cuenta</a>
+                                        <button type="button" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="eliminarCuenta()">Eliminar Cuenta</button>
                                     </div>
                                 </div>
                                 <hr />
@@ -277,7 +277,7 @@
                 </div>
                 <div class="modal-footer">
                     <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</a>
-                    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
+                    <a href=""  class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
                 </div>
             </div>
         </div>
@@ -314,6 +314,7 @@
             type: 'Post',
             url: '/Api/Cuenta/eliminarCuenta?idCuenta=' + id,
             success: function (result) {
+
             }
         });
     }

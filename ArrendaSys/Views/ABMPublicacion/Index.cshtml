@@ -49,19 +49,19 @@
                                 <br />
                                 <span>Fecha Alta: </span>
                                 <br />
-                                <input type="date" class="form-control obligatoria" id="fechaAlta" />
+                                <input type="date" class="form-control obligatoria" name="Fecha de alta "id="fechaAlta" />
                             </div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Fecha Baja: </span>
                                 <br />
-                                <input type="date" class="form-control obligatoria" id="fechaBaja" />
+                                <input type="date" class="form-control obligatoria" name="fecha de baja" id="fechaBaja" />
                             </div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Precio del Alquiler: </span>
                                 <br />
-                                <input type="text" class="form-control obligatoria" id="precio" placeholder="Ingrese el precio del Alquiler" />
+                                <input type="text" class="form-control obligatoria" name ="precio" id="precio" placeholder="Ingrese el precio del Alquiler" />
                             </div>
                             <div class="col-md-2">
                                 <br />
@@ -80,7 +80,7 @@
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <a href="" class="btn btn-outline-success btn-sm" onclick="GuardarPublicacion()">Publicar</a>
+                                <button type="button"class="btn btn-outline-success btn-sm" onclick="GuardarPublicacion()">Publicar</button>
                                 <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver">Cancelar</a>
                             </div>
                         </div>
@@ -88,11 +88,10 @@
                     <div class="col-md-12" id="formulario2" style="display:none">
                         <div class="row" style="padding-top:6px">
                             <div class="col-md-5">
-                                @*<div id="alertprecio"></div>
-                                <div id="alertfechaAlta"></div>
-                                <div id="alertfechaBaja"></div>
-                                <div id="alerttitulo"></div>
-                                <div id="alertaItem"></div>*@
+                                <div id="alertprecio2"></div>
+                                <div id="alertfechaAlta2"></div>
+                                <div id="alertfechaBaja2"></div>                        
+                                <div id="alertaItem"></div>
                             </div>
                         </div>
                         <div class="row" style="padding-top:6px">
@@ -100,19 +99,19 @@
                                 <br />
                                 <span>Fecha Alta: </span>
                                 <br />
-                                <input type="date" class="form-control " id="fechaAlta2" />
+                                <input type="date" class="form-control obligatoriaS "name="Fecha de alta" id="fechaAlta2" />
                             </div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Fecha Baja: </span>
                                 <br />
-                                <input type="date" class="form-control " id="fechaBaja2" />
+                                <input type="date" class="form-control obligatoriaS" name="Fecha de Baja" id="fechaBaja2" />
                             </div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Precio: </span>
                                 <br />
-                                <input type="text" class="form-control " id="precio2" placeholder="Ingrese el precio del Alquiler" />
+                                <input type="text" class="form-control obligatoriaS " id="precio2" name="Precio" placeholder="Ingrese el precio del Alquiler" />
                             </div>
 
                         </div>
@@ -138,7 +137,7 @@
                             <div class="col-md-12">
                                 <br />
                                 <div>
-                                    <a href="" class="btn btn-outline-success btn-sm" onclick="EditarPublicacion1()">Editar</a>
+                                    <button type="button" class="btn btn-outline-success btn-sm" onclick="EditarPublicacion1()">Editar</button>
                                     <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver2">Cancelar</a>
                                 </div>
                             </div>
@@ -307,7 +306,7 @@
     }
 
     function EditarPublicacion1() {
-
+        if (ValidarPublicacionEditar()) {
             publicacion = new Object();
             publicacion.descripcionPublicacion = $("#descripcionPublicacion2").val();
             publicacion.fechaAltaPublicacion = $("#fechaAlta2").val();
@@ -322,7 +321,7 @@
                     window.location.href = "/ABMPublicacion";
                 }
             });
-
+        }
     }
     function EliminarPublicacion(btn) {
 
@@ -353,7 +352,7 @@
 
     function mostrarformulario() {
         $("#formulario").show();
-        //$("#formulario2").hide();
+        $("#formulario2").hide();
 
     }
 
@@ -450,7 +449,7 @@
                     "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
                     "<i class='material-icons'>Cerrar</i>" +
                     "</button>" +
-                    "<span>Debe llenar el campo <b>" + $(this).attr("id").toString() + "</b>.</span>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
                     "</div>";
                 objetoAlert.clearQueue();
                 objetoAlert.empty();
@@ -482,28 +481,32 @@
         return true;
     }
 
-
+    $(".obligatoriaS").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    function ValidarPublicacionEditar() {
+        var respuesta = true;
+        $(".obligatoriaS").each(function (index, result) {
+            var alert = "";
+            var objeto = $("#" + $(this).attr("id").toString());
+            var objetoAlert = $("#alert" + $(this).attr("id").toString());
+            if (objeto.val() == "") {
+                alert += "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<i class='material-icons'>Cerrar</i>" +
+                    "</button>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
+                    "</div>";
+                objetoAlert.clearQueue();
+                objetoAlert.empty();
+                objetoAlert.append(alert);
+                respuesta = false;
+            }
+        });
+        return respuesta;
+    }
 
 </script>
 
-
-<!-- Modal -->
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Eliminar Inmueble</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ¿Seguro que desea eliminar este inmueble? Si está publicado, la publicación también se eliminará.
-            </div>
-            <div class="modal-footer">
-                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</a>
-                <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar">Eliminar</a>
-            </div>
-        </div>
-    </div>
-</div>-->
