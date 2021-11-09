@@ -74,7 +74,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card" style="height:800px;">
+                <div class="card">
                     <div class="card-header card-header-info">
                         <div class="float-left">
                             <div class="titulo">Publicación</div>
@@ -195,7 +195,7 @@
                         idPropietario = publicacion.inmobiliaria.idInmobiliaria;
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
                         item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
-                        item = item + "<p>" + publicacion.inmobiliaria.nombrePropietario + "</p>";
+                        item = item + "<p>" + publicacion.inmobiliaria.nombreInmobiliaria + "</p>";
                         item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
                         item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.inmobiliaria.idInmobiliaria +"," + 4+ ")'>Ver Reseñas Arrendador</button>";
                     }
