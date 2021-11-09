@@ -140,7 +140,6 @@ namespace ArrendaSys.Controllers
                 PdfFont bold = PdfFontFactory.CreateFont(StandardFonts.TIMES_BOLD);
                 cell = new Cell()
                     .Add(new Paragraph("Reporte diario\n").SetFont(bold))
-                    .Add(new Paragraph("TextoPruebaUno\n").SetFont(bold))
                     .Add(new Paragraph("Fecha de emisión: " + DateTime.Now.ToShortDateString()))
                     .AddStyle(styleText).AddStyle(styleCell)
                     .SetBorder(Border.NO_BORDER);

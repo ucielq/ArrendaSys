@@ -114,16 +114,16 @@ namespace ArrendaSys.Controllers.Api
             }
             if (tipoCuenta == 4) //Inmobiliaria
             {
-                var lista = (from r in db.ReseñaArrendadorArrendatario
-                         join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                var lista = (from r in db.ReseñaArrendatarioArrendador
+                             join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                         where i.tipoArrendador == 4 && i.idArrendador==id && r.fechaAltaReseñaAoAr >= desde && r.fechaAltaReseñaAoAr <= hasta
+                         where i.tipoArrendador == 4 && i.idArrendador==id && r.fechaAltaReseñaArAo >= desde && r.fechaAltaReseñaArAo <= hasta
                          select new ReseniaPDFVM
                          {
-                             fechaResenia = r.fechaAltaReseñaAoAr,
-                             descripcion = r.descripcionReseñaAoAr,
-                             puntuacionResenia = r.puntuacionReseñaAoAr,
-                             idResenia = r.idReseñaAoAr
+                             fechaResenia = r.fechaAltaReseñaArAo,
+                             descripcion = r.descripcionReseñaArAo,
+                             puntuacionResenia = r.puntuacionReseñaArAo,
+                             idResenia = r.idReseñaArAo
                          }).ToList();
                 int cont = 0;
                 Dictionary<int?, int> hash2 = new Dictionary<int?, int>();
