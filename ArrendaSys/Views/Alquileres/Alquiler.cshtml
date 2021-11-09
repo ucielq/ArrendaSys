@@ -167,12 +167,14 @@ p {
                 item = item + "</div>";
                 item = item + "</div>";
 
+
                 //Row Datos Arrendador u arrendatario (agregar condicion)
                 if (tipoCuenta == 2) {
+                    var ruta2 = result.arrendador.foto.split('\\')[result.arrendador.foto.split('\\').length - 1];
                     if (result.inmueble.tipoArrendador == 3) {
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
-                        item = item + "<p><h3>Arrendador</h3></p><img src='..\\TempFolder\\" + rutaParcial + "' style='height:100px; width:120px;'></img> ";
+                        item = item + "<p><h3>Arrendador</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:100px; width:120px;'></img> ";
                         item = item + "<p><h5>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h5></p>";
                         item = item + "<p><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></p>";
                         item = item + "<p><h5>Telefono: " + result.arrendador.telefonoPropietario + "</h5></p>";
@@ -183,7 +185,7 @@ p {
                     } else {
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
-                        item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + rutaParcial + "' style='height:100px; width:120px;'></img> ";
+                        item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:100px; width:120px;'></img> ";
                         item = item + "<p><h5>Nombre: " + result.arrendador.nombreInmobiliaria + "</h5></p>";
                         item = item + "<p><h5>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h5></p>";
                         item = item + "<div class='row' id='reseniasArAo'>";
@@ -193,9 +195,10 @@ p {
                     }
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    var ruta3 = result.arrendatario.foto.split('\\')[result.arrendatario.foto.split('\\').length - 1];
                     item = item + "<hr/>";
                     item = item + "<div class='row'>";
-                    item = item + "<p><h3>Arrendatario</h3></p><img src='..\\TempFolder\\" + rutaParcial + "' style='height:100px; width:120px;'></img> ";
+                    item = item + "<p><h3>Arrendatario</h3></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:100px; width:120px;'></img> ";
                     item = item + "<p><h5>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</h5></p>";
                     item = item + "<p><h5>Documento: " + result.arrendatario.nroDocumento + "</h5></p>";
                     item = item + "<p><h5>Telefono: " + result.arrendatario.telefonoArrendatario + "</h5></p>";
@@ -753,4 +756,5 @@ p {
             }
         });
     }
+
 </script>

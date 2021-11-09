@@ -26,39 +26,40 @@
                                             <div class="container" id="body">
                                                 @*Aca va todo el cuerpo*@
                                                 <div class="row">
-                                                    <div class="col-9">
+                                                    <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-3">
-                                                                <label for="fechaDesdeInput">Desde</label>
+                                                                <h6 for="fechaDesdeInput">Fecha Desde</h6>
                                                                 <br />
                                                                 <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
                                                             </div>
                                                             <div class="col-3">
-                                                                <label for="fechaDesdeInput">Hasta</label>
+                                                                <h6 for="fechaDesdeInput">Fecha Hasta</h6>
                                                                 <br />
                                                                 <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1 centrar">
-                                                        <div class="row botones">
-                                                            <div class="centrar">
-                                                                <button type="button" class="btn botonFiltrar" style="background-color:#5cb85c" onclick="Filtrar()">Filtrar</button>
+                                                            <div class="col-1 centrar">
+                                                                <div class="row botones">
+                                                                    <div class="centrar">
+                                                                        <a href="" class="btn btn-outline-secondary btn-sm" onclick="Filtrar()">Filtrar</a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-1 centrar">
-                                                       
-                                                    </div>
-                                                    <div class="col-1 centrar">
-                                                        <div class="row botones">
-                                                            <div class="centrar">
-                                                                <button type="button" class="btn" style="background-color:#5cb85c" onclick="imprimirReporte()">Generar Estadísticas</button>
+                                                            <div class="col-3 centrar">
+
+                                                            </div>
+                                                            <div class="col-1 centrar">
+                                                                <div class="row botones">
+                                                                    <div class="centrar">
+                                                                        <a href="" class="btn btn-outline-secondary btn-sm" onclick="imprimirReporte()">Generar Estadísticas</a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row" id="estadisticas">
+                                                <div class="row" id="estadisticas" style="padding-top:20px;">
+
                                                     @*Aca van las est*@
                                                 </div>
                                             </div>
@@ -115,7 +116,8 @@
                     {
                         for (const key2 in response[key]) {
                             if (response[key].hasOwnProperty(key2)) {
-                                item = item + "<br><span>" + key + " " + key2 + " estrellas: " + response[key][key2] + "</span>";                              
+
+                                item = item + "<br><h4><span>" + key + " " + key2 + " Estrellas: " + response[key][key2] +" Valoraciones totales." + "</h4></span>";
                             }
                         }
                     }

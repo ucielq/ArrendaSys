@@ -30,10 +30,10 @@
 </style>
 
     <div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
              <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Formato no válido</b></h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Inmueble</b></h5>
                      <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -50,16 +50,15 @@
         </div>
     </div>
     <div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+            <div class="modal-content" >
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Formato no válido</b></h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div><p><h3>Reseñas recibidas</h3></p></div>
                     <div class="container" id="bodyArrendador">
                         @*Aca va todo el cuerpo*@
                     </div>
@@ -75,7 +74,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="height:800px;">
                     <div class="card-header card-header-info">
                         <div class="float-left">
                             <div class="titulo">Publicación</div>
@@ -128,7 +127,7 @@
             success: function (publicacion) {
                 var item = "";
                 var cont = 0;
-                item = item + "<div class='row' style='border-top-width:50px; padding-top:50px; padding-bottom:50px;'>";
+                item = item + "<div class='row' style='border-top-width:50px; padding-top:50px; padding-bottom:0px;'>";
                     cont++;
                     item = item + "<div class='col-md-6'>";
                     //item = item + "<div class='cardV3'>";
@@ -159,34 +158,39 @@
                 item = item + "</div>";
                 item = item + "</div>";
                 item = item + "<div class='col-md-4' style='margin-left:-1'>";
-                item = item + "<p>" + publicacion.inmueble.descripcionInmueble + "</p>";
-                item = item + "<p>" + "Precio de Alquiler: $ " + publicacion.precioAlquiler + "</p>";
 
-                item = item + "<p>" + "Dirección: " + "</p>";
+
+                item = item + "<h3><b>" + "Dirección: " + "</b></h3>";
                 item = item + "<p>" + " " + publicacion.inmueble.direccion.nombreCalle + " " + publicacion.inmueble.direccion.numeroCalle + "-" + publicacion.inmueble.direccion.localidad.nombreLocalidad + "</p>";
                 item = item + "<p>" + " " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</p>";
-                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + publicacion.inmueble.mtsCuadrados + " metros cuadrados" + "</p>";
-                item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + "  metros cuadrados internos " + "</p>";
-                item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de habitaciones: " + publicacion.inmueble.cantHabitaciones + "</p>";
-                item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de baños: " + publicacion.inmueble.cantBanos + "</p>";
+                item = item + "<h3><b>" + "Especificaciones: " + "</b></h3>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + publicacion.inmueble.mtsCuadrados + " Metros Cuadrados." + "</p>";
+                item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + "  Metros Interior." + "</p>";
+                item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de Habitaciones: " + publicacion.inmueble.cantHabitaciones + "</p>";
+                item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de Baños: " + publicacion.inmueble.cantBanos + "</p>";
                 if (publicacion.inmueble.cochera) {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "Tiene Cochera" + "</p>";
                 } else {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + "  " + "No tiene Cochera" + "</p>";
-                }                 
+                }
+                item = item + "<p>" + publicacion.inmueble.descripcionInmueble + "</p>";
+                item = item + "<h3><b>" + "Precio del Alquiler: " + "</b></h3>";
+                item = item + "<p>" + "$" + publicacion.precioAlquiler + "</p>";
                 item = item + "</div>";
 
                 if (publicacion.inmueble.tipoArrendador == 3) {
 
                     item = item + "<div class='col-md-2' style='margin-left:-1'>";
-                    item = item + "<p>" + "Publicado por: " + publicacion.propietario.nombrePropietario + " " + publicacion.propietario.apellidoPropietario + "</p>";
+                    item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
+                    item = item + "<p>" + publicacion.propietario.nombrePropietario + " " + publicacion.propietario.apellidoPropietario + "</p>";
                     item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
                     item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.propietario.idPropietario + "," + 3+ ")'>Ver Reseñas Arrendador</button>";
 
                 } else {
                     if (publicacion.inmueble.tipoArrendador == 4) {
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
-                        item = item + "<p>" + "Publicado por: " + publicacion.inmobiliaria.nombrePropietario + "</p>";
+                        item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
+                        item = item + "<p>" + publicacion.inmobiliaria.nombrePropietario + "</p>";
                         item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + publicacion.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
                         item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.inmobiliaria.idInmobiliaria +"," + 4+ ")'>Ver Reseñas Arrendador</button>";
                     }
@@ -198,7 +202,7 @@
 
                 item = item + "</div>";
                 
-                item = item + "<button class='btn btn-outline-danger btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
+                item = item + "<button class='btn btn-outline-secondary btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
 
 
@@ -227,19 +231,18 @@
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
-                item = item + "<div><p><h3> Reseñas del Inmueble</h3></p></div>";
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
                     item = item + "<span>" + data.nombreAutor + "</span>";
                     item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
                     item = item + "</div>";
-                    item = item + "<div class='col-md-6'>";
+                    item = item + "<div class='col-md-8'>";
                     item = item + "<span>" + data.descripcionResenia + "</span></br>";
                     item = item + "</div>";
                     item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
                     item = item + "</div>";
-                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<div class='col-md-12' style='padding-left:0px;'>";
                     item = item + "<hr>";
                     item = item + "</div>";
                     item = item + "</div>";
@@ -266,12 +269,12 @@
                     item = item + "<span>" + data.nombreAutor + "</span>";
                     item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
                     item = item + "</div>";
-                    item = item + "<div class='col-md-6'>";
+                    item = item + "<div class='col-md-8'>";
                     item = item + "<span>" + data.descripcionResenia + "</span></br>";
                     item = item + "</div>";
                     item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
                     item = item + "</div>";
-                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<div class='col-md-12' style='padding-left:0px;'>";
                     item = item + "<hr>";
                     item = item + "</div>";
                     item = item + "</div>";
