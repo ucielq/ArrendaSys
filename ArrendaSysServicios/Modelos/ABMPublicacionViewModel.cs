@@ -25,7 +25,8 @@ namespace ArrendaSysServicios.Modelos
         public List<ArchivoVM> listaMultimedia { get; set; }
         public PropietarioViewModel propietario{ get; set; }
         public InmobiliariaViewModel inmobiliaria { get; set; }
+        public bool esPremium { get; set; }
 
-
+        public string direccion { get; set; }
     }
 }
