@@ -269,7 +269,7 @@ p {
                 item2 = item2 + "<textarea class='form-control' id='descripcionAoAr' name='descripcionAoAr'></textarea>";
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
-                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAoAr' style='width:120px;'>Cancelar</button>"
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAoAr' onclick='volverAoAr()'  style='width:120px;'>Cancelar</button>"
                 $("#formularioAoAr").append(item2)
             }
         });
@@ -293,7 +293,7 @@ p {
                 item2 = item2 + "<textarea class='form-control' id='descripcionArAo' name='descripcionArAo'></textarea>";
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
-                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverArAo' style='width:120px;'>Cancelar</button>"
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverArAo' onclick='volverArAo()' style='width:120px;'>Cancelar</button>"
                 $("#formularioArAo").append(item2)
                     //< a href = "" class="btn btn-outline-secondary btn-sm" data - bs - dismiss="modal" > Cancelar</a >
                     //    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
@@ -319,20 +319,22 @@ p {
                 item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
-                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAI' style='width:120px;;'>Cancelar</button>"
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAI' onclick='volverAI()' style='width:120px;;'>Cancelar</button>"
                 $("#formularioAI").append(item2)
             }
         });
     }
-    $("#btnvolverArAo").click(function () {
-        $("#formularioArAo").empty();
-    });
-    $("#btnvolverAoAr").click(function () {
-        $("#formularioAoAr").empty();
-    });
-    $("#btnvolverAI").click(function () {
-        $("#formularioAI").empty();
-    });
+    function volverArAo() {
+        $("#formularioArAo").hide();
+    }
+
+    function volverAoAr() {
+        $("#formularioAoAr").hide();
+    }
+    function volverAI() {
+        $("#formularioAI").hide();
+    }
+
 
     function GuardarReseñaAoAr() {
         if (verValorAoAr()) {
