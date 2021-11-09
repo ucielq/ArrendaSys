@@ -359,7 +359,6 @@
                 }
 
                 $.each(respuesta, function (index, result) {
-                    debugger;
                     if (departamento == result.idDepartamento) {
                         $('#departamentoid').append($('<option selected>').val(result.idDepartamento).text(result.nombreDepartamento))
 
