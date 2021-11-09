@@ -355,7 +355,7 @@
         $("#documento").text(cuentaVM.arrendatario.nroDocumento);
         $("#telefono").text(cuentaVM.arrendatario.nroTelefono);
         $("#fechaNacimiento").val(cuentaVM.arrendatario.fechaNacimientoStr);
-        $("#direccionArr").val(cuentaVM.arrendatario.direccion);
+        $("#direccionArr").text(cuentaVM.direccion);
     }
     function completarDatosPropietario(cuentaVM) {
         $("#tipoCuenta").empty();
@@ -371,7 +371,7 @@
         $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
         $("#telefonoProp").text(cuentaVM.propietario.telefonoPropietario);
         $("#fechaNacimientoProp").val(cuentaVM.propietario.fechaNacimientoStr);
-        $("#direccionProp").val(cuentaVM.propietario.direccion);
+        $("#direccionProp").text(cuentaVM.direccion);
     }
     function completarDatosInmobiliaria(cuentaVM) {
         $("#tipoCuenta").empty();
@@ -386,7 +386,7 @@
         $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
         $("#telefonoInmo").text(cuentaVM.inmobiliaria.telefonoInmobiliariaStr);
         $("#AltaInscripcionInmo").val(cuentaVM.inmobiliaria.altaInscripcionStr);
-        $("#direccionInmo").val(cuentaVM.inmobiliaria.direccion);
+        $("#direccionInmo").text(cuentaVM.direccion);
     }
 
     function cambioTipoCuenta() {
@@ -460,7 +460,6 @@
             if (ValidarDatos("obligatoriaInmo")) {
                 var inmobiliaria = new Object();
                 inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
-                debugger;
                 inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
                 inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
                 inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
