@@ -179,8 +179,11 @@
 
                     item = item + "</div>";
 
-                    item = item + "<div class='card-body'><h5 class='card-title'>" + "Calle " + publicacion.inmueble.direccion.nombreCalle + " " +" - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</h5>";
-                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + "  " + publicacion.inmueble.mtsCuadrados +" Metros Cuadrados."+ "</p>";
+                    item = item + "<div class='card-body'><h5 class='card-title'>" + "Calle " + publicacion.inmueble.direccion.nombreCalle + " "+publicacion.inmueble.direccion.numeroCalle+" " + " - " + publicacion.inmueble.direccion.localidad.departamento.nombreDepartamento + "</h5>";
+                    if (publicacion.esPremium) {
+                        item = item + "<p>Publicacion destacada</p>";
+                    }
+                    item = item + "<p><i class='fas fa-ruler-combined'></i>" + "  " + publicacion.inmueble.mtsCuadrados + " Metros Cuadrados." + "</p>";
                     item = item + "<p><i class='fas fa-home'></i>" + " " + publicacion.inmueble.mtsCuadradosInt + " Metros Interior."+"</p>";
                     item = item + "<p><i class='fas fa-bed'></i>" + "  " + publicacion.inmueble.cantHabitaciones + " Habitaciones. "+"</p>";
                     item = item + "<p><i class='fas fa-shower'></i>" + " " + publicacion.inmueble.cantBanos + " Baños."+"</p>";
