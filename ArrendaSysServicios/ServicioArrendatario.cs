@@ -28,13 +28,13 @@ namespace ArrendaSysServicios
                 cuenta.idRol = 2;
                 var arrendatario2 = db.Arrendatario.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
                 if (arrendatario2!=null)
-                {
+                {                    
                     arrendatario2.nombreArrendatario = arrendatario.nombreArrendatario;
                     arrendatario2.apellidoArrendatario = arrendatario.apellidoArrendatario;
                     arrendatario2.fechaNacimArrendatario = arrendatario.fechaNacimiento;
                     arrendatario2.numeroDocumentoArr = arrendatario.nroDocumento;
-                    arrendatario2.telefonoArrendatario = arrendatario.nroTelefono;
-                    arrendatario2.idCuenta = arrendatario.idCuenta;
+                    arrendatario2.telefonoArrendatario = arrendatario.nroTelefono;                    
+                    arrendatario2.idCuenta = arrendatario.idCuenta;                                   
                     db.SaveChanges();
                     return arrendatario2.idArrendatario;
                 }
@@ -48,8 +48,9 @@ namespace ArrendaSysServicios
                         telefonoArrendatario = arrendatario.nroTelefono,
                         idCuenta= arrendatario.idCuenta
                     };
-                    db.Arrendatario.Add(arrendatario1);
 
+                    db.Arrendatario.Add(arrendatario1);
+                    
                     await db.SaveChangesAsync();
                     return arrendatario1.idArrendatario;
                 }

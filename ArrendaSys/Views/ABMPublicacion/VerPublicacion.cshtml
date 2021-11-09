@@ -122,7 +122,7 @@
 
     (function () {
         $("#publicacion").empty();
-        debugger;
+        
         $.ajax({
             type: 'Get',
             url: '/Api/ABMPublicacion/VerPublicacion?idPublicacion=' + idPublicacion,
@@ -270,13 +270,14 @@
                 $("#bodyArrendador").empty();
                 var item = "";
                 item = item + "<div class='row'>";
-                item = item + "<div class='col-md-2'>";
+                item = item + "<div class='col-md-6'>";
                 if (result.lista.length > 0) {
-                    item = item + "<span>" + result.lista[0].nombreArrendador + "</span>";
+                    item = item + "<span style='margin-left:390px;font-size:25'>" + result.lista[0].nombreArrendador + "</span>";
                 }
                 item = item + "</div>";
                 item = item + "</div>";
                 result.lista.forEach(function (data, index) {
+                    item = item + "<span>" + " " + "</span>";
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
                     item = item + "<span>" + data.nombreAutor + "</span>";
