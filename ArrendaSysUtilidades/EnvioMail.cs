@@ -2,6 +2,7 @@
 using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -15,7 +16,7 @@ namespace ArrendaSysUtilidades
 
         public string EnviarMailGenerico(string destino,string body,string subject)
         {
-            var apiKey = "aca va la api key";
+            var apiKey = ConfigurationManager.AppSettings["apiKey"];
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("arrendasys@gmail.com", "Arrendasys");
             var subject2 = subject;
