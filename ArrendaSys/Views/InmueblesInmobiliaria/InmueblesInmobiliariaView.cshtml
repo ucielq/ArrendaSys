@@ -58,7 +58,7 @@
                 $.each(result,function (index,inmueble){
                     cont++;
                     item = item + "<div class='col-md-4'>";
-                    item = item + "<div class='cardV4'>";
+                    item = item + "<div class='cardV3' style='min-height:760px'>";
                     item = item + "<div id='carouselexamplecontrols"+cont.toString()+"' class='carousel slide' data-ride='carousel'>";
                     item = item + "<div class='carousel-inner'>";
                     //Agrego imagenes al carousel
@@ -94,8 +94,8 @@
                         item = item + "<p><i class='fas fa-warehouse'></i>" + " " + "No tiene Cochera" + "</p>";
                     }
                     var descrip = "";
-                    if (inmueble.descripcionInmueble.length >= 96) {
-                        descrip = inmueble.descripcionInmueble.substring(0, 93) + "...";
+                    if (inmueble.descripcionInmueble.length >= 80) {
+                        descrip = inmueble.descripcionInmueble.substring(0, 77) + "...";
                     } else {
                         descrip = inmueble.descripcionInmueble;
                     }
