@@ -31,7 +31,8 @@ namespace ArrendaSysServicios
                                          join i in db.Inmueble on p.idInmueble equals i.idInmueble
                                          join pr in db.Propietario on i.idArrendador equals pr.idPropietario
                                          join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
-                                      join ep in db.EstadoPublicacion on pe.idEstadoPublicacion equals ep.idEstadoPublicacion
+                                         join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                         join ep in db.EstadoPublicacion on pe.idEstadoPublicacion equals ep.idEstadoPublicacion
                                          where pr.idPropietario == id && pe.fechaBajaPublicacionEstado == null
                                       select new ABMPublicacionViewModel
                                       {
@@ -42,7 +43,8 @@ namespace ArrendaSysServicios
                                           idInmueble = p.idInmueble,
                                           idPublicacionEstado = pe.idPublicacionEstado,
                                           descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
-                                          descripcionPublicacion=p.descripcionPublicacion
+                                          descripcionPublicacion=p.descripcionPublicacion,
+                                          direccion = di.nombreCalle + " "+di.numeroCalle
                                       }).ToList();
                     object json = new { data = publicaciones };
                     return json;
@@ -54,6 +56,7 @@ namespace ArrendaSysServicios
                                          join i in db.Inmueble on p.idInmueble equals i.idInmueble
                                          join pr in db.Inmobiliaria on i.idArrendador equals pr.idInmobiliaria
                                          join pe in db.PublicacionEstado on p.idPublicacion equals pe.idPublicacion
+                                         join di in db.Direccion on i.idDireccion equals di.idDireccion
                                          join ep in db.EstadoPublicacion on pe.idEstadoPublicacion equals ep.idEstadoPublicacion
                                          where pr.idInmobiliaria == id && pe.fechaBajaPublicacionEstado == null
                                       select new ABMPublicacionViewModel
@@ -65,7 +68,8 @@ namespace ArrendaSysServicios
                                           idInmueble = p.idInmueble,
                                           idPublicacionEstado = pe.idPublicacionEstado,
                                           descripcionEstadoPublicacion = ep.nombreEstadoPublicacion,
-                                          descripcionPublicacion = p.descripcionPublicacion
+                                          descripcionPublicacion = p.descripcionPublicacion,
+                                          direccion = di.nombreCalle + " " + di.numeroCalle
                                       }).ToList();
                     object json = new { data = publicaciones };
                     return json;
@@ -218,7 +222,9 @@ namespace ArrendaSysServicios
                                              incluyeExpensas=i.incluyeExpensas,
                                              mtsCuadrados=i.mtsCuadrados,
                                              mtsCuadradosInt=i.mtsCuadradosInt,
-                                             permiteMascota=i.permiteMascota,                                                                                       
+                                             permiteMascota=i.permiteMascota,
+                                             tipoArrendador=i.tipoArrendador,
+                                             idArrendador= i.idArrendador,
                                              direccion = new DireccionViewModel
                                              {
                                                  idDireccion = d.idDireccion,
@@ -305,7 +311,41 @@ namespace ArrendaSysServicios
                     }
                     inmu.listaMultimedia = listaArchivoVM;
                 }
-
+                foreach (var publi in lista)
+                {
+                    publi.esPremium = false;
+                    if (publi.inmueble.tipoArrendador == 3)
+                    {
+                        var prop = db.Propietario.Where(x=>x.idPropietario==publi.inmueble.idArrendador).FirstOrDefault();
+                        if (prop != null)
+                        {
+                            var cuenta = db.Cuenta.Where(x=>x.idCuenta==prop.idCuenta).FirstOrDefault();    
+                            if(cuenta != null)
+                            {
+                                if (cuenta.idPremium != null)
+                                {
+                                    publi.esPremium = true;
+                                }
+                            }
+                        }
+                    }
+                    if (publi.inmueble.tipoArrendador == 4)
+                    {
+                        var inmo = db.Inmobiliaria.Where(x => x.idInmobiliaria == publi.inmueble.idArrendador).FirstOrDefault();
+                        if (inmo != null)
+                        {
+                            var cuenta = db.Cuenta.Where(x => x.idCuenta == inmo.idCuenta).FirstOrDefault();
+                            if (cuenta != null)
+                            {
+                                if (cuenta.idPremium != null)
+                                {
+                                    publi.esPremium = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                lista = lista.OrderByDescending(x => x.esPremium).ThenByDescending(x=>x.fechaAltaPublicacion).ToList();
                 //var inmu = db.Inmueble.Where(x => x.idInmueble == publicaciones.idInmueble).FirstOrDefault();
                 return lista ;
 

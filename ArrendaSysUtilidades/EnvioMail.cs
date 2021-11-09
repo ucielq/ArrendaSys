@@ -1,5 +1,8 @@
-﻿using System;
+﻿using SendGrid;
+using SendGrid.Helpers.Mail;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -13,35 +16,16 @@ namespace ArrendaSysUtilidades
 
         public string EnviarMailGenerico(string destino,string body,string subject)
         {
-            string respuesta = "Enviar";
-
-            string emailRemitente = "arrendasys@gmail.com";
-            string passwordRemitente = "arrendasys2021";
-
-            //Configuring SMTP
-            SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com");
-            client.EnableSsl = true;
-            client.Port = 587;
-            client.Timeout = (60 * 5 * 1000);
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-
-            //Setting credentials
-            client.UseDefaultCredentials = false;
-            client.Credentials = new System.Net.NetworkCredential(emailRemitente, passwordRemitente);
-
-            MailAddress from2 = new MailAddress(emailRemitente, String.Empty, System.Text.Encoding.UTF8);
-            MailMessage message = new MailMessage();
-            message.To.Add(destino);
-            message.From = from2;
-            message.Body = body;
-            message.IsBodyHtml = true;
-
-            message.BodyEncoding = System.Text.Encoding.UTF8;
-            message.Subject = subject;
-            message.SubjectEncoding = System.Text.Encoding.UTF8;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-            client.Send(message);
-            return respuesta;
+            var apiKey = ConfigurationManager.AppSettings["apiKey"];
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("arrendasys@gmail.com", "Arrendasys");
+            var subject2 = subject;
+            var to = new EmailAddress(destino, destino);
+            var plainTextContent = body;
+            var htmlContent = body;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject2, plainTextContent, htmlContent);
+            var response = client.SendEmailAsync(msg);
+            return "OK";
         }
     }
 }

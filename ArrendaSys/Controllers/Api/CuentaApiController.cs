@@ -85,7 +85,7 @@ namespace ArrendaSys.Controllers.Api
 
             var hashCode = Math.Abs((email+now.ToString()).GetHashCode());
             ArrendaSysUtilidades.EnvioMail envioMail = new ArrendaSysUtilidades.EnvioMail();
-            envioMail.EnviarMailGenerico(email,"Código de recuperación de contraseña: "+ hashCode, "Recuperación Contraseña");
+            var hola = envioMail.EnviarMailGenerico(email,"Código de recuperación de contraseña: "+ hashCode, "Recuperación Contraseña");
             return hashCode;
         }
         [System.Web.Http.Route("Api/Cuenta/ActualizarContrasenia")]

@@ -14,7 +14,7 @@ namespace ArrendaSys.Controllers
         {
             EnvioMail envioMail = new EnvioMail();
             message = "Autor: " + email + "<br>" + message;
-            var response = envioMail.EnviarMailGenerico("arrendasys@gmail.com", message,name+" "+ subject);
+            var hola = envioMail.EnviarMailGenerico("arrendasys@gmail.com", message,name+" "+ subject);
             return "OK";
         }
     }

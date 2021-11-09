@@ -113,7 +113,7 @@ namespace ArrendaSysServicios
             var destino = email;
             var body = codigo.ToString();
             var subject = "Código confirmación";
-            mail.EnviarMailGenerico(destino, body, subject);
+            var hola = mail.EnviarMailGenerico(destino, body, subject);
         }
 
         public static int Get(string emailCuenta)
