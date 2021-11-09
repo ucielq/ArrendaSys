@@ -47,10 +47,23 @@ function FechaformatoInput(fecha) {
     return fechaString;
 }
 function mostrarNombreImagen() {
-    $("#NombreMultiplesArchivos").empty();
+    var tipo = parseInt($("#tipoCuenta").val());
+    debugger;
+    $("#NombreMultiplesArchivosArr").empty();
+    $("#NombreMultiplesArchivosProp").empty();
+    $("#NombreMultiplesArchivosInmo").empty();
     var archivosCuerpo = $("#inputImagen").get(0).files;
     for (f = 0; f < archivosCuerpo.length; f++) {
-        $("#NombreMultiplesArchivos").append(archivosCuerpo[f].name + "<br/>")
+        if (tipo == 2) {
+            $("#NombreMultiplesArchivosArr").append(archivosCuerpo[f].name + "<br/>")
+        }
+        if (tipo == 3) {
+            $("#NombreMultiplesArchivosProp").append(archivosCuerpo[f].name + "<br/>")
+        }
+        if (tipo == 4) {
+            $("#NombreMultiplesArchivosInmo").append(archivosCuerpo[f].name + "<br/>")
+        }
+
     }
 }
 function MostrarNombreMultiplesArchivos() {
