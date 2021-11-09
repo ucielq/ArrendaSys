@@ -84,6 +84,7 @@ namespace ArrendaSysServicios
                                       join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                      join di in db.Direccion on i.idDireccion equals di.idDireccion
                                       where a.idArrendatario == id && ae.fechaBajaAlquilerEstado == null
                                       select new 
                                       {
@@ -95,7 +96,8 @@ namespace ArrendaSysServicios
                                           descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
                                           idEstadoAlquiler = ea.idEstadoAlquiler,
                                           idAlquilerEstado = ae.idAlquilerEstado,
-                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario
+                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                          direccion  = di.nombreCalle + " " + di.numeroCalle
                                       }).ToList();
                     object json = new { data = alquileres };
                     return json;
