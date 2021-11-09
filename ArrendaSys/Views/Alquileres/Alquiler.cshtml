@@ -154,11 +154,12 @@ p {
                 item = item + "<span class='sr-only'>Next</span></a>";
                 item = item + "</div></div></div>";
                 item = item + "<div class='col-md-6'>"; //Aca van los datos del inmueble
-                item = item + "<div class='card-body' style='padding-left:20;padding-top:0'><h5 class='card-title'>" + " " + result.inmueble.direccion.nombreCalle + " " + result.inmueble.direccion.numeroCalle + " - " + result.inmueble.direccion.localidad.nombreLocalidad + "</h5>";
-                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + result.inmueble.mtsCuadrados + "</p>";
-                item = item + "<p><i class='fas fa-home'></i>" + " " + result.inmueble.mtsCuadradosInt + "</p>";
-                item = item + "<p><i class='fas fa-bed'></i>" + " " + result.inmueble.cantHabitaciones + "</p>";
-                item = item + "<p><i class='fas fa-shower'></i>" + " " + result.inmueble.cantBanos + "</p>";
+                item = item + "<div class='card-body' style='padding-left:20;padding-top:0'><p class='card-title'>" + " " + result.inmueble.direccion.nombreCalle + " " + result.inmueble.direccion.numeroCalle + " - " + result.inmueble.direccion.localidad.nombreLocalidad + "</p>";
+                item = item + "<h3><b>" + "Especificaciones: " + "</b></h3>";
+                item = item + "<p><i class='fas fa-ruler-combined'></i>" + " " + result.inmueble.mtsCuadrados + " Metros Cuadrados." + "</p>";
+                item = item + "<p><i class='fas fa-home'></i>" + " " + result.inmueble.mtsCuadradosInt + "  Metros Interior." + "</p>";
+                item = item + "<p><i class='fas fa-bed'></i>" + " Cantidad de Habitaciones: " + result.inmueble.cantHabitaciones + "</p>";
+                item = item + "<p><i class='fas fa-shower'></i>" + " Cantidad de Baños: " + result.inmueble.cantBanos + "</p>";
                 if (result.inmueble.cochera) {
                     item = item + "<p><i class='fas fa-warehouse'></i>" + " " + "Tiene Cochera" + "</p>";
                 } else {
@@ -198,10 +199,10 @@ p {
                     var ruta3 = result.arrendatario.foto.split('\\')[result.arrendatario.foto.split('\\').length - 1];
                     item = item + "<hr/>";
                     item = item + "<div class='row'>";
-                    item = item + "<p><h3>Arrendatario</h3></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:100px; width:120px;'></img> ";
-                    item = item + "<p><h5>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</h5></p>";
-                    item = item + "<p><h5>Documento: " + result.arrendatario.nroDocumento + "</h5></p>";
-                    item = item + "<p><h5>Telefono: " + result.arrendatario.telefonoArrendatario + "</h5></p>";
+                    item = item + "<p><h4>Datos del Arrendatario:</h4></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:100px; width:120px;'></img> ";
+                    item = item + "<h4><b>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</b></h4>";
+                    item = item + "<h4><b>Documento: " + result.arrendatario.nroDocumento + "</b></h4>";
+                    item = item + "<h4><b>Telefono: " + result.arrendatario.telefonoArrendatario + "</b></h4>";
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
                 }
@@ -224,19 +225,18 @@ p {
                     item = item + "<div class='row'>"
                     item = item + "<div class='row' id='reseniasAI' style='display:none'>";
                     item = item + "</div>";
-                    cargarReseniasAI();
+
                     item = item + "<div class='row' id='formularioAI' style='display:none'>";
                     item = item + "</div>";
                     cargarItemsAI();
                     item = item + "</div>";
-                    item = item + "</hr>";
-                    cargarReseniasArAo();
+
                     item = item + "<div class='row' id='formularioArAo' style='display:none'>";
                     item = item + "</div>";
                     cargarItemsArAo();
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
-                    cargarReseniasAoAr();
+
                     item = item + "<div class='row' id='formularioAoAr' style='display:none'>";
                     item = item + "</div>";
                     cargarItemsAoAr();
@@ -257,7 +257,7 @@ p {
             url: '/Api/Item/ListarItemsAoAr',
             success: function (result) {
                 listaItemsAoAr = result;
-                $("#formularioAoAr").append("<p><h3>Haz tu Reseña</h3></p>")
+                $("#formularioAoAr").append("<p><h4>Haz tu Reseña:</h4></p>")
                 result.forEach(function (data, index) {
                     $("#formularioAoAr").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
@@ -268,8 +268,8 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionAoAr' name='descripcionAoAr'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
-                item2 = item2 + "<a href='' class='btn btn - outline - danger btn - sm' id='btnvolver' style='width:120px; background-color:#ea0606;'>Cancelar</a>"
+                item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAoAr' style='width:120px;'>Cancelar</button>"
                 $("#formularioAoAr").append(item2)
             }
         });
@@ -292,9 +292,11 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionArAo' name='descripcionArAo'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
-                item2 = item2 + "<a href='' class='btn btn - outline - danger btn - sm' id='btnvolver' style='width:120px; background-color:#ea0606;'>Cancelar</a>"
+                item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverArAo' style='width:120px;'>Cancelar</button>"
                 $("#formularioArAo").append(item2)
+                    //< a href = "" class="btn btn-outline-secondary btn-sm" data - bs - dismiss="modal" > Cancelar</a >
+                    //    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
             }
         });
     }
@@ -316,12 +318,21 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
-                item2 = item2 + "<a href='' class='btn btn - outline - danger btn - sm' id='btnvolver' style='width:120px; background-color:#ea0606;'>Cancelar</a>"
+                item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAI' style='width:120px;;'>Cancelar</button>"
                 $("#formularioAI").append(item2)
             }
         });
     }
+    $("#btnvolverArAo").click(function () {
+        $("#formularioArAo").hide();
+    });
+    $("#btnvolverAoAr").click(function () {
+        $("#formularioAoAr").hide();
+    });
+    $("#btnvolverAI").click(function () {
+        $("#formularioAI").hide();
+    });
 
     function GuardarReseñaAoAr() {
         if (verValorAoAr()) {
