@@ -9,6 +9,7 @@ namespace ArrendaSysServicios.Modelos
    public class ArchivoVM
     {
         public int? idInmueble { get; set; }
+        public int? idMultimediaInmueble { get; set; }
         public string nombreArchivo { get; set; }
         public string url { get; set; }
         public int? error { get; set; }

@@ -451,7 +451,9 @@ namespace ArrendaSysServicios
                     var lista = (from r in db.ReseñaArrendatarioArrendador
                                  join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                  join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                 join prop in db.Propietario on i.idArrendador equals prop.idPropietario
                                  join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                 
                                  where i.tipoArrendador == 3 && i.idArrendador == id
                                  select new ReseniaViewModel
                                  {
@@ -461,7 +463,8 @@ namespace ArrendaSysServicios
                                      idResenia = r.idReseñaArAo,
                                      idAlquiler = r.idAlquiler,
                                      idInmueble = a.idInmueble,
-                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario,
+                                     nombreArrendador= prop.nombrePropietario + " "+ prop.apellidoPropietario
                                  }).ToList();
 
                     tot = lista.Count;

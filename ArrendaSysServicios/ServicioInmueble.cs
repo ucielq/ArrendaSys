@@ -155,6 +155,7 @@ namespace ArrendaSysServicios
                                               join d in db.Direccion on i.idDireccion equals d.idDireccion
                                               join l in db.Localidad on d.idLocalidad equals l.idLocalidad
                                               join dep in db.Departamento on l.idDepartamento equals dep.idDepartamento
+                                              join mult in db.MultimediaInmueble on i.idInmueble equals mult.idInmueble
                                               where i.idInmueble == idInmueble
                                               select new InmuebleViewModel
                                               {
@@ -169,7 +170,7 @@ namespace ArrendaSysServicios
                                                   idInmueble = i.idInmueble,
                                                   incluyeExpensas = i.incluyeExpensas,
                                                   idArrendador = i.idArrendador,
-                                                  tipoArrendador = i.tipoArrendador,
+                                                  tipoArrendador = i.tipoArrendador,                                                  
                                                   direccion = new DireccionViewModel
                                                   {
                                                       idDireccion = d.idDireccion,
@@ -195,9 +196,17 @@ namespace ArrendaSysServicios
                                                   }
 
                                               }).FirstOrDefault();
+
+                List<ArchivoVM> lista = (from mult in db.MultimediaInmueble
+                                         where mult.idInmueble == idInmueble
+                                         select new ArchivoVM
+                                         {
+                                             url= mult.urlMultimediaInmueble,
+                                             idMultimediaInmueble= mult.idMultimediaInmueble
+                                         }).ToList();
+                inmueble.listaMultimedia = lista;
+
                 
-
-
                 return inmueble;
             }
         }

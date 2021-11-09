@@ -100,15 +100,17 @@
 <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 @{
     var idCuenta = Session["idCuenta"];
-    var idPropietario = Session["id"];
+    
     var tipoCuenta = Session["tipoCuenta"];
 
 }
 
 <script>
-
+    var idPropietario;
+    var tipoPropietario;
     var idCuenta = "@idCuenta";
-    var idPropietario = parseInt("@idPropietario");
+    
+
     var idPublicacion;
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
@@ -179,7 +181,8 @@
                 item = item + "</div>";
 
                 if (publicacion.inmueble.tipoArrendador == 3) {
-
+                    tipoPropietario = 3;
+                    idPropietario = publicacion.propietario.idPropietario;
                     item = item + "<div class='col-md-2' style='margin-left:-1'>";
                     item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
                     item = item + "<p>" + publicacion.propietario.nombrePropietario + " " + publicacion.propietario.apellidoPropietario + "</p>";
@@ -188,6 +191,8 @@
 
                 } else {
                     if (publicacion.inmueble.tipoArrendador == 4) {
+                        tipoPropietario = 4;
+                        idPropietario = publicacion.inmobiliaria.idInmobiliaria;
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
                         item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
                         item = item + "<p>" + publicacion.inmobiliaria.nombrePropietario + "</p>";
@@ -226,11 +231,11 @@
         $.ajax({
             type: 'Get',
             url: '/Api/Resenia/obtenerReseniasInmueble?idInmueble=' + idInmueble + "&pag=" + pag,
-            success: function (result) {
-                debugger;
+            success: function (result) {               
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
+                
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -254,7 +259,8 @@
         });
     }
     function ObtenerReseniasArrendatario(id, tipo) {
-        debugger;
+        
+        
         $("#modalarrendador").modal('show');
         $.ajax({
             type: 'Get',
@@ -263,6 +269,13 @@
                 cantidad = result.cantidad;
                 $("#bodyArrendador").empty();
                 var item = "";
+                item = item + "<div class='row'>";
+                item = item + "<div class='col-md-2'>";
+                if (result.lista.length > 0) {
+                    item = item + "<span>" + result.lista[0].nombreArrendador + "</span>";
+                }
+                item = item + "</div>";
+                item = item + "</div>";
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -285,6 +298,8 @@
             }
         });
     }
+    
+
     function paginas() {
         var html = "<nav aria-label='...'>";
         html = html + "<ul class='pagination'>";
@@ -309,8 +324,8 @@
     }
     function cambiarPag(num) {
         pag = num;
-        
-        ObtenerReseniasArrendatario();
+
+        ObtenerReseniasArrendatario(idPropietario, tipoPropietario);
     }
 
     function paginasInmueble() {

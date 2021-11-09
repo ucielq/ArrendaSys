@@ -20,5 +20,6 @@ namespace ArrendaSysServicios.Modelos
         public int? idInmueble { get; set; }
         public string nombreAutor { get; set; }
         public int? estadoAlquiler { get; set; }
+        public string nombreArrendador { get; set; }
     }
 }
