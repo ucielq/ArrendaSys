@@ -258,9 +258,7 @@
             }
         });
     }
-    function ObtenerReseniasArrendatario(id, tipo) {
-        
-        
+    function ObtenerReseniasArrendatario(id, tipo) {              
         $("#modalarrendador").modal('show');
         $.ajax({
             type: 'Get',
@@ -269,11 +267,13 @@
                 cantidad = result.cantidad;
                 $("#bodyArrendador").empty();
                 var item = "";
+                var ruta1 = result.lista[0].urlimg.split('\\')[result.lista[0].urlimg.split('\\').length - 1];
                 item = item + "<div class='row'>";
                 item = item + "<div class='col-md-6'>";
                 if (result.lista.length > 0) {
                     item = item + "<span style='margin-left:390px;font-size:25'>" + result.lista[0].nombreArrendador + "</span>";
                 }
+                item = item + "<p><h>Datos del Arrendador:</h4></p><img src='..\\TempFolder\\" + ruta1 + "' style='height:100px; width:120px;'></img> ";
                 item = item + "</div>";
                 item = item + "</div>";
                 result.lista.forEach(function (data, index) {
