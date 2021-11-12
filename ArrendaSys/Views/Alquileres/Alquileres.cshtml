@@ -62,7 +62,6 @@
                         <div class="float-left">
                             <div class="titulo">Alquileres</div>
                         </div>
-
                     </div>
                     <div class="col-md12" id="botonAgregar">
                         <div class="col-md12">
@@ -72,91 +71,86 @@
                             </button>
                             <br />
                         </div>
-
                     </div>
-
                     <div class="col-md-12" id="formulario" style="display:none">
-
                         <div class="row" style="padding-top:6px">
-
+                            <div class="col-md-5">
+                                <div id="alertfechaAltaAlquiler"></div>
+                                <div id="alertfechaBajaAlquiler"></div>
+                                <div id="alertidArrendatario"></div>
+                                <div id="alertaItem"></div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top:6px">
                             <div class="col-md-2">
                                 <br />
                                 <span>Fecha Alta: </span>
                                 <br />
-                                <input type="date" class="form-control" id="fechaAltaAlquiler" />
+                                <input type="date" class="form-control obligatoria" name="Fecha Alta" id="fechaAltaAlquiler" />
                             </div>
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Fecha Baja: </span>
                                 <br />
-                                <input type="date" class="form-control" id="fechaBajaAlquiler" />
+                                <input type="date" class="form-control obligatoria" name="Fecha Baja" id="fechaBajaAlquiler" />
                             </div>
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Arrendatario: </span>
                                 <br />
-                                <input type="text" class="form-control" id="idArrendatario" placeholder="Ingrese el DNI del Arrendatario" />
+                                <input type="text" class="form-control obligatoria" id="idArrendatario" name="DNI" placeholder="Ingrese el DNI del Arrendatario" />
                                 <button type="button" class="btn btn-outline-success btn-sm" onclick="verificarDni($('#idArrendatario').val())">Verificar</button>
-                                
-                                
                             </div>
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Inmueble: </span>
                                 <br />
-                                <select class="select2" style="/* min-width:2000px; *//* width: 1502px; */" name="idInmueble" id="idInmueble"></select>
+                                <select class="select2" name="idInmueble" id="idInmueble"></select>
                             </div>
                         </div>
-
                         <div class="col-md-12">
                             <br />
                             <div>
-                                <a href="" class="btn btn-outline-success btn-sm" id="BotonGuardar" onclick="GuardarAlquiler()">Guardar</a>
-                                <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver">Cancelar</a>
+                                <button type="button" class="btn btn-outline-success btn-sm" id="BotonGuardar" onclick="GuardarAlquiler()">Guardar</button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" id="btnvolver">Cancelar</button>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-12" id="formulario2" style="display:none">
-
+                        <div class="col-md-5">
+                            <div id="alertfechaAltaAlquiler2"></div>
+                            <div id="alertfechaBajaAlquiler2"></div>
+                            <div id="alertidArrendatario2"></div>
+                        </div>
                         <div class="row" style="padding-top:6px">
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Fecha Alta: </span>
                                 <br />
-                                <input input readonly type="date" class="form-control" id="fechaAltaAlquiler2" />
+                                <input input readonly type="date" class="form-control obligatoriaS" id="fechaAltaAlquiler2" />
                             </div>
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Fecha Baja: </span>
                                 <br />
-                                <input type="date" class="form-control" id="fechaBajaAlquiler2" />
+                                <input type="date" class="form-control obligatoriaS" id="fechaBajaAlquiler2" />
                             </div>
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Arrendatario: </span>
                                 <br />
-                                <input input readonly type="text" class="form-control" id="idArrendatario2" placeholder="ingrese el DNI del Arrendatario" />
+                                <input input readonly type="text" class="form-control obligatoriaS" id="idArrendatario2" placeholder="ingrese el DNI del Arrendatario" />
                             </div>
-
                             <div class="col-md-2">
                                 <br />
                                 <span>Inmueble: </span>
                                 <br />
-                                <input input readonly type="text" class="form-control" id="idInmueble2" />
+                                <input input readonly type="text" class="form-control obligatoriaS" id="idInmueble2" />
                             </div>
                             <div class="col-md-2">
-
                                 <input input readonly type="text" class="form-control" id="idAlquiler2" style="visibility:hidden" />
                             </div>
                         </div>
-
                         <div class="col-md-12">
                             <br />
                             <div>
@@ -383,57 +377,59 @@
         }
     }
     function EditarAlquiler1() {
-
-        alquiler = new Object();
-        alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler2").val();
-        alquiler.idAlquiler = $("#idAlquiler2").val();
-        alquiler.idArrendatario = $("#idArrendatario2").val();
-        alquiler.idInmueble = $("#idInmueble2").val();
-        debugger;
-       $.ajax({
-            type: 'Post',
-            url: '/Api/Alquiler/EditarAlquiler',
-            data: alquiler,
-            success: function (result) {
-                window.location.href = "/Alquileres/Alquileres";
-            }
-        });
-
+        if (ValidarAlquilerEditar()) {
+            alquiler = new Object();
+            alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler2").val();
+            alquiler.idAlquiler = $("#idAlquiler2").val();
+            alquiler.idArrendatario = $("#idArrendatario2").val();
+            alquiler.idInmueble = $("#idInmueble2").val();
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Alquiler/EditarAlquiler',
+                data: alquiler,
+                success: function (result) {
+                    window.location.href = "/Alquileres/Alquileres";
+                }
+            });
+        }
     }
 
     function GuardarAlquiler() {
-        var alquiler = new Object();
-        alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
-        alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
+        if (ValidarAlquiler()) {
+            if (ValidarInmueble()) {
+                var alquiler = new Object();
+                alquiler.fechaAltaAlquiler = $("#fechaAltaAlquiler").val();
+                alquiler.fechaBajaAlquiler = $("#fechaBajaAlquiler").val();
 
-        alquiler.idArrendatario = idArrendatario;
+                alquiler.idArrendatario = idArrendatario;
 
 
-        alquiler.idInmueble = $("#idInmueble").val();
+                alquiler.idInmueble = $("#idInmueble").val();
 
-        $.ajax({
-            type: 'Post',
-            url: '/Api/Alquiler/CrearAlquiler',
-            data: alquiler,
-            success: function (result) {
-                window.location.href = "/Alquileres/Alquileres";
+                $.ajax({
+                    type: 'Post',
+                    url: '/Api/Alquiler/CrearAlquiler',
+                    data: alquiler,
+                    success: function (result) {
+                        window.location.href = "/Alquileres/Alquileres";
+                    }
+                });
             }
-        });
-
+        }
     }
     //preguntar
     function ConfirmarAlquiler(btn) {
-        var id = table.row($(btn).parents('tr')).data();
-        console.log(id.idAlquiler);
-
-        $.ajax({
-            type: 'Put',
-            url: '/Api/Alquiler/ConfirmarAlquiler?idAlquiler=' + id.idAlquiler + '&idAlquilerEstado=' +id.idAlquilerEstado,
-            success: function (result) {
-                location.href = '/Alquileres/Alquileres';
-            }
-        });
-
+        
+            var id = table.row($(btn).parents('tr')).data();
+            console.log(id.idAlquiler);
+            $.ajax({
+                type: 'Put',
+                url: '/Api/Alquiler/ConfirmarAlquiler?idAlquiler=' + id.idAlquiler + '&idAlquilerEstado=' + id.idAlquilerEstado,
+                success: function (result) {
+                    location.href = '/Alquileres/Alquileres';
+                }
+            });
+        
     }
     function CancelarAlquiler(btn) {
         var id = table.row($(btn).parents('tr')).data();
@@ -449,9 +445,53 @@
 
     }
 
+    function ValidarAlquiler() {
+        var respuesta = true;
+        $(".obligatoria").each(function (index, result) {
+            var alert = "";
+            var objeto = $("#" + $(this).attr("id").toString());
+            var objetoAlert = $("#alert" + $(this).attr("id").toString());
+            if (objeto.val() == "") {
+                alert += "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<i class='material-icons'>Cerrar</i>" +
+                    "</button>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
+                    "</div>";
+                objetoAlert.clearQueue();
+                objetoAlert.empty();
+                objetoAlert.append(alert);
+                respuesta = false;
+            }
+        });
+        return respuesta;
+    }
 
 
 
+
+    $(".obligatoria").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    function ValidarInmueble() {
+        if ($("#idInmueble").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe seleccionar <b>Inmueble</b>.</span>" +
+                "</div>";
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+            $("#idInmueble").focus();
+            return false;
+        }
+        return true;
+    }
     function ObtenerInmuebles(inmueble) {
         $.ajax({
             type: 'Get',
@@ -465,24 +505,53 @@
                 else {
                     $('#idInmueble').append($('<option>').val(-1).text("Seleccione una opción"))
                 }
-
                 $.each(respuesta, function (index, result) {
-
                     if (inmueble == result.idInmueble) {
                         $('#idInmueble').append($('<option selected>').val(result.idInmueble).text(result.direccion.nombreCalle).text(result.direccion.numeroCalle))
-
                     }
                     else {
                         $('#idInmueble').append($('<option>').val(result.idInmueble).text(result.direccion.nombreCalle + " - " + result.direccion.localidad.nombreLocalidad))
-
                     }
                 });
             }
         });
     }
+    $(".obligatoriaS").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    function ValidarAlquilerEditar() {
+        var respuesta = true;
+        $(".obligatoriaS").each(function (index, result) {
+            var alert = "";
+            var objeto = $("#" + $(this).attr("id").toString());
+            var objetoAlert = $("#alert" + $(this).attr("id").toString());
+            if (objeto.val() == "") {
+                alert += "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<i class='material-icons'>Cerrar</i>" +
+                    "</button>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
+                    "</div>";
+                objetoAlert.clearQueue();
+                objetoAlert.empty();
+                objetoAlert.append(alert);
+                respuesta = false;
+            }
+        });
+        return respuesta;
+    }
+
+
+
+
+
+
+
+
 
     function verificarDni(DniArrendatario) {
-
         $.ajax({
             type: 'Get',
             url: '/Api/Alquiler/verificarDNI?DniArrendatario=' + DniArrendatario,
@@ -497,7 +566,6 @@
                     $("#modalDniNo").modal('show');
 
                 }
-
             }
         });
     }

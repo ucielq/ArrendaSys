@@ -31,9 +31,9 @@ namespace ArrendaSys.Controllers.Api
                 },
                 BackUrls = new PreferenceBackUrlsRequest
                 {
-                    Success = "https://localhost:44346/MercadoPago/pagoAprobado",
-                    Failure = "https://localhost:44346/Home",
-                    Pending = "https://localhost:44346/Home",
+                    Success = "https://arrendasys.azurewebsites.net/MercadoPago/pagoAprobado",
+                    Failure = "https://arrendasys.azurewebsites.net/Home",
+                    Pending = "https://arrendasys.azurewebsites.net/Home",
                 },
                 AutoReturn = "approved",
             };

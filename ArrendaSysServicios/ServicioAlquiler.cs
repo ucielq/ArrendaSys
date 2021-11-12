@@ -59,7 +59,7 @@ namespace ArrendaSysServicios
                                       join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
                                       join di in db.Direccion on i.idDireccion equals di.idDireccion
                                       join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
-                                      where p.idInmobiliaria == idCuenta && ae.fechaBajaAlquilerEstado == null
+                                      where p.idInmobiliaria == id && ae.fechaBajaAlquilerEstado == null
                                       select new                                       {
                                           idAlquiler = a.idAlquiler,
                                           fechaAltaAlquiler = a.fechaAltaAlquiler,
@@ -234,6 +234,7 @@ namespace ArrendaSysServicios
                                                                fechaAltaAlquiler = a.fechaAltaAlquiler,
                                                                fechaBajaAlquiler = a.fechaBajaAlquiler,
                                                                idArrendatario = a.idArrendatario,
+
                                                                inmueble = new InmuebleViewModel
                                                                {
                                                                    cantAmbientes = i.cantAmbientes,

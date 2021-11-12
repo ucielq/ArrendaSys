@@ -47,20 +47,20 @@
                                     <div id="alertdocumentoProp" name="documento"></div>
                                     <div id="alerttelefonoProp" name="telefono"></div>
                                     <div id="alertfechaNacimientoProp" name="fecha de nacimiento"></div>
-
                                     <div id="alertnombreInmo" name="nombre"></div>
                                     <div id="alertapellidoInmo" name="apellido"></div>
                                     <div id="alertcuitInmo" name="cuit"></div>
                                     <div id="alerttelefonoInmo" name="telefono"></div>
                                     <div id="alertAltaInscripcionInmo" name="fecha de inscripción"></div>
 
-
                                     <div class="col-md-2">
                                         <label for="email"><b>Correo Electrónico</b></label>
                                         <br />
                                         <label for="form-control" id="email" name="email"></label>
                                     </div>
+                                    <div class="col-md-2">
 
+                                    </div>
                                     <div class="col-md-2">
                                         <button type="button" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="eliminarCuenta()">Eliminar Cuenta</button>
                                     </div>
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class=" row">
                                                 <div class="col" id="asd123">
-                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                    <label id="NombreMultiplesArchivosArr"> Sin Archivos Seleccionados </label>
                                                 </div>
                                             </div>
                                             <div class=" row">
@@ -169,7 +169,7 @@
                                             </div>
                                             <div class=" row">
                                                 <div class="col" id="asd123">
-                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                    <label id="NombreMultiplesArchivosProp"> Sin Archivos Seleccionados </label>
                                                 </div>
                                             </div>
                                             <div class=" row">
@@ -227,7 +227,7 @@
                                             </div>
                                             <div class=" row">
                                                 <div class="col" id="asd123">
-                                                    <label id="NombreMultiplesArchivos"> Sin Archivos Seleccionados </label>
+                                                    <label id="NombreMultiplesArchivosInmo"> Sin Archivos Seleccionados </label>
                                                 </div>
                                             </div>
                                             <div class=" row">
@@ -314,7 +314,7 @@
             type: 'Post',
             url: '/Api/Cuenta/eliminarCuenta?idCuenta=' + id,
             success: function (result) {
-
+                window.location.href = "/Login/Logout";
             }
         });
     }
@@ -355,7 +355,7 @@
         $("#documento").text(cuentaVM.arrendatario.nroDocumento);
         $("#telefono").text(cuentaVM.arrendatario.nroTelefono);
         $("#fechaNacimiento").val(cuentaVM.arrendatario.fechaNacimientoStr);
-        $("#direccionArr").val(cuentaVM.arrendatario.direccion);
+        $("#direccionArr").text(cuentaVM.direccion);
     }
     function completarDatosPropietario(cuentaVM) {
         $("#tipoCuenta").empty();
@@ -371,7 +371,7 @@
         $("#documentoProp").text(cuentaVM.propietario.numeroDocumentoPropietario);
         $("#telefonoProp").text(cuentaVM.propietario.telefonoPropietario);
         $("#fechaNacimientoProp").val(cuentaVM.propietario.fechaNacimientoStr);
-        $("#direccionProp").val(cuentaVM.propietario.direccion);
+        $("#direccionProp").text(cuentaVM.direccion);
     }
     function completarDatosInmobiliaria(cuentaVM) {
         $("#tipoCuenta").empty();
@@ -386,7 +386,7 @@
         $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
         $("#telefonoInmo").text(cuentaVM.inmobiliaria.telefonoInmobiliariaStr);
         $("#AltaInscripcionInmo").val(cuentaVM.inmobiliaria.altaInscripcionStr);
-        $("#direccionInmo").val(cuentaVM.inmobiliaria.direccion);
+        $("#direccionInmo").text(cuentaVM.direccion);
     }
 
     function cambioTipoCuenta() {
@@ -460,7 +460,6 @@
             if (ValidarDatos("obligatoriaInmo")) {
                 var inmobiliaria = new Object();
                 inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
-                debugger;
                 inmobiliaria.cuitInmobiliaria = $("#cuitInmo").val();
                 inmobiliaria.telefonoInmobiliaria = $("#telefonoInmo").val();
                 inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();

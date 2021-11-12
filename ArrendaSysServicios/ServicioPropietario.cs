@@ -25,6 +25,7 @@ namespace ArrendaSysServicios
                 db.Inmobiliaria.Remove(inmo);
             }
             cuenta.idRol = 3;
+            cuenta.direccion = propietario.direccion;
             var propietario2 = db.Propietario.Where(x => x.idCuenta == propietario.idCuenta).FirstOrDefault();
             if (propietario2 != null)
             {

@@ -111,7 +111,8 @@ namespace ArrendaSysServicios
         {
             EnvioMail mail = new EnvioMail();
             var destino = email;
-            var body = codigo.ToString();
+            var body = "<p>Estimado/a Usuario/a, </br></p><p>¡Le damos la bienvenida a Arrendasys!</br></p><p> Su Código de Confirmación para completar el registro en nuestro sistema es: </br></p><p>" + codigo.ToString() + "</p><p></br>Si Usted no ha solicitado esto, por favor ignore este mensaje.<p>";
+            
             var subject = "Código confirmación";
             var hola = mail.EnviarMailGenerico(destino, body, subject);
         }
@@ -271,6 +272,7 @@ namespace ArrendaSysServicios
                 var cuent = db.Cuenta.Where(x => x.idCuenta == idCuenta && x.fechaBajaCuenta == null).FirstOrDefault();
                 if (cuent != null)
                 {
+                    cuenta.direccion = cuent.direccion;
                     cuenta.rutaFoto = cuent.urlImagen;
                     if (cuent.idPremium != null)
                     {

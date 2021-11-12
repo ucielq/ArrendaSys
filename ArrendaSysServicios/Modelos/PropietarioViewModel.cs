@@ -18,6 +18,6 @@ namespace ArrendaSysServicios.Modelos
         public string tipoDocumentoProp { get; set; }
         public string telefonoPropietario { get; set; }
         public string foto { get; set; }
-
+        public string direccion { get; set; }
     }
 }

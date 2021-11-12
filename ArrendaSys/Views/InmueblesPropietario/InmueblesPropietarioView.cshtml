@@ -60,7 +60,7 @@
                 $.each(result, function (index, inmueble) {
                     cont++;
                     item = item + "<div class='col-md-4'>";
-                    item = item + "<div class='cardV3'>";
+                    item = item + "<div class='cardV3' style='min-height:760px'>";
                     item = item + "<div id='carouselexamplecontrols" + cont.toString() + "' class='carousel slide' data-ride='carousel'>";
                     item = item + "<div class='carousel-inner'>";
                     //Agrego imagenes al carousel
@@ -96,15 +96,21 @@
                     } else {
                         item = item + "<p><i class='fas fa-warehouse'></i>" + "No tiene Cochera" + "</p>";
                     }
-                    item = item + "<p>" + " " + inmueble.descripcionInmueble + "</p>";
+                    var descrip = "";
+                    if (inmueble.descripcionInmueble.length >= 80) {
+                        descrip = inmueble.descripcionInmueble.substring(0, 77) + "...";
+                    } else {
+                        descrip = inmueble.descripcionInmueble;
+                    }
+                    item = item + "<p>" + " " + descrip + "</p>";
                     item = item + "<p style='font-size:20px; color:green; !important'>" + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</p>";
-
-                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='VerInmueble(" + inmueble.idInmueble + ")'>Ver</button>";
-                    item = item + "<button class='btn btn-outline-success btn-sm' onclick='EditarInmueble("+inmueble.idInmueble+")'>Editar</button>";
-                    item = item + "<button class='btn btn-outline-danger btn-sm' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";                   
+                    item = item + "</div>";
+                    item = item + "</div>";
+                    item = item + "<button class='btn btn-outline-success btn-sm' style='position:absolute;bottom:5;left:27;' onclick='VerInmueble(" + inmueble.idInmueble + ")'>Ver</button>";
+                    item = item + "<button class='btn btn-outline-success btn-sm' style='position:absolute;bottom:5;left:110;' onclick='EditarInmueble(" + inmueble.idInmueble + ")'>Editar</button>";
+                    item = item + "<button class='btn btn-outline-danger btn-sm' style='position:absolute;bottom:5;left:210;' onclick='EliminarInmueble(" + inmueble.idInmueble + ")'>Eliminar</button>";
                     //item = item + "<div class='card-body'><h5 class='card-title'>" + " " + inmueble.inmuebleEstado.nombreEstado.nombreEstadoInmueble + "</h5>";
-                    item = item + "</div>";
-                    item = item + "</div>";
+                    
                     item = item + "</div>";
                     item = item + "</div>";
 
