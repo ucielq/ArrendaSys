@@ -12,53 +12,51 @@
     <title>Alquiler</title>
 </head>
 <style>
-.rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content:left;
-}
+    .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: left;
+    }
 
-.rating>input {
-    display: none
-}
+        .rating > input {
+            display: none
+        }
 
-.rating>label {
-    position: relative;
-    width: 1em;
-    font-size: 30px;
-    color: #FFD600;
-    cursor: pointer
-}
+        .rating > label {
+            position: relative;
+            width: 1em;
+            font-size: 30px;
+            color: #2c302dab;
+            cursor: pointer
+        }
 
-.rating>label::before {
-    content: "\2605";
-    position: absolute;
-    opacity: 0
-}
+            .rating > label::before {
+                content: "\2605";
+                position: absolute;
+                opacity: 0
+            }
 
-.rating>label:hover:before,
-.rating>label:hover~label:before {
-    opacity: 1 !important
-}
+            .rating > label:hover:before,
+            .rating > label:hover ~ label:before {
+                opacity: 1 !important
+            }
 
-.rating>input:checked~label:before {
-    opacity: 1
-}
+        .rating > input:checked ~ label:before {
+            opacity: 1
+        }
 
-.rating:hover>input:checked~label:before {
-    opacity: 0.4
-}
+        .rating:hover > input:checked ~ label:before {
+            opacity: 0.4
+        }
 
-h1,
-h1 {
-    margin-top: 150px
-}
+    h1,
+    h1 {
+        margin-top: 150px
+    }
 
-p {
-    font-size: 1.2rem
-}
-
-
+    p {
+        font-size: 1.2rem
+    }
 </style>
 <div class="content">
     <div class="container-fluid">
@@ -104,6 +102,11 @@ p {
     var esAI = false;
     var idInmueble;
     var rutaParcial = "@rutaParcial";
+    var nombreArr;
+    var nombreArio;
+
+
+
     (function () {
 
         if (tipoCuenta == 2) {
@@ -132,8 +135,8 @@ p {
                 var cont2 = 1;
                 var cont = 1;
                 item = item + "<div class='row'>";
-                item = item + "<p><h3>Inmueble</h3></p>";
-                item = item + "<div class='col-md-3'>";
+                item = item + "<p><h3>Inmueble" + "<button class='btn btn-outline-secondary btn-sm' style='margin-left:900px;' onclick='Volver()'>Volver</button>" + "</h3></p>";
+                item = item + "<div class='col-md-4'>";
                 item = item + "<div id='carouselexamplecontrols" + cont.toString() + "' class='carousel slide' data-ride='carousel'>";
                 item = item + "<div class='carousel-inner'>";
                 $.each(result.inmueble.listaMultimedia, function (i, archivo) {
@@ -142,7 +145,7 @@ p {
                     if (cont2 == 1) {
                         var activo = "active";
                     }
-                    item = item + "<div class='carousel-item " + activo + "'><img src='..\\TempFolder\\" + ruta + "' alt='' class='card-img-top' height='240' width='350'></div>";
+                    item = item + "<div class='carousel-item " + activo + "'><img src='..\\TempFolder\\" + ruta + "' alt='' class='card-img-top' height='310' width='450'></div>";
                     cont2++;
                 })
                 item = item + "<a class='carousel-control-prev' href='#carouselexamplecontrols" + cont + "' role='button' data-slide='prev'>";
@@ -171,24 +174,28 @@ p {
 
                 //Row Datos Arrendador u arrendatario (agregar condicion)
                 if (tipoCuenta == 2) {
+                    
                     var ruta2 = result.arrendador.foto.split('\\')[result.arrendador.foto.split('\\').length - 1];
                     if (result.inmueble.tipoArrendador == 3) {
-                        item = item + "<div class='row'>"
+                        nombreArio = result.arrendador.nombrePropietario;
+                        item = item + "<hr/>";
                         item = item + "<div class='row'>";
-                        item = item + "<p><h3>Arrendador</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:100px; width:120px;'></img> ";
-                        item = item + "<span><h5>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h5></span>";
-                        item = item + "<span><h5>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h5></span>";
-                        item = item + "<span><h5>Telefono: " + result.arrendador.telefonoPropietario + "</h5></span>";
+                        item = item + "<div class='row'>";
+                        item = item + "<p><h3>Datos del Arrendador:</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:200px; width:220px; border-radius:100px;'></img></h3></p>";
+                        item = item + "<span style='color:black;'><h4>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h4></span>";
+                        item = item + "<span style='color:black;'><h4>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h4></span>";
+                        item = item + "<span style='color:black;'><h4>Telefono: " + result.arrendador.telefonoPropietario + "</h4></span>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
                         item = item + "</hr>";
                     } else {
+                        nombreArio = result.arrendador.nombreInmobiliaria;
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
-                        item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:100px; width:120px;'></img> ";
-                        item = item + "<p><h5>Nombre: " + result.arrendador.nombreInmobiliaria + "</h5></p>";
-                        item = item + "<p><h5>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h5></p>";
+                        item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:200px; width:220px; border-radius:100px;'></img></h3></p>";
+                        item = item + "<span style='color:black;'><h4>Nombre: " + result.arrendador.nombreInmobiliaria + "</h4></span>";
+                        item = item + "<span style='color:black;'><h4>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h4></span>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
@@ -196,13 +203,14 @@ p {
                     }
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    nombreArr = result.arrendatario.nombreArrendatario;
                     var ruta3 = result.arrendatario.foto.split('\\')[result.arrendatario.foto.split('\\').length - 1];
                     item = item + "<hr/>";
                     item = item + "<div class='row'>";
-                    item = item + "<p><h>Datos del Arrendatario:</h4></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:100px; width:120px;'></img> ";
-                    item = item + "<p><h5>Nombre: " + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</h5></p>";
-                    item = item + "<p><h5>Documento: " + result.arrendatario.nroDocumento + "</h5></p>";
-                    item = item + "<p><h5>Telefono: " + result.arrendatario.nroTelefono + "</h5></p>";
+                    item = item + "<p><h3>Datos del Arrendatario:</h4></p><img src='..\\TempFolder\\" + ruta3 + "' style='height:200px; width:220px; border-radius:100px;></img></h3></p> ";
+                    item = item + "<span style='color:black;'><h4><b>Nombre: </b>" + result.arrendatario.nombreArrendatario + " " + result.arrendatario.apellidoArrendatario + "</h4></span>";
+                    item = item + "<span style='color:black;'><h4><b>Documento: </b>" + result.arrendatario.nroDocumento + "</h4></span>";
+                    item = item + "<span style='color:black;'><h4><b>Telefono: </b>" + result.arrendatario.nroTelefono + "</h4></span>";
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
                 }
@@ -211,12 +219,13 @@ p {
 
                 //Row reseñas del inmueble
                 if (tipoCuenta == 2) {
-                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;' onclick = 'mostrarformularioArrendador()'><i class='fas fa-plus'></i> Hacer Reseña Propietario</button >"
-                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;'  onclick = 'mostrarformularioInmueble()'><i class='fas fa-plus'></i> Hacer Reseña Inmueble</button >"
+                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;' onclick = 'mostrarformularioArrendador()'><i class='fas fa-plus'></i> Realizar nueva reseña Propietario</button >"
+                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;'  onclick = 'mostrarformularioInmueble()'><i class='fas fa-plus'></i> Realizar nueva reseña Inmueble</button >"
                 }
 
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
-                    item = item + "<br/><button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;' onclick = 'mostrarformularioArrendatario()'><i class='fas fa-plus'></i> Hacer Reseña Arrendatario</button ><br/>"
+                    item = item + "<br/><button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;' onclick = 'mostrarformularioArrendatario()'><i class='fas fa-plus'></i> Realizar nueva reseña</button ><br/>"
+                    item = item + " "
                 }
 
                 item = item + "<div id='mensajeError' style='display: none; font-size: 15px; background-color: #bf3131; width:500px; color: white; border-radius: 10px; justify-content: center; text-align:center; margin-left:auto; margin-right:auto;'>No puedes hacer una Reseña sobre un Alquiler que no se encuentra Activo</div>"
@@ -257,7 +266,7 @@ p {
             url: '/Api/Item/ListarItemsAoAr',
             success: function (result) {
                 listaItemsAoAr = result;
-                $("#formularioAoAr").append("<p><h4>Haz tu Reseña:</h4></p>")
+                $("#formularioAoAr").append("<span style='margin-top:10px;'><h5>Items a Calificar:</h5></span>")
                 result.forEach(function (data, index) {
                     $("#formularioAoAr").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
@@ -268,7 +277,7 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionAoAr' name='descripcionAoAr'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
+                item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAoAr' onclick='volverAoAr()'  style='width:120px;'>Cancelar</button>"
                 $("#formularioAoAr").append(item2)
             }
@@ -281,7 +290,7 @@ p {
             url: '/Api/Item/ListarItemsArAo',
             success: function (result) {
                 listaItemsArAo = result;
-                $("#formularioArAo").append("<p><h3>Haz tu Reseña</h3></p>")
+                $("#formularioArAo").append("<span><h5>Items a Calificar:</h5></span>")
                 result.forEach(function (data, index) {
                     $("#formularioArAo").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
@@ -292,7 +301,7 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionArAo' name='descripcionArAo'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
+                item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverArAo' onclick='volverArAo()' style='width:120px;'>Cancelar</button>"
                 $("#formularioArAo").append(item2)
                     //< a href = "" class="btn btn-outline-secondary btn-sm" data - bs - dismiss="modal" > Cancelar</a >
@@ -307,7 +316,7 @@ p {
             url: '/Api/Item/ListarItemsAI',
             success: function (result) {
                 listaItemsAI = result;
-                $("#formularioAI").append("<p><h3>Haz tu Reseña</h3></p>")
+                $("#formularioAI").append("<span><h5>Items a Calificar:</h5></span>")
                 result.forEach(function (data, index) {
                     $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
                     var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
@@ -318,7 +327,7 @@ p {
                 item2 = item2 + "<label>Descripción Reseña</label></br>"
                 item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
                 item2 = item2 + "</div>";
-                item2 = item2 + "<button class='btn btn-outline-secondary btn-sm' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
+                item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAI' onclick='volverAI()' style='width:120px;;'>Cancelar</button>"
                 $("#formularioAI").append(item2)
             }
@@ -368,7 +377,7 @@ p {
             });
 
         } else {
-            alert("Por favor puntúe todos los aspectos.");
+            $("#modalReseña").modal('show');
         }
     }
     function GuardarReseñaArAo() {
@@ -403,7 +412,7 @@ p {
             });
 
         } else {
-            alert("Por favor puntúe todos los aspectos.");
+            $("#modalReseña").modal('show');
         }
     }
     function GuardarReseñaAI() {
@@ -438,7 +447,7 @@ p {
             });
 
         } else {
-            alert("Por favor puntúe todos los aspectos.");
+            $("#modalReseña").modal('show');
         }
     }
     function verValorAoAr() {
@@ -609,10 +618,10 @@ p {
                 $("#body").empty();
                 var item = "";
                 if (tipoCuenta == 2) {
-                    item = item + "<div><p><h3>Mis Reseñas sobre el Arrendador</h3></p></div>";
+                    item = item + "<div><p><h3>Mis Reseñas sobre " + nombreArio + ":</h3></p></div>";
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
-                    item = item + "<div><p><h3>Mis Reseñas sobre el Arrendatario</h3></p></div>";
+                    item = item + "<p><h3> Mis Reseñas sobre " + nombreArr + ":</h3></p>";
                 }
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
@@ -631,8 +640,10 @@ p {
                     item = item + "</div>";
                 });
 
-                $("#body").append(item);
+
+                $("#body").append(item); 
                 paginas();
+
             }
         });
     }
@@ -671,7 +682,7 @@ p {
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
-                item = item + "<div><p><h3>Mis Reseñas sobre el Inmueble</h3></p></div>";
+                item = item + "<div><p><h3>Mis Reseñas sobre el Inmueble:</h3></p></div>";
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -769,5 +780,26 @@ p {
             }
         });
     }
-
+    function Volver() {
+        location.href = 'javascript: history.go(-1)';
+    }
 </script>
+@* MODALES *@
+<div class="modal fade" id="modalReseña" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #c51616"><b>Valorar Items</b></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Por favor ingrese una calificación para cada uno de los items a valorar.
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+            </div>
+        </div>
+    </div>
+</div>

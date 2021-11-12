@@ -291,7 +291,7 @@ namespace ArrendaSysServicios
                 {
                     var lista = (from r in db.ReseñaArrendadorArrendatario
                                  join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
-                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble                                
                                  where a.idAlquiler == IdAlquiler && i.idArrendador == id
                                  select new ReseniaViewModel
                                  {
