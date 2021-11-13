@@ -94,20 +94,20 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Resenia/obtenerReseniasAlquiler")]
         [System.Web.Http.ActionName("obtenerReseniasAlquiler")]
         [System.Web.Http.HttpGet]
-        public ViewModelReseniaAux obtenerReseniasAlquiler(int tipoCuenta, int id, int pag, int idAlquiler)
+        public ViewModelReseniaAux obtenerReseniasAlquiler(int tipoCuenta, int id, int pag, int idAlquiler, int tipoBusqueda)
         {
             ServicioResenia servicio = new ServicioResenia();
-            var lista = servicio.obtenerReseniasAlquiler(tipoCuenta, id, pag, idAlquiler);
+            var lista = servicio.obtenerReseniasAlquiler(tipoCuenta, id, pag, idAlquiler, tipoBusqueda);
             return lista;
         }
 
         [System.Web.Http.Route("Api/Resenia/obtenerReseniasAlquilerInmueble")]
         [System.Web.Http.ActionName("obtenerReseniasAlquilerInmueble")]
         [System.Web.Http.HttpGet]
-        public ViewModelReseniaAux obtenerReseniasAlquilerInmueble(int tipoCuenta, int id, int pag, int idAlquiler)
+        public ViewModelReseniaAux obtenerReseniasAlquilerInmueble(int tipoCuenta, int id, int pag, int idAlquiler, int tipoBusqueda)
         {
             ServicioResenia servicio = new ServicioResenia();
-            var lista = servicio.obtenerReseniasAlquilerInmueble(tipoCuenta, id, pag, idAlquiler);
+            var lista = servicio.obtenerReseniasAlquilerInmueble(tipoCuenta, id, pag, idAlquiler, tipoBusqueda);
             return lista;
         }
         
