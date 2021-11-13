@@ -107,10 +107,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Alquiler/solicitarAlquiler")]
         [System.Web.Http.ActionName("solicitarAlquiler")]
         [System.Web.Http.HttpGet]
-        public int solicitarAlquiler(int idInmueble, int idArrendatario)
+        public int solicitarAlquiler(int idInmueble, int idArrendatario, string fechaAltaAlquiler, string fechaBajaAlquiler)
         {
             ServicioAlquiler servicio = new ServicioAlquiler();
-            var resp = servicio.solicitarAlquiler(idInmueble, idArrendatario);
+            var resp = servicio.solicitarAlquiler(idInmueble, idArrendatario, Convert.ToDateTime(fechaAltaAlquiler), Convert.ToDateTime(fechaBajaAlquiler));
 
             return resp;
         }
