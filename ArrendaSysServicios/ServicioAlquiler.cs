@@ -522,7 +522,7 @@ namespace ArrendaSysServicios
 
         }
 
-        public int solicitarAlquiler(int idInmueble,int idArrendatario)
+        public int solicitarAlquiler(int idInmueble,int idArrendatario, DateTime fechaAltaAlquiler, DateTime fechaBajaAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -530,8 +530,8 @@ namespace ArrendaSysServicios
                 Alquiler alquiler = new Alquiler();
                 alquiler.idArrendatario=idArrendatario;
                 alquiler.idInmueble=idInmueble;
-                alquiler.fechaBajaAlquiler = DateTime.Now.AddDays(1);
-                alquiler.fechaAltaAlquiler=DateTime.Now.AddDays(30);
+                alquiler.fechaBajaAlquiler = fechaAltaAlquiler;
+                alquiler.fechaAltaAlquiler= fechaBajaAlquiler;
                 db.Alquiler.Add(alquiler);
                 db.SaveChanges();
                 AlquilerEstado alquilerEstado = new AlquilerEstado();
@@ -541,7 +541,36 @@ namespace ArrendaSysServicios
                 alquilerEstado.fechaAltaAlquilerEstado = DateTime.Now;
                 db.AlquilerEstado.Add(alquilerEstado);
                 db.SaveChanges();
+                
+
+
+                Notificacion notif1 = new Notificacion();
+                var inmueble1 = db.Inmueble.Where(x => x.idInmueble == idInmueble).FirstOrDefault();
+                var direccion1 = db.Direccion.Where(x => x.idDireccion == inmueble1.idDireccion).FirstOrDefault();
+                var arrendatario1 = db.Arrendatario.Where(x => x.idArrendatario == idArrendatario).FirstOrDefault();
+                if (inmueble1.tipoArrendador == 3)
+                {
+                    var prop1 = db.Propietario.Where(x => x.idPropietario == inmueble1.idArrendador).FirstOrDefault();
+                    var cuenta1 = db.Cuenta.Where(x => x.idCuenta == prop1.idCuenta).FirstOrDefault();
+                    notif1.idCuenta = cuenta1.idCuenta;
+                }
+                else {
+                    var inmo1 = db.Inmobiliaria.Where(x => x.idInmobiliaria == inmueble1.idArrendador).FirstOrDefault();
+                    var cuenta1 = db.Cuenta.Where(x => x.idCuenta == inmo1.idCuenta).FirstOrDefault();
+                    notif1.idCuenta = cuenta1.idCuenta;
+                }
+
+                    notif1.descripcionNotificacion = arrendatario1.nombreArrendatario + ", " + arrendatario1.apellidoArrendatario + " ha solicitado el Alquiler de " + direccion1.nombreBarrio + ", calle " + direccion1.nombreCalle + ".";
+                    notif1.nombreNotificacion = "Solicitud de Alquiler";
+                    notif1.fechaNotificacion = DateTime.Now;
+                    
+                    notif1.leido = false;
+                    db.Notificacion.Add(notif1);
+                    db.SaveChanges();
+
+
                 return 1;
+
             }
 
         }
