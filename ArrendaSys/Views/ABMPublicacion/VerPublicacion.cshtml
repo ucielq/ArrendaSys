@@ -58,6 +58,22 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div class="row">
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Desde</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Hasta</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-1">
+                    <button class="btn" onclick="obtres()">Filtrar</button>
+                </div>
+
+            </div>
             <div class="modal-body">
                 <div class="container" id="bodyArrendador">
                     @*Aca va todo el cuerpo*@
@@ -65,6 +81,7 @@
             </div>
             <div class="modal-footer">
                 <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                <button class="btn btn-success" onclick="imprimirReporteArrendador()">Imprimir Reporte</button>
             </div>
         </div>
     </div>
@@ -110,13 +127,20 @@
     var tipoPropietario;
     var idCuenta = "@idCuenta";
     var idPropio = parseInt("@idPropio");
-
+    var fechaDesde;
+    var fechaHasta;
+    var idAo;
     var idPublicacion;
+    var tipoCuentaAo
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
     }
-
+    function imprimirReporteArrendador() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuentaAo + "&id=" + idAo + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, "Reporte de Reseñas");
+    }
     idPublicacion = GetUrlVars()["id"];
     var pag = 1;
 
@@ -181,6 +205,8 @@
                 item = item + "</div>";
 
                 if (publicacion.inmueble.tipoArrendador == 3) {
+                    tipoCuentaAo = 3;
+                    idAo = publicacion.inmueble.idArrendador;
                     tipoPropietario = 3;
                     idPropietario = publicacion.propietario.idPropietario;
                     item = item + "<div class='col-md-2' style='margin-left:-1'>";
@@ -191,6 +217,8 @@
 
                 } else {
                     if (publicacion.inmueble.tipoArrendador == 4) {
+                        tipoCuentaAo = 4;
+                        idAo = publicacion.inmueble.idArrendador;
                         tipoPropietario = 4;
                         idPropietario = publicacion.inmobiliaria.idInmobiliaria;
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
@@ -288,48 +316,21 @@
     }
     function ObtenerReseniasArrendatario(id, tipo) {
         $("#modalarrendador").modal('show');
-        $.ajax({
-            type: 'Get',
-            url: '/Api/Resenia/obtenerReseniasV2?id='+ id +"&tipo="+ tipo + "&pag=" + pag,
-            success: function (result) {
-                cantidad = result.cantidad;
-                $("#bodyArrendador").empty();
-                var item = "";
-                var ruta1 = result.lista[0].urlimg.split('\\')[result.lista[0].urlimg.split('\\').length - 1];
-                item = item + "<div class='row'>";
-                if (result.lista.length > 0) {
-                    item = item + "<div class='col-md-3'>";
-                    item = item + "<p></p><img src='..\\TempFolder\\" + ruta1 + "' style='height:150px; width:170px; border-radius:80px;></img> ";
-                    item = item + "</div>";
-                    item = item + "<div class='col-md-6'>";
-                    item = item + "<p style='font-size:25'>" + result.lista[0].nombreArrendador + "</p  >";
-                    item = item + "</div>";
-                    
-                }
-                item = item + "</div>";
-                item = item + "<hr>"
-                result.lista.forEach(function (data, index) {
-                    item = item + "<span>" + " " + "</span>";
-                    item = item + "<div class='row'>";
-                    item = item + "<div class='col-md-2'>";
-                    item = item + "<span>" + data.nombreAutor + "</span>";
-                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
-                    item = item + "</div>";
-                    item = item + "<div class='col-md-8'>";
-                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
-                    item = item + "</div>";
-                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
-                    item = item + "</div>";
-                    item = item + "<div class='col-md-12' style='padding-left:0px;'>";
-                    item = item + "<hr>";
-                    item = item + "</div>";
-                    item = item + "</div>";
-                });
+        var Hasta = new Date();
+        var Desde = new Date(Hasta);
+        var dias = 15;  //Dias para atras del dia de hoy para que salgan en Novedades
+        Desde.setDate(Desde.getDate() - dias);
+        var fechaDesdeInput = FechaformatoInput(Desde);
+        var fechaHastaInput = FechaformatoInput(Hasta);
 
-                $("#bodyArrendador").append(item);
-                paginas();
-            }
-        });
+        //las cargo en las variables globales
+        fechaDesde = fechaHoyMostrar(Desde);
+        fechaHasta = fechaHoyMostrar(Hasta);
+        //las cargo en el input
+        $('#fechaDesdeFiltro').val(fechaDesdeInput);
+        $('#fechaHastaFiltro').val(fechaHastaInput);
+        obtres();
+        
     }
 
 
@@ -360,7 +361,50 @@
 
         ObtenerReseniasArrendatario(idPropietario, tipoPropietario);
     }
+    function obtres() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Resenia/obtenerReseniasV2?id=' + idAo + "&tipo=" + tipoCuentaAo + "&pag=" + pag + "&fechaDesde=" + $('#fechaDesdeFiltro').val() + "&fechaHasta=" + $('#fechaHastaFiltro').val(),
+            success: function (result) {
+                cantidad = result.cantidad;
+                $("#bodyArrendador").empty();
+                var item = "";
+                var ruta1 = result.lista[0].urlimg.split('\\')[result.lista[0].urlimg.split('\\').length - 1];
+                item = item + "<div class='row'>";
+                if (result.lista.length > 0) {
+                    item = item + "<div class='col-md-3'>";
+                    item = item + "<p></p><img src='..\\TempFolder\\" + ruta1 + "' style='height:150px; width:170px; border-radius:80px;></img> ";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<p style='font-size:25'>" + result.lista[0].nombreArrendador + "</p  >";
+                    item = item + "</div>";
 
+                }
+                item = item + "</div>";
+                item = item + "<hr>"
+                result.lista.forEach(function (data, index) {
+                    item = item + "<span>" + " " + "</span>";
+                    item = item + "<div class='row'>";
+                    item = item + "<div class='col-md-2'>";
+                    item = item + "<span>" + data.nombreAutor + "</span>";
+                    item = item + "<span>" + data.fechaAltaReseña.toString().split('T')[0] + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-8'>";
+                    item = item + "<span>" + data.descripcionResenia + "</span></br>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-12' style='padding-left:0px;'>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "</div>";
+                });
+
+                $("#bodyArrendador").append(item);
+                paginas();
+            }
+        });
+    }
     function paginasInmueble() {
         var html = "<nav aria-label='...'>";
         html = html + "<ul class='pagination'>";

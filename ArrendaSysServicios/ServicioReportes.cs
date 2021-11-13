@@ -21,6 +21,7 @@ namespace ArrendaSysServicios
                     lista = (from r in db.ReseñaArrendadorArrendatario
                              join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                              join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                             join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
                              where a.idArrendatario == id && r.fechaAltaReseñaAoAr>=desde && r.fechaAltaReseñaAoAr<=hasta
                              select new ReseniaPDFVM
                              {
@@ -28,7 +29,8 @@ namespace ArrendaSysServicios
                                  descripcion = r.descripcionReseñaAoAr,
                                  puntuacionResenia = r.puntuacionReseñaAoAr,
                                  tipoArrendador=i.tipoArrendador,
-                                 idArrendador=i.idArrendador
+                                 idArrendador=i.idArrendador,
+                                 nombre = ar.nombreArrendatario + " "+ ar.apellidoArrendatario
                              }).ToList();
                     foreach (var item in lista)
                     {
@@ -50,13 +52,15 @@ namespace ArrendaSysServicios
                              join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                              join i in db.Inmueble on a.idInmueble equals i.idInmueble
                              join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                             join prop in db.Propietario on i.idArrendador equals prop.idPropietario
                              where i.tipoArrendador == 3 && i.idArrendador == id && r.fechaAltaReseñaArAo >= desde && r.fechaAltaReseñaArAo <= hasta
                              select new ReseniaPDFVM
                              {
                                  autorResenia = arr.apellidoArrendatario + " " + arr.nombreArrendatario,
                                  fechaResenia = r.fechaAltaReseñaArAo,
                                  descripcion = r.descripcionReseñaArAo,
-                                 puntuacionResenia = r.puntuacionReseñaArAo
+                                 puntuacionResenia = r.puntuacionReseñaArAo,
+                                 nombre = prop.nombrePropietario + " "+prop.apellidoPropietario
                              }).ToList();
 
                 }
@@ -66,13 +70,15 @@ namespace ArrendaSysServicios
                              join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                              join i in db.Inmueble on a.idInmueble equals i.idInmueble
                              join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                             join inmo in db.Inmobiliaria on i.idArrendador equals inmo.idInmobiliaria
                              where i.tipoArrendador == 4 && i.idArrendador == id && r.fechaAltaReseñaArAo >= desde && r.fechaAltaReseñaArAo <= hasta
                              select new ReseniaPDFVM
                              {
                                  autorResenia = arr.apellidoArrendatario + " " + arr.nombreArrendatario,
                                  fechaResenia = r.fechaAltaReseñaArAo,
                                  descripcion = r.descripcionReseñaArAo,
-                                 puntuacionResenia = r.puntuacionReseñaArAo
+                                 puntuacionResenia = r.puntuacionReseñaArAo,
+                                 nombre = inmo.nombreInmobiliaria
                              }).ToList();
 
                 }
