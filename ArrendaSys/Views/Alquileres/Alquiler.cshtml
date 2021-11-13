@@ -5,6 +5,15 @@
     var id = Session["id"];
     var fotoUsuario = Session["foto"];
     var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
+    var titulo = "";
+    if (Convert.ToInt32(tipoCuenta) == 2)
+    {
+        titulo = "Reseñas del arrendador";
+    }
+    else
+    {
+        titulo = "Reseñas del arrendatario";
+    }
 }
 
 <head>
@@ -82,7 +91,7 @@
     <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>@titulo</b></h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -280,6 +289,8 @@
                     }
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    tipoCuentaAo = 2;
+                    idAo = result.idArrendatario;
                     nombreArr = result.arrendatario.nombreArrendatario;
                     var ruta3 = result.arrendatario.foto.split('\\')[result.arrendatario.foto.split('\\').length - 1];
                     item = item + "<hr/>";
