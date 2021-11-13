@@ -225,11 +225,13 @@
                         item = item + "<span style='color:black;'><h4>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h4></span>";
                         item = item + "<span style='color:black;'><h4>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h4></span>";
                         item = item + "<span style='color:black;'><h4>Telefono: " + result.arrendador.telefonoPropietario + "</h4></span>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; margin-left:11px; ' onclick='completarResenias2()'>Ver Reseñas Arrendador</button>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; ' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Arrendador</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Arrendador</button>";
                         item = item + "</hr>";
                     } else {
                         nombreArio = result.arrendador.nombreInmobiliaria;
@@ -238,11 +240,13 @@
                         item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:200px; width:220px; border-radius:100px;'></img></h3></p>";
                         item = item + "<span style='color:black;'><h4>Nombre: " + result.arrendador.nombreInmobiliaria + "</h4></span>";
                         item = item + "<span style='color:black;'><h4>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h4></span>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; margin-left:11px;' onclick='completarResenias2()'>Ver Reseñas Inmobiliaria</button>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Inmobiliaria</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Inmobiliaria</button>";
                         item = item + "</hr>";
                     }
                 }
@@ -257,7 +261,7 @@
                     item = item + "<span style='color:black;'><h4><b>Telefono: </b>" + result.arrendatario.nroTelefono + "</h4></span>";
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
-                    item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Arrendatario</button>";
+                    item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; margin-left:8px;' onclick='completarResenias2()'>Ver Reseñas Arrendatario</button>";
                 }
 
                 item = item + "</div>";
