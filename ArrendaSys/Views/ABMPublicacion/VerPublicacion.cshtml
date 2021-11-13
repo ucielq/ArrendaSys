@@ -29,46 +29,46 @@
     }
 </style>
 
-    <div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
-             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Inmueble</b></h5>
-                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container" id="bodyInmueble">
-                        @*Aca va todo el cuerpo*@
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
-                </div>
-             </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
-            <div class="modal-content" >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container" id="bodyArrendador">
-                        @*Aca va todo el cuerpo*@
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
-                </div>
-            </div>
-        </div>
-    </div>
+ <div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+           <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Inmueble</b></h5>
+                   <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="container" id="bodyInmueble">
+                      @*Aca va todo el cuerpo*@
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+              </div>
+           </div>
+      </div>
+  </div>
+  <div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+          <div class="modal-content" >
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="container" id="bodyArrendador">
+                      @*Aca va todo el cuerpo*@
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+              </div>
+          </div>
+      </div>
+  </div>
 
 <div class="content">
     <div class="container-fluid">
@@ -85,10 +85,10 @@
                         <div class="container" id="publicacion" style="margin-left: 10px">
                             @*Cuerpo de la pagina*@
                         </div>
-                        
-                        
+
+
                     </section>
-                    
+
 
                 </div>
             </div>
@@ -100,7 +100,7 @@
 <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 @{
     var idCuenta = Session["idCuenta"];
-    
+
     var tipoCuenta = Session["tipoCuenta"];
 
 }
@@ -109,7 +109,7 @@
     var idPropietario;
     var tipoPropietario;
     var idCuenta = "@idCuenta";
-    
+
 
     var idPublicacion;
     function GetUrlId() {
@@ -122,7 +122,7 @@
 
     (function () {
         $("#publicacion").empty();
-        
+
         $.ajax({
             type: 'Get',
             url: '/Api/ABMPublicacion/VerPublicacion?idPublicacion=' + idPublicacion,
@@ -200,13 +200,13 @@
                         item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.inmobiliaria.idInmobiliaria +"," + 4+ ")'>Ver Reseñas Arrendador</button>";
                     }
                 }
-                
-                
-                
+
+
+
                 item = item + "</div>";
 
                 item = item + "</div>";
-                
+
                 item = item + "<button class='btn btn-outline-secondary btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
 
@@ -224,18 +224,18 @@
     function Volver() {
         location.href ='javascript: history.go(-1)';
     }
-   
-    
+
+
     function completarReseniasInmueble(idInmueble) {
         $("#modalinmueble").modal('show');
         $.ajax({
             type: 'Get',
             url: '/Api/Resenia/obtenerReseniasInmueble?idInmueble=' + idInmueble + "&pag=" + pag,
-            success: function (result) {               
+            success: function (result) {
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
-                
+
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -258,7 +258,7 @@
             }
         });
     }
-    function ObtenerReseniasArrendatario(id, tipo) {              
+    function ObtenerReseniasArrendador(id, tipo) {
         $("#modalarrendador").modal('show');
         $.ajax({
             type: 'Get',
@@ -299,7 +299,7 @@
             }
         });
     }
-    
+
 
     function paginas() {
         var html = "<nav aria-label='...'>";
@@ -355,7 +355,7 @@
         pag = num;
         completarReseniasInmueble();
     }
-    
+
 
 
 </script>
