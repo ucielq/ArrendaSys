@@ -17,92 +17,181 @@ namespace ArrendaSysServicios
     {
         public ArrendasysEntities db = new ArrendasysEntities();
         // ----------------------METODOS  ------------
-        public object ListarAlquileres(int idCuenta, int tipoCuenta)
+        public object ListarAlquileres(int idCuenta, int tipoCuenta,int tipoAlquiler)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
+                if (tipoAlquiler == 1)
+                {
+                    if (tipoCuenta == 3)
+                    {
+                        var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
+                        var alquileres = (from a in db.Alquiler
+                                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                          join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                                          join p in db.Propietario on i.idArrendador equals p.idPropietario
+                                          join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                          join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                          join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                          where p.idPropietario == id && ae.fechaBajaAlquilerEstado == null && ea.idEstadoAlquiler != 4
+                                          select new
+                                          {
+                                              idAlquiler = a.idAlquiler,
+                                              fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                              fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                              idArrendatario = a.idArrendatario,
+                                              idInmueble = a.idInmueble,
+                                              descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                              idEstadoAlquiler = ea.idEstadoAlquiler,
+                                              idAlquilerEstado = ae.idAlquilerEstado,
+                                              nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                              direccion = di.nombreCalle + " " + di.numeroCalle
+                                          }).ToList();
+                        object json = new { data = alquileres };
+                        return json;
+                    }
+                    else if (tipoCuenta == 4)
+                    {
+                        var id = db.Inmobiliaria.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idInmobiliaria;
+                        var alquileres = (from a in db.Alquiler
+                                          join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                          join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
+                                          join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                          join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                          join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                          where p.idInmobiliaria == id && ae.fechaBajaAlquilerEstado == null && ea.idEstadoAlquiler != 4
+                                          select new
+                                          {
+                                              idAlquiler = a.idAlquiler,
+                                              fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                              fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                              idArrendatario = a.idArrendatario,
+                                              idInmueble = a.idInmueble,
+                                              descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                              idEstadoAlquiler = ea.idEstadoAlquiler,
+                                              idAlquilerEstado = ae.idAlquilerEstado,
+                                              nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                              direccion = di.nombreCalle + " " + di.numeroCalle
+                                          }).ToList();
+                        object json = new { data = alquileres };
+                        return json;
+                    }
+                    else
+                    {
 
-                if (tipoCuenta == 3)
-                {
-                    var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
-                    var alquileres = (from a in db.Alquiler
-                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                      join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
-                                      join p in db.Propietario on i.idArrendador equals p.idPropietario
-                                      join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
-                                      join di in db.Direccion on i.idDireccion equals di.idDireccion
-                                      join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
-                                      where p.idPropietario == id && ae.fechaBajaAlquilerEstado == null
-                                      select new 
-                                      {
-                                          idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
-                                          fechaBajaAlquiler = a.fechaBajaAlquiler,
-                                          idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
-                                          idEstadoAlquiler=ea.idEstadoAlquiler,
-                                          idAlquilerEstado = ae.idAlquilerEstado,
-                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
-                                          direccion = di.nombreCalle+" "+ di.numeroCalle
-                                      }).ToList();
-                    object json = new { data = alquileres };
-                    return json;
-                }
-                else if (tipoCuenta == 4)
-                {
-                    var id = db.Inmobiliaria.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idInmobiliaria;
-                    var alquileres = (from a in db.Alquiler
-                                      join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
-                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                      join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
-                                      join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
-                                      join di in db.Direccion on i.idDireccion equals di.idDireccion
-                                      join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
-                                      where p.idInmobiliaria == id && ae.fechaBajaAlquilerEstado == null
-                                      select new                                       {
-                                          idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
-                                          fechaBajaAlquiler = a.fechaBajaAlquiler,
-                                          idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
-                                          idEstadoAlquiler = ea.idEstadoAlquiler,
-                                          idAlquilerEstado = ae.idAlquilerEstado,
-                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
-                                          direccion = di.nombreCalle + " " + di.numeroCalle
-                                      }).ToList();
-                    object json = new { data = alquileres };
-                    return json;
+                        //
+                        var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
+                        var alquileres = (from a in db.Alquiler
+                                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                          join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                                          join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                          join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                          join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                          where a.idArrendatario == id && ae.fechaBajaAlquilerEstado == null && ea.idEstadoAlquiler!=4
+                                          select new
+                                          {
+                                              idAlquiler = a.idAlquiler,
+                                              fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                              fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                              idArrendatario = a.idArrendatario,
+                                              idInmueble = a.idInmueble,
+                                              descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                              idEstadoAlquiler = ea.idEstadoAlquiler,
+                                              idAlquilerEstado = ae.idAlquilerEstado,
+                                              nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                              direccion = di.nombreCalle + " " + di.numeroCalle
+                                          }).ToList();
+                        object json = new { data = alquileres };
+                        return json;
+                    }
                 }
                 else
                 {
+                    if (tipoCuenta == 3)
+                    {
+                        var id = db.Propietario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idPropietario;
+                        var alquileres = (from a in db.Alquiler
+                                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                          join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                                          join p in db.Propietario on i.idArrendador equals p.idPropietario
+                                          join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                          join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                          join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                          where p.idPropietario == id && ae.fechaBajaAlquilerEstado == null && ea.idEstadoAlquiler == 4
+                                          select new
+                                          {
+                                              idAlquiler = a.idAlquiler,
+                                              fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                              fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                              idArrendatario = a.idArrendatario,
+                                              idInmueble = a.idInmueble,
+                                              descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                              idEstadoAlquiler = ea.idEstadoAlquiler,
+                                              idAlquilerEstado = ae.idAlquilerEstado,
+                                              nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                              direccion = di.nombreCalle + " " + di.numeroCalle
+                                          }).ToList();
+                        object json = new { data = alquileres };
+                        return json;
+                    }
+                    else if (tipoCuenta == 4)
+                    {
+                        var id = db.Inmobiliaria.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idInmobiliaria;
+                        var alquileres = (from a in db.Alquiler
+                                          join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                          join p in db.Inmobiliaria on i.idArrendador equals p.idInmobiliaria
+                                          join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                          join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                          join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                          where p.idInmobiliaria == id && ae.fechaBajaAlquilerEstado == null && ea.idEstadoAlquiler == 4
+                                          select new
+                                          {
+                                              idAlquiler = a.idAlquiler,
+                                              fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                              fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                              idArrendatario = a.idArrendatario,
+                                              idInmueble = a.idInmueble,
+                                              descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                              idEstadoAlquiler = ea.idEstadoAlquiler,
+                                              idAlquilerEstado = ae.idAlquilerEstado,
+                                              nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                              direccion = di.nombreCalle + " " + di.numeroCalle
+                                          }).ToList();
+                        object json = new { data = alquileres };
+                        return json;
+                    }
+                    else
+                    {
 
-                    //
-                    var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
-                    var alquileres = (from a in db.Alquiler
-                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                      join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
-                                      join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
-                                      join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
-                                      join di in db.Direccion on i.idDireccion equals di.idDireccion
-                                      where a.idArrendatario == id && ae.fechaBajaAlquilerEstado == null
-                                      select new 
-                                      {
-                                          idAlquiler = a.idAlquiler,
-                                          fechaAltaAlquiler = a.fechaAltaAlquiler,
-                                          fechaBajaAlquiler = a.fechaBajaAlquiler,
-                                          idArrendatario = a.idArrendatario,
-                                          idInmueble = a.idInmueble,
-                                          descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
-                                          idEstadoAlquiler = ea.idEstadoAlquiler,
-                                          idAlquilerEstado = ae.idAlquilerEstado,
-                                          nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
-                                          direccion  = di.nombreCalle + " " + di.numeroCalle
-                                      }).ToList();
-                    object json = new { data = alquileres };
-                    return json;
+                        //
+                        var id = db.Arrendatario.Where(x => x.idCuenta == idCuenta).FirstOrDefault().idArrendatario;
+                        var alquileres = (from a in db.Alquiler
+                                          join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                          join arr in db.Arrendatario on a.idArrendatario equals arr.idArrendatario
+                                          join ae in db.AlquilerEstado on a.idAlquiler equals ae.idAlquiler
+                                          join ea in db.EstadoAlquiler on ae.idEstadoAlquiler equals ea.idEstadoAlquiler
+                                          join di in db.Direccion on i.idDireccion equals di.idDireccion
+                                          where a.idArrendatario == id && ae.fechaBajaAlquilerEstado == null && ea.idEstadoAlquiler == 4
+                                          select new
+                                          {
+                                              idAlquiler = a.idAlquiler,
+                                              fechaAltaAlquiler = a.fechaAltaAlquiler,
+                                              fechaBajaAlquiler = a.fechaBajaAlquiler,
+                                              idArrendatario = a.idArrendatario,
+                                              idInmueble = a.idInmueble,
+                                              descripcionEstadoAlquiler = ea.nombreEstadoAlquiler,
+                                              idEstadoAlquiler = ea.idEstadoAlquiler,
+                                              idAlquilerEstado = ae.idAlquilerEstado,
+                                              nombreArrendatario = arr.nombreArrendatario + " " + arr.apellidoArrendatario,
+                                              direccion = di.nombreCalle + " " + di.numeroCalle
+                                          }).ToList();
+                        object json = new { data = alquileres };
+                        return json;
+                    }
                 }
+                
 
             }
         }
@@ -429,6 +518,59 @@ namespace ArrendaSysServicios
                     return 0;
                 }
                 
+            }
+
+        }
+
+        public int solicitarAlquiler(int idInmueble,int idArrendatario, DateTime fechaAltaAlquiler, DateTime fechaBajaAlquiler)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+
+                Alquiler alquiler = new Alquiler();
+                alquiler.idArrendatario=idArrendatario;
+                alquiler.idInmueble=idInmueble;
+                alquiler.fechaBajaAlquiler = fechaAltaAlquiler;
+                alquiler.fechaAltaAlquiler= fechaBajaAlquiler;
+                db.Alquiler.Add(alquiler);
+                db.SaveChanges();
+                AlquilerEstado alquilerEstado = new AlquilerEstado();
+                alquilerEstado.idAlquiler = alquiler.idAlquiler;
+                alquilerEstado.idEstadoAlquiler = 4;
+                alquilerEstado.fechaBajaAlquilerEstado = null;
+                alquilerEstado.fechaAltaAlquilerEstado = DateTime.Now;
+                db.AlquilerEstado.Add(alquilerEstado);
+                db.SaveChanges();
+                
+
+
+                Notificacion notif1 = new Notificacion();
+                var inmueble1 = db.Inmueble.Where(x => x.idInmueble == idInmueble).FirstOrDefault();
+                var direccion1 = db.Direccion.Where(x => x.idDireccion == inmueble1.idDireccion).FirstOrDefault();
+                var arrendatario1 = db.Arrendatario.Where(x => x.idArrendatario == idArrendatario).FirstOrDefault();
+                if (inmueble1.tipoArrendador == 3)
+                {
+                    var prop1 = db.Propietario.Where(x => x.idPropietario == inmueble1.idArrendador).FirstOrDefault();
+                    var cuenta1 = db.Cuenta.Where(x => x.idCuenta == prop1.idCuenta).FirstOrDefault();
+                    notif1.idCuenta = cuenta1.idCuenta;
+                }
+                else {
+                    var inmo1 = db.Inmobiliaria.Where(x => x.idInmobiliaria == inmueble1.idArrendador).FirstOrDefault();
+                    var cuenta1 = db.Cuenta.Where(x => x.idCuenta == inmo1.idCuenta).FirstOrDefault();
+                    notif1.idCuenta = cuenta1.idCuenta;
+                }
+
+                    notif1.descripcionNotificacion = arrendatario1.nombreArrendatario + ", " + arrendatario1.apellidoArrendatario + " ha solicitado el Alquiler de " + direccion1.nombreBarrio + ", calle " + direccion1.nombreCalle + ".";
+                    notif1.nombreNotificacion = "Solicitud de Alquiler";
+                    notif1.fechaNotificacion = DateTime.Now;
+                    
+                    notif1.leido = false;
+                    db.Notificacion.Add(notif1);
+                    db.SaveChanges();
+
+
+                return 1;
+
             }
 
         }

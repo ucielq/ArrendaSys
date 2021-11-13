@@ -28,10 +28,10 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.Route("Api/Alquiler/ListarAlquileres")]
         [System.Web.Http.ActionName("ListarAlquileres")]
         [System.Web.Http.HttpGet]
-        public object ListarAlquileres(int idCuenta,int tipoCuenta)
+        public object ListarAlquileres(int idCuenta,int tipoCuenta,int tipoAlquiler)
         {
             ServicioAlquiler servicio = new ServicioAlquiler();
-            var lista = servicio.ListarAlquileres(idCuenta,tipoCuenta);
+            var lista = servicio.ListarAlquileres(idCuenta,tipoCuenta,tipoAlquiler);
             return lista;
         }
 
@@ -102,6 +102,17 @@ namespace ArrendaSys.Controllers.Api
             var idArrendatario = servicio.verificarDNI(DniArrendatario);
 
             return idArrendatario;
+        }
+
+        [System.Web.Http.Route("Api/Alquiler/solicitarAlquiler")]
+        [System.Web.Http.ActionName("solicitarAlquiler")]
+        [System.Web.Http.HttpGet]
+        public int solicitarAlquiler(int idInmueble, int idArrendatario, string fechaAltaAlquiler, string fechaBajaAlquiler)
+        {
+            ServicioAlquiler servicio = new ServicioAlquiler();
+            var resp = servicio.solicitarAlquiler(idInmueble, idArrendatario, Convert.ToDateTime(fechaAltaAlquiler), Convert.ToDateTime(fechaBajaAlquiler));
+
+            return resp;
         }
 
     }

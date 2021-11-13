@@ -29,46 +29,127 @@
     }
 </style>
 
-    <div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
-             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Inmueble</b></h5>
-                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+<div class="modal fade" id="modalinmueble" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Inmueble</b></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                    </button>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container" id="bodyInmueble">
+                    @*Aca va todo el cuerpo*@
                 </div>
-                <div class="modal-body">
-                    <div class="container" id="bodyInmueble">
-                        @*Aca va todo el cuerpo*@
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
-                </div>
-             </div>
-        </div>
-    </div>
-    <div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
-            <div class="modal-content" >
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container" id="bodyArrendador">
-                        @*Aca va todo el cuerpo*@
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="modalarrendador" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Desde</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Hasta</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-1">
+                    <button class="btn" onclick="obtres()">Filtrar</button>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <div class="container" id="bodyArrendador">
+                    @*Aca va todo el cuerpo*@
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                <button class="btn btn-success" onclick="imprimirReporteArrendador()">Imprimir Reporte</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*aca estoy yo*@
+<div class="modal fade" id="modalsolicitaralquiler" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Solicitar Alquiler</b></h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container" id="bodyInmueble">
+                    @*Aca va todo el cuerpo*@
+                    <div class="col-md-12" id="formulario2" >
+                        @*<div class="col-md-5">
+                            <div id="alertfechaAltaAlquiler2"></div>
+                            <div id="alertfechaBajaAlquiler2"></div>
+                            <div id="alertidArrendatario2"></div>
+                        </div>*@
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Alta: </span>
+                                <br />
+                                <input type="date" class="form-control obligatoriaS" id="fechaAltaAlquiler" />
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Fecha Baja: </span>
+                                <br />
+                                <input type="date" class="form-control obligatoriaS" id="fechaBajaAlquiler" />
+                            </div>
+                            
+                        </div>
+                       
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-md-12">
+                    <br />
+                    <div>
+                        <button type="button" class="btn btn-outline-success btn-sm" onclick="agregarSolicitudAlquiler()" data-bs-dismiss="modal">Enviar Solicitud</button>
+                    </div>
+                </div>
+
+                @*<a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 <div class="content">
     <div class="container-fluid">
@@ -85,10 +166,10 @@
                         <div class="container" id="publicacion" style="margin-left: 10px">
                             @*Cuerpo de la pagina*@
                         </div>
-                        
-                        
+
+
                     </section>
-                    
+
 
                 </div>
             </div>
@@ -100,34 +181,43 @@
 <link href="~/Content/css/select2.min.css" rel="stylesheet" />
 @{
     var idCuenta = Session["idCuenta"];
-    
-    var tipoCuenta = Session["tipoCuenta"];
 
+    var tipoCuenta = Session["tipoCuenta"];
+    var idPropio = Session["id"];
 }
 
 <script>
     var idPropietario;
     var tipoPropietario;
     var idCuenta = "@idCuenta";
-    
-
+    var idPropio = parseInt("@idPropio");
+    var fechaDesde;
+    var fechaHasta;
+    var idAo;
+    var idInmueble = 0;
     var idPublicacion;
+    var tipoCuentaAo
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
     }
-
+    function imprimirReporteArrendador() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuentaAo + "&id=" + idAo + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, "Reporte de Reseñas");
+    }
     idPublicacion = GetUrlVars()["id"];
     var pag = 1;
 
     (function () {
         $("#publicacion").empty();
-        
+
         $.ajax({
             type: 'Get',
             url: '/Api/ABMPublicacion/VerPublicacion?idPublicacion=' + idPublicacion,
             success: function (publicacion) {
                 var item = "";
+                idInmueble = publicacion.inmueble.idInmueble;
                 var cont = 0;
                 item = item + "<div class='row' style='border-top-width:50px; padding-top:50px; padding-bottom:0px;'>";
                     cont++;
@@ -181,6 +271,8 @@
                 item = item + "</div>";
 
                 if (publicacion.inmueble.tipoArrendador == 3) {
+                    tipoCuentaAo = 3;
+                    idAo = publicacion.inmueble.idArrendador;
                     tipoPropietario = 3;
                     idPropietario = publicacion.propietario.idPropietario;
                     item = item + "<div class='col-md-2' style='margin-left:-1'>";
@@ -191,6 +283,8 @@
 
                 } else {
                     if (publicacion.inmueble.tipoArrendador == 4) {
+                        tipoCuentaAo = 4;
+                        idAo = publicacion.inmueble.idArrendador;
                         tipoPropietario = 4;
                         idPropietario = publicacion.inmobiliaria.idInmobiliaria;
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
@@ -200,42 +294,78 @@
                         item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + publicacion.inmobiliaria.idInmobiliaria +"," + 4+ ")'>Ver Reseñas Arrendador</button>";
                     }
                 }
-                
-                
-                
+
+
+                item = item + "<div id='solicitud'></div>";
                 item = item + "</div>";
 
                 item = item + "</div>";
-                
+
                 item = item + "<button class='btn btn-outline-secondary btn-sm' style:'margin-top: -45; margin-left:1100px;' onclick='Volver()'>Volver</button>";
 
 
 
                     item = item + "</div>";
 
-                    $("#publicacion").append(item);
+                $("#publicacion").append(item);
+                verSolicitud(publicacion.inmueble.idInmueble);
             }
         });
     })()
 
+    function verSolicitud(idInmueble) {
+        //$("#solicitud").empty();
+        //$.ajax({
+        //    url: "/Api/ABMPublicacion/verSolicitud?idInmueble=" + idInmueble + "&idArrendatario=" + idPropio,
+        //    type: "Get",
+        //    success: function (response) {
+        //        var i = "";
+        //        i = i + "";
 
+
+        //        $("#solicitud").append();
+        //    }
+        //})
+        $("#solicitud").empty();
+        var i = "";
+        i = i + "<button class='btn' onclick='solicitarAlquiler("+idInmueble+")'>Solicitar Alquiler</button>";
+        $("#solicitud").append(i);
+    }
+    function solicitarAlquiler() {
+
+        $('#modalsolicitaralquiler').modal('show');
+
+        
+    }
+    function agregarSolicitudAlquiler() {
+        $.ajax({
+            url: "/Api/Alquiler/solicitarAlquiler?idInmueble=" + idInmueble + "&idArrendatario=" + idPropio + "&fechaAltaAlquiler=" + $("#fechaAltaAlquiler").val() + "&fechaBajaAlquiler="+$("#fechaBajaAlquiler").val(),
+            type: "Get",
+            success: function (response) {
+                $("#solicitud").empty();
+                alert("Alquiler solicitado correctamente");
+            }
+        })
+
+
+    }
 
 
     function Volver() {
         location.href ='javascript: history.go(-1)';
     }
-   
-    
+
+
     function completarReseniasInmueble(idInmueble) {
         $("#modalinmueble").modal('show');
         $.ajax({
             type: 'Get',
             url: '/Api/Resenia/obtenerReseniasInmueble?idInmueble=' + idInmueble + "&pag=" + pag,
-            success: function (result) {               
+            success: function (result) {
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
-                
+
                 result.lista.forEach(function (data, index) {
                     item = item + "<div class='row'>";
                     item = item + "<div class='col-md-2'>";
@@ -258,24 +388,74 @@
             }
         });
     }
-    function ObtenerReseniasArrendatario(id, tipo) {              
+    function ObtenerReseniasArrendatario(id, tipo) {
         $("#modalarrendador").modal('show');
+        var Hasta = new Date();
+        var Desde = new Date(Hasta);
+        var dias = 15;  //Dias para atras del dia de hoy para que salgan en Novedades
+        Desde.setDate(Desde.getDate() - dias);
+        var fechaDesdeInput = FechaformatoInput(Desde);
+        var fechaHastaInput = FechaformatoInput(Hasta);
+
+        //las cargo en las variables globales
+        fechaDesde = fechaHoyMostrar(Desde);
+        fechaHasta = fechaHoyMostrar(Hasta);
+        //las cargo en el input
+        $('#fechaDesdeFiltro').val(fechaDesdeInput);
+        $('#fechaHastaFiltro').val(fechaHastaInput);
+        obtres();
+        
+    }
+
+
+    function paginas() {
+        var html = "<nav aria-label='...'>";
+        html = html + "<ul class='pagination'>";
+        var cantPag = 1;
+        var resto = cantidad % 6;
+        if (resto > 0) {
+            cantPag = cantidad / 6 + 1;
+        } else {
+            cantPag = cantidad / 6;
+        }
+
+        for (var i = 1; i <= cantPag; i++) {
+            if (i == pag) {
+                html = html + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            } else {
+                html = html + "<li class='page-item'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            }
+        }
+        html = html + "</ul>";
+        html = html + "</nav>";
+        $("#bodyArrendador").append(html);
+    }
+    function cambiarPag(num) {
+        pag = num;
+
+        ObtenerReseniasArrendatario(idPropietario, tipoPropietario);
+    }
+    function obtres() {
         $.ajax({
             type: 'Get',
-            url: '/Api/Resenia/obtenerReseniasV2?id='+ id +"&tipo="+ tipo + "&pag=" + pag,
+            url: '/Api/Resenia/obtenerReseniasV2?id=' + idAo + "&tipo=" + tipoCuentaAo + "&pag=" + pag + "&fechaDesde=" + $('#fechaDesdeFiltro').val() + "&fechaHasta=" + $('#fechaHastaFiltro').val(),
             success: function (result) {
                 cantidad = result.cantidad;
                 $("#bodyArrendador").empty();
                 var item = "";
                 var ruta1 = result.lista[0].urlimg.split('\\')[result.lista[0].urlimg.split('\\').length - 1];
                 item = item + "<div class='row'>";
-                item = item + "<div class='col-md-6'>";
                 if (result.lista.length > 0) {
-                    item = item + "<span style='margin-left:390px;font-size:25'>" + result.lista[0].nombreArrendador + "</span>";
+                    item = item + "<div class='col-md-3'>";
+                    item = item + "<p></p><img src='..\\TempFolder\\" + ruta1 + "' style='height:150px; width:170px; border-radius:80px;></img> ";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-6'>";
+                    item = item + "<p style='font-size:25'>" + result.lista[0].nombreArrendador + "</p  >";
+                    item = item + "</div>";
+
                 }
-                item = item + "<p><h>Datos del Arrendador:</h4></p><img src='..\\TempFolder\\" + ruta1 + "' style='height:100px; width:120px;'></img> ";
                 item = item + "</div>";
-                item = item + "</div>";
+                item = item + "<hr>"
                 result.lista.forEach(function (data, index) {
                     item = item + "<span>" + " " + "</span>";
                     item = item + "<div class='row'>";
@@ -299,7 +479,7 @@
             }
         });
     }
-    
+
 
     function paginas() {
         var html = "<nav aria-label='...'>";
@@ -355,7 +535,7 @@
         pag = num;
         completarReseniasInmueble();
     }
-    
+
 
 
 </script>
