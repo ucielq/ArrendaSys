@@ -163,6 +163,16 @@
                         <div class="card-body">
                             <div class="container">
                                 <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Filtro</label>
+                                        <select class="select2" id="tipoAlquiler" onchange="CrearTabla()">
+                                            <option value="1" selected>Mis Alquileres</option>
+                                            <option value="2">Solicitudes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
                                     <div class="col">
                                         <table id="alquilereslista" class="table table-bordered display nowrap" cellspacing="0" style="width:100%;">
                                             <thead>
@@ -223,7 +233,7 @@
         CrearTabla();
     })();
     function CrearTabla() {
-
+        $("#alquilereslista").dataTable().fnDestroy();
         var idiomaEspanol = {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -267,7 +277,7 @@
             },
             "responsive": true,
             "order": [[1, "asc"]],
-            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta,
+            "ajax": "/Api/Alquiler/ListarAlquileres?idCuenta=" + idCuenta + "&tipoCuenta=" + tipoCuenta+"&tipoAlquiler="+$("#tipoAlquiler").val(),
             "lengthMenu": [5, 10, 25, 50],
             "columns": [
                 { data: "idAlquiler", "className": "text-left", "visible": false },
@@ -290,9 +300,9 @@
                 { data: "direccion", "className": "text-left" },
                 { data: "idAlquilerEstado", "className": "text-left", "visible": false },
                 { data: "descripcionEstadoAlquiler", "className": "text-left" },
-               {data:"idEstadoAlquiler",
+                {data:"idEstadoAlquiler",
                     orderable: false,
-                   "render": function (data) {
+                    "render": function (data) {
                        if (tipoCuenta == 2) {
                            if (data == 3) {
                                var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='ConfirmarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='CancelarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
@@ -305,7 +315,13 @@
                            }
 
                        } else {
-                           var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                           if (data == 4) {
+                               var botones = "<button class='fas fa-check-circle' style='cursor:pointer' onclick='ConfirmarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-times-circle' style='cursor:pointer' onclick='CancelarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                           }
+                           else {
+                               var botones = "<button class='fa fa-edit' style='cursor:pointer' onclick='EditarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarAlquiler(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-eye' style='cursor:pointer' onclick='VerAlquiler(this)'></button>";
+                           }
+                           
                            return botones
                        }
 

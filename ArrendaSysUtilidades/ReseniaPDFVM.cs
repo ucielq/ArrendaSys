@@ -16,6 +16,7 @@ namespace ArrendaSysUtilidades
         public int? idResenia { get; set; }
         public int? tipoArrendador { get; set; }
         public int? idArrendador { get; set; }
+        public string nombre { get; set; }
     }
     public class ItemReseniaPDFVM
     {

@@ -43,7 +43,12 @@ namespace ArrendaSys.Controllers
             pdfDocument.AddEventHandler(PdfDocumentEvent.END_PAGE, new FooterEventHandler());
 
             Table table = new Table(1).UseAllAvailableWidth();
-            Cell cell = new Cell().Add(new Paragraph("Reporte de Reseñas").SetFontSize(14))
+            var nombre = "";
+            if (result.Count > 0)
+            {
+                nombre = result[0].nombre;
+            }
+            Cell cell = new Cell().Add(new Paragraph("Reporte de Reseñas "+nombre).SetFontSize(14))
                 .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER).
                 SetBorder(Border.NO_BORDER);
             table.AddCell(cell);

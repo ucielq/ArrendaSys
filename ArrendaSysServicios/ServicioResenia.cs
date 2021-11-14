@@ -281,68 +281,131 @@ namespace ArrendaSysServicios
             }
         }
 
-        public ViewModelReseniaAux obtenerReseniasAlquiler(int tipoCuenta, int id, int pag, int IdAlquiler)
+        public ViewModelReseniaAux obtenerReseniasAlquiler(int tipoCuenta, int id, int pag, int IdAlquiler, int tipoBusqueda,DateTime fechaDesde,DateTime fechaHasta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 List<ReseniaViewModel> listaFinal = new List<ReseniaViewModel>();
                 var tot = 0;
-                if (tipoCuenta == 3 || tipoCuenta == 4) //Soy Propietario o Inmobiliaria, quiero ver las reseñas que he hecho
+                if (tipoBusqueda == 1) //quiero ver las reseñas del arrendador que YO he hecho
                 {
-                    var lista = (from r in db.ReseñaArrendadorArrendatario
-                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
-                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble                                
-                                 where a.idAlquiler == IdAlquiler && i.idArrendador == id
-                                 select new ReseniaViewModel
-                                 {
-                                     descripcionResenia = r.descripcionReseñaAoAr,
-                                     fechaAltaReseña = r.fechaAltaReseñaAoAr,
-                                     puntuacionResenia = r.puntuacionReseñaAoAr,
-                                     idResenia = r.idReseñaAoAr,
-                                     idAlquiler = r.idAlquiler,
-                                     idInmueble = a.idInmueble
-                                 }).ToList();
-
-                    foreach (var re in lista)
+                    if (tipoCuenta == 3 || tipoCuenta == 4) //Soy Propietario o Inmobiliaria, quiero ver las reseñas que he hecho
                     {
-                        var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
-                        if (inmu.tipoArrendador == 3) //Propietario
-                        {
-                            var prop = db.Propietario.Where(x => x.idPropietario == inmu.idArrendador).FirstOrDefault();
-                            re.nombreAutor = prop.apellidoPropietario + " " + prop.nombrePropietario;
-                        }
-                        if (inmu.tipoArrendador == 4)
-                        {
-                            var inmo = db.Inmobiliaria.Where(x => x.idInmobiliaria == inmu.idArrendador).FirstOrDefault();
-                            re.nombreAutor = inmo.nombreInmobiliaria;
-                        }
-                    }
-                    tot = lista.Count;
-                    listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
-                    listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
-                }
-                if (tipoCuenta == 2) //Soy Arrendatario, quiero ver las reseñas que he hecho
-                {
-                    var lista = (from r in db.ReseñaArrendatarioArrendador
-                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
-                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                 join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
-                                 where a.idAlquiler == IdAlquiler && a.idArrendatario == id
-                                 select new ReseniaViewModel
-                                 {
-                                     descripcionResenia = r.descripcionReseñaArAo,
-                                     fechaAltaReseña = r.fechaAltaReseñaArAo,
-                                     puntuacionResenia = r.puntuacionReseñaArAo,
-                                     idResenia = r.idReseñaArAo,
-                                     idAlquiler = r.idAlquiler,
-                                     idInmueble = a.idInmueble,
-                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
-                                 }).ToList();
+                        var lista = (from r in db.ReseñaArrendadorArrendatario
+                                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     where a.idAlquiler == IdAlquiler && i.idArrendador == id 
+                                     select new ReseniaViewModel
+                                     {
+                                         descripcionResenia = r.descripcionReseñaAoAr,
+                                         fechaAltaReseña = r.fechaAltaReseñaAoAr,
+                                         puntuacionResenia = r.puntuacionReseñaAoAr,
+                                         idResenia = r.idReseñaAoAr,
+                                         idAlquiler = r.idAlquiler,
+                                         idInmueble = a.idInmueble
+                                     }).ToList();
 
-                    tot = lista.Count;
-                    listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
-                    listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                        foreach (var re in lista)
+                        {
+                            var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
+                            if (inmu.tipoArrendador == 3) //Propietario
+                            {
+                                var prop = db.Propietario.Where(x => x.idPropietario == inmu.idArrendador).FirstOrDefault();
+                                re.nombreAutor = prop.apellidoPropietario + " " + prop.nombrePropietario;
+                            }
+                            if (inmu.tipoArrendador == 4)
+                            {
+                                var inmo = db.Inmobiliaria.Where(x => x.idInmobiliaria == inmu.idArrendador).FirstOrDefault();
+                                re.nombreAutor = inmo.nombreInmobiliaria;
+                            }
+                        }
+                        tot = lista.Count;
+                        listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                        listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                    }
+                    if (tipoCuenta == 2) //Soy Arrendatario, quiero ver las reseñas que he hecho
+                    {
+                        var lista = (from r in db.ReseñaArrendatarioArrendador
+                                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                     where a.idAlquiler == IdAlquiler && a.idArrendatario == id 
+                                     select new ReseniaViewModel
+                                     {
+                                         descripcionResenia = r.descripcionReseñaArAo,
+                                         fechaAltaReseña = r.fechaAltaReseñaArAo,
+                                         puntuacionResenia = r.puntuacionReseñaArAo,
+                                         idResenia = r.idReseñaArAo,
+                                         idAlquiler = r.idAlquiler,
+                                         idInmueble = a.idInmueble,
+                                         nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                     }).ToList();
+
+                        tot = lista.Count;
+                        listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                        listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                    }
                 }
+                if (tipoBusqueda == 2)//quiero ver todas las reseñas del propietario
+                {
+                    if (tipoCuenta == 3 || tipoCuenta == 4) //Soy Propietario o Inmobiliaria
+                    {
+                        var lista = (from r in db.ReseñaArrendadorArrendatario
+                                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     where r.fechaAltaReseñaAoAr >= fechaDesde && r.fechaAltaReseñaAoAr <= fechaHasta
+                                     select new ReseniaViewModel
+                                     {
+                                         descripcionResenia = r.descripcionReseñaAoAr,
+                                         fechaAltaReseña = r.fechaAltaReseñaAoAr,
+                                         puntuacionResenia = r.puntuacionReseñaAoAr,
+                                         idResenia = r.idReseñaAoAr,
+                                         idAlquiler = r.idAlquiler,
+                                         idInmueble = a.idInmueble
+                                     }).ToList();
+
+                        foreach (var re in lista)
+                        {
+                            var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
+                            if (inmu.tipoArrendador == 3) //Propietario
+                            {
+                                var prop = db.Propietario.Where(x => x.idPropietario == inmu.idArrendador).FirstOrDefault();
+                                re.nombreAutor = prop.apellidoPropietario + " " + prop.nombrePropietario;
+                            }
+                            if (inmu.tipoArrendador == 4)
+                            {
+                                var inmo = db.Inmobiliaria.Where(x => x.idInmobiliaria == inmu.idArrendador).FirstOrDefault();
+                                re.nombreAutor = inmo.nombreInmobiliaria;
+                            }
+                        }
+                        tot = lista.Count;
+                        listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                        listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                    }
+                    if (tipoCuenta == 2) //Soy Arrendatario
+                    {
+                        var lista = (from r in db.ReseñaArrendatarioArrendador
+                                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                     where r.fechaAltaReseñaArAo >= fechaDesde && r.fechaAltaReseñaArAo <= fechaHasta
+                                     select new ReseniaViewModel
+                                     {
+                                         descripcionResenia = r.descripcionReseñaArAo,
+                                         fechaAltaReseña = r.fechaAltaReseñaArAo,
+                                         puntuacionResenia = r.puntuacionReseñaArAo,
+                                         idResenia = r.idReseñaArAo,
+                                         idAlquiler = r.idAlquiler,
+                                         idInmueble = a.idInmueble,
+                                         nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                     }).ToList();
+
+                        tot = lista.Count;
+                        listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                        listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                    }
+                }
+               
 
         
 
@@ -357,36 +420,61 @@ namespace ArrendaSysServicios
             }
         }
 
-        public ViewModelReseniaAux obtenerReseniasAlquilerInmueble(int tipoCuenta, int id, int pag, int IdAlquiler)
+        public ViewModelReseniaAux obtenerReseniasAlquilerInmueble(int tipoCuenta, int id, int pag, int IdAlquiler, int tipoBusqueda)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
                 List<ReseniaViewModel> listaFinal = new List<ReseniaViewModel>();
                 var tot = 0;
-                if (tipoCuenta == 2) //Soy Arrendatario, quiero ver las reseñas que he hecho
+                if (tipoBusqueda == 1)//quiero ver las reseñas que YO he hecho sobre el inmueble
                 {
-                    var lista = (from r in db.ReseñaArrendatarioInmueble
-                                 join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
-                                 join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                 join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
-                                 where a.idAlquiler == IdAlquiler && a.idArrendatario == id
-                                 select new ReseniaViewModel
-                                 {
-                                     descripcionResenia = r.descripcionReseñaAI,
-                                     fechaAltaReseña = r.fechaAltaReseñaAI,
-                                     puntuacionResenia = r.puntuacionReseñaAI,
-                                     idResenia = r.idReseñaAI,
-                                     idAlquiler = r.idAlquiler,
-                                     idInmueble = a.idInmueble,
-                                     nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
-                                 }).ToList();
+                    if (tipoCuenta == 2) //Soy Arrendatario, quiero ver las reseñas que he hecho
+                    {
+                        var lista = (from r in db.ReseñaArrendatarioInmueble
+                                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                     where a.idAlquiler == IdAlquiler && a.idArrendatario == id
+                                     select new ReseniaViewModel
+                                     {
+                                         descripcionResenia = r.descripcionReseñaAI,
+                                         fechaAltaReseña = r.fechaAltaReseñaAI,
+                                         puntuacionResenia = r.puntuacionReseñaAI,
+                                         idResenia = r.idReseñaAI,
+                                         idAlquiler = r.idAlquiler,
+                                         idInmueble = a.idInmueble,
+                                         nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                     }).ToList();
 
-                    tot = lista.Count;
-                    listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
-                    listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                        tot = lista.Count;
+                        listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                        listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                    }
                 }
+                if (tipoBusqueda == 2)//quiero ver todas las reseñas que hay sobre el inmueble
+                {
+                    if (tipoCuenta == 2) // soy arrendatario
+                    {
+                        var lista = (from r in db.ReseñaArrendatarioInmueble
+                                     join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
+                                     join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                     select new ReseniaViewModel
+                                     {
+                                         descripcionResenia = r.descripcionReseñaAI,
+                                         fechaAltaReseña = r.fechaAltaReseñaAI,
+                                         puntuacionResenia = r.puntuacionReseñaAI,
+                                         idResenia = r.idReseñaAI,
+                                         idAlquiler = r.idAlquiler,
+                                         idInmueble = a.idInmueble,
+                                         nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
+                                     }).ToList();
 
-
+                        tot = lista.Count;
+                        listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
+                        listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
+                    }
+                }
 
                 ViewModelReseniaAux response = new ViewModelReseniaAux
                 {
@@ -440,7 +528,7 @@ namespace ArrendaSysServicios
 
             }
         }
-        public ViewModelReseniaAux obtenerReseniasV2(int id, int tipo,int pag)
+        public ViewModelReseniaAux obtenerReseniasV2(int id, int tipo,int pag,DateTime fechaDesde,DateTime fechaHasta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -454,7 +542,7 @@ namespace ArrendaSysServicios
                                  join prop in db.Propietario on i.idArrendador equals prop.idPropietario
                                  join cuen in db.Cuenta on prop.idCuenta equals cuen.idCuenta
                                  join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario                                 
-                                 where i.tipoArrendador == 3 && i.idArrendador == id
+                                 where i.tipoArrendador == 3 && i.idArrendador == id && r.fechaAltaReseñaArAo>=fechaDesde && r.fechaAltaReseñaArAo<=fechaHasta
                                  select new ReseniaViewModel
                                  {
                                      descripcionResenia = r.descripcionReseñaArAo,
@@ -479,7 +567,7 @@ namespace ArrendaSysServicios
                                  join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                  join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                  join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
-                                 where i.tipoArrendador == 4 && i.idArrendador == id
+                                 where i.tipoArrendador == 4 && i.idArrendador == id && r.fechaAltaReseñaArAo >= fechaDesde && r.fechaAltaReseñaArAo <= fechaHasta
                                  select new ReseniaViewModel
                                  {
                                      descripcionResenia = r.descripcionReseñaArAo,
