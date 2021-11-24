@@ -147,6 +147,37 @@ namespace ArrendaSysServicios
                 return listaMenu;
             }
         }
+        public RolViewModel obtenerRol(int idRol)
+        {
+            using (ArrendasysEntities  db = new ArrendasysEntities())
+            {
+                RolViewModel rol;
+                rol = (from r in db.Rol
+                       where r.idRol == idRol
+                       select new RolViewModel
+                       {
+                           idRol = r.idRol,
+                           tipoRol=r.tipoRol
+                       }).FirstOrDefault();
+                return rol;
+            }
+        }
+        public List<RolViewModel> obtenerRoles()
+        {
+            using (ArrendasysEntities  db = new ArrendasysEntities())
+            {
+                List<RolViewModel> roles;
+                roles = (from r in db.Rol
+                         where r.tipoRol!=1
+                       select new RolViewModel
+                       {
+                           idRol = r.idRol,
+                           tipoRol=r.tipoRol,
+                           nombreRol=r.nombreRol
+                       }).ToList();
+                return roles;
+            }
+        }
         public RolViewModel ConsultarRol(int idRol)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())

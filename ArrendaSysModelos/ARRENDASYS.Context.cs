@@ -48,7 +48,6 @@ namespace ArrendaSysModelos
         public virtual DbSet<ReseñaArchivo> ReseñaArchivo { get; set; }
         public virtual DbSet<ReseñaItemAI> ReseñaItemAI { get; set; }
         public virtual DbSet<URL> URL { get; set; }
-        public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<ReseñaItemAoAr> ReseñaItemAoAr { get; set; }
         public virtual DbSet<ReseñaItemArAo> ReseñaItemArAo { get; set; }
         public virtual DbSet<Inmobiliaria> Inmobiliaria { get; set; }
@@ -57,5 +56,6 @@ namespace ArrendaSysModelos
         public virtual DbSet<ReseñaArrendatarioInmueble> ReseñaArrendatarioInmueble { get; set; }
         public virtual DbSet<Cuenta> Cuenta { get; set; }
         public virtual DbSet<Publicacion> Publicacion { get; set; }
+        public virtual DbSet<Rol> Rol { get; set; }
     }
 }

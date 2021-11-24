@@ -72,9 +72,6 @@
                                         <label for="tipoCuenta"><b>Tipo de Cuenta</b></label>
                                         <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" onchange="cambioTipoCuenta()">
                                             <option value="-1">Seleccione una opción</option>
-                                            <option value="2">Arrendatario</option>
-                                            <option value="3">Propietario</option>
-                                            <option value="4">Inmobiliaria</option>
                                         </select>
                                     </div>
                                 </div>
@@ -302,6 +299,20 @@
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
     }
+    
+    llenarSelector();
+    function llenarSelector() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Rol/obtenerRoles',
+            success: function (lista) {
+                lista.forEach(function(val) {
+                    var item = "<option value=" + val.idRol + ">" + val.nombreRol + "</option>";
+                    $("#tipoCuenta").append(item);
+                });
+            }
+        })
+    }
     completarDatos();
 
     function eliminarCuenta() {
@@ -390,21 +401,28 @@
     }
 
     function cambioTipoCuenta() {
-        if ($("#tipoCuenta").val() == 2) {
-            $(".arrendatario").show();
-            $(".propietario").hide();
-            $(".inmobiliaria").hide();
-        }
-        if ($("#tipoCuenta").val() == 3) {
-            $(".propietario").show();
-            $(".arrendatario").hide();
-            $(".inmobiliaria").hide();
-        }
-        if ($("#tipoCuenta").val() == 4) {
-            $(".inmobiliaria").show();
-            $(".arrendatario").hide();
-            $(".propietario").hide();
-        }
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Rol/obtenerRol?idRol=' + $("#tipoCuenta").val(),
+            success: function (result) {
+                if (result.tipoRol == 2) {
+                    $(".arrendatario").show();
+                    $(".propietario").hide();
+                    $(".inmobiliaria").hide();
+                }
+                if (result.tipoRol == 3) {
+                    $(".propietario").show();
+                    $(".arrendatario").hide();
+                    $(".inmobiliaria").hide();
+                }
+                if (result.tipoRol == 4) {
+                    $(".inmobiliaria").show();
+                    $(".arrendatario").hide();
+                    $(".propietario").hide();
+                }
+            }
+        });
+        
     }
 
 
