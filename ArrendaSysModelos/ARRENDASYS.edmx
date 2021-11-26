@@ -331,6 +331,7 @@
           <Property Name="fechaAltaRol" Type="date" />
           <Property Name="fechaBajaRol" Type="date" />
           <Property Name="nombreRol" Type="varchar" MaxLength="100" />
+          <Property Name="tipoRol" Type="int" />
         </EntityType>
         <EntityType Name="URL">
           <Key>
@@ -644,7 +645,6 @@
           <EntitySet Name="ReseñaArchivo" EntityType="Self.ReseñaArchivo" />
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
           <EntitySet Name="URL" EntityType="Self.URL" />
-          <EntitySet Name="Rol" EntityType="ARRENDASYSEntities.Rol" />
           <EntitySet Name="ReseñaItemAoAr" EntityType="ARRENDASYSEntities.ReseñaItemAoAr" />
           <EntitySet Name="ReseñaItemArAo" EntityType="ARRENDASYSEntities.ReseñaItemArAo" />
           <EntitySet Name="Inmobiliaria" EntityType="ARRENDASYSEntities.Inmobiliaria" />
@@ -653,17 +653,8 @@
           <EntitySet Name="ReseñaArrendatarioInmueble" EntityType="ARRENDASYSEntities.ReseñaArrendatarioInmueble" />
           <EntitySet Name="Cuenta" EntityType="ARRENDASYSEntities.Cuenta" />
           <EntitySet Name="Publicacion" EntityType="ARRENDASYSEntities.Publicacion" />
+          <EntitySet Name="Rol" EntityType="ARRENDASYSEntities.Rol" />
         </EntityContainer>
-        <EntityType Name="Rol">
-          <Key>
-            <PropertyRef Name="idRol" />
-          </Key>
-          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="fechaAltaRol" Type="DateTime" Precision="0" />
-          <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
-          <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="ReseñaItemAoAr">
           <Key>
             <PropertyRef Name="idReseñaItemAoAr" />
@@ -756,6 +747,17 @@
           <Property Name="precioAlquiler" Type="Decimal" Precision="9" Scale="2" />
           <Property Name="tituloPublicacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="idInmueble" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcionRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaAltaRol" Type="DateTime" Precision="0" />
+          <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
+          <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tipoRol" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1023,17 +1025,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rol">
-            <EntityTypeMapping TypeName="ARRENDASYSEntities.Rol">
-              <MappingFragment StoreEntitySet="Rol">
-                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
-                <ScalarProperty Name="fechaBajaRol" ColumnName="fechaBajaRol" />
-                <ScalarProperty Name="fechaAltaRol" ColumnName="fechaAltaRol" />
-                <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
-                <ScalarProperty Name="idRol" ColumnName="idRol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReseñaItemAoAr">
             <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaItemAoAr">
               <MappingFragment StoreEntitySet="ReseñaItemAoAr">
@@ -1132,6 +1123,18 @@
                 <ScalarProperty Name="fechaAltaPublicacion" ColumnName="fechaAltaPublicacion" />
                 <ScalarProperty Name="descripcionPublicacion" ColumnName="descripcionPublicacion" />
                 <ScalarProperty Name="idPublicacion" ColumnName="idPublicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="tipoRol" ColumnName="tipoRol" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+                <ScalarProperty Name="fechaBajaRol" ColumnName="fechaBajaRol" />
+                <ScalarProperty Name="fechaAltaRol" ColumnName="fechaAltaRol" />
+                <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

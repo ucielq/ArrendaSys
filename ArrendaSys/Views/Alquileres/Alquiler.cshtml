@@ -5,6 +5,15 @@
     var id = Session["id"];
     var fotoUsuario = Session["foto"];
     var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
+    var titulo = "";
+    if (Convert.ToInt32(tipoCuenta) == 2)
+    {
+        titulo = "Reseñas del arrendador";
+    }
+    else
+    {
+        titulo = "Reseñas del arrendatario";
+    }
 }
 
 <head>
@@ -82,10 +91,26 @@
     <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Reseñas del Arrendador</b></h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>@titulo</b></h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Desde</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Hasta</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-1">
+                    <button class="btn" onclick="obtres()">Filtrar</button>
+                </div>
+                
             </div>
             <div class="modal-body">
                 <div class="container" id="bodyModalArrendador">
@@ -94,10 +119,11 @@
             </div>
             <div class="modal-footer">
                 <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                <button class="btn btn-success" onclick="imprimirReporteArrendador()">Imprimir Reporte</button>
             </div>
         </div>
     </div>
-</div> 
+</div>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -131,7 +157,9 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/Generales.js"></script>
 <script>
+    
     var tipoCuenta = parseInt(@tipoCuenta);
     var idCuenta = parseInt(@idCuenta);
     var id = parseInt(@id);
@@ -144,7 +172,17 @@
     var rutaParcial = "@rutaParcial";
     var nombreArr;
     var nombreArio;
-
+    var fechaDesde;
+    var fechaHasta;
+    var fechaDesdeI;
+    var fechaHastaIs;
+    var tipoCuentaAo;
+    var idAo;
+    function imprimirReporteArrendador() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuentaAo + "&id=" + idAo + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, "Reporte de Reseñas");
+    }
 
 
     (function () {
@@ -217,6 +255,8 @@
 
                     var ruta2 = result.arrendador.foto.split('\\')[result.arrendador.foto.split('\\').length - 1];
                     if (result.inmueble.tipoArrendador == 3) {
+                        tipoCuentaAo = 3;
+                        idAo = result.inmueble.idArrendador;
                         nombreArio = result.arrendador.nombrePropietario;
                         item = item + "<hr/>";
                         item = item + "<div class='row'>";
@@ -225,28 +265,36 @@
                         item = item + "<span style='color:black;'><h4>Nombre: " + result.arrendador.nombrePropietario + ' ' + result.arrendador.apellidoPropietario + "</h4></span>";
                         item = item + "<span style='color:black;'><h4>Documento: " + result.arrendador.numeroDocumentoPropietario + "</h4></span>";
                         item = item + "<span style='color:black;'><h4>Telefono: " + result.arrendador.telefonoPropietario + "</h4></span>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; margin-left:11px; ' onclick='completarResenias2()'>Ver Reseñas Arrendador</button>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; ' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Arrendador</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Arrendador</button>";
                         item = item + "</hr>";
                     } else {
+                        tipoCuentaAo = 4;
+                        idAo = result.inmueble.idArrendador;
                         nombreArio = result.arrendador.nombreInmobiliaria;
                         item = item + "<div class='row'>"
                         item = item + "<div class='row'>";
                         item = item + "<p><h3>Inmobiliaria</h3></p><img src='..\\TempFolder\\" + ruta2 + "' style='height:200px; width:220px; border-radius:100px;'></img></h3></p>";
                         item = item + "<span style='color:black;'><h4>Nombre: " + result.arrendador.nombreInmobiliaria + "</h4></span>";
                         item = item + "<span style='color:black;'><h4>Telefono: " + result.arrendador.telefonoInmobiliaria + "</h4></span>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; margin-left:11px;' onclick='completarResenias2()'>Ver Reseñas Inmobiliaria</button>";
+                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
                         item = item + "<div class='row' id='reseniasArAo'>";
                         item = item + "</div>";
                         item = item + "</div>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
-                        item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Inmobiliaria</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarReseniasInmueble2()'>Ver Reseñas Inmueble</button>";
+                        //item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Inmobiliaria</button>";
                         item = item + "</hr>";
                     }
                 }
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
+                    tipoCuentaAo = 2;
+                    idAo = result.idArrendatario;
                     nombreArr = result.arrendatario.nombreArrendatario;
                     var ruta3 = result.arrendatario.foto.split('\\')[result.arrendatario.foto.split('\\').length - 1];
                     item = item + "<hr/>";
@@ -257,36 +305,15 @@
                     item = item + "<span style='color:black;'><h4><b>Telefono: </b>" + result.arrendatario.nroTelefono + "</h4></span>";
                     item = item + "<div class='row' id='reseniasAoAr'>";
                     item = item + "</div>";
-                    item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px;' onclick='completarResenias2()'>Ver Reseñas Arrendatario</button>";
+                    item = item + "<button class='btn  btn-success' style = 'float:right; margin:5px; width:500px; margin-left:8px;' onclick='completarResenias2()'>Ver Reseñas Arrendatario</button>";
                 }
 
                 item = item + "</div>";
-                /*if (tipoCuenta == 2)
-                if (result.inmueble.tipoArrendador == 3) {
-                    tipoPropietario = 3;
-                    idPropietario = result.propietario.idPropietario;
-                    item = item + "<div class='col-md-2' style='margin-left:-1'>";
-                    item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
-                    item = item + "<p>" + result.propietario.nombrePropietario + " " + result.propietario.apellidoPropietario + "</p>";
-                    item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + result.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
-                    item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendador(" + result.propietario.idPropietario + "," + 3 + ")'>Ver Reseñas Arrendador</button>";
-
-                } else {
-                    if (result.inmueble.tipoArrendador == 4) {
-                        tipoPropietario = 4;
-                        idPropietario = result.inmobiliaria.idInmobiliaria;
-                        item = item + "<div class='col-md-2' style='margin-left:-1'>";
-                        item = item + "<h3><b>" + "Publicado por: " + "</b></h3>";
-                        item = item + "<p>" + Result.inmobiliaria.nombreInmobiliaria + "</p>";
-                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='completarReseniasInmueble(" + result.inmueble.idInmueble + ")'>Ver Reseñas Inmueble</button>";
-                        item = item + "<button class='btn  btn-success' style:'margin-top: -45; margin-left:1100px;' onclick='ObtenerReseniasArrendatario(" + result.inmobiliaria.idInmobiliaria + "," + 4 + ")'>Ver Reseñas Arrendador</button>";
-                    }
-                }*/
 
                 //Row reseñas del inmueble
                 if (tipoCuenta == 2) {
                     item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;' onclick = 'mostrarformularioArrendador()'><i class='fas fa-plus'></i> Realizar nueva reseña Propietario</button >"
-                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;'  onclick = 'mostrarformularioInmueble()'><i class='fas fa-plus'></i> Realizar nueva reseña Inmueble</button >"     
+                    item = item + "<button type = 'button' class='btn btn-info btn-sm' style = 'float:right; margin:5px; width:500px;'  onclick = 'mostrarformularioInmueble()'><i class='fas fa-plus'></i> Realizar nueva reseña Inmueble</button >"
                 }
 
                 if (tipoCuenta == 3 || tipoCuenta == 4) {
@@ -370,8 +397,6 @@
                 item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverArAo' onclick='volverArAo()' style='width:120px;'>Cancelar</button>"
                 $("#formularioArAo").append(item2)
-                    //< a href = "" class="btn btn-outline-secondary btn-sm" data - bs - dismiss="modal" > Cancelar</a >
-                    //    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
             }
         });
     }
@@ -626,60 +651,12 @@
             return false;
         }
     }
-    function cargarReseniasAoAr() {
-        $.ajax({
-            type: 'Get',
-            url: '/Api/Resenia/ListarReseniasAoAr',
 
-        });
-    }
-    function cargarReseniasArAo() {
-        $.ajax({
-            type: 'Get',
-            url: '/Api/Resenia/ListarReseniasArAo',
-            /*success: function (result) {
-                listaItemsAI = result;
-                result.forEach(function (data, index) {
-                    $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
-                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
-                    item1 = item1 + "</div>";
-                    $("#formularioAI").append(item1);
-                });
-                var item2 = "<div class='row'>";
-                item2 = item2 + "<label>Descripción Reseña</label></br>"
-                item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
-                item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
-                $("#formularioAI").append(item2)
-            }*/
-        });
-    }
-    function cargarReseniasAI() {
-        $.ajax({
-            type: 'Get',
-            url: '/Api/Resenia/ListarReseniasAI',
-            /*success: function (result) {
-                listaItemsAI = result;
-                result.forEach(function (data, index) {
-                    $("#formularioAI").append("<div class='col-md-3'>" + data.nombreItemReseña);
-                    var item1 = "<div class='rating'><input type ='radio' name ='rating" + data.idItemReseña + "' value ='5' id ='5" + data.idItemReseña + "'><label for='5" + data.idItemReseña + "'>☆</label><input type='radio' name='rating" + data.idItemReseña + "' value='4' id='4" + data.idItemReseña + "'><label for='4" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='3' id='3" + data.idItemReseña + "'><label for='3" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='2' id='2" + data.idItemReseña + "'><label for='2" + data.idItemReseña + "'>☆</label> <input type='radio' name='rating" + data.idItemReseña + "' value='1' id='1" + data.idItemReseña + "'><label for='1" + data.idItemReseña + "'>☆</label></div>"
-                    item1 = item1 + "</div>";
-                    $("#formularioAI").append(item1);
-                });
-                var item2 = "<div class='row'>";
-                item2 = item2 + "<label>Descripción Reseña</label></br>"
-                item2 = item2 + "<textarea class='form-control' id='descripcionAI' name='descripcionAI'></textarea>";
-                item2 = item2 + "</div>";
-                item2 = item2 + "<button type='button' class='btn btn-info pull-center' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>"
-                $("#formularioAI").append(item2)
-            }*/
-        });
-    }
     function completarResenias() {
         var tipoBusqueda = 1;
         $.ajax({
             type: 'Get',
-            url: '/Api/Resenia/obtenerReseniasAlquiler?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&IdAlquiler=" + idAlquiler + "&tipoBusqueda=" + tipoBusqueda,
+            url: '/Api/Resenia/obtenerReseniasAlquiler?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&IdAlquiler=" + idAlquiler + "&tipoBusqueda=" + tipoBusqueda+"&fechaDesde=12/12/2012&fechaHasta=12/12/2012",
             success: function (result) {
                 cantidad = result.cantidad;
                 $("#body").empty();
@@ -815,7 +792,6 @@
         });
     }
     function mostrarformularioInmueble() {
-
         $.ajax({
             type: 'Get',
             url: '/Api/Resenia/indicadorAlquilerActivo?idAlquiler=' + idAlquiler,
@@ -829,6 +805,7 @@
                 } else {
                     $("#mensajeError").show();
                 }
+
             }
         });
     }
@@ -854,10 +831,28 @@
 
     function completarResenias2() {
         $("#modalarrendador").modal('show');
+
+        var Hasta = new Date();
+        var Desde = new Date(Hasta);
+        var dias = 15;  //Dias para atras del dia de hoy para que salgan en Novedades
+        Desde.setDate(Desde.getDate() - dias);
+        var fechaDesdeInput = FechaformatoInput(Desde);
+        var fechaHastaInput = FechaformatoInput(Hasta);
+
+        //las cargo en las variables globales
+        fechaDesde = fechaHoyMostrar(Desde);
+        fechaHasta = fechaHoyMostrar(Hasta);
+        //las cargo en el input
+        $('#fechaDesdeFiltro').val(fechaDesdeInput);
+        $('#fechaHastaFiltro').val(fechaHastaInput);
+        obtres();
+       
+    }
+    function obtres() {
         var tipoBusqueda = 2;
         $.ajax({
             type: 'Get',
-            url: '/Api/Resenia/obtenerReseniasAlquiler?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&IdAlquiler=" + idAlquiler + "&tipoBusqueda=" + tipoBusqueda,
+            url: '/Api/Resenia/obtenerReseniasAlquiler?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&IdAlquiler=" + idAlquiler + "&tipoBusqueda=" + tipoBusqueda + "&fechaDesde=" + $('#fechaDesdeFiltro').val() + "&fechaHasta=" + $('#fechaHastaFiltro').val(),
             success: function (result) {
                 cantidad = result.cantidad;
                 $("#bodyModalArrendador").empty();

@@ -281,7 +281,7 @@ namespace ArrendaSysServicios
             }
         }
 
-        public ViewModelReseniaAux obtenerReseniasAlquiler(int tipoCuenta, int id, int pag, int IdAlquiler, int tipoBusqueda)
+        public ViewModelReseniaAux obtenerReseniasAlquiler(int tipoCuenta, int id, int pag, int IdAlquiler, int tipoBusqueda,DateTime fechaDesde,DateTime fechaHasta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -294,7 +294,7 @@ namespace ArrendaSysServicios
                         var lista = (from r in db.ReseñaArrendadorArrendatario
                                      join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
-                                     where a.idAlquiler == IdAlquiler && i.idArrendador == id
+                                     where a.idAlquiler == IdAlquiler && i.idArrendador == id 
                                      select new ReseniaViewModel
                                      {
                                          descripcionResenia = r.descripcionReseñaAoAr,
@@ -329,7 +329,7 @@ namespace ArrendaSysServicios
                                      join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                      join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
-                                     where a.idAlquiler == IdAlquiler && a.idArrendatario == id
+                                     where a.idAlquiler == IdAlquiler && a.idArrendatario == id 
                                      select new ReseniaViewModel
                                      {
                                          descripcionResenia = r.descripcionReseñaArAo,
@@ -353,6 +353,7 @@ namespace ArrendaSysServicios
                         var lista = (from r in db.ReseñaArrendadorArrendatario
                                      join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
+                                     where r.fechaAltaReseñaAoAr >= fechaDesde && r.fechaAltaReseñaAoAr <= fechaHasta
                                      select new ReseniaViewModel
                                      {
                                          descripcionResenia = r.descripcionReseñaAoAr,
@@ -387,6 +388,7 @@ namespace ArrendaSysServicios
                                      join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                      join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
+                                     where r.fechaAltaReseñaArAo >= fechaDesde && r.fechaAltaReseñaArAo <= fechaHasta
                                      select new ReseniaViewModel
                                      {
                                          descripcionResenia = r.descripcionReseñaArAo,
@@ -526,7 +528,7 @@ namespace ArrendaSysServicios
 
             }
         }
-        public ViewModelReseniaAux obtenerReseniasV2(int id, int tipo,int pag)
+        public ViewModelReseniaAux obtenerReseniasV2(int id, int tipo,int pag,DateTime fechaDesde,DateTime fechaHasta)
         {
             using (ArrendasysEntities db = new ArrendasysEntities())
             {
@@ -540,7 +542,7 @@ namespace ArrendaSysServicios
                                  join prop in db.Propietario on i.idArrendador equals prop.idPropietario
                                  join cuen in db.Cuenta on prop.idCuenta equals cuen.idCuenta
                                  join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario                                 
-                                 where i.tipoArrendador == 3 && i.idArrendador == id
+                                 where i.tipoArrendador == 3 && i.idArrendador == id && r.fechaAltaReseñaArAo>=fechaDesde && r.fechaAltaReseñaArAo<=fechaHasta
                                  select new ReseniaViewModel
                                  {
                                      descripcionResenia = r.descripcionReseñaArAo,
@@ -565,7 +567,7 @@ namespace ArrendaSysServicios
                                  join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                  join i in db.Inmueble on a.idInmueble equals i.idInmueble
                                  join ar in db.Arrendatario on a.idArrendatario equals ar.idArrendatario
-                                 where i.tipoArrendador == 4 && i.idArrendador == id
+                                 where i.tipoArrendador == 4 && i.idArrendador == id && r.fechaAltaReseñaArAo >= fechaDesde && r.fechaAltaReseñaArAo <= fechaHasta
                                  select new ReseniaViewModel
                                  {
                                      descripcionResenia = r.descripcionReseñaArAo,

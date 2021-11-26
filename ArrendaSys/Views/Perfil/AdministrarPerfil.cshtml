@@ -72,9 +72,6 @@
                                         <label for="tipoCuenta"><b>Tipo de Cuenta</b></label>
                                         <select class="select2" style="min-width:2000px" name="tipoCuenta" id="tipoCuenta" onchange="cambioTipoCuenta()">
                                             <option value="-1">Seleccione una opción</option>
-                                            <option value="2">Arrendatario</option>
-                                            <option value="3">Propietario</option>
-                                            <option value="4">Inmobiliaria</option>
                                         </select>
                                     </div>
                                 </div>
@@ -125,10 +122,10 @@
                                             </div>
                                         </div>
                                         @*<div class="col-md-2">
-                                            <label><b>Dirección (Calle y Número)</b></label>
-                                            <br />
-                                            <textarea class="form-control obligatoriaArr" id="direccionArr" name="nombre"></textarea>
-                                        </div>*@
+                    <label><b>Dirección (Calle y Número)</b></label>
+                    <br />
+                    <textarea class="form-control obligatoriaArr" id="direccionArr" name="nombre"></textarea>
+                </div>*@
 
                                     </div>
                                 </div>
@@ -179,10 +176,10 @@
                                             </div>
                                         </div>
                                         @*<div class="col-md-2">
-                                            <label><b>Dirección (Calle y Número)</b></label>
-                                            <br />
-                                            <textarea class="form-control obligatoriaProp" id="direccionProp" name="nombre"></textarea>
-                                        </div>*@
+                    <label><b>Dirección (Calle y Número)</b></label>
+                    <br />
+                    <textarea class="form-control obligatoriaProp" id="direccionProp" name="nombre"></textarea>
+                </div>*@
 
 
                                         <div class="col-md-2" style="padding-left: 150px;">
@@ -237,13 +234,55 @@
                                             </div>
                                         </div>
                                         @*<div class="col-md-2">
-                                            <label><b>Dirección (Calle y Número)</b></label>
-                                            <br />
-                                            <textarea class="form-control obligatoriaInmo" id="direccionInmo" name="nombre"></textarea>
-                                        </div>*@
+                    <label><b>Dirección (Calle y Número)</b></label>
+                    <br />
+                    <textarea class="form-control obligatoriaInmo" id="direccionInmo" name="nombre"></textarea>
+                </div>*@
                                     </div>
                                 </div>
+
+                                <button type="button" class="btn btn-info pull-center" onclick="cambiarContrasenia()">Cambiar Contraseña</button>
                                 <button type="button" class="btn btn-info pull-center" onclick="GuardarPerfil()">Guardar</button>
+
+                                <!-- CAMBIO DE CONTRASEÑA-->
+                                <div id="cambioContra" class="modal-content" style='display:none'>
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="input" id="divpass">
+                                            <label for="pass">Contraseña Actual</label>
+                                            <br />
+                                            <input type="password" name="passActual" id="passActual">
+                                            <span class="spin"></span>
+                                            <br />
+                                        </div>
+                                        <div id="xpassActual"><h6 style="color:darkred">La contraseña actual es incorrecta</h6></div>
+                                        <div class="input" id="divpass">
+                                            <label for="pass">Ingrese Contraseña Nueva</label>
+                                            <br />
+                                            <input type="password" name="passNueva" id="passNueva">
+                                            <span class="spin"></span>
+                                            <br />
+                                        </div>
+                                        <div id="xpassNueva"><h6 style="color:darkred">La contraseña no cumple los requisitos</h6></div>
+                                        <div class="input" id="divpass">
+                                            <label for="pass">Confirme Contraseña Nueva</label>
+                                            <br />
+                                            <input type="password" name="passConfirmada" id="passConfirmada">
+                                            <span class="spin"></span>
+                                            <br />
+                                        </div>
+                                        <div id="xpassConfirmada"><h6 style="color:darkred">Las contraseñas deben Coincidir</h6></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal" onclick="ocultarCambioContra()">Cancelar</a>
+                                        <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="validarContraseniaActual($('#passActual').val())">Confirmar Cambio</a>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -277,7 +316,49 @@
                 </div>
                 <div class="modal-footer">
                     <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</a>
-                    <a href=""  class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
+                    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="aceptarEliminacion()">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalCambiarContrasenia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Cambiar Contraseña</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input" id="divpass">
+                        <label for="pass">Contraseña Actual</label>
+                        <br />
+                        <input type="password" name="passActual" id="passActual">
+                        <span class="spin"></span>
+                        <br />
+                    </div>
+                    <div id="xpassActual"><h6>La contraseña actual es incorrecta</h6></div>
+                    <div class="input" id="divpass">
+                        <label for="pass">Ingrese Contraseña Nueva</label>
+                        <br />
+                        <input type="password" name="passNueva" id="passNueva">
+                        <span class="spin"></span>
+                        <br />
+                    </div>
+                    <div id="xpassNueva"><h6>La contraseña no cumple los requisitos</h6></div>
+                    <div class="input" id="divpass">
+                        <label for="pass">Confirme Contraseña Nueva</label>
+                        <br />
+                        <input type="password" name="passConfirmada" id="passConfirmada">
+                        <span class="spin"></span>
+                        <br />
+                    </div>
+                    <div id="xpassConfirmada"><h6>Las contraseñas deben Coincidir</h6></div>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancelar</a>
+                    <a href="" class="btn btn-outline-danger btn-sm" id="btnEliminar" onclick="validarContraseniaActual($('#passActual').val())">Cambiar Contraseña</a>
                 </div>
             </div>
         </div>
@@ -301,6 +382,20 @@
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
+    }
+    
+    llenarSelector();
+    function llenarSelector() {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Rol/obtenerRoles',
+            success: function (lista) {
+                lista.forEach(function(val) {
+                    var item = "<option value=" + val.idRol + ">" + val.nombreRol + "</option>";
+                    $("#tipoCuenta").append(item);
+                });
+            }
+        })
     }
     completarDatos();
 
@@ -390,21 +485,28 @@
     }
 
     function cambioTipoCuenta() {
-        if ($("#tipoCuenta").val() == 2) {
-            $(".arrendatario").show();
-            $(".propietario").hide();
-            $(".inmobiliaria").hide();
-        }
-        if ($("#tipoCuenta").val() == 3) {
-            $(".propietario").show();
-            $(".arrendatario").hide();
-            $(".inmobiliaria").hide();
-        }
-        if ($("#tipoCuenta").val() == 4) {
-            $(".inmobiliaria").show();
-            $(".arrendatario").hide();
-            $(".propietario").hide();
-        }
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Rol/obtenerRol?idRol=' + $("#tipoCuenta").val(),
+            success: function (result) {
+                if (result.tipoRol == 2) {
+                    $(".arrendatario").show();
+                    $(".propietario").hide();
+                    $(".inmobiliaria").hide();
+                }
+                if (result.tipoRol == 3) {
+                    $(".propietario").show();
+                    $(".arrendatario").hide();
+                    $(".inmobiliaria").hide();
+                }
+                if (result.tipoRol == 4) {
+                    $(".inmobiliaria").show();
+                    $(".arrendatario").hide();
+                    $(".propietario").hide();
+                }
+            }
+        });
+        
     }
 
 
@@ -537,6 +639,92 @@
         };
     }(jQuery));
 
+    function cambiarContrasenia() {
+        //$("#modalCambiarContrasenia").modal('show');
+        $("#cambioContra").show();
+        $("#xpassActual").hide();
+        $("#xpassNueva").hide();
+        $("#xpassConfirmada").hide();
+
+    }
+
+    function validarContraseña(pass) {
+        var caract = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/);
+        if (caract.test(pass)) {
+            $("#xpassNueva").hide();
+            return true;
+        }
+        else {
+            $("#xpassNueva").show();
+            return false;
+        }
+    }
+
+    $("#passConfirmada").keyup(function () {
+        var pass = $("#passNueva").val();
+        var pass1 = $("#passConfirmada").val();
+        if (pass != pass1) {
+            $("#xpassConfirmada").show();
+        } else {
+            $("#xpassConfirmada").hide();
+        }
+        validarContraseña(pass);
+    });
+
+    $("#passNueva").keyup(function () {
+        var pass = $("#passNueva").val();
+        validarContraseña(pass);
+    });
+
+    function validarContraseniaActual(passwordActual) {
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Cuenta/ValidarContraseniaActual?idCuenta=' + idCuenta + "&password=" + passwordActual,
+            success: function (result) {
+                console.log(result);
+                if (result == 1) {
+                    validarDatos();
+                    $("#modalCambiarContrasenia").modal('show');
+                }
+                if (result == 0) {
+                    alert("Contraseña Actual Incorrecta, intentelo con la contraseña correcta");
+                    $("#modalCambiarContrasenia").modal('show');
+                    $("#xpassActual").show();
+                }
+            }
+        });
+    }
+
+    function validarDatos() {
+        debugger;
+
+        if ($("#passNueva").val() == $("#passConfirmada").val()) {
+            if (validarContraseña($("#passNueva").val())) {
+                $.ajax({
+                    type: 'Get',
+                    url: '/Api/Cuenta/cambiarContrasenia?idCuenta=' + idCuenta + "&password=" + $("#passNueva").val(),
+                    success: function (result) {
+                        console.log(result);
+                        alert(result);
+                        if (result == 1) {
+                            alert("Contraseña actualizada correctamente");
+                            window.location.href = '/Perfil/AdministrarPerfil'
+                        } else {
+                            alert("Hubo un error al actualizar la contraseña, intente nuevamente");
+                            window.location.href = '/Perfil/AdministrarPerfil'
+                        }
+                    }
+                });
+            } else { alert("Debe ingresar una contraseña válida") }
+        } else {
+            alert("Las contraseñas deben coincidir")
+        }
+
+    }
+    function ocultarCambioContra() {
+        $("#cambioContra").hide();
+        window.location.href = '/Perfil/AdministrarPerfil'
+    }
     //$("#cuitInmo").inputFilter(function (value) {
     //    return /\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]/.test(value);
     //});

@@ -26,7 +26,7 @@ namespace ArrendaSys.Controllers.Api
                         Title = "Premium",
                         Quantity = 1,
                         CurrencyId = "ARS",
-                        UnitPrice = 1m,
+                        UnitPrice = 2000m,
                     },
                 },
                 BackUrls = new PreferenceBackUrlsRequest

@@ -221,7 +221,7 @@ namespace ArrendaSys.Controllers.Api
 
             columnChart.DataLabel.ShowValue=true;
             columnChart.SetSize(500, 500);
-            columnChart.SetPosition(0, 0);
+            columnChart.SetPosition(0,500);
             var pathInic = "~/TempFolder/";
             var nombreArchivo = "Excel" + Convert.ToDateTime(DateTime.Today).ToString("dd-MM-yyyy") + ".xlsx";
             var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath(pathInic), nombreArchivo);

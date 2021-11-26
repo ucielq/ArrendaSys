@@ -58,6 +58,22 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div class="row">
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Desde</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaDesdeFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-3">
+                    <h6 for="fechaDesdeInput">Fecha Hasta</h6>
+                    <br />
+                    <input type="date" class="form-control" id="fechaHastaFiltro" name="fechaDesdeInput" required>
+                </div>
+                <div class="col-1">
+                    <button class="btn" onclick="obtres()">Filtrar</button>
+                </div>
+
+            </div>
             <div class="modal-body">
                 <div class="container" id="bodyArrendador">
                     @*Aca va todo el cuerpo*@
@@ -65,6 +81,7 @@
             </div>
             <div class="modal-footer">
                 <a href="" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Aceptar</a>
+                <button class="btn btn-success" onclick="imprimirReporteArrendador()">Imprimir Reporte</button>
             </div>
         </div>
     </div>
@@ -174,13 +191,21 @@
     var tipoPropietario;
     var idCuenta = "@idCuenta";
     var idPropio = parseInt("@idPropio");
+    var fechaDesde;
+    var fechaHasta;
+    var idAo;
     var idInmueble = 0;
     var idPublicacion;
+    var tipoCuentaAo
     function GetUrlId() {
         var hash = window.location.href.slice(window.location.href.lastIndexOf('/') + 1);
         return hash;
     }
-
+    function imprimirReporteArrendador() {
+        fechaDesde = $("#fechaDesdeFiltro").val();
+        fechaHasta = $("#fechaHastaFiltro").val();
+        window.open("/Reportes/ReporteResenias?tipoCuenta=" + tipoCuentaAo + "&id=" + idAo + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, "Reporte de Reseñas");
+    }
     idPublicacion = GetUrlVars()["id"];
     var pag = 1;
 
@@ -246,6 +271,8 @@
                 item = item + "</div>";
 
                 if (publicacion.inmueble.tipoArrendador == 3) {
+                    tipoCuentaAo = 3;
+                    idAo = publicacion.inmueble.idArrendador;
                     tipoPropietario = 3;
                     idPropietario = publicacion.propietario.idPropietario;
                     item = item + "<div class='col-md-2' style='margin-left:-1'>";
@@ -256,6 +283,8 @@
 
                 } else {
                     if (publicacion.inmueble.tipoArrendador == 4) {
+                        tipoCuentaAo = 4;
+                        idAo = publicacion.inmueble.idArrendador;
                         tipoPropietario = 4;
                         idPropietario = publicacion.inmobiliaria.idInmobiliaria;
                         item = item + "<div class='col-md-2' style='margin-left:-1'>";
@@ -361,9 +390,55 @@
     }
     function ObtenerReseniasArrendatario(id, tipo) {
         $("#modalarrendador").modal('show');
+        var Hasta = new Date();
+        var Desde = new Date(Hasta);
+        var dias = 15;  //Dias para atras del dia de hoy para que salgan en Novedades
+        Desde.setDate(Desde.getDate() - dias);
+        var fechaDesdeInput = FechaformatoInput(Desde);
+        var fechaHastaInput = FechaformatoInput(Hasta);
+
+        //las cargo en las variables globales
+        fechaDesde = fechaHoyMostrar(Desde);
+        fechaHasta = fechaHoyMostrar(Hasta);
+        //las cargo en el input
+        $('#fechaDesdeFiltro').val(fechaDesdeInput);
+        $('#fechaHastaFiltro').val(fechaHastaInput);
+        obtres();
+        
+    }
+
+
+    function paginas() {
+        var html = "<nav aria-label='...'>";
+        html = html + "<ul class='pagination'>";
+        var cantPag = 1;
+        var resto = cantidad % 6;
+        if (resto > 0) {
+            cantPag = cantidad / 6 + 1;
+        } else {
+            cantPag = cantidad / 6;
+        }
+
+        for (var i = 1; i <= cantPag; i++) {
+            if (i == pag) {
+                html = html + "<li class='page-item active'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            } else {
+                html = html + "<li class='page-item'><button class='page-link' id='pag" + i + "' onclick=cambiarPag(" + i + ")>" + i + "</button></li>";
+            }
+        }
+        html = html + "</ul>";
+        html = html + "</nav>";
+        $("#bodyArrendador").append(html);
+    }
+    function cambiarPag(num) {
+        pag = num;
+
+        ObtenerReseniasArrendatario(idPropietario, tipoPropietario);
+    }
+    function obtres() {
         $.ajax({
             type: 'Get',
-            url: '/Api/Resenia/obtenerReseniasV2?id='+ id +"&tipo="+ tipo + "&pag=" + pag,
+            url: '/Api/Resenia/obtenerReseniasV2?id=' + idAo + "&tipo=" + tipoCuentaAo + "&pag=" + pag + "&fechaDesde=" + $('#fechaDesdeFiltro').val() + "&fechaHasta=" + $('#fechaHastaFiltro').val(),
             success: function (result) {
                 cantidad = result.cantidad;
                 $("#bodyArrendador").empty();
@@ -377,7 +452,7 @@
                     item = item + "<div class='col-md-6'>";
                     item = item + "<p style='font-size:25'>" + result.lista[0].nombreArrendador + "</p  >";
                     item = item + "</div>";
-                    
+
                 }
                 item = item + "</div>";
                 item = item + "<hr>"

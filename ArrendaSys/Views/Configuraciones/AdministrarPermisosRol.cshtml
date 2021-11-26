@@ -16,6 +16,17 @@
                                     <label class="bmd-label-floating">Nombre Rol</label>
                                     <input type="text" class="form-control ObtenerRol" id="nombreRol" maxlength="50">
                                 </div>
+                                <div class="col-md-2">
+                                    <label class="bmd-label-floating">Tipo Rol</label>
+                                    
+                                    <select class="selector" id="tipoRol" placeholder="Seleccione un tipo">
+                                        <option value="1">Administrador</option>
+                                        <option value="2">Arrendatario</option>
+                                        <option value="3">Propietario</option>
+                                        <option value="4">Inmobiliaria</option>
+                                    </select>
+                                    
+                                </div>
 
                             </div>
                             <div id="permisoMenu"></div>
@@ -258,6 +269,7 @@
     }
     function CrearOEditar() {
         if (idRol != undefined) {
+            //Editar
             $.ajax({
                 type: 'Get',
                 url: '/Api/Configuraciones/ConsultarRol?idRol=' + idRol,
@@ -267,19 +279,16 @@
 
                     lista = rol;
                     $('#nombreRol').val(rol.nombreRol);
-                    if (rol.esJefe) {
-                        $('#esJefe').prop('checked', true);
-                    }
-                    if (rol.esOperador) {
-                        $('#esOperador').prop('checked', true);
-                    }
 
+                    //Tipo rol
                     $.each(rol.menu, function (index, menu) {
                         //controlo que esten todos los datos completos
                         var idMenu = menu.idUrl;
                         var Tlectura = menu.lectura;
                         var Tedicion = menu.edicion;
                         var Teliminacion = menu.eliminacion;
+                        $("#tipoRol").val(rol.tipoRol);
+                        $("#tipoRol").change();
                         ObtenerMenus();
                         AgregarNuevoMenu(idMenu, Tlectura, Tedicion, Teliminacion);
                     })
@@ -287,7 +296,7 @@
                 }
             })
         }
-        else {
+        else { //Crear
             var id = -1
             ObtenerRol(id);
         }
