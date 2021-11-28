@@ -39,7 +39,7 @@
                                 <br />
                                 <span>Tipo de Rol: </span>
                                 <br />
-                                <select class="select"  name="tipoRol" id="tipoRol">
+                                <select class="select2"  name="tipoRol" id="tipoRol">
                                     <option value="1">Administrador</option>
                                     <option value="2">Arrendatario</option>
                                     <option value="3">Propietario</option>
@@ -128,7 +128,14 @@
     var table;
     (function () {
         CrearTabla();
+        iniciarSelect2();
     })();
+    function iniciarSelect2() {
+        $('.select2').select2({
+            allowClear: false,
+            width: '100%',
+        });
+    }
     function CrearTabla() {
 
         var idiomaEspanol = {
