@@ -418,6 +418,7 @@
             type: 'Get',
             url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + idCuenta,
             success: function (result) {
+                debugger;
                 $("#tipoCuenta").val(result.idRol);
                 $("#tipoCuenta").change();
                 completarDatosCuenta(result);

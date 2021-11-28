@@ -282,7 +282,7 @@ namespace ArrendaSysServicios
                     {
                         cuenta.premium="0";
                     }
-                    var rol = db.Rol.Where(x => x.idRol == cuenta.idRol).FirstOrDefault();
+                    var rol = db.Rol.Where(x => x.idRol == cuent.idRol).FirstOrDefault();
                     if (rol != null)
                     {
                         cuenta.idRol = rol.idRol;
