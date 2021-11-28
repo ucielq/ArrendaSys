@@ -136,5 +136,46 @@ namespace ArrendaSys.Controllers.Api
             CuentaViewModel cuenta = servicio.ObtenerDatosCuenta(idCuenta);
             return cuenta;
         }
+
+        [System.Web.Http.Route("Api/Cuenta/ValidarContraseniaActual")]
+        [System.Web.Http.ActionName("ValidarContraseniaActual")]
+        [System.Web.Http.HttpGet]
+        public int ValidarContraseniaActual(int idCuenta, string password)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var user = db.Cuenta.Where(x => x.idCuenta == idCuenta && x.fechaBajaCuenta == null).FirstOrDefault();
+                var ePass = Encrypt.GetSHA256(password);
+                var resultado = 0;
+                    if (user.contrasenaCuenta == ePass)
+                    {
+
+                        resultado = 1;
+
+                    }
+                return resultado;
+            }
+        }
+        [System.Web.Http.Route("Api/Cuenta/cambiarContrasenia")]
+        [System.Web.Http.ActionName("cambiarContrasenia")]
+        [System.Web.Http.HttpGet]
+        public int cambiarContrasenia(int idCuenta, string password)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                try
+                {
+                    var cuenta = db.Cuenta.Where(x => x.idCuenta == idCuenta).FirstOrDefault();
+                    var nuevaContrasenia = Encrypt.GetSHA256(password);
+                    cuenta.contrasenaCuenta = nuevaContrasenia;
+                    db.SaveChanges();
+                    return 1;
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }

@@ -189,6 +189,7 @@ namespace ArrendaSysServicios
                        {
                            idRol = r.idRol,
                            nombreRol = r.nombreRol,
+                           tipoRol = r.tipoRol
                        }).FirstOrDefault();
 
 
