@@ -418,6 +418,8 @@
             type: 'Get',
             url: '/Api/Cuenta/ObtenerDatosCuenta?idCuenta=' + idCuenta,
             success: function (result) {
+                $("#tipoCuenta").val(result.idRol);
+                $("#tipoCuenta").change();
                 completarDatosCuenta(result);
                 if (result.tipoCuenta == 2) {
                     completarDatosArrendatario(result);
@@ -437,13 +439,7 @@
     }
 
     function completarDatosArrendatario(cuentaVM) {
-        $("#tipoCuenta").empty();
-        var html = '<option value="-1">Seleccione una opción</option>';
-        html = html + '<option value="2" selected>Arrendatario</option>';
-        html = html + '<option value="3">Propietario</option>';
-        html = html + '<option value="4">Inmobiliaria</option>';
-        $("#tipoCuenta").append(html);
-        $("#tipoCuenta").change();
+
         $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombre").text(cuentaVM.arrendatario.nombreArrendatario);
         $("#apellido").text(cuentaVM.arrendatario.apellidoArrendatario);
@@ -453,13 +449,7 @@
         $("#direccionArr").text(cuentaVM.direccion);
     }
     function completarDatosPropietario(cuentaVM) {
-        $("#tipoCuenta").empty();
-        var html = '<option value="-1">Seleccione una opción</option>';
-        html = html + '<option value="2">Arrendatario</option>';
-        html = html + '<option value="3" selected>Propietario</option>';
-        html = html + '<option value="4">Inmobiliaria</option>';
-        $("#tipoCuenta").append(html);
-        $("#tipoCuenta").change();
+
         $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombrePropietario").text(cuentaVM.propietario.nombrePropietario);
         $("#apellidoPropietario").text(cuentaVM.propietario.apellidoPropietario);
@@ -469,13 +459,7 @@
         $("#direccionProp").text(cuentaVM.direccion);
     }
     function completarDatosInmobiliaria(cuentaVM) {
-        $("#tipoCuenta").empty();
-        var html = '<option value="-1">Seleccione una opción</option>';
-        html = html + '<option value="2">Arrendatario</option>';
-        html = html + '<option value="3">Propietario</option>';
-        html = html + '<option value="4" selected>Inmobiliaria</option>';
-        $("#tipoCuenta").append(html);
-        $("#tipoCuenta").change();
+
         $("#tipoCuenta").attr("disabled", "disabled");
         $("#nombreInmo").text(cuentaVM.inmobiliaria.nombreInmobiliaria);
         $("#cuitInmo").text(cuentaVM.inmobiliaria.cuitInmobiliaria);
@@ -511,8 +495,16 @@
 
 
     function GuardarPerfil() {
-
-        if ($("#tipoCuenta").val() == 2) {
+        var tipo = 0;
+        $.ajax({
+            type: 'Get',
+            url: '/Api/Cuenta/getTipo?idRol=' + $("#tipoCuenta").val(),
+            async:false,
+            success: function (result) {
+                tipo = result;
+            }
+        });
+        if (tipo == 2) {
             if (ValidarDatos("obligatoriaArr")) {
                 var arrendatario = new Object();
                 arrendatario.nombreArrendatario = $("#nombre").val();
@@ -522,6 +514,7 @@
                 arrendatario.nroTelefono = $("#telefono").val();
                 arrendatario.direccion = $("#direccionArr").val();
                 arrendatario.idCuenta = idCuenta;
+                arrendatario.idRol = $("#tipoCuenta").val();
                 $.ajax({
                     type: 'Post',
                     url: '/Api/Arrendatario/CrearArrendatario',
@@ -536,7 +529,7 @@
             }
         }
 
-        if ($("#tipoCuenta").val() == 3) {
+        if (tipo == 3) {
             if (ValidarDatos("obligatoriaProp")) {
                 var propietario = new Object();
                 propietario.nombrePropietario = $("#nombrePropietario").val();
@@ -546,6 +539,7 @@
                 propietario.telefonoPropietario = $("#telefonoProp").val();
                 propietario.direccion = $("#direccionProp").val();
                 propietario.idCuenta = idCuenta;
+                propietario.idRol = $("#tipoCuenta").val();
                 $.ajax({
                     type: 'Post',
                     url: '/Api/Propietario/CrearPropietario',
@@ -558,7 +552,7 @@
 
             }
         }
-        if ($("#tipoCuenta").val() == 4) {
+        if (tipo == 4) {
             if (ValidarDatos("obligatoriaInmo")) {
                 var inmobiliaria = new Object();
                 inmobiliaria.nombreInmobiliaria = $("#nombreInmo").val();
@@ -567,6 +561,7 @@
                 inmobiliaria.altaInscripcion = $("#AltaInscripcionInmo").val();
                 inmobiliaria.direccion = $("#direccionInmo").val();
                 inmobiliaria.idCuenta = idCuenta;
+                inmobiliaria.idRol = $("#tipoCuenta").val();
                 $.ajax({
                     type: 'Post',
                     url: '/Api/Inmobiliaria/CrearInmobiliaria',
@@ -683,7 +678,7 @@
             success: function (result) {
                 console.log(result);
                 if (result == 1) {
-                    validarDatos();
+                    validarDatos2();
                     $("#modalCambiarContrasenia").modal('show');
                 }
                 if (result == 0) {
@@ -695,8 +690,7 @@
         });
     }
 
-    function validarDatos() {
-        debugger;
+    function validarDatos2() {
 
         if ($("#passNueva").val() == $("#passConfirmada").val()) {
             if (validarContraseña($("#passNueva").val())) {

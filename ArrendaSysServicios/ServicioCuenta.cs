@@ -282,6 +282,12 @@ namespace ArrendaSysServicios
                     {
                         cuenta.premium="0";
                     }
+                    var rol = db.Rol.Where(x => x.idRol == cuenta.idRol).FirstOrDefault();
+                    if (rol != null)
+                    {
+                        cuenta.idRol = rol.idRol;
+                    }
+                    
                     cuenta.email = cuent.emailCuenta;
                     var arrendatario = db.Arrendatario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
                     var propietario = db.Propietario.Where(x => x.idCuenta == cuent.idCuenta).FirstOrDefault();
