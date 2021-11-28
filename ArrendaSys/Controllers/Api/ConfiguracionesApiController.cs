@@ -86,5 +86,36 @@ namespace ArrendaSys.Controllers.Api
 
             return rol;
         }
+        //Maury
+        [System.Web.Http.Route("Api/Configuraciones/AgregarRol")]
+        [System.Web.Http.ActionName("AgregarRol")]
+        [System.Web.Http.HttpPost]
+        public int AgregarRol(RolViewModel rol)
+        {
+            ServicioRol servicio = new ServicioRol();
+            var rol1 = servicio.AgregarRol(rol);
+            return rol1;
+        }
+        [System.Web.Http.Route("Api/Configuraciones/EliminarRol")]
+        [System.Web.Http.ActionName("EliminarRol")]
+        [System.Web.Http.HttpPost]
+        public int EliminarRol(RolViewModel rol)
+        {
+            ServicioRol servicio = new ServicioRol();
+            var rol1 = servicio.EliminarRol(rol);
+            return rol1;
+        }
+        [System.Web.Http.Route("Api/Configuraciones/EditarRol")]
+        [System.Web.Http.ActionName("EditarRol")]
+        [System.Web.Http.HttpPost]
+        public int EditarRol(RolViewModel rol)
+        {
+            ServicioRol servicio = new ServicioRol();
+            var rol1 = servicio.EditarRol(rol);
+            return rol1;
+        }
+
+
+
     }
 }

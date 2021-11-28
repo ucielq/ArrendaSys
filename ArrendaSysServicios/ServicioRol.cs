@@ -224,7 +224,11 @@ namespace ArrendaSysServicios
                                  {
                                      nombreRol = r.nombreRol,
                                      idRol = r.idRol,
-                                     activo=true
+                                     activo=true,
+                                     fechaBajaRol=r.fechaBajaRol,
+                                     tipoRol=r.tipoRol,
+                                     descripcionRol=r.descripcionRol
+
                                  }).ToList();
                     object json = new { data = lista };
                     return json;
@@ -237,7 +241,10 @@ namespace ArrendaSysServicios
                                  {
                                      nombreRol = r.nombreRol,
                                      idRol = r.idRol,
-                                     activo = false
+                                     activo = false,
+                                     fechaBajaRol = r.fechaBajaRol,
+                                     tipoRol = r.tipoRol,
+                                     descripcionRol = r.descripcionRol
 
                                  }).ToList();
                     object json = new { data = lista };
@@ -246,5 +253,49 @@ namespace ArrendaSysServicios
                 
             }
         }
+
+        //Maury
+        public int AgregarRol(RolViewModel rol)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+
+                Rol rol1 = new Rol();
+                rol1.nombreRol = rol.nombreRol;
+                rol1.tipoRol = rol.tipoRol;
+                rol1.descripcionRol = rol.descripcionRol;
+                rol1.fechaAltaRol = DateTime.Now;
+                db.Rol.Add(rol1);
+                db.SaveChanges();
+                return 1;
+            }
+        }
+
+
+        public int EliminarRol(RolViewModel rol)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var rol1 = db.Rol.Where(x => x.idRol == rol.idRol).FirstOrDefault();
+                rol1.fechaBajaRol= DateTime.Now;                
+                db.SaveChanges();
+                return 1;
+            }
+        }
+
+
+        public int EditarRol(RolViewModel rol)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var rol1 = db.Rol.Where(x => x.idRol == rol.idRol).FirstOrDefault();
+                rol1.nombreRol = rol.nombreRol;
+                rol1.tipoRol = rol.tipoRol;
+                rol1.descripcionRol = rol.descripcionRol;
+                db.SaveChanges();
+                return 1;
+            }
+        }
+
     }
 }

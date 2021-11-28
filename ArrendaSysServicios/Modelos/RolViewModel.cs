@@ -18,5 +18,11 @@ namespace ArrendaSysServicios.Modelos
         public bool activo { get; set; }
         public int? tipoRol { get; set; }
         public List<URLViewModel> menu { get; set; }
+        public string descripcionRol { get; set; }
+        public DateTime? fechaAltaRol { get; set; }
+        public DateTime? fechaBajaRol { get; set; }
+
+   
+
     }
 }
