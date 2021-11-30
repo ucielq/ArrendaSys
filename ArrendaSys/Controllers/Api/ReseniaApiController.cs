@@ -133,6 +133,70 @@ namespace ArrendaSys.Controllers.Api
             return indicador;
         }
 
+        [System.Web.Http.Route("Api/Resenia/GuardarArchivosArAo")]
+        [System.Web.Http.ActionName("GuardarArchivosArAo")]
+        [System.Web.Http.HttpPost]
+        public int GuardarArchivosArAo()
+        {
+            ArchivoApiController api = new ArchivoApiController();
+            ServicioResenia serv2 = new ServicioResenia();
+            var listaArchivos = api.Subir("Inmueble");
+            if (listaArchivos.Count > 0)
+            {
+                if (listaArchivos[0].error != 400)
+                {
+                    return serv2.GuardarArchivosArAo(listaArchivos);
+                }
+                else return 500;
+            }
+            else
+            {
+                return 500;
+            }
+        }
+        [System.Web.Http.Route("Api/Resenia/GuardarArchivosAoAr")]
+        [System.Web.Http.ActionName("GuardarArchivosAoAr")]
+        [System.Web.Http.HttpPost]
+        public int GuardarArchivosAoAr()
+        {
+            ArchivoApiController api = new ArchivoApiController();
+            ServicioResenia serv2 = new ServicioResenia();
+            var listaArchivos = api.Subir("Inmueble");
+            if (listaArchivos.Count > 0)
+            {
+                if (listaArchivos[0].error != 400)
+                {
+                    return serv2.GuardarArchivosAoAr(listaArchivos);
+                }
+                else return 500;
+            }
+            else
+            {
+                return 500;
+            }
+        }
+        [System.Web.Http.Route("Api/Resenia/GuardarArchivosAI")]
+        [System.Web.Http.ActionName("GuardarArchivosAI")]
+        [System.Web.Http.HttpPost]
+        public int GuardarArchivosAI()
+        {
+            ArchivoApiController api = new ArchivoApiController();
+            ServicioResenia serv2 = new ServicioResenia();
+            var listaArchivos = api.Subir("Inmueble");
+            if (listaArchivos.Count > 0)
+            {
+                if (listaArchivos[0].error != 400)
+                {
+                    return serv2.GuardarArchivosAI(listaArchivos);
+                }
+                else return 500;
+            }
+            else
+            {
+                return 500;
+            }
+        }
+
 
     }
 

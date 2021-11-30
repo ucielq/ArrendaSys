@@ -307,6 +307,17 @@ namespace ArrendaSysServicios
 
                         foreach (var re in lista)
                         {
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo==re.idResenia).ToList();
+                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            foreach(var vm in listaArchivo)
+                            {
+                                ArchivoVM archivoVM = new ArchivoVM
+                                {
+                                    url=vm.urlMultimediaReseñaArchivo
+                                };
+                                lista2.Add(archivoVM);
+                            }
+                            re.listaArchivo = lista2;
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
                             if (inmu.tipoArrendador == 3) //Propietario
                             {
@@ -325,6 +336,7 @@ namespace ArrendaSysServicios
                     }
                     if (tipoCuenta == 2) //Soy Arrendatario, quiero ver las reseñas que he hecho
                     {
+
                         var lista = (from r in db.ReseñaArrendatarioArrendador
                                      join a in db.Alquiler on r.idAlquiler equals a.idAlquiler
                                      join i in db.Inmueble on a.idInmueble equals i.idInmueble
@@ -340,7 +352,20 @@ namespace ArrendaSysServicios
                                          idInmueble = a.idInmueble,
                                          nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
                                      }).ToList();
-
+                        foreach(var re in lista)
+                        {
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).ToList();
+                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            foreach (var vm in listaArchivo)
+                            {
+                                ArchivoVM archivoVM = new ArchivoVM
+                                {
+                                    url = vm.urlMultimediaReseñaArchivo
+                                };
+                                lista2.Add(archivoVM);
+                            }
+                            re.listaArchivo = lista2;
+                        }
                         tot = lista.Count;
                         listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
                         listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
@@ -366,6 +391,17 @@ namespace ArrendaSysServicios
 
                         foreach (var re in lista)
                         {
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo == re.idResenia).ToList();
+                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            foreach (var vm in listaArchivo)
+                            {
+                                ArchivoVM archivoVM = new ArchivoVM
+                                {
+                                    url = vm.urlMultimediaReseñaArchivo
+                                };
+                                lista2.Add(archivoVM);
+                            }
+                            re.listaArchivo = lista2;
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
                             if (inmu.tipoArrendador == 3) //Propietario
                             {
@@ -399,7 +435,20 @@ namespace ArrendaSysServicios
                                          idInmueble = a.idInmueble,
                                          nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
                                      }).ToList();
-
+                        foreach(var re in lista)
+                        {
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).ToList();
+                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            foreach (var vm in listaArchivo)
+                            {
+                                ArchivoVM archivoVM = new ArchivoVM
+                                {
+                                    url = vm.urlMultimediaReseñaArchivo
+                                };
+                                lista2.Add(archivoVM);
+                            }
+                            re.listaArchivo = lista2;
+                        }
                         tot = lista.Count;
                         listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
                         listaFinal = listaFinal.Skip((pag - 1) * 6).Take(6).ToList();
@@ -607,7 +656,101 @@ namespace ArrendaSysServicios
             }
 
         }
+        public int GuardarArchivosArAo(List<ArchivoVM> lista)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                try
+                {
+                    var ultimaResenia = db.ReseñaArrendatarioArrendador.OrderByDescending(x => x.idReseñaArAo).FirstOrDefault();
 
-    } 
+                    foreach (var archivo in lista)
+                    {
+                        ReseñaArchivo archivoR = new ReseñaArchivo()
+                        {
+                            urlMultimediaReseñaArchivo = archivo.url,
+                            urlReseñaArchivo = ultimaResenia.idReseñaArAo,
+                            RA_esArAo=true,
+                            RA_esAI=false,
+                            RA_esAoAr=false
+                        };
+                        db.ReseñaArchivo.Add(archivoR);
+                        db.SaveChanges();
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return 400;
+                }
+                return 200;
+            }
+        }
+        public int GuardarArchivosAoAr(List<ArchivoVM> lista)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                try
+                {
+                    var ultimaResenia = db.ReseñaArrendadorArrendatario.OrderByDescending(x => x.idReseñaAoAr).FirstOrDefault();
+
+                    foreach (var archivo in lista)
+                    {
+                        ReseñaArchivo archivoR = new ReseñaArchivo()
+                        {
+                            urlMultimediaReseñaArchivo = archivo.url,
+                            urlReseñaArchivo = ultimaResenia.idReseñaAoAr,
+                            RA_esArAo = false,
+                            RA_esAI = false,
+                            RA_esAoAr = true
+                        };
+                        db.ReseñaArchivo.Add(archivoR);
+                        db.SaveChanges();
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return 400;
+                }
+                return 200;
+            }
+        }
+        public int GuardarArchivosAI(List<ArchivoVM> lista)
+        {
+            using (ArrendasysEntities db = new ArrendasysEntities())
+            {
+                try
+                {
+                    var ultimaResenia = db.ReseñaArrendatarioInmueble.OrderByDescending(x => x.idReseñaAI).FirstOrDefault();
+
+                    foreach (var archivo in lista)
+                    {
+                        ReseñaArchivo archivoR = new ReseñaArchivo()
+                        {
+                            urlMultimediaReseñaArchivo = archivo.url,
+                            urlReseñaArchivo = ultimaResenia.idReseñaAI,
+                            RA_esArAo = true,
+                            RA_esAI = false,
+                            RA_esAoAr = false
+                        };
+                        db.ReseñaArchivo.Add(archivoR);
+                        db.SaveChanges();
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    return 400;
+                }
+                return 200;
+            }
+        }
+
+
+    }
 }
 

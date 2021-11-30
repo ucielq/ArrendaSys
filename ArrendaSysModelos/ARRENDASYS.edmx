@@ -255,8 +255,8 @@
           <Property Name="RA_esAI" Type="bit" />
           <Property Name="RA_esAoAr" Type="bit" />
           <Property Name="RA_esArAo" Type="bit" />
-          <Property Name="urlMultimediaReseñaArchivo" Type="varchar" MaxLength="100" />
-          <Property Name="urlReseñaArchivo" Type="varchar" MaxLength="100" />
+          <Property Name="urlMultimediaReseñaArchivo" Type="varchar" MaxLength="500" />
+          <Property Name="urlReseñaArchivo" Type="int" />
           <Property Name="idTipoReseña" Type="int" />
         </EntityType>
         <EntityType Name="ReseñaArrendadorArrendatario">
@@ -587,18 +587,6 @@
           <Property Name="idEstadoPublicacion" Type="Int32" />
           <Property Name="idPublicacion" Type="Int32" />
         </EntityType>
-        <EntityType Name="ReseñaArchivo">
-          <Key>
-            <PropertyRef Name="idReseñaArchivo" />
-          </Key>
-          <Property Name="idReseñaArchivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RA_esAI" Type="Boolean" />
-          <Property Name="RA_esAoAr" Type="Boolean" />
-          <Property Name="RA_esArAo" Type="Boolean" />
-          <Property Name="urlMultimediaReseñaArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="urlReseñaArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="idTipoReseña" Type="Int32" />
-        </EntityType>
         <EntityType Name="ReseñaItemAI">
           <Key>
             <PropertyRef Name="idReseñaItemAI" />
@@ -642,7 +630,6 @@
           <EntitySet Name="Propietario" EntityType="Self.Propietario" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" />
           <EntitySet Name="PublicacionEstado" EntityType="Self.PublicacionEstado" />
-          <EntitySet Name="ReseñaArchivo" EntityType="Self.ReseñaArchivo" />
           <EntitySet Name="ReseñaItemAI" EntityType="Self.ReseñaItemAI" />
           <EntitySet Name="URL" EntityType="Self.URL" />
           <EntitySet Name="ReseñaItemAoAr" EntityType="ARRENDASYSEntities.ReseñaItemAoAr" />
@@ -654,6 +641,7 @@
           <EntitySet Name="Cuenta" EntityType="ARRENDASYSEntities.Cuenta" />
           <EntitySet Name="Publicacion" EntityType="ARRENDASYSEntities.Publicacion" />
           <EntitySet Name="Rol" EntityType="ARRENDASYSEntities.Rol" />
+          <EntitySet Name="ReseñaArchivo" EntityType="ARRENDASYSEntities.ReseñaArchivo" />
         </EntityContainer>
         <EntityType Name="ReseñaItemAoAr">
           <Key>
@@ -758,6 +746,18 @@
           <Property Name="fechaBajaRol" Type="DateTime" Precision="0" />
           <Property Name="nombreRol" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="tipoRol" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ReseñaArchivo">
+          <Key>
+            <PropertyRef Name="idReseñaArchivo" />
+          </Key>
+          <Property Name="idReseñaArchivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RA_esAI" Type="Boolean" />
+          <Property Name="RA_esAoAr" Type="Boolean" />
+          <Property Name="RA_esArAo" Type="Boolean" />
+          <Property Name="urlMultimediaReseñaArchivo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="urlReseñaArchivo" Type="Int32" />
+          <Property Name="idTipoReseña" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -988,19 +988,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ReseñaArchivo">
-            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArchivo">
-              <MappingFragment StoreEntitySet="ReseñaArchivo">
-                <ScalarProperty Name="idReseñaArchivo" ColumnName="idReseñaArchivo" />
-                <ScalarProperty Name="RA_esAI" ColumnName="RA_esAI" />
-                <ScalarProperty Name="RA_esAoAr" ColumnName="RA_esAoAr" />
-                <ScalarProperty Name="RA_esArAo" ColumnName="RA_esArAo" />
-                <ScalarProperty Name="urlMultimediaReseñaArchivo" ColumnName="urlMultimediaReseñaArchivo" />
-                <ScalarProperty Name="urlReseñaArchivo" ColumnName="urlReseñaArchivo" />
-                <ScalarProperty Name="idTipoReseña" ColumnName="idTipoReseña" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ReseñaItemAI">
             <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaItemAI">
               <MappingFragment StoreEntitySet="ReseñaItemAI">
@@ -1135,6 +1122,19 @@
                 <ScalarProperty Name="fechaAltaRol" ColumnName="fechaAltaRol" />
                 <ScalarProperty Name="descripcionRol" ColumnName="descripcionRol" />
                 <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReseñaArchivo">
+            <EntityTypeMapping TypeName="ARRENDASYSEntities.ReseñaArchivo">
+              <MappingFragment StoreEntitySet="ReseñaArchivo">
+                <ScalarProperty Name="idTipoReseña" ColumnName="idTipoReseña" />
+                <ScalarProperty Name="urlReseñaArchivo" ColumnName="urlReseñaArchivo" />
+                <ScalarProperty Name="urlMultimediaReseñaArchivo" ColumnName="urlMultimediaReseñaArchivo" />
+                <ScalarProperty Name="RA_esArAo" ColumnName="RA_esArAo" />
+                <ScalarProperty Name="RA_esAoAr" ColumnName="RA_esAoAr" />
+                <ScalarProperty Name="RA_esAI" ColumnName="RA_esAI" />
+                <ScalarProperty Name="idReseñaArchivo" ColumnName="idReseñaArchivo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

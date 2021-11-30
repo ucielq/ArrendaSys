@@ -19,7 +19,7 @@ namespace ArrendaSysModelos
         public Nullable<bool> RA_esAoAr { get; set; }
         public Nullable<bool> RA_esArAo { get; set; }
         public string urlMultimediaReseñaArchivo { get; set; }
-        public string urlReseñaArchivo { get; set; }
+        public Nullable<int> urlReseñaArchivo { get; set; }
         public Nullable<int> idTipoReseña { get; set; }
     }
 }
