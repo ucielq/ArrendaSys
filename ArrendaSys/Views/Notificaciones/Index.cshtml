@@ -23,6 +23,76 @@
                             <div class="titulo">Notificaciones</div>
                         </div>
                     </div>
+                    @*Modal*@
+
+                    <div class="modal fade" id="modalvernotificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" style="min-width:800px; max-width:1000px;" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel" style="color: #198754"><b>Solicitar Alquiler</b></h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="container" id="bodyInmueble">
+                                        @*Aca va todo el cuerpo*@
+                                        <div class="col-md-12" id="formulario2">
+
+                                            <div class="row" style="padding-top:6px">
+                                                <div class="col-md-2">
+                                                    <br />
+                                                    <span>Fecha: </span>
+                                                    <br />
+
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input input readonly type="text" class="form-control" id="fechaNotificacion" style="visibility:hidden" />
+                                                </div>
+
+                                            </div>
+                                            <div class="row" style="padding-top:6px">
+
+                                                <div class="col-md-2">
+
+                                                    <span>Nombre: </span>
+                                                    <br />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input input readonly type="text" class="form-control" id="nombreNotificacion" style="visibility:hidden" />
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:6px">
+
+                                                <div class="col-md-2">
+
+                                                    <span>Descripción: </span>
+                                                    <br />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input input readonly type="text" class="form-control" id="descripcionNotificacion" style="visibility:hidden" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    
+                                    <button type="button" class="btn btn-outline-success btn-sm" data-bs-dismiss="modal">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
                     <div class="card">
                         <div class="card-body">
                             <div class="container">
@@ -166,6 +236,14 @@
 
     } function VistoNotificacion(btn) {
         var id = table.row($(btn).parents('tr')).data();
+        var fechaAltaStr = (id.fechaNotificacion).toString().split('T')[0];
+        $("#fechaNotificacion").val(fechaAltaStr);
+        $("#nombreNotificacion").val(id.nombreNotificacion);
+        $("#descripcionNotificacion").val(id.descripcionNotificacion);
+
+
+        $('#modalvernotificacion').modal('show');
+        var id = table.row($(btn).parents('tr')).data();
         console.log(id.idAlquiler);
 
         $.ajax({
@@ -173,6 +251,7 @@
             url: '/Api/Notificaciones/VistoNotificacion?idNotificacion=' + id.idNotificacion,
             success: function (result) {
                 location.href = '/Notificaciones/Index';
+               
             }
         });
 

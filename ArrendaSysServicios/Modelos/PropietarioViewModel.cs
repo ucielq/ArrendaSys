@@ -19,5 +19,6 @@ namespace ArrendaSysServicios.Modelos
         public string telefonoPropietario { get; set; }
         public string foto { get; set; }
         public string direccion { get; set; }
+        public int idRol { get; set; }
     }
 }

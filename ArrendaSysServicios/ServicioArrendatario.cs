@@ -25,7 +25,7 @@ namespace ArrendaSysServicios
                 {
                     db.Propietario.Remove(prop);
                 }
-                cuenta.idRol = 2;
+                cuenta.idRol = arrendatario.idRol;
                 //cuenta.direccion = arrendatario.direccion;
                 var arrendatario2 = db.Arrendatario.Where(x => x.idCuenta == arrendatario.idCuenta).FirstOrDefault();
                 if (arrendatario2!=null)

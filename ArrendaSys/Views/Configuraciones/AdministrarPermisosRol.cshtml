@@ -279,7 +279,8 @@
 
                     lista = rol;
                     $('#nombreRol').val(rol.nombreRol);
-
+                    $("#tipoRol").val(rol.tipoRol);
+                    $("#tipoRol").change();
                     //Tipo rol
                     $.each(rol.menu, function (index, menu) {
                         //controlo que esten todos los datos completos
@@ -287,8 +288,7 @@
                         var Tlectura = menu.lectura;
                         var Tedicion = menu.edicion;
                         var Teliminacion = menu.eliminacion;
-                        $("#tipoRol").val(rol.tipoRol);
-                        $("#tipoRol").change();
+                        
                         ObtenerMenus();
                         AgregarNuevoMenu(idMenu, Tlectura, Tedicion, Teliminacion);
                     })

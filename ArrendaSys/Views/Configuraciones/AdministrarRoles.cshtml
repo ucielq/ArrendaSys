@@ -10,12 +10,98 @@
                 <div class="card">
                     <div class="card-header card-header-info">
                         <div class="float-left">
-                            <div class="titulo">Permisos</div>
+                            <div class="titulo">Roles</div>
                         </div>
                         <div class="float-right">
-                            <button class="fas fa-plus fa-2x" onclick="AgregarPermiso()"></button>
+                            <button class="fas fa-plus fa-2x" onclick="mostrarformulario()"></button>
                         </div>
                     </div>
+
+                    @*maury*@
+
+                    <div class="col-md-12" id="formulario" style="display:none">
+
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-2">
+                                <br />
+                                <span>Nombre del Rol: </span>
+                                <br />
+                                <input type="text" class="form-control obligatoria" name="nombreRol" id="nombreRol" placeholder="Ingrese el nombre del Rol" />
+                            </div>
+                            <div class="row" style="padding-top:6px">
+                                <div class="col-md-12">
+                                    <br />
+                                    <span>Descripción: </span>
+                                    <input type="text" class="form-control  rol" name="descripcion rol" id="descripcionRol" placeholder="Ingrese descripción del rol" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Tipo de Rol: </span>
+                                <br />
+                                <select class="select2"  name="tipoRol" id="tipoRol">
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Arrendatario</option>
+                                    <option value="3">Propietario</option>
+                                    <option value="4">Inmobiliaria</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="AgregarRol()">Agregar Rol</button>
+                                <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" id="formulario2" style="display:none">
+
+                        <div class="row" style="padding-top:6px">
+                            <div class="col-md-2">
+                                <br />
+                                <span>Nombre del Rol: </span>
+                                <br />
+                                <input type="text" class="form-control obligatoria" name="nombreRol" id="nombreRol2" placeholder="Ingrese el nombre del Rol" />
+                            </div>
+                            <div class="row" style="padding-top:6px">
+                                <div class="col-md-12">
+                                    <br />
+                                    <span>Descripción: </span>
+                                    <input type="text" class="form-control  rol" name="descripcion rol" id="descripcionRol2" placeholder="Ingrese descripción del rol" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <br />
+                                <span>Tipo de Rol: </span>
+                                <br />
+                                <select class="select" name="tipoRol2" id="tipoRol2">
+                                    <option value="1">Administrador del Sistema</option>
+                                    <option value="2">Arrendatario</option>
+                                    <option value="3">Propietario</option>
+                                    <option value="4">Inmobiliaria</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            <input input readonly type="text" class="form-control " id="idRol" style="visibility:hidden" />
+                        </div>
+
+                        <div class="col-md-12">
+                            <br />
+                            <div>
+                                <button type="button" class="btn btn-outline-success btn-sm" onclick="EditarRol()">Editar Rol</button>
+                                <a href="" class="btn btn-outline-danger btn-sm" id="btnvolver2">Cancelar</a>
+                            </div>
+                        </div>
+                    </div>
+                    @*maury*@
+
                     <div class="card-body">
                         <div class="container">
                             <div class="row">
@@ -31,7 +117,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,7 +128,14 @@
     var table;
     (function () {
         CrearTabla();
+        iniciarSelect2();
     })();
+    function iniciarSelect2() {
+        $('.select2').select2({
+            allowClear: false,
+            width: '100%',
+        });
+    }
     function CrearTabla() {
 
         var idiomaEspanol = {
@@ -95,16 +188,29 @@
                 { data: "nombreRol", "className": "text-left" },
                 {
                     orderable: false,
-                    data: "nombreRol",
+               /*     data: "nombreRol",*/
+                    data: "idRol",
                     "render": function (data) {
-                        if (data != "") {
-                            var botones = "<button class='fa fa-edit' onclick='EditarPermiso(this)'></button>";
+                       /* if (data != "") {*/
 
-                            return botones
-                        } else {
-                            var recuperar = "<button class='fa fa-edit' onclick='EditarPermiso(this)'></button>";
-                            return recuperar
-                        }
+                                if (data > 5) {
+                                    var botones = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>&nbsp&nbsp&nbsp<button class='fa fa-edit' style='cursor:pointer' onclick='EditarRol2(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarRol(this)'></button>";
+                                    return botones
+                                } else {
+                                    var botones = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>";
+                                    return botones
+                                }
+
+                            
+                        //} else {
+                        //    if (data2 > 5) {
+                        //        var recuperar = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>&nbsp&nbsp&nbsp<button class='fa fa-edit' style='cursor:pointer' onclick='EditarRol2(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarRol(this)'></button>";
+                        //        return recuperar
+                        //    } else {
+                        //        var recuperar = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>&nbsp&nbsp&nbsp<button class='fa fa-edit' style='cursor:pointer' onclick='EditarRol2(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarRol(this)'></button>";
+                        //        return recuperar
+                        //    }
+                        //}
                     },
                     "width": 35,
                 }
@@ -118,4 +224,76 @@
         console.log(id.idRol);
         window.location.href = '/Configuraciones/AdministrarPermisosRol?idRol=' + id.idRol;
     }
+
+/*    maury*/
+    function AgregarRol() {
+       var rol = new Object();
+        rol.nombreRol = $("#nombreRol").val();
+        rol.descripcionRol = $("#descripcionRol").val();
+        rol.tipoRol = $("#tipoRol").val();
+      /*  debugger;*/
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Configuraciones/AgregarRol',
+            data: rol,
+            success: function (result) {
+               location.href = "/Configuraciones/AdministrarRoles";
+            }
+        });
+    }
+
+    function EditarRol2(btn) {
+        $("#formulario").hide();
+        $("#formulario2").show();
+        var id = table.row($(btn).parents('tr')).data();
+        $("#idRol").val(id.idRol);
+        $("#nombreRol2").val(id.nombreRol);
+        $("#descripcionRol2").val(id.descripcionRol);
+        $("#tipoRol2").val(id.tipoRol);
+    }
+    function EditarRol() {
+        var rol = new Object();
+        rol.idRol = $("#idRol").val();
+        rol.nombreRol = $("#nombreRol2").val();
+        rol.descripcionRol = $("#descripcionRol2").val();
+        rol.tipoRol = $("#tipoRol2").val();
+        debugger;
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Configuraciones/EditarRol',
+            data: rol,
+            success: function (result) {
+                window.location.href = "/Configuraciones/AdministrarRoles";
+            }
+        });
+    }
+    function EliminarRol(btn) {
+        
+        var id = table.row($(btn).parents('tr')).data();
+        var rol1 = new Object();
+        rol1.idRol = id.idRol;
+        $.ajax({
+            type: 'Post',
+            url: '/Api/Configuraciones/EliminarRol',
+            data: rol1,
+            success: function (result) {
+                window.location.href = "/Configuraciones/AdministrarRoles";
+            }
+        });
+    }
+
+    $("#btnvolver").click(function () {
+        $("#formulario").hide();
+    });
+    $("#btnvolver2").click(function () {
+        $("#formulario2").hide();
+    });
+
+    function mostrarformulario() {
+        $("#formulario").show();
+        $("#formulario2").hide();
+
+    }
+
+
 </script>

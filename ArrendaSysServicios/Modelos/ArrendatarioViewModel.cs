@@ -19,6 +19,7 @@ namespace ArrendaSysServicios.Modelos
         public int idCuenta { get; set; }
         public int idArrendatario { get; set; }
         public string foto { get; set; }        
+        public int idRol { get; set; }
     }
 }
 

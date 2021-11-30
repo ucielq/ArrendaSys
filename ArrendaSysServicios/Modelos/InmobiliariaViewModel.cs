@@ -18,5 +18,6 @@ namespace ArrendaSysServicios.Modelos
         public int idInmobiliaria { get; set; }
         public string direccion { get; set; }
         public string foto { get; set; }
+        public int idRol { get; set; }
     }
 }

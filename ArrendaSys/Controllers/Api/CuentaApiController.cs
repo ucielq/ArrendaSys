@@ -30,6 +30,18 @@ namespace ArrendaSys.Controllers.Api
                 }
             }
         }
+        [System.Web.Http.Route("Api/Cuenta/getTipo")]
+        [System.Web.Http.ActionName("getTipo")]
+        [System.Web.Http.HttpGet]
+        public int getTipo(int idRol)
+        {
+            using (ArrendaSysModelos.ArrendasysEntities db = new ArrendaSysModelos.ArrendasysEntities())
+            {
+                var rol = db.Rol.Where(x => x.idRol == idRol).FirstOrDefault();
+                return rol == null ? 0 : (int)rol.tipoRol;
+            }
+        }   
+
         [System.Web.Http.Route("Api/Cuenta/eliminarCuenta")]
         [System.Web.Http.ActionName("eliminarCuenta")]
         [System.Web.Http.HttpPost]
