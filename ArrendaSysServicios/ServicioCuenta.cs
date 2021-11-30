@@ -286,6 +286,7 @@ namespace ArrendaSysServicios
                     if (rol != null)
                     {
                         cuenta.idRol = rol.idRol;
+                        cuenta.nombreRol = rol.nombreRol;
                     }
                     
                     cuenta.email = cuent.emailCuenta;

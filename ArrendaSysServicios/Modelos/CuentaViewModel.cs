@@ -23,5 +23,6 @@ namespace ArrendaSysServicios.Modelos
         public string premium { get; set; }
         public int? codigoConfirmacion { get; set; }
         public string direccion { get; set; }
+        public string nombreRol { get; set; }
     }
 }

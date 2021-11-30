@@ -30,6 +30,7 @@
     var id = Session["id"];
     var premium = Session["premium"].ToString();
     var fotoUsuario = Session["foto"];
+    var rol = Session["rol"];
     var rutaParcial = fotoUsuario.ToString().Split('\\')[fotoUsuario.ToString().Split('\\').Length - 1];
 }
 <head>
@@ -78,6 +79,7 @@
                     }
                     <span style="color: darkgreen; padding-left: 65px; padding-bottom: 10px; padding-right: 40px; background-color: #a7a9a8; padding-top: 10px; border-radius: 30px; width: 251px; overflow: hidden; text-overflow: ellipsis;font:bold "> @emailCuenta.ToString().Split('@')[0]</span>
                     &nbsp
+                    <span style="padding-left:65px;font-weight:bold">@rol</span>   
                 </div>
             </nav>
 
@@ -128,7 +130,7 @@
 
     var tipoCuenta = parseInt(@tipoCuenta);
     var id = parseInt(@id);
-
+    var rol = @rol;
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
