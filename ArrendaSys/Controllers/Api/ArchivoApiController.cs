@@ -30,7 +30,7 @@ namespace ArrendaSys.Controllers.Api
                 var path="";
                 if (idTipo == 1)
                 {
-                    var archivo = db.ReseñaArchivo.Where(x=>x.idReseñaArchivo==idResenia && x.RA_esAoAr== true).FirstOrDefault();
+                    var archivo = db.ReseñaArchivo.Where(x=>x.urlReseñaArchivo==idResenia && x.RA_esAoAr== true).FirstOrDefault();
                     if (archivo != null)
                     {
                         path = archivo.urlMultimediaReseñaArchivo;
@@ -38,7 +38,15 @@ namespace ArrendaSys.Controllers.Api
                 }
                 if (idTipo == 2)
                 {
-                    var archivo = db.ReseñaArchivo.Where(x => x.idReseñaArchivo == idResenia && x.RA_esArAo == true).FirstOrDefault();
+                    var archivo = db.ReseñaArchivo.Where(x => x.urlReseñaArchivo == idResenia && x.RA_esArAo == true).FirstOrDefault();
+                    if (archivo != null)
+                    {
+                        path = archivo.urlMultimediaReseñaArchivo;
+                    }
+                }
+                if (idTipo == 3)
+                {
+                    var archivo = db.ReseñaArchivo.Where(x => x.urlReseñaArchivo == idResenia && x.RA_esAI == true).FirstOrDefault();
                     if (archivo != null)
                     {
                         path = archivo.urlMultimediaReseñaArchivo;
@@ -50,7 +58,7 @@ namespace ArrendaSys.Controllers.Api
                 responseMsg.Content = new StreamContent(fileStream);
                 responseMsg.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 responseMsg.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-                responseMsg.Content.Headers.ContentDisposition.FileName = "Prueba";
+                responseMsg.Content.Headers.ContentDisposition.FileName = "Comprobante.pdf";
                 response = ResponseMessage(responseMsg);
                 return response;
             }

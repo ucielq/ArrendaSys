@@ -125,13 +125,13 @@
     </div>
 </div>
 <div hidden>
-    <input type="file" id="inputArchivosAoAr" value="cargarArchivosAoAr" onchange="MostrarNombreMultiplesArchivosAoAr()" multiple />
+    <input type="file" id="inputArchivosAoAr" value="cargarArchivosAoAr" onchange="MostrarNombreMultiplesArchivosAoAr()" />
 </div>
 <div hidden>
-    <input type="file" id="inputArchivosArAo" value="cargarArchivosAoAr" onchange="MostrarNombreMultiplesArchivosArAo()" multiple />
+    <input type="file" id="inputArchivosArAo" value="cargarArchivosAoAr" onchange="MostrarNombreMultiplesArchivosArAo()" />
 </div>
 <div hidden>
-    <input type="file" id="inputArchivosAI" value="cargarArchivosAI" onchange="MostrarNombreMultiplesArchivosAI()" multiple />
+    <input type="file" id="inputArchivosAI" value="cargarArchivosAI" onchange="MostrarNombreMultiplesArchivosAI()" />
 </div>
 <div class="content">
     <div class="container-fluid">
@@ -433,7 +433,7 @@
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAI' onclick='volverAI()' style='width:120px;;'>Cancelar</button>"
-                item2 = item2 + "<button class='btn btn-outline-primary btn-sm' id='btnAdjuntarAi' onclick='adjuntarAi()'  style='width:180px;'>Adjuntar Comprobante</button>";
+                item2 = item2 + "<button class='btn btn-outline-primary btn-sm' id='btnAdjuntarAi' onclick='adjuntarAI()'  style='width:180px;'>Adjuntar Comprobante</button>";
                 item2 = item2 + "<div class='col' id ='asdAI'><label id='NombreMultiplesArchivosAI'> Sin Archivos Seleccionados </label></div>"
                 $("#formularioAI").append(item2)
             }
@@ -700,10 +700,10 @@
                     if (data.listaArchivo!= null) {
                         item = item + "<div class='col-md-3' style='padding-left:0px;'>";
                         item = item + "<button class='btn btn-success' id='btnVerComprobantes' onclick='verComprobantes(" + data.idResenia+ ")'>Descargar comprobantes</button>";
-                        item = item + "<hr>";
+                        
                         item = item + "</div>";
                         item = item + "<div class='col-md-7' style='padding-left:0px;'>";
-                        item = item + "<hr>";
+                        
                         item = item + "</div>";
                         item = item + "</div>";
                     }
@@ -721,6 +721,9 @@
     }
     function verComprobantes(url) {
         window.location.href = '/Api/Archivo/DescargarPdf?idResenia=' + url + '&idTipo=' + tipoCuenta;
+    }
+    function verComprobantesInmueble(url) {
+        window.location.href = '/Api/Archivo/DescargarPdf?idResenia=' + url + '&idTipo=3';
     }
     function paginas() {
         var html = "<nav aria-label='...'>";
@@ -755,6 +758,7 @@
             type: 'Get',
             url: '/Api/Resenia/obtenerReseniasAlquilerInmueble?tipoCuenta=' + tipoCuenta + "&id=" + id + "&pag=" + pag + "&IdAlquiler=" + idAlquiler + "&tipoBusqueda=" + tipoBusqueda,
             success: function (result) {
+                debugger;
                 cantidad = result.cantidad;
                 $("#bodyInmueble").empty();
                 var item = "";
@@ -770,6 +774,14 @@
                     item = item + "</div>";
                     item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
                     item = item + "</div>";
+                    if (data.listaArchivo != null) {
+                        item = item + "<div class='col-md-3' style='padding-left:0px;'>";
+                        item = item + "<button class='btn btn-success' id='btnVerComprobantes' onclick='verComprobantesInmueble(" + data.idResenia + ")'>Descargar comprobantes</button>";                        
+                        item = item + "</div>";
+                        item = item + "<div class='col-md-7' style='padding-left:0px;'>";                       
+                        item = item + "</div>";
+                        item = item + "</div>";
+                    }
                     item = item + "<div class='col-md-10' style='padding-left:0px;'>";
                     item = item + "<hr>";
                     item = item + "</div>";
