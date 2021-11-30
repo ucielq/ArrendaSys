@@ -307,15 +307,11 @@ namespace ArrendaSysServicios
 
                         foreach (var re in lista)
                         {
-                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo==re.idResenia).ToList();
-                            List<string> lista2 = new List<string>();
-                            foreach(var vm in listaArchivo)
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo==re.idResenia).FirstOrDefault();
+                            if (listaArchivo != null)
                             {
-                                
-                                
-                                lista2.Add(vm.urlMultimediaReseñaArchivo);
+                                re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
                             }
-                            re.listaArchivo = lista2;
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
                             if (inmu.tipoArrendador == 3) //Propietario
                             {
@@ -352,14 +348,11 @@ namespace ArrendaSysServicios
                                      }).ToList();
                         foreach(var re in lista)
                         {
-                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).ToList();
-                            List<string> lista2 = new List<string>();
-                            foreach (var vm in listaArchivo)
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).FirstOrDefault();
+                            if (listaArchivo != null)
                             {
-                                
-                                lista2.Add(vm.urlMultimediaReseñaArchivo);
+                                re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
                             }
-                            re.listaArchivo = lista2;
                         }
                         tot = lista.Count;
                         listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
@@ -386,14 +379,12 @@ namespace ArrendaSysServicios
 
                         foreach (var re in lista)
                         {
-                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo == re.idResenia).ToList();
-                            List<string> lista2 = new List<string>();
-                            foreach (var vm in listaArchivo)
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo == re.idResenia).FirstOrDefault();
+                            if (listaArchivo != null)
                             {
-                                
-                                lista2.Add(vm.urlMultimediaReseñaArchivo);
+                                re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
                             }
-                            re.listaArchivo = lista2;
+                            
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
                             if (inmu.tipoArrendador == 3) //Propietario
                             {
@@ -429,14 +420,11 @@ namespace ArrendaSysServicios
                                      }).ToList();
                         foreach(var re in lista)
                         {
-                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).ToList();
-                            List<string> lista2 = new List<string>();
-                            foreach (var vm in listaArchivo)
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).FirstOrDefault();
+                            if (listaArchivo != null)
                             {
-                             
-                                lista2.Add(vm.urlMultimediaReseñaArchivo);
+                                re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
                             }
-                            re.listaArchivo = lista2;
                         }
                         tot = lista.Count;
                         listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();

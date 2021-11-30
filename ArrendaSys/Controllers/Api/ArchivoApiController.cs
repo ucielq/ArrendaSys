@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -16,6 +18,22 @@ namespace ArrendaSys.Controllers.Api
     public class ArchivoApiController : ApiController
     {
         private readonly Random _random = new Random();
+        [System.Web.Http.Route("Api/Archivo/DescargarPdf")]
+        [System.Web.Http.ActionName("DescargarPdf")]
+        [System.Web.Http.HttpGet]
+
+        public IHttpActionResult DescargarPdf(string path)
+        {
+            IHttpActionResult response;
+            HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.OK);
+            var fileStream = new FileStream(path, FileMode.Open);
+            responseMsg.Content = new StreamContent(fileStream);
+            responseMsg.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            responseMsg.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+            responseMsg.Content.Headers.ContentDisposition.FileName = "Prueba";
+            response = ResponseMessage(responseMsg);
+            return response;
+        }
 
         [System.Web.Http.Route("Api/Archivo/Subir")]
         [System.Web.Http.ActionName("Subir")]

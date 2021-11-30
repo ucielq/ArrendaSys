@@ -23,6 +23,6 @@ namespace ArrendaSysServicios.Modelos
         public string nombreArrendador { get; set; }
         public int? idCuenta { get; set; }
         public string urlimg { get; set; }
-        public List<string> listaArchivo { get; set; }
+        public string listaArchivo { get; set; }
     }
 }
