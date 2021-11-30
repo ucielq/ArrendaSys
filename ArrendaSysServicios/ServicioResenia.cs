@@ -311,6 +311,7 @@ namespace ArrendaSysServicios
                             if (listaArchivo != null)
                             {
                                 re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
+                                re.tipo = 1;
                             }
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
                             if (inmu.tipoArrendador == 3) //Propietario
@@ -352,6 +353,7 @@ namespace ArrendaSysServicios
                             if (listaArchivo != null)
                             {
                                 re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
+                                re.tipo = 2;
                             }
                         }
                         tot = lista.Count;
@@ -383,6 +385,7 @@ namespace ArrendaSysServicios
                             if (listaArchivo != null)
                             {
                                 re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
+                                re.tipo = 1;
                             }
                             
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
@@ -424,6 +427,7 @@ namespace ArrendaSysServicios
                             if (listaArchivo != null)
                             {
                                 re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
+                                re.tipo = 2;
                             }
                         }
                         tot = lista.Count;

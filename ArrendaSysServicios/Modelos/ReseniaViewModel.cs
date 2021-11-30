@@ -24,5 +24,6 @@ namespace ArrendaSysServicios.Modelos
         public int? idCuenta { get; set; }
         public string urlimg { get; set; }
         public string listaArchivo { get; set; }
+        public int tipo { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ArrendaSysServicios.Modelos;
+﻿using ArrendaSysModelos;
+using ArrendaSysServicios.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,17 +23,37 @@ namespace ArrendaSys.Controllers.Api
         [System.Web.Http.ActionName("DescargarPdf")]
         [System.Web.Http.HttpGet]
 
-        public IHttpActionResult DescargarPdf(string path)
+        public IHttpActionResult DescargarPdf(int idResenia,int idTipo)
         {
-            IHttpActionResult response;
-            HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.OK);
-            var fileStream = new FileStream(path, FileMode.Open);
-            responseMsg.Content = new StreamContent(fileStream);
-            responseMsg.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            responseMsg.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-            responseMsg.Content.Headers.ContentDisposition.FileName = "Prueba";
-            response = ResponseMessage(responseMsg);
-            return response;
+            using(ArrendasysEntities db = new ArrendasysEntities())
+            {
+                var path="";
+                if (idTipo == 1)
+                {
+                    var archivo = db.ReseñaArchivo.Where(x=>x.idReseñaArchivo==idResenia && x.RA_esAoAr== true).FirstOrDefault();
+                    if (archivo != null)
+                    {
+                        path = archivo.urlMultimediaReseñaArchivo;
+                    }
+                }
+                if (idTipo == 2)
+                {
+                    var archivo = db.ReseñaArchivo.Where(x => x.idReseñaArchivo == idResenia && x.RA_esArAo == true).FirstOrDefault();
+                    if (archivo != null)
+                    {
+                        path = archivo.urlMultimediaReseñaArchivo;
+                    }
+                }
+                IHttpActionResult response;
+                HttpResponseMessage responseMsg = new HttpResponseMessage(HttpStatusCode.OK);
+                var fileStream = new FileStream(path, FileMode.Open);
+                responseMsg.Content = new StreamContent(fileStream);
+                responseMsg.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                responseMsg.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+                responseMsg.Content.Headers.ContentDisposition.FileName = "Prueba";
+                response = ResponseMessage(responseMsg);
+                return response;
+            }
         }
 
         [System.Web.Http.Route("Api/Archivo/Subir")]
