@@ -22,24 +22,27 @@
                     <div class="col-md-12" id="formulario" style="display:none">
 
                         <div class="row" style="padding-top:6px">
+                            <div id="alertnombreRol"></div>     
+                            <div id="alertaItem"></div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Nombre del Rol: </span>
                                 <br />
-                                <input type="text" class="form-control obligatoria" name="nombreRol" id="nombreRol" placeholder="Ingrese el nombre del Rol" />
+                                <input type="text" class="form-control obligatoria" name="Nombre de Rol" id="nombreRol" placeholder="Ingrese el nombre del Rol" />
                             </div>
                             <div class="row" style="padding-top:6px">
                                 <div class="col-md-12">
                                     <br />
                                     <span>Descripción: </span>
-                                    <input type="text" class="form-control  rol" name="descripcion rol" id="descripcionRol" placeholder="Ingrese descripción del rol" />
+                                    <input type="text" class="form-control" name="descripcion rol" id="descripcionRol" placeholder="Ingrese descripción del rol" />
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Tipo de Rol: </span>
-                                <br />
-                                <select class="select2"  name="tipoRol" id="tipoRol">
+                                <br />                               
+                                <select class="select2" name="tipo" id="tipoRol">
+                                    <option value="-1">Seleccione una opción</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Arrendatario</option>
                                     <option value="3">Propietario</option>
@@ -60,11 +63,13 @@
                     <div class="col-md-12" id="formulario2" style="display:none">
 
                         <div class="row" style="padding-top:6px">
+                            <div id="alertnombreRol2"></div>
+                            <div id="alertaItem2"></div>
                             <div class="col-md-2">
                                 <br />
                                 <span>Nombre del Rol: </span>
                                 <br />
-                                <input type="text" class="form-control obligatoria" name="nombreRol" id="nombreRol2" placeholder="Ingrese el nombre del Rol" />
+                                <input type="text" class="form-control edit" name="Nombre de Rol" id="nombreRol2" placeholder="Ingrese el nombre del Rol" />
                             </div>
                             <div class="row" style="padding-top:6px">
                                 <div class="col-md-12">
@@ -77,7 +82,8 @@
                                 <br />
                                 <span>Tipo de Rol: </span>
                                 <br />
-                                <select class="select" name="tipoRol2" id="tipoRol2">
+                                <select class="select2" name="tipoRol2" id="tipoRol2">
+                                    <option value="-1">Seleccione una opción</option>
                                     <option value="1">Administrador del Sistema</option>
                                     <option value="2">Arrendatario</option>
                                     <option value="3">Propietario</option>
@@ -124,12 +130,16 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/select2.js"></script>
+<script src="~/Scripts/select2.min.js"></script>
+<link href="~/Content/css/select2.min.css" rel="stylesheet" />
 <script>
     var table;
     (function () {
         CrearTabla();
         iniciarSelect2();
     })();
+
     function iniciarSelect2() {
         $('.select2').select2({
             allowClear: false,
@@ -168,7 +178,7 @@
         }
 
         table = $('#tablaRol').DataTable({
-            "colResize" : {
+            "colResize": {
                 isEnabled: true,
                 hoverClass: 'dt-colresizable-hover',
                 hasBoundCheck: true,
@@ -179,7 +189,7 @@
                 onResizeEnd: function (column, columns) { },
                 getMinWidthOf: function ($thNode) { }
             },
-            "responsive":true,
+            "responsive": true,
             "order": [[1, "asc"]],
             "ajax": "/Api/Configuraciones/ObtenerRoles?activo=" + true,
             "lengthMenu": [5, 10, 25, 50],
@@ -188,20 +198,20 @@
                 { data: "nombreRol", "className": "text-left" },
                 {
                     orderable: false,
-               /*     data: "nombreRol",*/
+                    /*     data: "nombreRol",*/
                     data: "idRol",
                     "render": function (data) {
-                       /* if (data != "") {*/
+                        /* if (data != "") {*/
 
-                                if (data > 5) {
-                                    var botones = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>&nbsp&nbsp&nbsp<button class='fa fa-edit' style='cursor:pointer' onclick='EditarRol2(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarRol(this)'></button>";
-                                    return botones
-                                } else {
-                                    var botones = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>";
-                                    return botones
-                                }
+                        if (data > 5) {
+                            var botones = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>&nbsp&nbsp&nbsp<button class='fa fa-edit' style='cursor:pointer' onclick='EditarRol2(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarRol(this)'></button>";
+                            return botones
+                        } else {
+                            var botones = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>";
+                            return botones
+                        }
 
-                            
+
                         //} else {
                         //    if (data2 > 5) {
                         //        var recuperar = "<button class='fas fa-cog' onclick='EditarPermiso(this)'></button>&nbsp&nbsp&nbsp<button class='fa fa-edit' style='cursor:pointer' onclick='EditarRol2(this)'></button>&nbsp&nbsp&nbsp<button class='fas fa-trash-alt' style='cursor:pointer' onclick='EliminarRol(this)'></button>";
@@ -225,21 +235,22 @@
         window.location.href = '/Configuraciones/AdministrarPermisosRol?idRol=' + id.idRol;
     }
 
-/*    maury*/
+    /*    maury*/
     function AgregarRol() {
-       var rol = new Object();
-        rol.nombreRol = $("#nombreRol").val();
-        rol.descripcionRol = $("#descripcionRol").val();
-        rol.tipoRol = $("#tipoRol").val();
-      /*  debugger;*/
-        $.ajax({
-            type: 'Post',
-            url: '/Api/Configuraciones/AgregarRol',
-            data: rol,
-            success: function (result) {
-               location.href = "/Configuraciones/AdministrarRoles";
-            }
-        });
+        if (ValidarRol() && ValidarSelect()) {
+            var rol = new Object();
+            rol.nombreRol = $("#nombreRol").val();
+            rol.descripcionRol = $("#descripcionRol").val();
+            rol.tipoRol = $("#tipoRol").val();
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Configuraciones/AgregarRol',
+                data: rol,
+                success: function (result) {
+                    location.href = "/Configuraciones/AdministrarRoles";
+                }
+            });
+        }
     }
 
     function EditarRol2(btn) {
@@ -252,23 +263,25 @@
         $("#tipoRol2").val(id.tipoRol);
     }
     function EditarRol() {
-        var rol = new Object();
-        rol.idRol = $("#idRol").val();
-        rol.nombreRol = $("#nombreRol2").val();
-        rol.descripcionRol = $("#descripcionRol2").val();
-        rol.tipoRol = $("#tipoRol2").val();
         debugger;
-        $.ajax({
-            type: 'Post',
-            url: '/Api/Configuraciones/EditarRol',
-            data: rol,
-            success: function (result) {
-                window.location.href = "/Configuraciones/AdministrarRoles";
-            }
-        });
+        if (ValidarEdit() && ValidarSelect2() ) {
+            var rol = new Object();
+            rol.idRol = $("#idRol").val();
+            rol.nombreRol = $("#nombreRol2").val();
+            rol.descripcionRol = $("#descripcionRol2").val();
+            rol.tipoRol = $("#tipoRol2").val();
+            $.ajax({
+                type: 'Post',
+                url: '/Api/Configuraciones/EditarRol',
+                data: rol,
+                success: function (result) {
+                    window.location.href = "/Configuraciones/AdministrarRoles";
+                }
+            });
+        }
     }
     function EliminarRol(btn) {
-        
+
         var id = table.row($(btn).parents('tr')).data();
         var rol1 = new Object();
         rol1.idRol = id.idRol;
@@ -295,5 +308,106 @@
 
     }
 
+    $(".obligatoria").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    function ValidarRol() {
+        var respuesta = true;
+        $(".obligatoria").each(function (index, result) {
+            var alert = "";
+            var objeto = $("#" + $(this).attr("id").toString());
+            var objetoAlert = $("#alert" + $(this).attr("id").toString());
+            if (objeto.val() == "") {
+                alert += "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<i class='material-icons'>Cerrar</i>" +
+                    "</button>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
+                    "</div>";
+                objetoAlert.clearQueue();
+                objetoAlert.empty();
+                objetoAlert.append(alert)
+                respuesta = false;
+            }
+        });
+        return respuesta;
+    }
+
+    $(".edit").keydown(function () {
+        var objetoAlert = $("#alert" + $(this).attr("id").toString());
+        objetoAlert.clearQueue();
+        objetoAlert.empty();
+    });
+    function ValidarEdit() {
+        var respuesta = true;
+        $(".edit").each(function (index, result) {
+            var alert = "";
+            var objeto = $("#" + $(this).attr("id").toString());
+            var objetoAlert = $("#alert" + $(this).attr("id").toString());
+            if (objeto.val() == "") {
+                alert += "<div class='alert alert-danger'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<i class='material-icons'>Cerrar</i>" +
+                    "</button>" +
+                    "<span>Debe llenar el campo <b>" + $(this).attr("name").toString() + "</b>.</span>" +
+                    "</div>";
+                objetoAlert.clearQueue();
+                objetoAlert.empty();
+                objetoAlert.append(alert)
+                respuesta = false;
+            }
+        });
+        return respuesta;
+    }
+
+    $("#tipoRol").keydown(function () {
+        $("#alertaItem").clearQueue();
+        $("#alertaItem").empty();
+    });
+    $("#tipoRol2").keydown(function () {
+        $("#alertaItem2").clearQueue();
+        $("#alertaItem2").empty();
+    });
+
+    function ValidarSelect() {
+        if ($("#tipoRol").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe seleccionar <b>Rol</b>.</span>" +
+                "</div>";
+
+            $('#alertaItem').clearQueue();
+            $("#alertaItem").empty();
+            $('#alertaItem').append(alert);
+
+            $("#tipoRol").focus();
+            return false;
+        }
+        return true;
+    }
+    function ValidarSelect2() {
+        if ($("#tipoRol2").val() == -1) {
+            var alert = "";
+            alert += "<div class='alert alert-danger'>" +
+                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                "<i class='material-icons'>Cerrar</i>" +
+                "</button>" +
+                "<span>Debe seleccionar <b>Rol</b>.</span>" +
+                "</div>";
+
+            $('#alertaItem2').clearQueue();
+            $("#alertaItem2").empty();
+            $('#alertaItem2').append(alert);
+
+            $("#tipoRol2").focus();
+            return false;
+        }
+        return true;
+    }
 
 </script>

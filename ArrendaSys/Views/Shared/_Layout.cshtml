@@ -174,7 +174,7 @@
     }
 
     (function () {
-
+        var idCuenta = parseInt(@idCuenta)
         $.ajax({
             type: 'Get',
             url: '/Api/Notificaciones/indicadorNotificacion?idCuenta=' + idCuenta,
