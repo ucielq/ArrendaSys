@@ -475,6 +475,15 @@ namespace ArrendaSysServicios
                                          idInmueble = a.idInmueble,
                                          nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
                                      }).ToList();
+                        foreach (var re in lista)
+                        {
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAI == true && x.urlReseñaArchivo == re.idResenia).FirstOrDefault();
+                            if (listaArchivo != null)
+                            {
+                                re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
+                                re.tipo = 3;
+                            }
+                        }
 
                         tot = lista.Count;
                         listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
@@ -499,6 +508,17 @@ namespace ArrendaSysServicios
                                          idInmueble = a.idInmueble,
                                          nombreAutor = ar.apellidoArrendatario + " " + ar.nombreArrendatario
                                      }).ToList();
+
+                       foreach(var re in lista)
+                        {
+                            var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAI == true && x.urlReseñaArchivo == re.idResenia).FirstOrDefault();
+                            if (listaArchivo != null)
+                            {
+                                re.listaArchivo = listaArchivo.urlMultimediaReseñaArchivo;
+                                re.tipo = 3;
+                            }
+                        }
+
 
                         tot = lista.Count;
                         listaFinal = lista.OrderByDescending(x => x.fechaAltaReseña).ToList();
@@ -713,8 +733,8 @@ namespace ArrendaSysServicios
                         {
                             urlMultimediaReseñaArchivo = archivo.url,
                             urlReseñaArchivo = ultimaResenia.idReseñaAI,
-                            RA_esArAo = true,
-                            RA_esAI = false,
+                            RA_esArAo = false,
+                            RA_esAI = true,
                             RA_esAoAr = false
                         };
                         db.ReseñaArchivo.Add(archivoR);
