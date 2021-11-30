@@ -308,14 +308,12 @@ namespace ArrendaSysServicios
                         foreach (var re in lista)
                         {
                             var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo==re.idResenia).ToList();
-                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            List<string> lista2 = new List<string>();
                             foreach(var vm in listaArchivo)
                             {
-                                ArchivoVM archivoVM = new ArchivoVM
-                                {
-                                    url=vm.urlMultimediaReseñaArchivo
-                                };
-                                lista2.Add(archivoVM);
+                                
+                                
+                                lista2.Add(vm.urlMultimediaReseñaArchivo);
                             }
                             re.listaArchivo = lista2;
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
@@ -355,14 +353,11 @@ namespace ArrendaSysServicios
                         foreach(var re in lista)
                         {
                             var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).ToList();
-                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            List<string> lista2 = new List<string>();
                             foreach (var vm in listaArchivo)
                             {
-                                ArchivoVM archivoVM = new ArchivoVM
-                                {
-                                    url = vm.urlMultimediaReseñaArchivo
-                                };
-                                lista2.Add(archivoVM);
+                                
+                                lista2.Add(vm.urlMultimediaReseñaArchivo);
                             }
                             re.listaArchivo = lista2;
                         }
@@ -392,14 +387,11 @@ namespace ArrendaSysServicios
                         foreach (var re in lista)
                         {
                             var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esAoAr == true && x.urlReseñaArchivo == re.idResenia).ToList();
-                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            List<string> lista2 = new List<string>();
                             foreach (var vm in listaArchivo)
                             {
-                                ArchivoVM archivoVM = new ArchivoVM
-                                {
-                                    url = vm.urlMultimediaReseñaArchivo
-                                };
-                                lista2.Add(archivoVM);
+                                
+                                lista2.Add(vm.urlMultimediaReseñaArchivo);
                             }
                             re.listaArchivo = lista2;
                             var inmu = db.Inmueble.Where(x => x.idInmueble == re.idInmueble).FirstOrDefault();
@@ -438,14 +430,11 @@ namespace ArrendaSysServicios
                         foreach(var re in lista)
                         {
                             var listaArchivo = db.ReseñaArchivo.Where(x => x.RA_esArAo == true && x.urlReseñaArchivo == re.idResenia).ToList();
-                            List<ArchivoVM> lista2 = new List<ArchivoVM>();
+                            List<string> lista2 = new List<string>();
                             foreach (var vm in listaArchivo)
                             {
-                                ArchivoVM archivoVM = new ArchivoVM
-                                {
-                                    url = vm.urlMultimediaReseñaArchivo
-                                };
-                                lista2.Add(archivoVM);
+                             
+                                lista2.Add(vm.urlMultimediaReseñaArchivo);
                             }
                             re.listaArchivo = lista2;
                         }
