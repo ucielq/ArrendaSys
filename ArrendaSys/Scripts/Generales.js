@@ -17,6 +17,18 @@ function agregarMultiplesArchivos() {
     $("#inputArchivosInmueble").trigger("click");
 
 }
+function adjuntarArAo() {
+    $("#inputArchivosArAo").trigger("click");
+
+}
+function adjuntarAoAr() {
+    $("#inputArchivosAoAr").trigger("click");
+
+}
+function adjuntarAI() {
+    $("#inputArchivosAI").trigger("click");
+
+}
 function fechaHoyMostrar(date) {
 
     var dd = date.getDate();
@@ -73,6 +85,27 @@ function MostrarNombreMultiplesArchivos() {
         $("#NombreMultiplesArchivos").append(archivosCuerpo[f].name + "<br/>")
     }
 }
+function MostrarNombreMultiplesArchivosArAo() {
+    $("#NombreMultiplesArchivosArAo").empty();
+    var archivosCuerpo = $("#inputArchivosArAo").get(0).files;
+    for (f = 0; f < archivosCuerpo.length; f++) {
+        $("#NombreMultiplesArchivosArAo").append(archivosCuerpo[f].name + "<br/>")
+    }
+}
+function MostrarNombreMultiplesArchivosAoAr() {
+    $("#NombreMultiplesArchivosAoAr").empty();
+    var archivosCuerpo = $("#inputArchivosAoAr").get(0).files;
+    for (f = 0; f < archivosCuerpo.length; f++) {
+        $("#NombreMultiplesArchivosAoAr").append(archivosCuerpo[f].name + "<br/>")
+    }
+}
+function MostrarNombreMultiplesArchivosAI() {
+    $("#NombreMultiplesArchivosAI").empty();
+    var archivosCuerpo = $("#inputArchivosAI").get(0).files;
+    for (f = 0; f < archivosCuerpo.length; f++) {
+        $("#NombreMultiplesArchivosAI").append(archivosCuerpo[f].name + "<br/>")
+    }
+}
 function GuardarImagen(idCuenta) {
     var data = new FormData();
     data.append("Ruta", "Inmueble");
@@ -109,6 +142,36 @@ function GuardarArchivo(idInmueble) {
     }
     postGuardarArchivo(data);
 }
+function GuardarArchivoArAo(idAlquiler) {
+    var data = new FormData();
+    data.append("Ruta", "Resenia");
+    data.append("Id" + "," + idAlquiler, idAlquiler);
+    var archivos = $("#inputArchivosArAo").get(0).files;
+    for (i = 0; i < archivos.length; i++) {
+        data.append("Archivos", archivos[i]);
+    }
+    postGuardarArchivoArAo(data);
+}
+function GuardarArchivoAoAr(idAlquiler) {
+    var data = new FormData();
+    data.append("Ruta", "Resenia");
+    data.append("Id" + "," + idAlquiler, idAlquiler);
+    var archivos = $("#inputArchivosAoAr").get(0).files;
+    for (i = 0; i < archivos.length; i++) {
+        data.append("Archivos", archivos[i]);
+    }
+    postGuardarArchivoAoAr(data);
+}
+function GuardarArchivoAI(idAlquiler) {
+    var data = new FormData();
+    data.append("Ruta", "Resenia");
+    data.append("Id" + "," + idAlquiler, idAlquiler);
+    var archivos = $("#inputArchivosAI").get(0).files;
+    for (i = 0; i < archivos.length; i++) {
+        data.append("Archivos", archivos[i]);
+    }
+    postGuardarArchivoAI(data);
+}
 function postGuardarArchivo(data) {
     $.ajax({
         type: "POST",
@@ -121,10 +184,58 @@ function postGuardarArchivo(data) {
            
         },
         error: function (jqxhr) {
-            alert("rompiste algo bro")
+            alert("Error en el guardado")
         }
     })
+}
+function postGuardarArchivoArAo(data) {
+    $.ajax({
+        type: "POST",
+        url: "/Api/Resenia/GuardarArchivosArAo",
+        contentType: false,
+        processData: false,
+        data: data,
+        async: false,
+        success: function (response) {
 
+        },
+        error: function (jqxhr) {
+            alert("Error en el guardado")
+        }
+    })
+}
+function postGuardarArchivoAoAr(data) {
+    $.ajax({
+        type: "POST",
+        url: "/Api/Resenia/GuardarArchivosAoAr",
+        contentType: false,
+        processData: false,
+        data:data,
+        async: false,
+        success: function (response) {
+
+        },
+        error: function (jqxhr) {
+            debugger;
+            alert("Error en el guardado")
+        }
+    })
+}
+function postGuardarArchivoAI(data) {
+    $.ajax({
+        type: "POST",
+        url: "/Api/Resenia/GuardarArchivosAI",
+        contentType: false,
+        processData: false,
+        data: data,
+        async: false,
+        success: function (response) {
+
+        },
+        error: function (jqxhr) {
+            alert("Error en el guardado")
+        }
+    })
 }
 
 

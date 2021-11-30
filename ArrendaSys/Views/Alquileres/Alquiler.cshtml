@@ -124,6 +124,15 @@
         </div>
     </div>
 </div>
+<div hidden>
+    <input type="file" id="inputArchivosAoAr" value="cargarArchivosAoAr" onchange="MostrarNombreMultiplesArchivosAoAr()" multiple />
+</div>
+<div hidden>
+    <input type="file" id="inputArchivosArAo" value="cargarArchivosAoAr" onchange="MostrarNombreMultiplesArchivosArAo()" multiple />
+</div>
+<div hidden>
+    <input type="file" id="inputArchivosAI" value="cargarArchivosAI" onchange="MostrarNombreMultiplesArchivosAI()" multiple />
+</div>
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -371,7 +380,9 @@
                 item2 = item2 + "<textarea class='form-control' id='descripcionAoAr' name='descripcionAoAr'></textarea>";
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaAoAr()'>Guardar</button>";
-                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAoAr' onclick='volverAoAr()'  style='width:120px;'>Cancelar</button>"
+                item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAoAr' onclick='volverAoAr()'  style='width:120px;'>Cancelar</button>";
+                item2 = item2 + "<button class='btn btn-outline-primary btn-sm' id='btnAdjuntarAoAr' onclick='adjuntarAoAr()'  style='width:180px;'>Adjuntar Comprobante</button>";
+                item2 = item2 + "<div class='col' id ='asdAoAr'><label id='NombreMultiplesArchivosAoAr'> Sin Archivos Seleccionados </label></div>"
                 $("#formularioAoAr").append(item2)
             }
         });
@@ -396,6 +407,8 @@
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaArAo()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverArAo' onclick='volverArAo()' style='width:120px;'>Cancelar</button>"
+                item2 = item2 + "<button class='btn btn-outline-primary btn-sm' id='btnAdjuntarArAo' onclick='adjuntarArAo()'  style='width:180px;'>Adjuntar Comprobante</button>";
+                item2 = item2 + "<div class='col' id ='asdArAo'><label id='NombreMultiplesArchivosArAo'> Sin Archivos Seleccionados </label></div>"
                 $("#formularioArAo").append(item2)
             }
         });
@@ -420,6 +433,8 @@
                 item2 = item2 + "</div>";
                 item2 = item2 + "<button class='btn btn-outline-success btn-sm' style='width:120px' onclick='GuardarReseñaAI()'>Guardar</button>";
                 item2 = item2 + "<button class='btn btn-outline-danger btn-sm' id='btnvolverAI' onclick='volverAI()' style='width:120px;;'>Cancelar</button>"
+                item2 = item2 + "<button class='btn btn-outline-primary btn-sm' id='btnAdjuntarAi' onclick='adjuntarAi()'  style='width:180px;'>Adjuntar Comprobante</button>";
+                item2 = item2 + "<div class='col' id ='asdAI'><label id='NombreMultiplesArchivosAI'> Sin Archivos Seleccionados </label></div>"
                 $("#formularioAI").append(item2)
             }
         });
@@ -463,6 +478,7 @@
                 url: '/Api/Resenia/CrearReseniaAorAr',
                 data: resenia,
                 success: function (result) {
+                    GuardarArchivoAoAr(2);
                     window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
                 }
             });
@@ -498,6 +514,7 @@
                 url: '/Api/Resenia/CrearReseniaArAo',
                 data: resenia,
                 success: function (result) {
+                    GuardarArchivoArAo(2);
                     window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
                 }
             });
@@ -533,6 +550,7 @@
                 url: '/Api/Resenia/CrearReseniaAI',
                 data: resenia,
                 success: function (result) {
+                    GuardarArchivoAI(2);
                     window.location.href = "/Alquileres/Alquiler?idAlquiler=" + idAlquiler;
                 }
             });
@@ -678,7 +696,11 @@
                     item = item + "</div>";
                     item = item + "<div class='col-md-2'style='text-align:center;'><span>Puntuación</span></br><span>" + data.puntuacionResenia + "</span></div>";
                     item = item + "</div>";
-                    item = item + "<div class='col-md-10' style='padding-left:0px;'>";
+                    item = item + "<div class='col-md-3' style='padding-left:0px;'>";
+                    item = item + "<button class='btn btn-success' id='btnVerComprobantes' onclick='verComprobantes(data.listaArchivo)'>Descargar comprobantes</button>";
+                    item = item + "<hr>";
+                    item = item + "</div>";
+                    item = item + "<div class='col-md-7' style='padding-left:0px;'>";
                     item = item + "<hr>";
                     item = item + "</div>";
                     item = item + "</div>";
@@ -689,6 +711,11 @@
                 paginas();
 
             }
+        });
+    }
+    function verComprobantes(lista) {
+        lista.forEach(function (index, value) {
+            window.open(value.url);
         });
     }
     function paginas() {

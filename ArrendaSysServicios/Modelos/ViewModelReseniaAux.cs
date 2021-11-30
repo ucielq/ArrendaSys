@@ -10,5 +10,6 @@ namespace ArrendaSysServicios.Modelos
     {
         public int? cantidad { get; set; }
         public List<ReseniaViewModel> lista { get; set; }
+
     }
 }

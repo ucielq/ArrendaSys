@@ -25,7 +25,6 @@
         <EntityTypeShape EntityType="ARRENDASYSEntities.Propietario" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Provincia" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.PublicacionEstado" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArchivo" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemAI" Width="1.5" PointX="12.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.URL" Width="1.5" PointX="14.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaItemAoAr" Width="1.5" PointX="7.375" PointY="12.75" />
@@ -37,6 +36,7 @@
         <EntityTypeShape EntityType="ARRENDASYSEntities.Cuenta" Width="1.5" PointX="5.375" PointY="15.75" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Publicacion" Width="1.5" PointX="3.375" PointY="10.75" />
         <EntityTypeShape EntityType="ARRENDASYSEntities.Rol" Width="1.5" PointX="9.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ARRENDASYSEntities.ReseñaArchivo" Width="1.5" PointX="16.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
