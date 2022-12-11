@@ -16,15 +16,17 @@ namespace ArrendaSysUtilidades
 
         public string EnviarMailGenerico(string destino,string body,string subject)
         {
-            var apiKey = ConfigurationManager.AppSettings["apiKey"];
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("arrendasys@gmail.com", "Arrendasys");
-            var subject2 = subject;
-            var to = new EmailAddress(destino, destino);
-            var plainTextContent = body;
-            var htmlContent = body;
-            var msg = MailHelper.CreateSingleEmail(from, to, subject2, plainTextContent, htmlContent);
-            var response = client.SendEmailAsync(msg);
+
+            var smtp = new SmtpClient("smtp.gmail.com",587);
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential("arrendasys@gmail.com","oaejywljtzkqswgf");
+            var MailMessage = new MailMessage();
+            MailMessage.From = new MailAddress("arrendasys@gmail.com");
+            MailMessage.To.Add(new MailAddress(destino));
+            MailMessage.IsBodyHtml = true;
+            MailMessage.Subject = subject;
+            MailMessage.Body = body;
+            smtp.Send(MailMessage);
             return "OK";
         }
     }
